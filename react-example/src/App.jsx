@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import Welcome from './components/Welcome'
 import Comment from './components/Comment'
 import Clock from './components/Clock'
+import Dialog from './components/Dialog'
 import './App.css'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Clock />
       <Welcome name="Toan" />
       <Comment userName="React" content="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+      <Dialog />
     </div>
   )
 }
