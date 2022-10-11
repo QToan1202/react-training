@@ -6,6 +6,7 @@ import Clock from './components/Clock'
 import Dialog from './components/Dialog'
 import Menu from './components/Menu'
 import Task from './components/Task'
+import Form from './components/Form'
 import './App.css'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Dialog />
       <Menu />
       <Task />
+      <Form />
     </div>
   )
 }
