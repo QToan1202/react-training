@@ -4,6 +4,8 @@ import Welcome from './components/Welcome'
 import Comment from './components/Comment'
 import Clock from './components/Clock'
 import Dialog from './components/Dialog'
+import Menu from './components/Menu'
+import Task from './components/Task'
 import './App.css'
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
       <Welcome name="Toan" />
       <Comment userName="React" content="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
       <Dialog />
+      <Menu />
+      <Task />
     </div>
   )
 }
