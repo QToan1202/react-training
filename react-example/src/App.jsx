@@ -8,6 +8,7 @@ import Menu from './components/Menu'
 import Task from './components/Task'
 import Form from './components/Form'
 import Test from './components/Test'
+import Class from './components/Class'
 import './App.css'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Task />
       <Form />
       <Test />
+      <Class />
     </div>
   )
 }
