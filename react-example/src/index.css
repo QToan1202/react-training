@@ -68,3 +68,22 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.card {
+  max-width: 500px;
+  max-height: 300px;
+  border: 1px solid #fff;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.card__title {
+  text-transform: capitalize;
+  font-style: italic;
+  border: 2px dashed #f01;
+}
+
+.card__date {
+  font-size: 12px;
+  font-style: italic;
+}
