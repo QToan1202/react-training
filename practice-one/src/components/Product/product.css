@@ -5,3 +5,12 @@
   padding-bottom: 30px;
   background-color: #f8f8f9;
 }
+
+.card__title {
+  font-size: 40px;
+}
+
+.card__price {
+  font-size: 25px;
+  color: #9d8220;
+}
