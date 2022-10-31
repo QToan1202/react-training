@@ -26,7 +26,7 @@ E-commerce Product Website
 
 Open Windows PowerShell or cmd or [Windows Terminal](https://www.microsoft.com/en-gb/p/windows-terminal/9n0dx20hk701?rtc=1&activetab=pivot:overviewtab)
 
-**_Step 1:_** Clone feature/practice-2 branch
+**_Step 1:_** Clone develop branch
 
 ```bash
 git clone --single-branch --branch develop git@github.com:QToan1202/react-training.git
@@ -44,7 +44,7 @@ cd react-training/practice-one
 npm install -g pnpm
 ```
 
-**_Step 4:_** Install Project
+**_Step 4:_** Install project
 
 ```bash
 pnpm install
