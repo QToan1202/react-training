@@ -16,7 +16,7 @@ class ProductSection extends React.Component {
         <div className="content">
           <h2 className="upper-title">{upperTitle}</h2>
           <h1 className="title">{title}</h1>
-          <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <span className="inline">
             <p className="price">&#36;{price}</p>
             <Button size="medium" style="warning" />
           </span>

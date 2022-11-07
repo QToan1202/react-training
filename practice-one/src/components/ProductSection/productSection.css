@@ -5,7 +5,7 @@ p {
 
 .container {
   display: flex;
-  min-width: 1440px;
+  max-width: 1440px;
   background: #2b2835;
   position: relative;
 }
@@ -18,7 +18,7 @@ p {
 
 .content {
   margin-left: auto;
-  padding: 200px 55px 180px 0;
+  padding: 175px 143px 191px 0;
 }
 
 .upper-title {
@@ -28,6 +28,7 @@ p {
 }
 
 .title {
+  max-width: 500px;
   font-size: 40px;
   color: #fff;
 }
@@ -40,4 +41,11 @@ p {
 .description {
   font-size: 13px;
   color: #ffc700;
+}
+
+.inline {
+  display: flex;
+  margin-bottom: 14px;
+  align-items: center;
+  gap: 34px;
 }
