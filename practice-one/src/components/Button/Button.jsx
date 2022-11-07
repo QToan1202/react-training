@@ -8,16 +8,18 @@ class Button extends React.Component {
   }
 
   render() {
+    const {title, size, style} = this.props
     return (
       <button
-        className={['btn',  `btn--${this.props.size}`, `btn--${this.props.style}`].join('  ')}
-      >buy now</button>
+        className={['btn',  `btn--${size}`, `btn--${style}`].join('  ')}
+      >{title}</button>
     )
   }
 
 }
 
 Button.propTypes = {
+  title: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   style: PropTypes.oneOf(['dark', 'warning'])
 }
