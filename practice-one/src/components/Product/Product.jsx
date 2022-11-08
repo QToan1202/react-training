@@ -9,14 +9,15 @@ class Product extends React.Component {
   }
 
   render() {
+    const {imageURL, title, content, price} = this.props
     return (
       <div className='card'>
-        <img src={this.props.imageURL} alt="product-image" />
-        <h2 className='card__title'>{this.props.title}</h2>
-        <p>{this.props.content}</p>
+        <img src={imageURL} alt="product-image" />
+        <h2 className='card__title'>{title}</h2>
+        <p>{content}</p>
         <span
           style={{display: 'flex', alignItems: 'center', gap: 10}}>
-          <p className='card__price'>${this.props.price}</p>
+          <p className='card__price'>${price}</p>
           <Button style="dark" size="small" />
         </span>
       </div>
