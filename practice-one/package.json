@@ -1,0 +1,46 @@
+{
+  "name": "practice-one",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.6",
+    "@storybook/addon-actions": "^6.5.12",
+    "@storybook/addon-backgrounds": "^6.5.12",
+    "@storybook/addon-docs": "^6.5.12",
+    "@storybook/addon-essentials": "^6.5.12",
+    "@storybook/addon-interactions": "^6.5.12",
+    "@storybook/addon-links": "^6.5.12",
+    "@storybook/addon-measure": "^6.5.12",
+    "@storybook/addon-outline": "^6.5.12",
+    "@storybook/addons": "^6.5.12",
+    "@storybook/builder-vite": "^0.2.4",
+    "@storybook/channel-postmessage": "^6.5.12",
+    "@storybook/channel-websocket": "^6.5.12",
+    "@storybook/client-api": "^6.5.12",
+    "@storybook/preview-web": "^6.5.12",
+    "@storybook/react": "^6.5.12",
+    "@storybook/testing-library": "^0.0.13",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.1.0",
+    "babel-loader": "^8.2.5",
+    "eslint": "^8.26.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react": "^7.31.10",
+    "prettier": "2.7.1",
+    "prop-types": "^15.8.1",
+    "vite": "^3.1.0"
+  }
+}
