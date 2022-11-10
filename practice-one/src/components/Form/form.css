@@ -1,0 +1,33 @@
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.form {
+  margin: 34px 94px;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  background-color: #f8f8f8;
+  text-align: center;
+}
+
+.form__title {
+  font-size: 50px;
+  color: #2b2835;
+}
+
+.form__input {
+  display: block;
+  min-width: 480px;
+  margin: auto;
+  margin-top: 42px;
+  margin-bottom: 19px;
+  padding: 10px 0 10px 22px;
+  border-radius: 18px;
+  border: 1px solid #bfbfbf;
+}
+
+.form__input::placeholder {
+  color: #030303;
+  opacity: 0.3;
+}
