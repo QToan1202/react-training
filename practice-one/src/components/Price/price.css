@@ -1,0 +1,18 @@
+.price {
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 49px;
+  color: #000;
+}
+
+.price--white {
+  color: #fff;
+}
+
+.price--product {
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 31px;
+  color: #9d8220;
+}
+
