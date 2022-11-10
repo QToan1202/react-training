@@ -1,0 +1,27 @@
+.btn {
+  text-transform: uppercase;
+  border-radius: 100px;
+  border: none;
+}
+
+.btn--large {
+  padding: 12px 222px;
+}
+
+.btn--medium {
+  padding: 12px 48px;
+}
+
+.btn--small {
+  padding: 12px 33px;
+}
+
+.btn--dark {
+  color: #fff;
+  background-color: #000;
+}
+
+.btn--warning {
+  color: #000;
+  background-color: #ffc700;
+}
