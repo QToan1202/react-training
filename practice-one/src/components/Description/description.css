@@ -1,0 +1,14 @@
+.desc {
+  font-weight: 500;
+  size: 13px;
+  line-height: 20px;
+  color: #000;
+}
+
+.desc--white {
+  color: #fff;
+}
+
+.desc--warning {
+  color: #ffc700;
+}
