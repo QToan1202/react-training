@@ -1,4 +1,4 @@
-import Header from './Header';
+import Header from './Navigation';
 import logo from '../../assets/images/logo.svg'
 import ic_user from '../../assets/images/ic_user.svg'
 import ic_search from '../../assets/images/ic_search.svg'
