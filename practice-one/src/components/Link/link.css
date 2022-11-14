@@ -10,6 +10,7 @@
 }
 
 .link--footer {
+  padding-left: 0;
   color: #bbb;
   font-size: 12px;
 }
