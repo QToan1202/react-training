@@ -1,7 +1,8 @@
 import React from 'react'
 import './footer.css'
-import FooterCol from './FooterCol'
 import PropTypes from 'prop-types'
+import Image from '../Image/Image'
+import Column from '../Column/Column'
 
 class Footer extends React.Component {
   constructor(props) {
@@ -9,23 +10,14 @@ class Footer extends React.Component {
   }
 
   render() {
-    const {logo, notice, socialIcon} = this.props
+    const {logo, notice, socialIcon, columns} = this.props
+
     return(
-      <div className='container'>
-        <img className='footer__logo' src={logo} alt="footer-logo" />
-        <ul className='footer__col'>
-          <FooterCol title='products' />
-        </ul>
-        <ul className='footer__col'>
-          <FooterCol title='support' />
-        </ul>
-        <ul className='footer__col'>
-          <FooterCol title='company' />
-        </ul>
-        <ul className='footer__col'>
-          <FooterCol title='follow us' />
-          <img src={socialIcon} alt="social icon" />
-        </ul>
+      <div className='footer'>
+        <span className='footer__logo'>
+          <Image src={logo} alt="footer-logo" />
+        </span>
+        <Column contents={columns} socialIcon={socialIcon} />
         <p className='footer__line'>{notice}</p>
       </div>
     )
@@ -36,7 +28,8 @@ class Footer extends React.Component {
 Footer.propTypes = {
   logo: PropTypes.string.isRequired,
   notice: PropTypes.string.isRequired,
-  socialIcon: PropTypes.string.isRequired
+  socialIcon: PropTypes.string.isRequired,
+  columns: PropTypes.array.isRequired,
 }
 
 export default Footer
