@@ -8,3 +8,8 @@
   text-transform: uppercase;
   text-decoration: none;
 }
+
+.link--footer {
+  color: #bbb;
+  font-size: 12px;
+}
