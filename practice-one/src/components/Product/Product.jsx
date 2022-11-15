@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Button from '../Button/Button'
 import './product.css'
+import Image from '../Image/Image'
+import HeadingText from '../HeadingText/HeadingText'
+import Text from '../Text/Text'
 
 class Product extends React.Component {
   constructor(props) {
@@ -12,13 +15,12 @@ class Product extends React.Component {
     const {imageURL, title, content, price} = this.props
     return (
       <div className='card'>
-        <img src={imageURL} alt="product-image" />
-        <h2 className='card__title'>{title}</h2>
-        <p>{content}</p>
-        <span
-          style={{display: 'flex', alignItems: 'center', gap: 10}}>
-          <p className='card__price'>${price}</p>
-          <Button style="dark" size="small" />
+        <Image src={imageURL} alt="product-image" />
+        <HeadingText content={title} style="black" />
+        <Text leading="relaxed">{content}</Text>
+        <span className='flex'>
+          <Text color='yellow-700' weight='semibold' size='2xl' leading='extra-loose'>${price}</Text>
+          <Button style="dark" size="small" title="buy now" />
         </span>
       </div>
     )
