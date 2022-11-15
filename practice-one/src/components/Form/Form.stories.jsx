@@ -1,35 +1,24 @@
+import Button from '../Button/Button';
+import HeadingText from '../HeadingText/HeadingText';
+import Input from '../Input/Input';
 import Form from './Form';
 
 export default {
   title: 'Form',
   component: Form,
-  argTypes: {
-    title: {
-      type: {
-        name: 'string',
-        required: true,
-      },
-      defaultValue: 'Hear it first',
-      control: {
-        type: 'text',
-      },
-      description: 'Heading of the form',
-    },
-    subTitle: {
-      type: {
-        name: 'string',
-        required: true,
-      },
-      defaultValue: 'Get updates on product drops, collaborations and all things Beats.',
-      control: {
-        type: 'text',
-      },
-      description: 'Subtitle below the form title',
-    },
-  },
 };
 
-const Template = (args) => <Form {...args} />;
+const FormContent = (args) => (
+  <Form {...args}>
+    <HeadingText content="Hear it first" style='black' />
+    <p className="form__sub-title">Get updates on product drops, collaborations and all things Beats.</p>
+    <Input placeholder='Enter your email' />
+    <Button size="large" style="warning" title="sign up" />
+  </Form>
+)
 
-export const Default = Template.bind({});
-Default.args = {};
+export const LogInForm = FormContent.bind({});
+LogInForm.args = {
+  action: 'javascript:void(0)',
+  method: 'get',
+}
