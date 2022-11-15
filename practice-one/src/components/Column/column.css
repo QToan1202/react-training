@@ -5,7 +5,7 @@
 }
 
 .col__title {
-  color: #fff;
+  color: var(--white);
   font-size: 22px;
   text-transform: capitalize;
 }

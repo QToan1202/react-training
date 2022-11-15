@@ -41,19 +41,19 @@
 }
 
 .text-black {
-  color: #000;
+  color: var(--black);
 }
 
 .text-white {
-  color: #fff;
+  color: var(--white);
 }
 
 .text-yellow-400 {
-  color: #ffc700;
+  color: var(--yellow-400);
 }
 
 .text-yellow-700 {
-  color: #9d8220;
+  color: var(--yellow-700);
 }
 
 .text-normal {

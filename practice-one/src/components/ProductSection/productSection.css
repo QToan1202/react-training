@@ -6,7 +6,7 @@ p {
 .container {
   display: flex;
   max-width: 1440px;
-  background: #2b2835;
+  background: var(--neutral-700);
   position: relative;
 }
 

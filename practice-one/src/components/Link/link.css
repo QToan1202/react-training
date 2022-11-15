@@ -4,13 +4,13 @@
   line-height: 18px;
   letter-spacing: 2px;
   font-weight: 500;
-  color: #fff;
+  color: var(--white);
   text-transform: uppercase;
   text-decoration: none;
 }
 
 .link--footer {
   padding-left: 0;
-  color: #bbb;
+  color: var(--gray-100);
   font-size: 12px;
 }

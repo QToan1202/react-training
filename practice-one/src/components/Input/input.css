@@ -5,10 +5,10 @@
   margin-bottom: 19px;
   padding: 10px 0 10px 22px;
   border-radius: 18px;
-  border: 1px solid #bfbfbf;
+  border: 1px solid var(--gray-200);
 }
 
 .input::placeholder {
-  color: #030303;
+  color: var(--neutral-800);
   opacity: 0.3;
 }
