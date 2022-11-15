@@ -1,7 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "./productSection.css";
-import Button from "../Button/Button";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './productSection.css';
+import Button from '../Button/Button';
+import Text from '../Text/Text';
+import Image from '../Image/Image';
+import HeadingText from '../HeadingText/HeadingText';
 
 class ProductSection extends React.Component {
   constructor(props) {
@@ -12,15 +15,23 @@ class ProductSection extends React.Component {
     const { productImg, title, upperTitle, price, description } = this.props;
     return (
       <div className="container">
-        <img className="product_image" src={productImg} alt="photo for the header section" />
+        <span className="product_image">
+          <Image src={productImg} alt="photo for the header section" />
+        </span>
         <div className="content">
-          <h2 className="upper-title">{upperTitle}</h2>
-          <h1 className="title">{title}</h1>
+          <Text color="white" weight="medium" leading="relaxed">
+            {upperTitle}
+          </Text>
+          <HeadingText content={title}  />
           <span className="inline">
-            <p className="price">&#36;{price}</p>
-            <Button size="medium" style="warning" />
+            <Text color="white" leading="relaxed" size="5xl">
+              &#36;{price}
+            </Text>
+            <Button size="medium" style="warning" title="buy now" />
           </span>
-          <p className="description">{description}</p>
+          <Text color="yellow-400" weight="medium" leading="relaxed">
+            {description}
+          </Text>
         </div>
       </div>
     );
