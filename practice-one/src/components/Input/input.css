@@ -1,0 +1,14 @@
+.input {
+  display: block;
+  min-width: 480px;
+  margin: 10px auto;
+  margin-bottom: 19px;
+  padding: 10px 0 10px 22px;
+  border-radius: 18px;
+  border: 1px solid #bfbfbf;
+}
+
+.input::placeholder {
+  color: #030303;
+  opacity: 0.3;
+}
