@@ -1,6 +1,7 @@
 import Footer from './Footer';
 import logo from '../../assets/images/logo.svg'
 import social_icon from '../../assets/images/ic_social.svg'
+import columns from '../../data/columns'
 
 export default {
   title: 'Footer',
@@ -53,6 +54,22 @@ export default {
         type: 'text',
       },
       description: 'The copyright notice at the bottom of the page',
+    },
+    columns: {
+      type: {
+        name: 'array',
+        required: true,
+      },
+      table: {
+        defaultValue: {
+          summary: columns
+        },
+      },
+      defaultValue: columns,
+      control: {
+        type: 'text',
+      },
+      description: 'Data for each column',
     },
   },
 };

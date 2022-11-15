@@ -1,0 +1,23 @@
+.nav {
+  box-sizing: border-box;
+  padding: 14px 95px;
+  max-width: 1440px;
+  background-color: var(--neutral-900);
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-item {
+  margin: auto 0;
+  display: flex;
+  flex: 1;
+  justify-content: space-evenly;
+}
+
+.nav-icon {
+  margin: 0 23px;
+}
+
+.shrink {
+  flex: 0;
+}

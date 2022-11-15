@@ -6,7 +6,7 @@ p {
 .container {
   display: flex;
   max-width: 1440px;
-  background: #2b2835;
+  background: var(--neutral-700);
   position: relative;
 }
 
@@ -18,29 +18,8 @@ p {
 
 .content {
   margin-left: auto;
-  padding: 175px 143px 191px 0;
-}
-
-.upper-title {
-  font-size: 16px;
-  letter-spacing: 1px;
-  color: #fff;
-}
-
-.title {
-  max-width: 500px;
-  font-size: 40px;
-  color: #fff;
-}
-
-.price {
-  font-size: 40px;
-  color: #f2f2f2;
-}
-
-.description {
-  font-size: 13px;
-  color: #ffc700;
+  max-width: 440px;
+  padding: 175px 135px 191px 0;
 }
 
 .inline {

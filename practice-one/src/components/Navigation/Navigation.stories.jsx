@@ -1,12 +1,12 @@
-import Header from './Header';
+import Navigation from './Navigation';
 import logo from '../../assets/images/logo.svg'
 import ic_user from '../../assets/images/ic_user.svg'
 import ic_search from '../../assets/images/ic_search.svg'
 import ic_cart from '../../assets/images/ic_cart.svg'
 
 export default {
-  title: 'Header Nav',
-  component: Header,
+  title: 'Navigation',
+  component: Navigation,
   argTypes: {
     logo: {
       type: {
@@ -59,7 +59,7 @@ export default {
   },
 };
 
-const Template = (args) => <Header {...args} />;
+const Template = (args) => <Navigation {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

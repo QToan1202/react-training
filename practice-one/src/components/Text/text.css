@@ -1,0 +1,69 @@
+.text {
+  margin: 20px 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.text-xl {
+  font-size: 20px;
+}
+
+.text-2xl {
+  font-size: 25px;
+}
+
+.text-3xl {
+  font-size: 31px;
+}
+
+.text-4xl {
+  font-size: 35px;
+}
+
+.text-5xl {
+  font-size: 40px;
+}
+
+.leading-normal {
+  line-height: 17px;
+}
+
+.leading-relaxed {
+  line-height: 20px;
+}
+
+.leading-loose {
+  line-height: 27px;
+}
+
+.leading-extra-loose {
+  line-height: 31px;
+}
+
+.text-black {
+  color: var(--black);
+}
+
+.text-white {
+  color: var(--white);
+}
+
+.text-yellow-400 {
+  color: var(--yellow-400);
+}
+
+.text-yellow-700 {
+  color: var(--yellow-700);
+}
+
+.text-normal {
+  font-weight:400;
+}
+
+.text-medium {
+  font-weight: 500;
+}
+
+.text-semibold {
+  font-weight: 600;
+}

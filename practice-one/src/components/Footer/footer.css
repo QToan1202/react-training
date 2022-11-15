@@ -1,4 +1,4 @@
-.container {
+.footer {
   max-width: 1440px;
   background-color: #2b2835;
   display: grid;
@@ -17,21 +17,15 @@
 }
 
 .footer__title {
-  color: #fff;
+  color: var(--white);
   font-size: 22px;
   text-transform: capitalize;
 }
 
-.footer__link {
-  display: block;
-  color: #bbb;
-  font-size: 12px;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
 .footer__line {
-  color: #fff;
+  margin-bottom: 20px;
+  margin-top: 50px;
+  color: var(--white);
   font-size: 12px;
   grid-column: 1/6;
   text-align: center;

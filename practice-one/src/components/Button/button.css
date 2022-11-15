@@ -2,6 +2,7 @@
   text-transform: uppercase;
   border-radius: 100px;
   border: none;
+  cursor: pointer;
 }
 
 .btn--large {
@@ -17,11 +18,11 @@
 }
 
 .btn--dark {
-  color: #fff;
-  background-color: #000;
+  color: var(--white);
+  background-color: var(--black);
 }
 
 .btn--warning {
-  color: #000;
-  background-color: #ffc700;
+  color: var(--black);
+  background-color: var(--yellow-400);
 }
