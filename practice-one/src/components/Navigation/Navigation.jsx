@@ -1,6 +1,8 @@
 import React from 'react'
 import './navigation.css'
 import PropTypes from 'prop-types'
+import Link from '../Link/Link'
+import Image from '../Image/Image'
 
 class Header extends React.Component {
   constructor(props) {
@@ -11,12 +13,12 @@ class Header extends React.Component {
     const {logo, links, icons} = this.props
     return(
       <div className='nav'>
-        <img src={logo} alt="logo" />
-        <div style={{margin:'auto'}}>
-          {links.map((link, index) => <a className='nav-link' key={index} href="javascript:void(0)">{link}</a>)}
+        <Image src={logo} alt="logo" />
+        <div className="nav-item">
+          {links.map((link, index) => <Link key={index} to='javascript:void(0)'>{link}</Link>)}
         </div>
-        <div style={{margin:'auto 0'}}>
-          {icons.map((ic, index) => <img className='icon' key={index} src={ic} alt="icon" />)}
+        <div className='nav-item  shrink'>
+          {icons.map((ic, index) => <span key={index} className='nav-icon'><Image src={ic} alt='Icon' /></span>)}
         </div>
       </div>
     )
