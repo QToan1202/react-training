@@ -8,11 +8,12 @@ class Button extends React.Component {
   }
 
   render() {
-    const {title, size, style} = this.props
+    const {title, size, style, onClick} = this.props
+
     return (
-      <button
-        className={['btn',  `btn--${size}`, `btn--${style}`].join('  ')}
-      >{title}</button>
+      <button className={['btn',  `btn--${size}`, `btn--${style}`].join('  ')} onClick={() => onClick(title)}>
+        {title}
+      </button>
     )
   }
 
@@ -21,7 +22,8 @@ class Button extends React.Component {
 Button.propTypes = {
   title: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  style: PropTypes.oneOf(['dark', 'warning'])
+  style: PropTypes.oneOf(['dark', 'warning']),
+  onClick: PropTypes.func
 }
 
 export default Button
