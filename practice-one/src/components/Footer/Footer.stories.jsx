@@ -1,6 +1,6 @@
 import Footer from './Footer';
 import logo from '../../assets/images/logo.svg'
-import social_icon from '../../assets/images/ic_social.svg'
+import socials_icon from '../../assets/icons/socials.svg'
 import columns from '../../data/columns'
 
 export default {
@@ -46,10 +46,10 @@ export default {
       },
       table: {
         defaultValue: {
-          summary: social_icon
+          summary: socials_icon
         },
       },
-      defaultValue: social_icon,
+      defaultValue: socials_icon,
       control: {
         type: 'text',
       },

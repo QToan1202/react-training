@@ -1,8 +1,8 @@
 import Navigation from './Navigation';
 import logo from '../../assets/images/logo.svg'
-import ic_user from '../../assets/images/ic_user.svg'
-import ic_search from '../../assets/images/ic_search.svg'
-import ic_cart from '../../assets/images/ic_cart.svg'
+import user from '../../assets/icons/user.svg'
+import search from '../../assets/icons/search.svg'
+import cart from '../../assets/icons/cart.svg'
 
 export default {
   title: 'Navigation',
@@ -45,10 +45,10 @@ export default {
         name: 'array',
         required: true,
       },
-      defaultValue: [ic_search, ic_user, ic_cart],
+      defaultValue: [search, user, cart],
       table: {
         defaultValue: {
-          summary: [ic_search, ic_user, ic_cart]
+          summary: [search, user, cart]
         }
       },
       control: {
