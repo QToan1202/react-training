@@ -7,7 +7,7 @@ export default {
   argTypes: {
     contents: {
       type: {
-        name: 'array',
+        name: 'object',
         required: true,
       },
       table: {

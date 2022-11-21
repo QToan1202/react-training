@@ -31,5 +31,6 @@ export default function Column({ contents, socialIcon = '' }) {
 }
 
 Column.propTypes = {
-  contents: PropTypes.array.isRequired,
+  contents: PropTypes.object.isRequired,
+  socialIcon: PropTypes.string,
 };

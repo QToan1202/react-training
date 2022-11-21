@@ -9,6 +9,7 @@ class Form extends React.Component {
 
   render() {
     const { action, method, children } = this.props;
+
     return (
       <form action={action} method={method} className="form">
         {children}
@@ -20,7 +21,7 @@ class Form extends React.Component {
 Form.propTypes = {
   action: PropTypes.string.isRequired,
   method: PropTypes.string.isRequired,
-  children: PropTypes.any,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]).isRequired,
 };
 
 export default Form;

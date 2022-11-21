@@ -11,7 +11,7 @@ class Button extends React.Component {
     const {title, size, style, onClick} = this.props
 
     return (
-      <button className={['btn',  `btn--${size}`, `btn--${style}`].join('  ')} onClick={() => onClick(title)}>
+      <button className={['btn',  `btn--${size}`, `btn--${style}`].join(' ')} onClick={onClick}>
         {title}
       </button>
     )

@@ -7,6 +7,6 @@ export default function Link({to, children, style}) {
 
 Link.propTypes = {
   to: PropTypes.string.isRequired,
-  children: PropTypes.any.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
   style: PropTypes.string,
 }

@@ -29,7 +29,7 @@ Footer.propTypes = {
   logo: PropTypes.string.isRequired,
   notice: PropTypes.string.isRequired,
   socialIcon: PropTypes.string.isRequired,
-  columns: PropTypes.array.isRequired,
+  columns: PropTypes.object.isRequired,
 }
 
 export default Footer
