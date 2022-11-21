@@ -5,9 +5,9 @@ import Column from '../Column/Column'
 
 const Footer = ({ logo, notice, socialIcon, columns }) => (
   <div className="footer">
-    <span className="footer__logo">
+    <div className="footer__logo">
       <Image src={logo} alt="footer-logo" />
-    </span>
+    </div>
     <Column contents={columns} socialIcon={socialIcon} />
     <p className="footer__line">{notice}</p>
   </div>

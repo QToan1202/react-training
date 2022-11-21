@@ -10,12 +10,12 @@ const Product = ({ imageURL, title, content, price }) => (
     <Image src={imageURL} alt="product-image" />
     <HeadingText content={title} style="black" />
     <Text leading="relaxed">{content}</Text>
-    <span className="flex">
+    <div className="flex">
       <Text color="yellow-700" weight="semibold" size="2xl" leading="extra-loose">
         ${price}
       </Text>
       <Button style="dark" size="small" title="buy now" />
-    </span>
+    </div>
   </div>
 )
 

@@ -7,20 +7,20 @@ import HeadingText from '../HeadingText/HeadingText'
 
 const ProductSection = ({ productImg, title, upperTitle, price, description }) => (
   <div className="container">
-    <span className="product_image">
+    <div className="product_image">
       <Image src={productImg} alt="photo for the header section" />
-    </span>
+    </div>
     <div className="content">
       <Text color="white" weight="medium" leading="relaxed">
         {upperTitle}
       </Text>
       <HeadingText content={title} />
-      <span className="inline">
+      <div className="inline">
         <Text color="white" leading="relaxed" size="5xl">
           &#36;{price}
         </Text>
         <Button size="medium" style="warning" title="buy now" />
-      </span>
+      </div>
       <Text color="yellow-400" weight="medium" leading="relaxed">
         {description}
       </Text>

@@ -15,9 +15,9 @@ const Header = ({ logo, links, icons }) => (
     </div>
     <div className="nav-item shrink">
       {icons.map((ic, index) => (
-        <span key={index} className="nav-icon">
+        <div key={index} className="nav-icon">
           <Image src={ic} alt="Icon" />
-        </span>
+        </div>
       ))}
     </div>
   </div>
