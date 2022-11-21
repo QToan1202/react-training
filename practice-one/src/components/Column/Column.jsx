@@ -1,10 +1,10 @@
-import './column.css';
-import PropTypes from 'prop-types';
-import Link from '../Link/Link';
-import Image from '../Image/Image';
+import './column.css'
+import PropTypes from 'prop-types'
+import Link from '../Link/Link'
+import Image from '../Image/Image'
 
-export default function Column({ contents, socialIcon = '' }) {
-  const colName = Object.keys(contents);
+const Column = ({ contents, socialIcon = '' }) => {
+  const colName = Object.keys(contents)
 
   return colName.map((col, index) => (
     <ul key={index} className="col">
@@ -27,10 +27,12 @@ export default function Column({ contents, socialIcon = '' }) {
         </li>
       )}
     </ul>
-  ));
+  ))
 }
 
 Column.propTypes = {
   contents: PropTypes.object.isRequired,
   socialIcon: PropTypes.string,
-};
+}
+
+export default Column

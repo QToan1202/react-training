@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import './text.css';
 
-export default function Text({ children, size, weight, color, leading }) {
+const Text = ({ children, size, weight, color, leading }) => {
   const styleClass = ['text'];
 
   leading && styleClass.push(`leading-${leading}`);
@@ -9,8 +9,7 @@ export default function Text({ children, size, weight, color, leading }) {
   weight && styleClass.push(`text-${weight}`);
   size && styleClass.push(`text-${size}`);
 
-  console.log(styleClass)
-  return <p className={styleClass.join('  ')}>{children}</p>;
+  return <p className={styleClass.join(' ')}>{children}</p>;
 }
 
 Text.propTypes = {
@@ -20,3 +19,5 @@ Text.propTypes = {
   color: PropTypes.oneOf(['black', 'white', 'yellow-400', 'yellow-700']),
   leading: PropTypes.oneOf(['normal', 'relaxed', 'loose', 'extra-loose']),
 };
+
+export default Text
