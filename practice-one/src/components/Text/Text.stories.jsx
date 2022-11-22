@@ -1,4 +1,5 @@
-import Text from './Text';
+import {Text} from '../index'
+
 
 export default {
   title: 'Text',

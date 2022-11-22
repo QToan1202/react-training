@@ -1,5 +1,6 @@
-import Column from './Column';
 import columns from '../../data/columns'
+
+import {Column} from '../index'
 
 export default {
   title: 'Column',

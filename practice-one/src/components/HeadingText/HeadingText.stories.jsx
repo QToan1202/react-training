@@ -1,4 +1,4 @@
-import HeadingText from './HeadingText';
+import {HeadingText} from '../index'
 
 export default {
   title: 'Heading Text',

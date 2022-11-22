@@ -1,4 +1,5 @@
-import Link from './Link';
+import {Link} from '../index'
+
 
 export default {
   title: 'Link',

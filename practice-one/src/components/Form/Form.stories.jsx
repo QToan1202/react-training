@@ -1,7 +1,4 @@
-import Button from '../Button/Button';
-import HeadingText from '../HeadingText/HeadingText';
-import Input from '../Input/Input';
-import Form from './Form';
+import {Button, HeadingText, Input, Form} from '../index'
 
 export default {
   title: 'Form',

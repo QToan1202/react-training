@@ -1,5 +1,6 @@
-import ProductSection from './ProductSection';
 import headPhone from '../../assets/images/black_headphone.png'
+import {ProductSection} from '../index'
+
 
 export default {
   title: 'Product Section',

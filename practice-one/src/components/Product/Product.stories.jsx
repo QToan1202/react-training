@@ -1,5 +1,6 @@
-import Product from './Product';
 import image from '../../assets/images/product.png'
+import {Product} from '../index'
+
 
 export default {
   title: 'Product Card',

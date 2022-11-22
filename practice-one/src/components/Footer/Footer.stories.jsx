@@ -1,7 +1,8 @@
-import Footer from './Footer';
 import logo from '../../assets/images/logo.svg'
 import socials_icon from '../../assets/icons/socials.svg'
 import columns from '../../data/columns'
+
+import {Footer} from '../index'
 
 export default {
   title: 'Footer',

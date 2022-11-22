@@ -1,5 +1,6 @@
-import Image from './Image';
 import logo from '../../assets/images/logo.svg'
+import {Image} from '../index'
+
 
 export default {
   title: 'Image',
