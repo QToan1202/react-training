@@ -1,23 +1,23 @@
-import PropTypes from 'prop-types';
-import './text.css';
+import PropTypes from 'prop-types'
+import './text.css'
 
-const Text = ({ children, size, weight, color, leading }) => {
-  const styleClass = ['text'];
+const Text = ({ children, weight, color, price, priceSection }) => {
+  const styleClass = ['text']
 
-  leading && styleClass.push(`leading-${leading}`);
-  color && styleClass.push(`text-${color}`);
-  weight && styleClass.push(`text-${weight}`);
-  size && styleClass.push(`text-${size}`);
+  color && styleClass.push(`text-${color}`)
+  weight && styleClass.push(`text-${weight}`)
+  price && styleClass.push('text--price')
+  priceSection && styleClass.push('text--price-section')
 
-  return <p className={styleClass.join(' ')}>{children}</p>;
+  return <p className={styleClass.join(' ')}>{children}</p>
 }
 
 Text.propTypes = {
   children: PropTypes.any,
-  size: PropTypes.oneOf(['xl', '2xl','3xl', '4xl','5xl']),
   weight: PropTypes.oneOf(['normal', 'medium', 'semibold']),
   color: PropTypes.oneOf(['black', 'white', 'yellow-400', 'yellow-700']),
-  leading: PropTypes.oneOf(['normal', 'relaxed', 'loose', 'extra-loose']),
-};
+  price: PropTypes.bool,
+  priceSection: PropTypes.bool,
+}
 
 export default Text

@@ -11,17 +11,17 @@ const ProductSection = ({ product }) => {
         <Image src={productImg} alt="photo for the header section" />
       </div>
       <div className="content">
-        <Text color="white" weight="medium" leading="relaxed">
+        <Text color="white" weight="medium">
           {upperTitle}
         </Text>
         <HeadingText content={title} />
         <div className="inline">
-          <Text color="white" leading="relaxed" size="5xl">
+          <Text color="white" priceSection>
             &#36;{price}
           </Text>
-          <Button size="medium" style="warning" title="buy now" />
+          <Button size="medium" type="secondary" title="buy now" />
         </div>
-        <Text color="yellow-400" weight="medium" leading="relaxed">
+        <Text color="yellow-400" weight="medium">
           {description}
         </Text>
       </div>

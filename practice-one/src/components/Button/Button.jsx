@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import './button.css'
 
-const Button = ({ title, size, style, onClick }) => (
-  <button className={['btn', `btn--${size}`, `btn--${style}`].join(' ')} onClick={onClick}>
+const Button = ({ title, size, type, onClick }) => (
+  <button className={['btn', `btn--${size}`, `btn--${type}`].join(' ')} onClick={onClick}>
     {title}
   </button>
 )
@@ -10,7 +10,7 @@ const Button = ({ title, size, style, onClick }) => (
 Button.propTypes = {
   title: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  style: PropTypes.oneOf(['dark', 'warning']),
+  type: PropTypes.oneOf(['primary', 'secondary']),
   onClick: PropTypes.func,
 }
 

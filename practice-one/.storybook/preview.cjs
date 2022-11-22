@@ -1,4 +1,5 @@
 import '../src/styles/colors.css'
+import '../src/styles/z-index.css'
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

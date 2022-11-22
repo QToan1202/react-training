@@ -7,10 +7,10 @@ export default {
 
 const FormContent = (args) => (
   <Form {...args}>
-    <HeadingText content="Hear it first" style="black" />
-    <p className="form__sub-title">Get updates on product drops, collaborations and all things Beats.</p>
+    <HeadingText content="Hear it first" type="primary" />
+    <p>Get updates on product drops, collaborations and all things Beats.</p>
     <Input placeholder="Enter your email" />
-    <Button size="large" style="warning" title="sign up" />
+    <Button size="large" type="secondary" title="sign up" />
   </Form>
 )
 

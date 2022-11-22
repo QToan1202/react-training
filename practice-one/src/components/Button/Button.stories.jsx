@@ -19,8 +19,8 @@ export default {
       defaultValue: 'small',
       description: 'Change size of the button',
     },
-    style: {
-      defaultValue: 'dark',
+    type: {
+      defaultValue: 'primary',
       description: 'Change color of the button',
     },
   },
@@ -34,17 +34,17 @@ Default.args = {}
 export const Small = Template.bind({})
 Small.args = {
   size: 'small',
-  style: 'dark',
+  type: 'primary',
 }
 
 export const Medium = Template.bind({})
 Medium.args = {
   size: 'medium',
-  style: 'dark',
+  type: 'primary',
 }
 
 export const Large = Template.bind({})
 Large.args = {
   size: 'large',
-  style: 'warning',
+  type: 'secondary',
 }

@@ -8,13 +8,13 @@ const Product = ({ product }) => {
   return (
     <div className="card">
       <Image src={imageURL} alt="product-image" />
-      <HeadingText content={title} style="black" />
+      <HeadingText content={title} type="primary" />
       <Text leading="relaxed">{content}</Text>
       <div className="flex">
-        <Text color="yellow-700" weight="semibold" size="2xl" leading="extra-loose">
+        <Text color="yellow-700" weight="semibold" price>
           ${price}
         </Text>
-        <Button style="dark" size="small" title="buy now" />
+        <Button type="primary" size="small" title="buy now" />
       </div>
     </div>
   )
