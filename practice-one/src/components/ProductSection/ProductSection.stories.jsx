@@ -8,11 +8,13 @@ export default {
 
 const Template = (args) => <ProductSection {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
+const product = {
   productImg: headPhone,
   title: 'Experience your music like never before.',
   upperTitle: 'Beats Studio3 Wireless',
   price: 299.95,
   description: '$60 Apple Music gift card with purchase of select Beats products.*'
 }
+
+export const Default = Template.bind({});
+Default.args = { product }
