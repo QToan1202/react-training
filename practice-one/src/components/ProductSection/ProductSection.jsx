@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types'
 import './productSection.css'
-import Button from '../Button/Button'
-import Text from '../Text/Text'
-import Image from '../Image/Image'
-import HeadingText from '../HeadingText/HeadingText'
+import { Button, Text, Image, HeadingText } from '../index'
 
 const ProductSection = ({ product }) => {
   const { productImg, title, upperTitle, price, description } = product

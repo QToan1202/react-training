@@ -1,7 +1,6 @@
 import './footer.css'
 import PropTypes from 'prop-types'
-import Image from '../Image/Image'
-import Column from '../Column/Column'
+import { Image, Column, Text } from '../index'
 
 const Footer = ({ logo, notice, socialIcon, columns }) => (
   <div className="footer">
@@ -9,7 +8,9 @@ const Footer = ({ logo, notice, socialIcon, columns }) => (
       <Image src={logo} alt="footer-logo" />
     </div>
     <Column contents={columns} socialIcon={socialIcon} />
-    <p className="footer__line">{notice}</p>
+    <div className="footer__line">
+      <Text>{notice}</Text>
+    </div>
   </div>
 )
 

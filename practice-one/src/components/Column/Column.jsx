@@ -1,7 +1,6 @@
 import './column.css'
 import PropTypes from 'prop-types'
-import Link from '../Link/Link'
-import Image from '../Image/Image'
+import { Link, Image } from '../index'
 
 const Column = ({ contents, socialIcon = '' }) => {
   const colName = Object.keys(contents)
