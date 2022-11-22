@@ -1,5 +1,4 @@
-import {Link} from '../index'
-
+import { Link } from '../index'
 
 export default {
   title: 'Link',
@@ -13,8 +12,8 @@ export default {
       defaultValue: 'javascript:void(0)',
       table: {
         defaultValue: {
-          summary: 'javascript:void(0)'
-        }
+          summary: 'javascript:void(0)',
+        },
       },
       control: {
         type: 'text',
@@ -29,8 +28,8 @@ export default {
       defaultValue: 'My link',
       table: {
         defaultValue: {
-          summary: 'My link'
-        }
+          summary: 'My link',
+        },
       },
       control: {
         type: 'text',
@@ -38,9 +37,9 @@ export default {
       description: 'The content represent the link',
     },
   },
-};
+}
 
-const Template = (args) => <Link {...args} />;
+const Template = (args) => <Link {...args} />
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = Template.bind({})
+Default.args = {}

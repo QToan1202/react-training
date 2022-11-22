@@ -1,4 +1,4 @@
-import {Button} from '../index'
+import { Button } from '../index'
 
 export default {
   title: 'Button',
@@ -24,27 +24,27 @@ export default {
       description: 'Change color of the button',
     },
   },
-};
+}
 
-const Template = (args) => <Button {...args} />;
+const Template = (args) => <Button {...args} />
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = Template.bind({})
+Default.args = {}
 
-export const Small = Template.bind({});
+export const Small = Template.bind({})
 Small.args = {
   size: 'small',
   style: 'dark',
-};
+}
 
-export const Medium = Template.bind({});
+export const Medium = Template.bind({})
 Medium.args = {
   size: 'medium',
   style: 'dark',
-};
+}
 
-export const Large = Template.bind({});
+export const Large = Template.bind({})
 Large.args = {
   size: 'large',
   style: 'warning',
-};
+}

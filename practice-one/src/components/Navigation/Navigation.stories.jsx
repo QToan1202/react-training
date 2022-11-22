@@ -2,7 +2,7 @@ import logo from '../../assets/images/logo.svg'
 import user from '../../assets/icons/user.svg'
 import search from '../../assets/icons/search.svg'
 import cart from '../../assets/icons/cart.svg'
-import {Navigation} from '../index'
+import { Navigation } from '../index'
 
 export default {
   title: 'Navigation',
@@ -16,8 +16,8 @@ export default {
       defaultValue: logo,
       table: {
         defaultValue: {
-          summary: logo
-        }
+          summary: logo,
+        },
       },
       control: {
         type: 'text',
@@ -32,8 +32,8 @@ export default {
       defaultValue: ['headphones', 'earphones', 'speakers', 'explore'],
       table: {
         defaultValue: {
-          summary: ['headphones', 'earphones', 'speakers', 'explore']
-        }
+          summary: ['headphones', 'earphones', 'speakers', 'explore'],
+        },
       },
       control: {
         type: 'array',
@@ -48,8 +48,8 @@ export default {
       defaultValue: [search, user, cart],
       table: {
         defaultValue: {
-          summary: [search, user, cart]
-        }
+          summary: [search, user, cart],
+        },
       },
       control: {
         type: 'array',
@@ -57,9 +57,9 @@ export default {
       description: 'All the icons that can be show on the header navigation bar',
     },
   },
-};
+}
 
-const Template = (args) => <Navigation {...args} />;
+const Template = (args) => <Navigation {...args} />
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = Template.bind({})
+Default.args = {}

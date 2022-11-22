@@ -1,8 +1,7 @@
 import logo from '../../assets/images/logo.svg'
 import socials_icon from '../../assets/icons/socials.svg'
 import columns from '../../data/columns'
-
-import {Footer} from '../index'
+import { Footer } from '../index'
 
 export default {
   title: 'Footer',
@@ -15,7 +14,7 @@ export default {
       },
       table: {
         defaultValue: {
-          summary: logo
+          summary: logo,
         },
       },
       defaultValue: logo,
@@ -31,7 +30,7 @@ export default {
       },
       table: {
         defaultValue: {
-          summary: 'Copyright &#169; 2020 Apple Inc. - All rights reserved.'
+          summary: 'Copyright &#169; 2020 Apple Inc. - All rights reserved.',
         },
       },
       defaultValue: 'Copyright &#169; 2020 Apple Inc. - All rights reserved.',
@@ -47,7 +46,7 @@ export default {
       },
       table: {
         defaultValue: {
-          summary: socials_icon
+          summary: socials_icon,
         },
       },
       defaultValue: socials_icon,
@@ -63,7 +62,7 @@ export default {
       },
       table: {
         defaultValue: {
-          summary: columns
+          summary: columns,
         },
       },
       defaultValue: columns,
@@ -73,8 +72,8 @@ export default {
       description: 'Data for each column',
     },
   },
-};
+}
 
-const Template = (args) => <Footer {...args} />;
+const Template = (args) => <Footer {...args} />
 
-export const Default = Template.bind({});
+export const Default = Template.bind({})

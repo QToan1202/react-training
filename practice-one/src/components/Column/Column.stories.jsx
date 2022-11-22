@@ -1,6 +1,5 @@
 import columns from '../../data/columns'
-
-import {Column} from '../index'
+import { Column } from '../index'
 
 export default {
   title: 'Column',
@@ -13,7 +12,7 @@ export default {
       },
       table: {
         defaultValue: {
-          summary: columns
+          summary: columns,
         },
       },
       defaultValue: columns,
@@ -23,8 +22,8 @@ export default {
       description: 'The copyright notice at the bottom of the page',
     },
   },
-};
+}
 
-const Template = (args) => <Column {...args} />;
+const Template = (args) => <Column {...args} />
 
-export const Default = Template.bind({});
+export const Default = Template.bind({})
