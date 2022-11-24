@@ -1,6 +1,7 @@
 import './footer.css'
 import PropTypes from 'prop-types'
-import { Image, Column, Text } from '../index'
+import Column from './Column'
+import { Image, Text } from '../index'
 
 const Footer = ({ logo, notice, socialIcon, columns }) => (
   <div className="footer">

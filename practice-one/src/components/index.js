@@ -1,5 +1,4 @@
 export { default as Button } from './Button/Button'
-export { default as Column } from './Column/Column'
 export { default as Footer } from './Footer/Footer'
 export { default as Form } from './Form/Form'
 export { default as HeadingText } from './HeadingText/HeadingText'
