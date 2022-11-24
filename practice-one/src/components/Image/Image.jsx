@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 
-export default function Image({width, height, src, alt}) {
-  return <img width={width} height={height} src={src} alt={alt} />
-}
+const Image = ({ width, height, src, alt }) => <img width={width} height={height} src={src} alt={alt} />
 
 Image.propTypes = {
   width: PropTypes.number,
@@ -10,3 +8,5 @@ Image.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string,
 }
+
+export default Image

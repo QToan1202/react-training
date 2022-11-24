@@ -1,5 +1,5 @@
-import Image from './Image';
 import logo from '../../assets/images/logo.svg'
+import { Image } from '../index'
 
 export default {
   title: 'Image',
@@ -13,17 +13,17 @@ export default {
       defaultValue: logo,
       table: {
         defaultValue: {
-          summary: logo
-        }
+          summary: logo,
+        },
       },
       control: {
         type: 'text',
       },
     },
   },
-};
+}
 
-const Template = (args) => <Image {...args} />;
+const Template = (args) => <Image {...args} />
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = Template.bind({})
+Default.args = {}

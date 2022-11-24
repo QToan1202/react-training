@@ -3,26 +3,27 @@
   border-radius: 100px;
   border: none;
   cursor: pointer;
+  height: 40px;
 }
 
 .btn--large {
-  padding: 12px 222px;
+  width: 507px;
 }
 
 .btn--medium {
-  padding: 12px 48px;
+  width: 170px;
 }
 
 .btn--small {
-  padding: 12px 33px;
+  width: 145px;
 }
 
-.btn--dark {
+.btn--primary {
   color: var(--white);
   background-color: var(--black);
 }
 
-.btn--warning {
+.btn--secondary {
   color: var(--black);
   background-color: var(--yellow-400);
 }

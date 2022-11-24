@@ -1,4 +1,4 @@
-import Input from './Input';
+import { Input } from '../index'
 
 export default {
   title: 'Input',
@@ -12,8 +12,8 @@ export default {
       defaultValue: 'text',
       table: {
         defaultValue: {
-          summary: 'text'
-        }
+          summary: 'text',
+        },
       },
       control: {
         type: 'text',
@@ -21,9 +21,9 @@ export default {
       description: 'Heading of the form',
     },
   },
-};
+}
 
-const Template = (args) => <Input {...args} />;
+const Template = (args) => <Input {...args} />
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = Template.bind({})
+Default.args = {}

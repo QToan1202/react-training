@@ -3,7 +3,7 @@
   max-width: 390px;
   padding: 0 50px;
   padding-bottom: 30px;
-  background-color: #f8f8f9;
+  background-color: var(--gray-50);
 }
 
 .flex {

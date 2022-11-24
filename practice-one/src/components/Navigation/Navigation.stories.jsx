@@ -1,8 +1,8 @@
-import Navigation from './Navigation';
 import logo from '../../assets/images/logo.svg'
-import ic_user from '../../assets/images/ic_user.svg'
-import ic_search from '../../assets/images/ic_search.svg'
-import ic_cart from '../../assets/images/ic_cart.svg'
+import user from '../../assets/icons/user.svg'
+import search from '../../assets/icons/search.svg'
+import cart from '../../assets/icons/cart.svg'
+import { Navigation } from '../index'
 
 export default {
   title: 'Navigation',
@@ -16,8 +16,8 @@ export default {
       defaultValue: logo,
       table: {
         defaultValue: {
-          summary: logo
-        }
+          summary: logo,
+        },
       },
       control: {
         type: 'text',
@@ -32,8 +32,8 @@ export default {
       defaultValue: ['headphones', 'earphones', 'speakers', 'explore'],
       table: {
         defaultValue: {
-          summary: ['headphones', 'earphones', 'speakers', 'explore']
-        }
+          summary: ['headphones', 'earphones', 'speakers', 'explore'],
+        },
       },
       control: {
         type: 'array',
@@ -45,11 +45,11 @@ export default {
         name: 'array',
         required: true,
       },
-      defaultValue: [ic_search, ic_user, ic_cart],
+      defaultValue: [search, user, cart],
       table: {
         defaultValue: {
-          summary: [ic_search, ic_user, ic_cart]
-        }
+          summary: [search, user, cart],
+        },
       },
       control: {
         type: 'array',
@@ -57,9 +57,9 @@ export default {
       description: 'All the icons that can be show on the header navigation bar',
     },
   },
-};
+}
 
-const Template = (args) => <Navigation {...args} />;
+const Template = (args) => <Navigation {...args} />
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = Template.bind({})
+Default.args = {}
