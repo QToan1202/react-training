@@ -1,6 +1,7 @@
 import './column.css'
 import PropTypes from 'prop-types'
 import { Link, Image } from '../index'
+import { clearUnderscore } from '../../helper/string'
 
 const Column = ({ contents, socialIcon = '' }) => {
   const colName = Object.keys(contents)
@@ -8,8 +9,8 @@ const Column = ({ contents, socialIcon = '' }) => {
   return colName.map((col, index) => (
     <ul key={index} className="col">
       <li>
-        <h3 className="col__title" href="/">
-          {col.replace('_', ' ').toLowerCase()}
+        <h3 className="col__title">
+          {clearUnderscore(col)}
         </h3>
       </li>
       {contents[col].length ? (
