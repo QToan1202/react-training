@@ -1,6 +1,8 @@
 .container {
   display: flex;
+  flex-direction: row-reverse;
   max-width: 1440px;
+  min-height: 616px;
   background: var(--neutral-700);
   position: relative;
 }
@@ -8,12 +10,15 @@
 .product_image {
   z-index: var(--image);
   position: absolute;
+  left: 0;
 }
 
 .content {
-  margin-left: auto;
+  position: absolute;
+  z-index: var(--text);
   max-width: 440px;
-  padding: 175px 135px 191px 0;
+  align-self: center;
+  right: 135px;
 }
 
 .inline {
