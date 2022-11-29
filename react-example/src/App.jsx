@@ -10,6 +10,9 @@ import Form from './components/Form'
 import Test from './components/Test'
 import Class from './components/Class'
 import './App.css'
+import Text from './components/Text'
+import { UserContext } from './contexts/user'
+import Title from './components/Title'
 
 function App() {
 
@@ -24,6 +27,10 @@ function App() {
       <Form />
       <Test />
       <Class />
+      <Text /> {/* ngquoctoan.02@gmail.com */}
+      <UserContext.Provider value='toan124677@gmai.com'>
+        <Title /> {/* toan124677@gmai.com */}
+      </UserContext.Provider>
     </div>
   )
 }
