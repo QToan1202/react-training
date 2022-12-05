@@ -13,6 +13,8 @@ class Dialog extends React.Component {
   }
 
   render() {
+    if (this.state.click === 10) throw new Error('Not handing value')
+    
     return (
       <div style={{maxWidth: 500, border: '1px solid white'}}>
         <h2>Lorem</h2>

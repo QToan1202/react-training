@@ -13,6 +13,7 @@ import './App.css'
 import Text from './components/Text'
 import { UserContext } from './contexts/user'
 import Title from './components/Title'
+import ErrorBoundary from './components/ErrorBoundary'
 
 function App() {
 
@@ -21,7 +22,9 @@ function App() {
       <Clock />
       <Welcome name="Toan" />
       <Comment userName="React" content="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
-      <Dialog />
+      <ErrorBoundary>
+        <Dialog />
+      </ErrorBoundary>
       <Menu />
       <Task />
       <Form />
