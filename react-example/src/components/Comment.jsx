@@ -1,8 +1,9 @@
+import { forwardRef } from 'react'
 import reactLogo from '../assets/react.svg'
 
-function Comment(props) {
+function Comment(props, ref) {
   return (
-    <div className="comment">
+    <div ref={ref} className="comment">
       <img src={reactLogo} alt="React logo" />
       <div className="comment-content">
         <h2>{props.userName}</h2>
@@ -12,4 +13,4 @@ function Comment(props) {
   )
 }
 
-export default Comment
+export default forwardRef(Comment)

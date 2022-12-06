@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import Welcome from './components/Welcome'
 import Comment from './components/Comment'
@@ -16,6 +16,11 @@ import Title from './components/Title'
 import ErrorBoundary from './components/ErrorBoundary'
 
 function App() {
+  const myComment = useRef(null)
+  
+  useEffect(() => {
+    console.log(myComment.current)
+  }, [myComment])
 
   return (
     <div>
@@ -34,6 +39,8 @@ function App() {
       <UserContext.Provider value='toan124677@gmai.com'>
         <Title /> {/* toan124677@gmai.com */}
       </UserContext.Provider>
+
+      <Comment ref={myComment} userName="Toan" content="Test ref" />
     </div>
   )
 }
