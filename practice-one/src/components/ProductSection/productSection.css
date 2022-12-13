@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: row-reverse;
+  max-width: 1440px;
+  min-height: 616px;
+  background: var(--neutral-700);
+  position: relative;
+}
+
+.product_image {
+  z-index: var(--image);
+  position: absolute;
+  left: 0;
+}
+
+.content {
+  position: absolute;
+  z-index: var(--text);
+  max-width: 440px;
+  align-self: center;
+  right: 135px;
+}
+
+.inline {
+  display: flex;
+  margin-bottom: 14px;
+  align-items: center;
+  gap: 34px;
+}

@@ -1,0 +1,29 @@
+.btn {
+  text-transform: uppercase;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+}
+
+.btn--large {
+  width: 507px;
+}
+
+.btn--medium {
+  width: 170px;
+}
+
+.btn--small {
+  width: 145px;
+}
+
+.btn--primary {
+  color: var(--white);
+  background-color: var(--black);
+}
+
+.btn--secondary {
+  color: var(--black);
+  background-color: var(--yellow-400);
+}

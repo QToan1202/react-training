@@ -1,0 +1,7 @@
+.form {
+  margin: 34px 94px;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  background-color: var(--gray-50);
+  text-align: center;
+}
