@@ -15,6 +15,7 @@ import { UserContext } from './contexts/user'
 import Title from './components/Title'
 import ErrorBoundary from './components/ErrorBoundary'
 import Button from './components/Button'
+import Message from './components/Message'
 
 function App() {
   const myComment = useRef(null)
@@ -46,6 +47,10 @@ function App() {
       <Comment ref={myComment} userName="Toan" content="Test ref" />
 
       <Button ref={myButton} title='My button' />
+
+      <Message>
+        {content => (<p>{content}</p>)}
+      </Message>
     </div>
   )
 }
