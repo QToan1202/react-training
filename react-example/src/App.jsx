@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, createRef } from 'react'
+import { useEffect, useRef, useState, createRef, Profiler } from 'react'
 import reactLogo from './assets/react.svg'
 import Welcome from './components/Welcome'
 import Comment from './components/Comment'
@@ -27,9 +27,18 @@ function App() {
     console.log(myButton.current)
   }, [myComment])
 
+
+  const renderCallback = ( id, phase, actualDuration, baseDuration, startTime, commitTime, interactions ) => {
+    console.log({
+      id, phase, actualDuration, baseDuration, startTime, commitTime, interactions
+    });
+  }
+
   return (
     <div>
-      <Clock />
+      <Profiler id='myClock' onRender={renderCallback}>
+        <Clock />
+      </Profiler>
       <Welcome name="Toan" />
       <Comment userName="React" content="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
       <ErrorBoundary>
@@ -57,6 +66,10 @@ function App() {
         <h2>My task modal</h2>
         <Task />
       </Modal>
+
+      <Profiler id='myTask' onRender={renderCallback}>
+        <Task />
+      </Profiler>
     </div>
   )
 }
