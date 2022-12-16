@@ -16,6 +16,7 @@ import Title from './components/Title'
 import ErrorBoundary from './components/ErrorBoundary'
 import Button from './components/Button'
 import Message from './components/Message'
+import Modal from './components/Modal'
 
 function App() {
   const myComment = useRef(null)
@@ -51,6 +52,11 @@ function App() {
       <Message>
         {content => (<p>{content}</p>)}
       </Message>
+
+      <Modal>
+        <h2>My task modal</h2>
+        <Task />
+      </Modal>
     </div>
   )
 }
