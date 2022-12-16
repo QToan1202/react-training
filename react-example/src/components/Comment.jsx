@@ -1,7 +1,8 @@
 import { forwardRef } from 'react'
 import reactLogo from '../assets/react.svg'
+import PropTypes from 'prop-types'
 
-function Comment(props, ref) {
+const Comment = forwardRef((props, ref) => {
   return (
     <div ref={ref} className="comment">
       <img src={reactLogo} alt="React logo" />
@@ -11,6 +12,11 @@ function Comment(props, ref) {
       </div>
     </div>
   )
+})
+
+Comment.propTypes = {
+  userName: PropTypes.string,
+  content: PropTypes.string,
 }
 
-export default forwardRef(Comment)
+export default Comment

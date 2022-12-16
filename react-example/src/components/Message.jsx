@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 class Message extends React.Component {
   constructor(props) {
@@ -19,6 +20,10 @@ class Message extends React.Component {
       </div>
     )
   }
+}
+
+Message.propTypes = {
+  children: PropTypes.func
 }
 
 export default Message

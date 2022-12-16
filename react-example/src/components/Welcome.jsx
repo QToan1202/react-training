@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 class Welcome extends React.Component {
   constructor(props) {
@@ -23,6 +24,10 @@ class Welcome extends React.Component {
       </>
     )
   }
+}
+
+Welcome.propTypes = {
+  name: PropTypes.string
 }
 
 export default Welcome
