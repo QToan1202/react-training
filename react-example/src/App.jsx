@@ -17,6 +17,7 @@ import ErrorBoundary from './components/ErrorBoundary'
 import Button from './components/Button'
 import Message from './components/Message'
 import Modal from './components/Modal'
+import Click from './components/Click'
 
 function App() {
   const myComment = useRef(null)
@@ -70,6 +71,8 @@ function App() {
       <Profiler id='myTask' onRender={renderCallback}>
         <Task />
       </Profiler>
+
+      <Click />
     </div>
   )
 }
