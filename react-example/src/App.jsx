@@ -18,16 +18,26 @@ import Button from './components/Button'
 import Message from './components/Message'
 import Modal from './components/Modal'
 import Click from './components/Click'
+import AnotherClock from './components/AnotherClock'
 
 function App() {
   const myComment = useRef(null)
   const myButton = createRef()
+  const [posts, setPosts] = useState([])
+  const [text, setText] = useState('Init')
   
   useEffect(() => {
     console.log(myComment.current)
     console.log(myButton.current)
   }, [myComment])
 
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(json => setPosts(json))
+  }, [])
+
+  useEffect(() => setText('Hello'))
 
   const renderCallback = ( id, phase, actualDuration, baseDuration, startTime, commitTime, interactions ) => {
     console.log({
@@ -40,6 +50,7 @@ function App() {
       <Profiler id='myClock' onRender={renderCallback}>
         <Clock />
       </Profiler>
+      <AnotherClock />
       <Welcome name="Toan" />
       <Comment userName="React" content="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
       <ErrorBoundary>
@@ -73,6 +84,10 @@ function App() {
       </Profiler>
 
       <Click />
+
+      {posts.map((post) => <p key={post.id}>{JSON.stringify(post)}</p>)}
+
+      <p>{text}</p>
     </div>
   )
 }
