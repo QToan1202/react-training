@@ -19,6 +19,7 @@ import Message from './components/Message'
 import Modal from './components/Modal'
 import Click from './components/Click'
 import AnotherClock from './components/AnotherClock'
+import Box from './components/Box'
 
 function App() {
   const myComment = useRef(null)
@@ -88,6 +89,7 @@ function App() {
       {posts.map((post) => <p key={post.id}>{JSON.stringify(post)}</p>)}
 
       <p>{text}</p>
+      <Box />
     </div>
   )
 }
