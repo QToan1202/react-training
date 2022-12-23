@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef, forwardRef } from 'react';
 
 class Form extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class Form extends React.Component {
       <form >
         <label>
           Use name
-        <input name="name" type="text" value={this.state.name} onChange={this.handleChange}/>
+        <input ref={this.props.innerRef} name="name" type="text" value={this.state.name} onChange={this.handleChange}/>
         </label>
         <select name="age" value={this.state.age} onChange={this.handleChange}>
           <option value="18">18</option>
@@ -35,4 +35,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form
+export default forwardRef((props, ref) => <Form innerRef={ref} {...props}/>)

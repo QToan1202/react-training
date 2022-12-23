@@ -26,10 +26,12 @@ function App() {
   const myButton = createRef()
   const [posts, setPosts] = useState([])
   const [text, setText] = useState('Init')
+  const myInput = useRef(null)
   
   useEffect(() => {
     console.log(myComment.current)
     console.log(myButton.current)
+    myInput.current.focus()
   }, [myComment])
 
   useEffect(() => {
@@ -59,7 +61,7 @@ function App() {
       </ErrorBoundary>
       <Menu />
       <Task />
-      <Form />
+      <Form ref={myInput}/>
       <Test />
       <Class />
       <Text /> {/* ngquoctoan.02@gmail.com */}
