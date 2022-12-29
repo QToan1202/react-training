@@ -32,7 +32,6 @@ function App() {
     const posts = await data.json()
 
     setPosts(posts)
-    console.log('Called')
   }, [])
   
   useEffect(() => {
