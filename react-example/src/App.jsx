@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, createRef, Profiler } from 'react'
+import { useEffect, useRef, useState, createRef, Profiler, useCallback } from 'react'
 import reactLogo from './assets/react.svg'
 import Welcome from './components/Welcome'
 import Comment from './components/Comment'
@@ -27,6 +27,13 @@ function App() {
   const [posts, setPosts] = useState([])
   const [text, setText] = useState('Init')
   const myInput = useRef(null)
+  const fetchData = useCallback(async () => {
+    const data = await fetch('https://jsonplaceholder.typicode.com/posts')
+    const posts = await data.json()
+
+    setPosts(posts)
+    console.log('Called')
+  }, [])
   
   useEffect(() => {
     console.log(myComment.current)
@@ -35,10 +42,8 @@ function App() {
   }, [myComment])
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.json())
-      .then(json => setPosts(json))
-  }, [])
+    fetchData()
+  }, [fetchData])
 
   useEffect(() => setText('Hello'))
 
@@ -50,9 +55,7 @@ function App() {
 
   return (
     <div>
-      <Profiler id='myClock' onRender={renderCallback}>
-        <Clock />
-      </Profiler>
+      <Clock />
       <AnotherClock />
       <Welcome name="Toan" />
       <Comment userName="React" content="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
