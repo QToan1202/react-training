@@ -35,7 +35,6 @@ function App() {
   }, [])
   
   useEffect(() => {
-    console.log(myComment.current)
     console.log(myButton.current)
     myInput.current.focus()
   }, [myComment])
@@ -50,6 +49,10 @@ function App() {
     console.log({
       id, phase, actualDuration, baseDuration, startTime, commitTime, interactions
     });
+  }
+
+  const handleClick = () => {
+    myComment.current.focusMyComment()
   }
 
   return (
@@ -72,6 +75,7 @@ function App() {
       </UserContext.Provider>
 
       <Comment ref={myComment} userName="Toan" content="Test ref" />
+      <button onClick={handleClick}>Click to focus comment</button>
 
       <Button ref={myButton} title='My button' />
 
