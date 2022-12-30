@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, createRef, Profiler, useCallback } from 'react'
+import { useEffect, useRef, useState, createRef, Profiler, useCallback, useLayoutEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import Welcome from './components/Welcome'
 import Comment from './components/Comment'
@@ -33,6 +33,7 @@ function App() {
 
     setPosts(posts)
   }, [])
+  const [width, setWidth] = useState()
   
   useEffect(() => {
     console.log(myButton.current)
@@ -44,6 +45,10 @@ function App() {
   }, [fetchData])
 
   useEffect(() => setText('Hello'))
+
+  useLayoutEffect(() => {
+    setWidth(window.innerWidth)
+  })
 
   const renderCallback = ( id, phase, actualDuration, baseDuration, startTime, commitTime, interactions ) => {
     console.log({
@@ -57,6 +62,7 @@ function App() {
 
   return (
     <div>
+      <p>Current width: {width} px</p>
       <Clock />
       <AnotherClock />
       <Welcome name="Toan" />
