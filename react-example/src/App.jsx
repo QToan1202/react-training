@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, createRef, Profiler, useCallback, useLayoutEffect } from 'react'
+import { useEffect, useRef, useState, createRef, Profiler, useCallback, useLayoutEffect, useTransition } from 'react'
 import reactLogo from './assets/react.svg'
 import Welcome from './components/Welcome'
 import Comment from './components/Comment'
@@ -20,6 +20,10 @@ import Modal from './components/Modal'
 import Click from './components/Click'
 import AnotherClock from './components/AnotherClock'
 import Box from './components/Box'
+import Tab from './components/Tab'
+import AboutTab from './components/AboutTab'
+import SlowTab from './components/SlowTab'
+import AnotherTab from './components/AnotherTab'
 
 function App() {
   const myComment = useRef(null)
@@ -34,6 +38,8 @@ function App() {
     setPosts(posts)
   }, [])
   const [width, setWidth] = useState()
+  const [isPending, startTransition] = useTransition()
+  const [tab, setTab] = useState('about')
   
   useEffect(() => {
     console.log(myButton.current)
@@ -60,8 +66,18 @@ function App() {
     myComment.current.focusMyComment()
   }
 
+  const selectTab = (nextTab) => {
+    startTransition(() => setTab(nextTab))
+  }
+
   return (
     <div>
+      <Tab onClick={() => selectTab('about')} isActive={tab === 'about'}>About</Tab>
+      <Tab onClick={() => selectTab('slow')} isActive={tab === 'slow'}>Slow</Tab>
+      <Tab onClick={() => selectTab('another')} isActive={tab === 'another'}>Another</Tab>
+      {tab === 'about' && <AboutTab />}
+      {tab === 'slow' && <SlowTab />}
+      {tab === 'another' && <AnotherTab />}
       <p>Current width: {width} px</p>
       <Clock />
       <AnotherClock />
