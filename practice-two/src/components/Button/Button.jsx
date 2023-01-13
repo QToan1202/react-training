@@ -13,7 +13,7 @@ const handleButtonWidth = (size) => {
       return '8px 54px'
 
     default:
-      return '56px'
+      return '4px 28px'
   }
 }
 
@@ -22,7 +22,6 @@ const RadiusButton = styled.button`
   border-radius: 40px;
   padding: ${({ size }) => handleButtonWidth(size)};
   cursor: pointer;
-  background-color: var(--blue);
   background-color: ${({ variant }) => (variant === 'primary' ? 'transparent' : 'var(--blue)')};
 `
 
