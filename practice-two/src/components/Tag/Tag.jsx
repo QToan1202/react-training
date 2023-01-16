@@ -1,19 +1,25 @@
 import PropTypes from 'prop-types'
 import styles from './Tag.module.css'
 
-const Tag = ({ label }) => (
-  <div className={styles.tag}>
-    <p>{label}</p>
-    <button className={styles['tag-btn']}>&#10006;</button>
-  </div>
-)
+const Tag = ({ children, onClick }) => {
+  return (
+    <div className={styles.tag}>
+      <p className={styles.tag__label}>{children}</p>
+      <button className={styles.tag__btn} onClick={onClick}>
+        &#10006;
+      </button>
+    </div>
+  )
+}
 
 Tag.propTypes = {
-  label: PropTypes.string.isRequired,
+  children: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
 }
 
 Tag.defaultProps = {
-  label: 'Red',
+  children: 'Tag',
+  onClick: () => void 0,
 }
 
 export default Tag
