@@ -5,7 +5,12 @@
   width: fit-content;
 }
 
-.tag-btn {
+.tag__label {
+  padding: 5px;
+}
+
+.tag__btn {
+  padding: 5px;
   color: var(--white);
   background: var(--black);
   border: none;
