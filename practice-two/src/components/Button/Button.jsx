@@ -4,10 +4,10 @@ import styled from 'styled-components'
 const handleButtonWidth = (size) => {
   switch (size) {
     case 'sm':
-      return '4px 28px'
+      return '8px 34px'
 
     case 'md':
-      return '6px 34px'
+      return '8px 44px'
 
     case 'lg':
       return '8px 54px'
@@ -23,6 +23,8 @@ const RadiusButton = styled.button`
   padding: ${({ size }) => handleButtonWidth(size)};
   cursor: pointer;
   background-color: ${({ variant }) => (variant === 'primary' ? 'transparent' : 'var(--blue)')};
+  color: ${({ variant }) => variant === 'secondary' && 'white'};
+  font-weight: 700;
 `
 
 const Button = ({ title, size, variant, onClick }) => (
