@@ -1,0 +1,13 @@
+.tag {
+  display: flex;
+  align-items: center;
+  background-color: var(--gray);
+  width: fit-content;
+}
+
+.tag-btn {
+  color: var(--white);
+  background: var(--black);
+  border: none;
+  cursor: pointer;
+}
