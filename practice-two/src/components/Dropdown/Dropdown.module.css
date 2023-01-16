@@ -1,0 +1,8 @@
+.dropdown {
+  padding: 10px 0;
+  width: 300px;
+}
+
+.dropdown:focus {
+  border: 1.5px solid #0f62fe;
+}
