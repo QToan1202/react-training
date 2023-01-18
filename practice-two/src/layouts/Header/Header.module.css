@@ -1,0 +1,12 @@
+.header {
+  height: 78px;
+  background-color: var(--header-bg);
+  position: relative;
+}
+
+.header__logo {
+  position: absolute;
+  top: 22px;
+  left: 131px;
+  z-index: var(--header-logo);
+}
