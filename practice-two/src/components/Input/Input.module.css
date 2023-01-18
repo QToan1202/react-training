@@ -1,6 +1,16 @@
 .input {
+  box-sizing: border-box;
   color: var(--black);
   font-size: 18px;
   padding: 10px;
-  width: 270px;
+}
+
+.label {
+  margin: auto 0;
+  font-weight: 500;
+  text-align: right;
+}
+
+.label::after {
+  content: ':';
 }
