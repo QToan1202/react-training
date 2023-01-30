@@ -17,8 +17,6 @@
 
 .product__desc {
   grid-area: 1 / 2 / 2 / 3;
-  padding: 15px 25px;
-  font-size: 16px;
 }
 
 .product__footer {
@@ -27,10 +25,4 @@
   border-top: 2px solid var(--gray);
   font-size: 18px;
   font-weight: 600;
-}
-
-.product__title {
-  margin-bottom: 15px;
-  font-size: 36px;
-  font-weight: 700;
 }

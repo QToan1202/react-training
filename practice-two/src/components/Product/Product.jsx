@@ -1,70 +1,31 @@
 import PropTypes from 'prop-types'
-import Image from '../Image/Image'
+import { Content, Image } from '../index'
 import styles from './Product.module.css'
 
-const Container = ({ children, onClick }) => (
-  <div className={styles.product} onClick={onClick}>
-    {children}
+const Product = ({ children, cover, title, description }) => (
+  <div className={styles.product}>
+    <div className={styles.product__img}>
+      <Image src={cover} />
+    </div>
+    <div className={styles.product__desc}>
+      <Content title={title} description={description} />
+    </div>
+    <div className={styles.product__footer}>{children}</div>
   </div>
 )
 
-const Meta = ({ cover, ...rest }) => (
-  <div className={styles.product__img}>
-    <Image src={cover} {...rest} />
-  </div>
-)
-
-const Content = ({ children, title }) => (
-  <div className={styles.product__desc}>
-    <h2 className={styles.product__title}>{title}</h2>
-    {children}
-  </div>
-)
-
-const Footer = ({ children }) => <div className={styles.product__footer}>{children}</div>
-
-Container.propTypes = {
-  children: PropTypes.element,
-  onClick: PropTypes.func,
-}
-
-Meta.propTypes = {
+Product.propTypes = {
   cover: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 }
 
-Content.propTypes = {
-  title: PropTypes.string,
-  cover: PropTypes.string,
-  children: PropTypes.element,
-}
-
-Footer.propTypes = {
-  children: PropTypes.element,
-}
-
-Container.defaultProps = {
-  children: null,
-  onClick: () => void 0,
-}
-
-Meta.defaultProps = {
+Product.defaultProps = {
   cover: 'https://cdn.pixabay.com/photo/2022/11/14/20/14/compass-7592447_960_720.jpg',
-}
-
-Content.defaultProps = {
   title: '',
+  description: '',
   children: null,
-}
-
-Footer.defaultProps = {
-  children: null,
-}
-
-const Product = {
-  Container,
-  Meta,
-  Content,
-  Footer,
 }
 
 export default Product
