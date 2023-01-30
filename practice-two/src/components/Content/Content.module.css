@@ -1,0 +1,13 @@
+.container {
+  padding: 15px 25px;
+}
+
+.desc {
+  font-size: 16px;
+}
+
+.title {
+  margin-bottom: 15px;
+  font-size: 36px;
+  font-weight: 700;
+}
