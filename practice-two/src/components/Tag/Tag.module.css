@@ -1,4 +1,6 @@
 .tag {
+  margin: var(--spacing-sm) 0;
+  margin-right: var(--spacing-sm);
   display: flex;
   align-items: center;
   background-color: var(--gray);
@@ -6,11 +8,11 @@
 }
 
 .tag__label {
-  padding: 5px;
+  padding: var(--spacing-sm);
 }
 
 .tag__btn {
-  padding: 5px;
+  padding: var(--spacing-sm);
   color: var(--white);
   background: var(--black);
   border: none;
