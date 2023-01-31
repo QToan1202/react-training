@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { Option } from '../index'
 import styles from './Select.module.css'
 
 const Select = ({ defaultValue, children, onSelect }) => (
@@ -10,7 +9,7 @@ const Select = ({ defaultValue, children, onSelect }) => (
 
 Select.propTypes = {
   defaultValue: PropTypes.string,
-  children: PropTypes.arrayOf(PropTypes.instanceOf(Option)).isRequired,
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
   onSelect: PropTypes.func.isRequired,
 }
 
