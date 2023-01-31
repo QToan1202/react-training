@@ -4,5 +4,5 @@
 }
 
 .dropdown:focus {
-  border: 1.5px solid #0f62fe;
+  border: 1.5px solid var(--focus);
 }
