@@ -1,0 +1,17 @@
+.container {
+  margin: 0 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.filter {
+  padding: var(--spacing-lg);
+  padding-top: var(--spacing-2xl);
+  max-width: 360px;
+  background-color: var(--filter-box);
+}
+
+.filter__tag {
+  display: flex;
+}
