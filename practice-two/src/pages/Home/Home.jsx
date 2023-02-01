@@ -9,7 +9,7 @@ const Home = () => {
       <Header logo={logo} />
       <div className={styles.container}>
         <SearchBar />
-        <div>
+        <div className={styles.col}>
           <div className={styles.filter}>
             <Input placeholder="Enter filter category" />
             <div className={styles.filter__tag}>

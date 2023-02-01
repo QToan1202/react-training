@@ -5,10 +5,18 @@
   flex-direction: column;
 }
 
+.col {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto;
+  gap: var(--spacing-xl);
+}
+
 .filter {
   padding: var(--spacing-lg);
   padding-top: var(--spacing-2xl);
   max-width: 360px;
+  height: fit-content;
   background-color: var(--filter-box);
 }
 

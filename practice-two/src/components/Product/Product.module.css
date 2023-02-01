@@ -4,7 +4,7 @@
   grid-template-columns: minmax(252px, max-content) minmax(434px, 1fr);
   grid-template-rows: 195px 45px;
   border: 2px solid var(--gray);
-  margin: var(--spacing-md) 0;
+  margin-bottom: var(--spacing-lg);
 }
 
 .product:hover {
