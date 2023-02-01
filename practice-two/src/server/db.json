@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "name": "Notebook",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "categoryId": 1,
+      "img": "/",
+      "id": 1
+    },
+    {
+      "name": "Tablet",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "categoryId": 2,
+      "img": "/",
+      "id": 2
+    }
+  ],
+  "categories": [
+    {
+      "name": "Stationery",
+      "id": 1
+    },
+    {
+      "name": "Electronic",
+      "id": 2
+    }
+  ]
+}

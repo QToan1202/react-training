@@ -11,7 +11,8 @@
     "lint:fix": "eslint --fix",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "server": "json-server --watch src/server/db.json --routes src/server/routes.json"
   },
   "dependencies": {
     "react": "^18.2.0",
