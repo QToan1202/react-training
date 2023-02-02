@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import placeHolder from '../../assets/images/placeholder.jpg'
 
 const ProductImage = styled.img`
   width: ${(props) => props.width}px;
@@ -18,7 +19,7 @@ Image.propTypes = {
 Image.defaultProps = {
   width: 252,
   height: 240,
-  src: 'https://cdn.pixabay.com/photo/2022/11/14/20/14/compass-7592447_960_720.jpg',
+  src: placeHolder,
   alt: 'my image',
 }
 

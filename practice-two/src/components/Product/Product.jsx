@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { Content, Image } from '../index'
 import styles from './Product.module.css'
+import placeHolder from '../../assets/images/placeholder.jpg'
 
 const Product = ({ children, cover, title, description }) => (
   <div className={styles.product}>
@@ -10,7 +11,7 @@ const Product = ({ children, cover, title, description }) => (
     <div className={styles.product__desc}>
       <Content title={title} description={description} />
     </div>
-    <div className={styles.product__footer}>{children}</div>
+    <div className={styles.product__footer}>{children}</div> {/*TODO: Replace with edit/delete action*/}
   </div>
 )
 
@@ -22,7 +23,7 @@ Product.propTypes = {
 }
 
 Product.defaultProps = {
-  cover: 'https://cdn.pixabay.com/photo/2022/11/14/20/14/compass-7592447_960_720.jpg',
+  cover: placeHolder,
   title: '',
   description: '',
   children: null,
