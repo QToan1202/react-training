@@ -1,24 +1,18 @@
-import { Header } from '../../layouts'
-import styles from './Home.module.css'
-import logo from '../../assets/logo.svg'
-import { Input, Option, Product, SearchBar, Select, Tag } from '../../components'
-import { useId } from 'react'
-
-// API fetch support
+import { memo, useCallback, useId } from 'react'
 import useSWR from 'swr'
-import GET from '../../utils/fetcher'
-import { API_PRODUCTS } from '../../constants/url'
-
-// Notification
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import MESSAGES from '../../constants/messages'
+import { Input, Option, Product, SearchBar, Select, Tag } from '../../components'
+import { Header } from '../../layouts'
+import GET from '../../utils/fetcher'
+import logo from '../../assets/logo.svg'
+import styles from './Home.module.css'
 
 const Home = () => {
-  const { data: products, error } = useSWR(API_PRODUCTS, GET)
+  const { data: products, error, isLoading } = useSWR(import.meta.env.VITE_API_PRODUCTS, GET)
   const notifyId = useId()
-  const notifyError = () => {
-    toast.error(MESSAGES.GET_DATA_FAIL, {
+  const handleNotifyError = useCallback(() => {
+    toast.error(error.message, {
       toastId: notifyId, // Prevent duplicate toast
       position: toast.POSITION.TOP_CENTER,
       closeButton: false,
@@ -26,7 +20,13 @@ const Home = () => {
       pauseOnHover: false,
       pauseOnFocusLoss: false,
     })
-  }
+  }, [notifyId, error])
+  const handleRenderProducts = useCallback(() => {
+    if (error) return handleNotifyError()
+    if (!isLoading) {
+      return products?.map(({ id, name, description }) => <Product key={id} title={name} description={description} />)
+    }
+  }, [error, handleNotifyError, isLoading, products])
 
   return (
     <>
@@ -42,19 +42,15 @@ const Home = () => {
               <Tag>Tablet</Tag>
             </div>
             <Select defaultValue={1}>
-              <Option value={1} disabled label="Book" />
-              <Option value={2} label="Tablet" />
+              <Option value="book" disabled label="Book" />
+              <Option value="tablet" label="Tablet" />
             </Select>
           </div>
-          <div>
-            {!error
-              ? products.map(({ id, name, description }) => <Product key={id} title={name} description={description} />)
-              : notifyError()}
-          </div>
+          <div>{handleRenderProducts()}</div>
         </div>
       </div>
     </>
   )
 }
 
-export default Home
+export default memo(Home)
