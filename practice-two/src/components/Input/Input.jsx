@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import styles from './Input.module.css'
@@ -8,29 +9,26 @@ const Wrapper = styled.div`
   column-gap: 5px;
 `
 
-const Input = ({ value, type, placeholder, autoComplete, label, name, onChange }) => (
+const Input = ({ type, placeholder, autoComplete, label, register, error }) => (
   <Wrapper hasLabel={!!label}>
     {label ? <label className={styles.label}>{label}</label> : null}
     <input
       className={styles.input}
       type={type}
-      name={name}
       placeholder={placeholder}
       autoComplete={autoComplete}
-      value={value}
-      onChange={onChange}
+      {...register(label, error)}
     />
   </Wrapper>
 )
 
 Input.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
   type: PropTypes.string,
-  name: PropTypes.string,
   label: PropTypes.string,
   placeholder: PropTypes.string,
   autoComplete: PropTypes.string,
-  onChange: PropTypes.func,
+  register: PropTypes.func,
+  error: PropTypes.object,
 }
 
 Input.defaultProps = {
@@ -40,4 +38,4 @@ Input.defaultProps = {
   autoComplete: 'off',
 }
 
-export default Input
+export default memo(Input)

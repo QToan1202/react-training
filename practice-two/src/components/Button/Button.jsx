@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -27,13 +28,14 @@ const RadiusButton = styled.button`
   font-weight: 700;
 `
 
-const Button = ({ title, size, variant, onClick }) => (
-  <RadiusButton size={size} variant={variant} onClick={onClick}>
+const Button = ({ title, size, variant, type, onClick }) => (
+  <RadiusButton type={type} size={size} variant={variant} onClick={onClick}>
     {title}
   </RadiusButton>
 )
 
 Button.propTypes = {
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
   title: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
   variant: PropTypes.oneOf(['primary', 'secondary']),
@@ -41,10 +43,11 @@ Button.propTypes = {
 }
 
 Button.defaultProps = {
+  type: 'button',
   title: 'Button',
   size: 'sm',
   variant: 'primary',
-  onClick: () => console.log('Click'),
+  onClick: () => undefined,
 }
 
-export default Button
+export default memo(Button)

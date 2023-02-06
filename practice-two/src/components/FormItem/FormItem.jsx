@@ -1,10 +1,11 @@
+import { memo } from 'react'
 import PropTypes from 'prop-types'
 import styles from './FormItem.module.css'
 
 const FormItem = ({ children }) => <div className={styles.item}>{children}</div>
 
 FormItem.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]).isRequired,
 }
 
-export default FormItem
+export default memo(FormItem)

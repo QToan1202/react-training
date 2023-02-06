@@ -9,6 +9,7 @@
   margin: auto 0;
   font-weight: 500;
   text-align: right;
+  text-transform: capitalize;
 }
 
 .label::after {
