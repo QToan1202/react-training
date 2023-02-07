@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Content, Image } from '../index'
 import styles from './Product.module.css'
@@ -29,4 +30,4 @@ Product.defaultProps = {
   children: null,
 }
 
-export default Product
+export default memo(Product)
