@@ -1,18 +1,28 @@
-import { memo, useEffect } from 'react'
+import { memo, useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import useSWRMutation from 'swr/mutation'
 import { Button, Form, FormItem, Input } from '../../components'
 import MESSAGES from '../../constants/messages'
 import productService from '../../services/product'
 import styles from './AddProduct.module.css'
 
 const AddProduct = () => {
+  const { trigger } = useSWRMutation(import.meta.env.VITE_API_PRODUCTS, productService.add)
   const {
     register,
     reset,
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
   } = useForm()
-  const handleAddProduct = (data) => productService.add(data)
+  const handleAddProduct = useCallback(
+    (data) => {
+      trigger(data, {
+        optimisticData: (current) => [...current, data],
+        rollbackOnError: true,
+      })
+    },
+    [trigger]
+  )
   useEffect(() => {
     if (isSubmitSuccessful) reset({ name: '', description: '', image: '', category: '' })
   }, [isSubmitSuccessful, reset])
@@ -23,7 +33,7 @@ const AddProduct = () => {
         <Input
           label="name"
           register={register}
-          error={{
+          config={{
             required: MESSAGES.REQUIRED,
           }}
         />
@@ -37,7 +47,7 @@ const AddProduct = () => {
         <Input
           label="description"
           register={register}
-          error={{
+          config={{
             maxLength: {
               value: 200,
               message: MESSAGES.MAX_LENGTH,
@@ -54,7 +64,7 @@ const AddProduct = () => {
         <Input
           label="image"
           register={register}
-          error={{
+          config={{
             required: MESSAGES.REQUIRED,
           }}
         />
@@ -68,7 +78,7 @@ const AddProduct = () => {
         <Input
           label="category"
           register={register}
-          error={{
+          config={{
             required: MESSAGES.REQUIRED,
           }}
         />
@@ -79,7 +89,7 @@ const AddProduct = () => {
         )}
       </FormItem>
       <FormItem>
-        <Button type="submit" />
+        <Button type="submit" title="Add" size="lg" />
       </FormItem>
     </Form>
   )
