@@ -1,14 +1,22 @@
 import request from '../utils/request'
 
-const add = async (values) => {
-  const res = await request.post(import.meta.env.VITE_API_PRODUCTS, values).catch((error) => {
+const get = async (path, options = {}) => {
+  const res = await request.get(path, options).catch((error) => {
     throw error
   })
 
   return res.data
 }
 
-const edit = async (id, values) => {
+const add = async (path, { arg: values }) => {
+  const res = await request.post(path, values).catch((error) => {
+    throw error
+  })
+
+  return res.data
+}
+
+const edit = async (path, id, { arg: values }) => {
   const res = await request.patch(import.meta.env.VITE_API_PRODUCTS + `/${id}`, values).catch((error) => {
     throw error
   })
@@ -21,10 +29,11 @@ const remove = async (id) => {
     throw error
   })
 
-  return res.data
+  return res.status
 }
 
 const productService = {
+  get,
   add,
   edit,
   remove,
