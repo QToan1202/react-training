@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import PropTypes from 'prop-types'
 import { CiSearch } from 'react-icons/ci'
 import { IconContext } from 'react-icons/lib'
@@ -31,4 +32,4 @@ SearchBar.defaultProps = {
   placeholder: 'Enter a Product name...',
 }
 
-export default SearchBar
+export default memo(SearchBar)
