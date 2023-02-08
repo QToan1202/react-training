@@ -1,9 +1,11 @@
-import { memo, useCallback, useEffect } from 'react'
+import { memo, useCallback, useEffect, useId } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import useSWRMutation from 'swr/mutation'
 import { Button, Form, FormItem, Input } from '../../components'
 import MESSAGES from '../../constants/messages'
 import productService from '../../services/product'
+import toastConfig from '../../utils/toastConfig'
 import styles from './AddProduct.module.css'
 
 const AddProduct = () => {
@@ -23,9 +25,16 @@ const AddProduct = () => {
     },
     [trigger]
   )
+  const notifyId = useId()
   useEffect(() => {
-    if (isSubmitSuccessful) reset({ name: '', description: '', image: '', category: '' })
-  }, [isSubmitSuccessful, reset])
+    const handleNotifySuccess = () => {
+      toast.success(MESSAGES.CREATE_SUCCESS, toastConfig(notifyId, toast.POSITION.TOP_CENTER))
+    }
+    if (isSubmitSuccessful) {
+      handleNotifySuccess()
+      reset({ name: '', description: '', image: '', category: '' })
+    }
+  }, [isSubmitSuccessful, reset, notifyId])
 
   return (
     <Form onSubmit={handleSubmit(handleAddProduct)}>
