@@ -8,6 +8,14 @@ const get = async (path, options = {}) => {
   return res.data
 }
 
+const find = async (path, query) => {
+  const res = await request.get(path, { params: { q: query } }).catch((error) => {
+    throw error
+  })
+
+  return res.data
+}
+
 const add = async (path, { arg: values }) => {
   const res = await request.post(path, values).catch((error) => {
     throw error
@@ -34,6 +42,7 @@ const remove = async (id) => {
 
 const productService = {
   get,
+  find,
   add,
   edit,
   remove,
