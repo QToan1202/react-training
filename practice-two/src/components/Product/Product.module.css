@@ -22,7 +22,7 @@
 
 .product__footer {
   grid-area: 2 / 2 / 3 / 3;
-  padding: 10px 25px;
+  padding: 5px 25px;
   border-top: 2px solid var(--gray);
   font-size: 18px;
   font-weight: 600;
