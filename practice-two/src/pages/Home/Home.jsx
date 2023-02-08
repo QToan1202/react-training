@@ -1,36 +1,26 @@
 import { memo, useCallback, useId, useState } from 'react'
 import useSWR from 'swr'
-import { toast, ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { toast } from 'react-toastify'
 import { Button, Input, LoadingSpinner, Option, Product, SearchBar, Select, Tag } from '../../components'
-import { Header } from '../../layouts'
-import logo from '../../assets/logo.svg'
 import productService from '../../services/product'
 import useDebounce from '../../hooks/useDebounce'
-import { AddProduct } from '../index'
+import { AddProduct } from '../../layouts'
 import styles from './Home.module.css'
 import MESSAGES from '../../constants/messages'
+import toastConfig from '../../utils/toastConfig'
 
 const Home = () => {
   const { data: products, error, isLoading, mutate } = useSWR(import.meta.env.VITE_API_PRODUCTS, productService.get)
   const [searchValue, setSearchValue] = useState('')
   const debouncedValue = useDebounce(searchValue, 1000)
-  const {
-    data: find,
-    error: e,
-    isLoading: searching,
-  } = useSWR([import.meta.env.VITE_API_PRODUCTS, debouncedValue], ([path, query]) => productService.find(path, query))
+  const { data: find, error: searchError } = useSWR(
+    debouncedValue.length ? [import.meta.env.VITE_API_PRODUCTS, debouncedValue] : null,
+    ([path, query]) => productService.find(path, query)
+  )
   const notifyId = useId()
   const handleNotifyError = useCallback(
     (error) => {
-      toast.error(error.message, {
-        toastId: notifyId, // Prevent duplicate toast
-        position: toast.POSITION.TOP_CENTER,
-        closeButton: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        pauseOnFocusLoss: false,
-      })
+      toast.error(error.message, toastConfig(notifyId, toast.POSITION.TOP_CENTER))
     },
     [notifyId]
   )
@@ -40,11 +30,12 @@ const Home = () => {
       const status = await productService.remove(id)
 
       if (status !== 200) return handleNotifyError(MESSAGES.DELETE_FAILED)
+      toast.success(MESSAGES.DELETE_SUCCESS, toastConfig(notifyId, toast.POSITION.TOP_CENTER))
       mutate(remainProducts, {
         revalidate: false,
       })
     },
-    [products, handleNotifyError]
+    [products, handleNotifyError, notifyId, mutate]
   )
   const renderProducts = useCallback(
     (data) =>
@@ -72,7 +63,6 @@ const Home = () => {
 
   return (
     <>
-      <Header logo={logo} />
       <div className={styles.container}>
         <SearchBar value={searchValue} onChange={handleChangeSearchValue} />
         <div className={styles.col}>
@@ -89,11 +79,12 @@ const Home = () => {
           </div>
           <div>
             <AddProduct />
-            {!searchValue.trim() ? preRenderCheck(products, error, isLoading) : preRenderCheck(find, e, searching)}
+            {!searchValue.trim()
+              ? preRenderCheck(products, error, isLoading)
+              : preRenderCheck(find, searchError, !find)}
           </div>
         </div>
       </div>
-      <ToastContainer />
     </>
   )
 }
