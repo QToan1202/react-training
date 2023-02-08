@@ -1,5 +1,8 @@
+import { Home } from './pages'
+import '../src/styles/index.css'
+
 function App() {
-  return <div></div>
+  return <Home />
 }
 
 export default App

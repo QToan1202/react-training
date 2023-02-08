@@ -1,16 +1,25 @@
-import { memo, useCallback, useId } from 'react'
+import { memo, useCallback, useId, useState } from 'react'
 import useSWR from 'swr'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { Button, Input, Option, Product, SearchBar, Select, Tag } from '../../components'
+import { Button, Input, LoadingSpinner, Option, Product, SearchBar, Select, Tag } from '../../components'
 import { Header } from '../../layouts'
 import logo from '../../assets/logo.svg'
 import productService from '../../services/product'
+import useDebounce from '../../hooks/useDebounce'
 import { AddProduct } from '../index'
 import styles from './Home.module.css'
+import MESSAGES from '../../constants/messages'
 
 const Home = () => {
   const { data: products, error, isLoading, mutate } = useSWR(import.meta.env.VITE_API_PRODUCTS, productService.get)
+  const [searchValue, setSearchValue] = useState('')
+  const debouncedValue = useDebounce(searchValue, 1000)
+  const {
+    data: find,
+    error: e,
+    isLoading: searching,
+  } = useSWR([import.meta.env.VITE_API_PRODUCTS, debouncedValue], ([path, query]) => productService.find(path, query))
   const notifyId = useId()
   const handleNotifyError = useCallback(
     (error) => {
@@ -28,30 +37,44 @@ const Home = () => {
   const handleDeleteProduct = useCallback(
     async (id) => {
       const remainProducts = products.filter((item) => item.id !== id)
-      await productService.remove(id)
-      mutate([...products, remainProducts])
+      const status = await productService.remove(id)
+
+      if (status !== 200) return handleNotifyError(MESSAGES.DELETE_FAILED)
+      mutate(remainProducts, {
+        revalidate: false,
+      })
     },
-    [mutate, products]
+    [products, handleNotifyError]
   )
-  const handleRenderProducts = useCallback(
-    (data, error, loading) => {
-      if (error) return handleNotifyError(error)
-      if (!loading) {
-        return data?.map(({ id, name, description }) => (
+  const renderProducts = useCallback(
+    (data) =>
+      data?.map(({ id, name, description }) => {
+        const handleActionDelete = () => handleDeleteProduct(id)
+
+        return (
           <Product key={id} title={name} description={description}>
-            <Button type="button" title="Delete" onClick={() => handleDeleteProduct(id)} />
+            <Button type="button" title="Delete" onClick={handleActionDelete} />
           </Product>
-        ))
-      }
-    },
-    [handleNotifyError, handleDeleteProduct]
+        )
+      }),
+    [handleDeleteProduct]
   )
+  const preRenderCheck = useCallback(
+    (data, error, loading) => {
+      if (loading) return <LoadingSpinner />
+      if (error) return handleNotifyError(error)
+      if (data?.length) return renderProducts(data)
+      return <h1 className={styles.empty}>There no products yet</h1>
+    },
+    [handleNotifyError, renderProducts]
+  )
+  const handleChangeSearchValue = useCallback((e) => setSearchValue(e.target.value), [])
 
   return (
     <>
       <Header logo={logo} />
       <div className={styles.container}>
-        <SearchBar />
+        <SearchBar value={searchValue} onChange={handleChangeSearchValue} />
         <div className={styles.col}>
           <div className={styles.filter}>
             <Input placeholder="Enter filter category" />
@@ -65,8 +88,8 @@ const Home = () => {
             </Select>
           </div>
           <div>
-            {handleRenderProducts(products, error, isLoading)}
             <AddProduct />
+            {!searchValue.trim() ? preRenderCheck(products, error, isLoading) : preRenderCheck(find, e, searching)}
           </div>
         </div>
       </div>
