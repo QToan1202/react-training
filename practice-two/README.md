@@ -43,10 +43,10 @@ Estimate: **5 days** (_Jan 06, 2023 - Jan 19, 2023_)
 
 Open Windows PowerShell or cmd or [Windows Terminal](https://www.microsoft.com/en-gb/p/windows-terminal/9n0dx20hk701?rtc=1&activetab=pivot:overviewtab)
 
-**_Step 1:_** Clone develop branch
+**_Step 1:_** Clone feature/practice-two branch
 
 ```bash
-git clone --single-branch --branch develop git@github.com:QToan1202/react-training.git
+git clone --single-branch --branch feature/practice-two git@github.com:QToan1202/react-training.git
 ```
 
 **_Step 2:_**  Move to _practice-two_ folder
@@ -67,7 +67,13 @@ npm install -g pnpm
 pnpm install
 ```
 
-**_Step 5:_** Run project in development mode
+**_Step 5:_** Run json-server
+
+```bash
+pnpm run server
+```
+
+**_Step 6:_** Run project in development mode
 
 ```bash
 pnpm dev
