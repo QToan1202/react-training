@@ -1,4 +1,30 @@
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
+
+const Blog = memo(() => {
+  const [theme, setTheme] = useState('primary');
+  const themes = ['primary', 'secondary', 'light', 'dark']
+
+  const handleChangeTheme = useCallback(() => {
+    setTheme(themes[Math.floor(Math.random()*themes.length)])
+  }, [])
+
+  return (
+    <>
+      <Post theme={theme} onChangeTheme={handleChangeTheme} />
+      <Post theme={theme} onChangeTheme={handleChangeTheme} />
+      <Post theme={theme} onChangeTheme={handleChangeTheme} />
+    </>
+  );
+});
+
+const Post = memo(({ theme, onChangeTheme }) => {
+  return (
+    <>
+      <h2>My blog have {theme} theme</h2>
+      <button onClick={onChangeTheme}>Change Theme</button>
+    </>
+  );
+});
 
 const Overview = () => {
   const [value, setValue] = useState('');
@@ -25,6 +51,7 @@ const Overview = () => {
         />
       </div>
       <p>Above checkbox is {isChecked ? 'checked' : 'un-checked'}</p>
+      <Blog />
     </>
   );
 };
