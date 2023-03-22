@@ -1,4 +1,12 @@
-import { createContext, memo, useCallback, useContext, useMemo, useState } from 'react';
+import {
+  createContext,
+  memo,
+  Profiler,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 
 const ThemeContext = createContext('light');
 const ProductContext = createContext(null);
@@ -49,6 +57,10 @@ const Overview = () => {
     setIsChecked((prevState) => !prevState);
   }, []);
 
+  const onRender = useCallback((id, phase, actualDuration, baseDuration, startTime, commitTime) => {
+    console.log(actualDuration, baseDuration)
+  }, [])
+
   return (
     <ThemeContext.Provider value='dark'>
       <ProductContext.Provider value={product}>
@@ -63,7 +75,9 @@ const Overview = () => {
           />
         </div>
         <p>Above checkbox is {isChecked ? 'checked' : 'un-checked'}</p>
-        <Blog />
+        <Profiler id="Blog" onRender={onRender}>
+          <Blog />
+        </Profiler>
       </ProductContext.Provider>
     </ThemeContext.Provider>
   );
