@@ -7,6 +7,7 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { createPortal } from 'react-dom';
 
 const ThemeContext = createContext('light');
 const ProductContext = createContext(null);
@@ -73,6 +74,7 @@ const Overview = () => {
             checked={isChecked}
             onChange={handleChangeCheck}
           />
+          { createPortal(<p>Hello, this is my portal</p>, document.getElementById('root')) }
         </div>
         <p>Above checkbox is {isChecked ? 'checked' : 'un-checked'}</p>
         <Profiler id="Blog" onRender={onRender}>
