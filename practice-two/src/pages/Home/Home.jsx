@@ -9,21 +9,25 @@ import styles from './Home.module.css'
 import MESSAGES from '../../constants/messages'
 import toastConfig from '../../utils/toastConfig'
 
+const API_PRODUCTS = import.meta.env.VITE_API_PRODUCTS
+
 const Home = () => {
-  const { data: products, error, isLoading, mutate } = useSWR(import.meta.env.VITE_API_PRODUCTS, productService.get)
+  const { data: products, error, isLoading, mutate } = useSWR(API_PRODUCTS, productService.get)
   const [searchValue, setSearchValue] = useState('')
   const debouncedValue = useDebounce(searchValue, 1000)
   const { data: find, error: searchError } = useSWR(
-    debouncedValue.length ? [import.meta.env.VITE_API_PRODUCTS, debouncedValue] : null,
+    debouncedValue.length ? [API_PRODUCTS, debouncedValue] : null,
     ([path, query]) => productService.find(path, query)
   )
   const notifyId = useId()
+
   const handleNotifyError = useCallback(
     (error) => {
       toast.error(error.message, toastConfig(notifyId, toast.POSITION.TOP_CENTER))
     },
     [notifyId]
   )
+
   const handleDeleteProduct = useCallback(
     async (id) => {
       const remainProducts = products.filter((item) => item.id !== id)
@@ -37,6 +41,7 @@ const Home = () => {
     },
     [products, handleNotifyError, notifyId, mutate]
   )
+
   const renderProducts = useCallback(
     (data) =>
       data?.map(({ id, name, description }) => {
@@ -50,6 +55,7 @@ const Home = () => {
       }),
     [handleDeleteProduct]
   )
+
   const preRenderCheck = useCallback(
     (data, error, loading) => {
       if (loading) return <LoadingSpinner />
@@ -59,33 +65,30 @@ const Home = () => {
     },
     [handleNotifyError, renderProducts]
   )
+
   const handleChangeSearchValue = useCallback((e) => setSearchValue(e.target.value), [])
 
   return (
-    <>
-      <div className={styles.container}>
-        <SearchBar value={searchValue} onChange={handleChangeSearchValue} />
-        <div className={styles.col}>
-          <div className={styles.filter}>
-            <Input placeholder="Enter filter category" />
-            <div className={styles.filter__tag}>
-              <Tag>Book</Tag>
-              <Tag>Tablet</Tag>
-            </div>
-            <Select defaultValue="book">
-              <Option value="book" disabled label="Book" />
-              <Option value="tablet" label="Tablet" />
-            </Select>
+    <div className={styles.container}>
+      <SearchBar value={searchValue} onChange={handleChangeSearchValue} />
+      <div className={styles.col}>
+        <div className={styles.filter}>
+          <Input placeholder="Enter filter category" />
+          <div className={styles.filter__tag}>
+            <Tag>Book</Tag>
+            <Tag>Tablet</Tag>
           </div>
-          <div>
-            <AddProduct />
-            {!searchValue.trim()
-              ? preRenderCheck(products, error, isLoading)
-              : preRenderCheck(find, searchError, !find)}
-          </div>
+          <Select defaultValue="book">
+            <Option value="book" disabled label="Book" />
+            <Option value="tablet" label="Tablet" />
+          </Select>
+        </div>
+        <div>
+          <AddProduct />
+          {!searchValue.trim() ? preRenderCheck(products, error, isLoading) : preRenderCheck(find, searchError, !find)}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
