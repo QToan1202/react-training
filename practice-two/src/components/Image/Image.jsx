@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import placeHolder from '../../assets/images/placeholder.jpg'
@@ -23,4 +24,4 @@ Image.defaultProps = {
   alt: 'my image',
 }
 
-export default Image
+export default memo(Image)

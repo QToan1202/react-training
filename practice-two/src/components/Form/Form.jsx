@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import PropTypes from 'prop-types'
 import styles from './Form.module.css'
 
@@ -20,4 +21,4 @@ Form.defaultProps = {
   onSubmit: () => undefined,
 }
 
-export default Form
+export default memo(Form)

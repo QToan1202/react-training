@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import PropTypes from 'prop-types'
 import styles from './Content.module.css'
 
@@ -18,4 +19,4 @@ Content.defaultProps = {
   description: '',
 }
 
-export default Content
+export default memo(Content)

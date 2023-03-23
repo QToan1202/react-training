@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import PropTypes from 'prop-types'
 
 const Option = ({ value, label, disabled, hidden }) => (
@@ -20,4 +21,4 @@ Option.defaultProps = {
   hidden: false,
 }
 
-export default Option
+export default memo(Option)

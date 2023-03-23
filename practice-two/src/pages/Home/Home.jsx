@@ -1,4 +1,4 @@
-import { memo, useCallback, useId, useState } from 'react'
+import { useCallback, useId, useState } from 'react'
 import useSWR from 'swr'
 import { toast } from 'react-toastify'
 import { Button, Input, LoadingSpinner, Option, Product, SearchBar, Select, Tag } from '../../components'
@@ -89,4 +89,4 @@ const Home = () => {
   )
 }
 
-export default memo(Home)
+export default Home

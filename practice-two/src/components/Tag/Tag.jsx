@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import PropTypes from 'prop-types'
 import styles from './Tag.module.css'
 
@@ -22,4 +23,4 @@ Tag.defaultProps = {
   onClick: () => void 0,
 }
 
-export default Tag
+export default memo(Tag)
