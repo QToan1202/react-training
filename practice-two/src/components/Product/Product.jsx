@@ -2,7 +2,7 @@ import { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Content, Image } from '../index'
 import styles from './Product.module.css'
-import placeHolder from '../../assets/images/placeholder.jpg'
+import placeHolder from '@assets/images/placeholder.jpg'
 
 const Product = ({ children, cover, title, description }) => (
   <div className={styles.product}>

@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import placeHolder from '../../assets/images/placeholder.jpg'
+import placeHolder from '@assets/images/placeholder.jpg'
 
 const ProductImage = styled.img`
   width: ${(props) => props.width}px;

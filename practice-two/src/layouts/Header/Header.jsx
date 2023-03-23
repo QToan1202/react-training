@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import styles from './Header.module.css'
-import logo from '../../../src/assets/logo.svg'
+import logo from '@assets/logo.svg'
 
 const Header = ({ logo }) => (
   <header className={styles.header}>

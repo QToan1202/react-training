@@ -1,13 +1,13 @@
 import { useCallback, useId, useState } from 'react'
 import useSWR from 'swr'
 import { toast } from 'react-toastify'
-import { Button, Input, LoadingSpinner, Option, Product, SearchBar, Select, Tag } from '../../components'
-import productService from '../../services/product'
-import useDebounce from '../../hooks/useDebounce'
-import { AddProduct } from '../../layouts'
+import { Button, Input, LoadingSpinner, Option, Product, SearchBar, Select, Tag } from '@components'
+import { productService } from '@services'
+import { useDebounce } from '@hooks'
+import { AddProduct } from '@layouts'
+import { toastConfig } from '@utils'
+import { MESSAGES } from '@constants'
 import styles from './Home.module.css'
-import MESSAGES from '../../constants/messages'
-import toastConfig from '../../utils/toastConfig'
 
 const API_PRODUCTS = import.meta.env.VITE_API_PRODUCTS
 
