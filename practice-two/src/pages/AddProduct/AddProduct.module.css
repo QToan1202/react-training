@@ -1,3 +1,7 @@
+.container {
+  margin: 20px 100px;
+}
+
 .error_message {
   position: relative;
   color: var(--red);

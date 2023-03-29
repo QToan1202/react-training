@@ -39,70 +39,72 @@ const AddProduct = () => {
   }, [isSubmitSuccessful, reset, notifyId, navigate])
 
   return (
-    <Form onSubmit={handleSubmit(handleAddProduct)}>
-      <FormItem>
-        <Input
-          label="name"
-          register={register}
-          config={{
-            required: MESSAGES.REQUIRED,
-          }}
-        />
-        {errors.name && (
-          <p role="alert" className={styles.error_message}>
-            {errors.name?.message}
-          </p>
-        )}
-      </FormItem>
-      <FormItem>
-        <Input
-          label="description"
-          register={register}
-          config={{
-            maxLength: {
-              value: 200,
-              message: MESSAGES.MAX_LENGTH,
-            },
-          }}
-        />
-        {errors.description && (
-          <p role="alert" className={styles.error_message}>
-            {errors.description?.message}
-          </p>
-        )}
-      </FormItem>
-      <FormItem>
-        <Input
-          label="image"
-          register={register}
-          config={{
-            required: MESSAGES.REQUIRED,
-          }}
-        />
-        {errors.image && (
-          <p role="alert" className={styles.error_message}>
-            {errors.image?.message}
-          </p>
-        )}
-      </FormItem>
-      <FormItem>
-        <Input
-          label="category"
-          register={register}
-          config={{
-            required: MESSAGES.REQUIRED,
-          }}
-        />
-        {errors.category && (
-          <p role="alert" className={styles.error_message}>
-            {errors.category?.message}
-          </p>
-        )}
-      </FormItem>
-      <FormItem>
-        <Button type="submit" title="Add" size="lg" />
-      </FormItem>
-    </Form>
+    <div className={styles.container}>
+      <Form onSubmit={handleSubmit(handleAddProduct)}>
+        <FormItem>
+          <Input
+            label="name"
+            register={register}
+            config={{
+              required: MESSAGES.REQUIRED,
+            }}
+          />
+          {errors.name && (
+            <p role="alert" className={styles.error_message}>
+              {errors.name?.message}
+            </p>
+          )}
+        </FormItem>
+        <FormItem>
+          <Input
+            label="description"
+            register={register}
+            config={{
+              maxLength: {
+                value: 200,
+                message: MESSAGES.MAX_LENGTH,
+              },
+            }}
+          />
+          {errors.description && (
+            <p role="alert" className={styles.error_message}>
+              {errors.description?.message}
+            </p>
+          )}
+        </FormItem>
+        <FormItem>
+          <Input
+            label="image"
+            register={register}
+            config={{
+              required: MESSAGES.REQUIRED,
+            }}
+          />
+          {errors.image && (
+            <p role="alert" className={styles.error_message}>
+              {errors.image?.message}
+            </p>
+          )}
+        </FormItem>
+        <FormItem>
+          <Input
+            label="category"
+            register={register}
+            config={{
+              required: MESSAGES.REQUIRED,
+            }}
+          />
+          {errors.category && (
+            <p role="alert" className={styles.error_message}>
+              {errors.category?.message}
+            </p>
+          )}
+        </FormItem>
+        <FormItem>
+          <Button type="submit" title="Add" size="lg" />
+        </FormItem>
+      </Form>
+    </div>
   )
 }
 
