@@ -1,9 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Home } from './pages'
-import Root from './pages/Root'
-import '../src/styles/index.css'
+import { AddProduct, Home, Root } from '@pages'
+import '@styles/index.css'
 
 const router = createBrowserRouter([
   {
@@ -13,6 +12,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: 'add-products',
+        element: <AddProduct />,
       },
     ],
   },
