@@ -4,10 +4,10 @@ import { toast } from 'react-toastify'
 import { Button, Input, LoadingSpinner, Option, Product, SearchBar, Select, Tag } from '@components'
 import { productService } from '@services'
 import { useDebounce } from '@hooks'
-import { AddProduct } from '@layouts'
 import { toastConfig } from '@utils'
 import { MESSAGES } from '@constants'
 import styles from './Home.module.css'
+import { Link } from 'react-router-dom'
 
 const API_PRODUCTS = import.meta.env.VITE_API_PRODUCTS
 
@@ -15,9 +15,8 @@ const Home = () => {
   const { data: products, error, isLoading, mutate } = useSWR(API_PRODUCTS, productService.get)
   const [searchValue, setSearchValue] = useState('')
   const debouncedValue = useDebounce(searchValue, 1000)
-  const { data: find, error: searchError } = useSWR(
-    debouncedValue.length ? [API_PRODUCTS, debouncedValue] : null,
-    ([path, query]) => productService.find(path, query)
+  const { data: find } = useSWR(debouncedValue.length ? [API_PRODUCTS, debouncedValue] : null, ([path, query]) =>
+    productService.find(path, query)
   )
   const notifyId = useId()
 
@@ -43,8 +42,10 @@ const Home = () => {
   )
 
   const renderProducts = useCallback(
-    (data) =>
-      data?.map(({ id, name, description }) => {
+    (data) => {
+      if (!data?.length) return <h1 className={styles.empty}>There no products yet</h1>
+
+      return data?.map(({ id, name, description }) => {
         const handleActionDelete = () => handleDeleteProduct(id)
 
         return (
@@ -52,21 +53,15 @@ const Home = () => {
             <Button type="button" title="Delete" onClick={handleActionDelete} />
           </Product>
         )
-      }),
+      })
+    },
     [handleDeleteProduct]
   )
 
-  const preRenderCheck = useCallback(
-    (data, error, loading) => {
-      if (loading) return <LoadingSpinner />
-      if (error) return handleNotifyError(error)
-      if (data?.length) return renderProducts(data)
-      return <h1 className={styles.empty}>There no products yet</h1>
-    },
-    [handleNotifyError, renderProducts]
-  )
-
   const handleChangeSearchValue = useCallback((e) => setSearchValue(e.target.value), [])
+
+  if (isLoading) return <LoadingSpinner />
+  if (error) return handleNotifyError(error)
 
   return (
     <div className={styles.container}>
@@ -82,11 +77,11 @@ const Home = () => {
             <Option value="book" disabled label="Book" />
             <Option value="tablet" label="Tablet" />
           </Select>
+          <Link to={'add-products'}>
+            <Button title="Add new product" size="md" />
+          </Link>
         </div>
-        <div>
-          <AddProduct />
-          {!searchValue.trim() ? preRenderCheck(products, error, isLoading) : preRenderCheck(find, searchError, !find)}
-        </div>
+        <div>{!searchValue.trim() ? renderProducts(products) : renderProducts(find)}</div>
       </div>
     </div>
   )
