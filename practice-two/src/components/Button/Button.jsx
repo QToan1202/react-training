@@ -2,7 +2,7 @@ import { memo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const handleButtonWidth = (size) => {
+const changeBtnSpacing = (size) => {
   switch (size) {
     case 'sm':
       return '8px 34px'
@@ -21,7 +21,7 @@ const handleButtonWidth = (size) => {
 const RadiusButton = styled.button`
   border: 1px solid var(--gray);
   border-radius: 40px;
-  padding: ${({ size }) => handleButtonWidth(size)};
+  padding: ${({ size }) => changeBtnSpacing(size)};
   cursor: pointer;
   background-color: ${({ variant }) => (variant === 'primary' ? 'transparent' : 'var(--blue)')};
   color: ${({ variant }) => variant === 'secondary' && 'white'};
