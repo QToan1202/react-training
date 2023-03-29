@@ -1,4 +1,4 @@
-import { AddProduct } from '../../pages/index'
+import { AddProduct } from '../index'
 
 export default {
   title: 'Add product page',
