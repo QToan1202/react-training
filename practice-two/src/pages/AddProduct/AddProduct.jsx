@@ -20,11 +20,8 @@ const AddProduct = () => {
   const navigate = useNavigate()
 
   const handleAddProduct = useCallback(
-    (data) => {
-      trigger(data, {
-        optimisticData: (current) => [...current, data],
-        rollbackOnError: true,
-      })
+    async (data) => {
+      await trigger(data)
     },
     [trigger]
   )
