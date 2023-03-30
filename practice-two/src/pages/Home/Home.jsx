@@ -15,8 +15,9 @@ const Home = () => {
   const { data: products, error, isLoading, mutate } = useSWR(API_PRODUCTS, productService.get)
   const [searchValue, setSearchValue] = useState('')
   const debouncedValue = useDebounce(searchValue, 1000)
-  const { data: find } = useSWR(debouncedValue.length ? [API_PRODUCTS, debouncedValue] : null, ([path, query]) =>
-    productService.find(path, query)
+  const { data: find, isLoading: isFinding } = useSWR(
+    debouncedValue.length ? [API_PRODUCTS, debouncedValue] : null,
+    ([path, query]) => productService.find(path, query)
   )
   const notifyId = useId()
   const [showDialog, setShowDialog] = useState(false)
@@ -56,11 +57,7 @@ const Home = () => {
       return data?.map(({ id, name, description }) => {
         const handleActionDelete = () => handleDeleteProduct(id)
 
-        return (
-          <Product key={id} title={name} description={description}>
-            <Button type="button" title="Delete" onClick={handleActionDelete} />
-          </Product>
-        )
+        return <Product key={id} title={name} description={description} onDeleteProduct={handleActionDelete} />
       })
     },
     [handleDeleteProduct]
@@ -68,7 +65,7 @@ const Home = () => {
 
   const handleChangeSearchValue = useCallback((e) => setSearchValue(e.target.value), [])
 
-  if (isLoading) return <LoadingSpinner />
+  if (isLoading || isFinding) return <LoadingSpinner />
   if (error) return handleNotifyError(error)
 
   return (
@@ -86,7 +83,7 @@ const Home = () => {
             <Option value="tablet" label="Tablet" />
           </Select>
           <Link to={'add-products'}>
-            <Button variant="secondary" title="Add new product" size="lg" />
+            <Button variant="secondary" title="Add new product" size="lg" customStyle={styles.spacing} />
           </Link>
         </div>
         <div>{!searchValue.trim() ? renderProducts(products) : renderProducts(find)}</div>
