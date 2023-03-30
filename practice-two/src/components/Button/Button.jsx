@@ -18,18 +18,52 @@ const changeBtnSpacing = (size) => {
   }
 }
 
+const changeBtnFontSize = (size) => {
+  switch (size) {
+    case 'sm':
+      return '16px'
+
+    case 'md':
+      return '18px'
+
+    case 'lg':
+      return '20px'
+
+    default:
+      return '16px'
+  }
+}
+
+const changeBtnTheme = (theme) => {
+  switch (theme) {
+    case 'primary':
+      return 'transparent'
+
+    case 'secondary':
+      return 'var(--blue)'
+
+    case 'tertiary':
+      return 'var(--red)'
+
+    default:
+      return 'transparent'
+  }
+}
+
 const RadiusButton = styled.button`
+  margin-right: 10px;
   border: 1px solid var(--gray);
   border-radius: 40px;
   padding: ${({ size }) => changeBtnSpacing(size)};
   cursor: pointer;
-  background-color: ${({ variant }) => (variant === 'primary' ? 'transparent' : 'var(--blue)')};
-  color: ${({ variant }) => variant === 'secondary' && 'white'};
-  font-weight: 700;
+  background-color: ${({ variant }) => changeBtnTheme(variant)};
+  color: ${({ variant }) => variant !== 'primary' && 'white'};
+  font-weight: 500;
+  font-size: ${({ size }) => changeBtnFontSize(size)};
 `
 
-const Button = ({ title, size, variant, type, onClick }) => (
-  <RadiusButton type={type} size={size} variant={variant} onClick={onClick}>
+const Button = ({ title, size, variant, type, onClick, customStyle }) => (
+  <RadiusButton className={customStyle} type={type} size={size} variant={variant} onClick={onClick}>
     {title}
   </RadiusButton>
 )
@@ -38,8 +72,9 @@ Button.propTypes = {
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
   title: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  variant: PropTypes.oneOf(['primary', 'secondary']),
+  variant: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
   onClick: PropTypes.func,
+  customStyle: PropTypes.string,
 }
 
 Button.defaultProps = {
@@ -48,6 +83,7 @@ Button.defaultProps = {
   size: 'sm',
   variant: 'primary',
   onClick: () => undefined,
+  customStyle: '',
 }
 
 export default memo(Button)
