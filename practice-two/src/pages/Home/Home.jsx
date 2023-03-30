@@ -1,13 +1,13 @@
 import { useCallback, useId, useState } from 'react'
 import useSWR from 'swr'
 import { toast } from 'react-toastify'
-import { Button, Input, LoadingSpinner, Option, Product, SearchBar, Select, Tag } from '@components'
+import { Link } from 'react-router-dom'
+import { Button, Input, LoadingSpinner, Option, Popup, Product, SearchBar, Select, Tag } from '@components'
 import { productService } from '@services'
 import { useDebounce } from '@hooks'
 import { toastConfig } from '@utils'
 import { MESSAGES } from '@constants'
 import styles from './Home.module.css'
-import { Link } from 'react-router-dom'
 
 const API_PRODUCTS = import.meta.env.VITE_API_PRODUCTS
 
@@ -19,6 +19,8 @@ const Home = () => {
     productService.find(path, query)
   )
   const notifyId = useId()
+  const [showDialog, setShowDialog] = useState(false)
+  const [selectedProductId, setSelectedProductId] = useState(undefined)
 
   const handleNotifyError = useCallback(
     (error) => {
@@ -27,19 +29,25 @@ const Home = () => {
     [notifyId]
   )
 
-  const handleDeleteProduct = useCallback(
-    async (id) => {
-      const remainProducts = products.filter((item) => item.id !== id)
-      const status = await productService.remove(id)
+  const handleDeleteProduct = useCallback((id) => {
+    setShowDialog(true)
+    setSelectedProductId(id)
+  }, [])
 
-      if (status !== 200) return handleNotifyError(MESSAGES.DELETE_FAILED)
-      toast.success(MESSAGES.DELETE_SUCCESS, toastConfig(notifyId, toast.POSITION.TOP_CENTER))
-      mutate(remainProducts, {
-        revalidate: false,
-      })
-    },
-    [products, handleNotifyError, notifyId, mutate]
-  )
+  const handleCancel = useCallback(() => setShowDialog(false), [])
+
+  const handleConfirm = useCallback(async () => {
+    const remainProducts = products.filter((item) => item.id !== selectedProductId)
+    const status = await productService.remove(selectedProductId)
+
+    if (status !== 200) return handleNotifyError(MESSAGES.DELETE_FAILED)
+    toast.success(MESSAGES.DELETE_SUCCESS, toastConfig(notifyId, toast.POSITION.TOP_CENTER))
+    mutate(remainProducts, {
+      revalidate: false,
+    })
+
+    setShowDialog(false)
+  }, [products, handleNotifyError, notifyId, mutate, selectedProductId])
 
   const renderProducts = useCallback(
     (data) => {
@@ -78,11 +86,12 @@ const Home = () => {
             <Option value="tablet" label="Tablet" />
           </Select>
           <Link to={'add-products'}>
-            <Button title="Add new product" size="md" />
+            <Button variant="secondary" title="Add new product" size="lg" />
           </Link>
         </div>
         <div>{!searchValue.trim() ? renderProducts(products) : renderProducts(find)}</div>
       </div>
+      <Popup isShow={showDialog} onCancel={handleCancel} onConfirm={handleConfirm} />
     </div>
   )
 }
