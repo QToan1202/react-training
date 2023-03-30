@@ -1,25 +1,30 @@
-import { memo } from 'react'
+import { memo, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Content, Image } from '../index'
 import placeHolder from '@assets/images/placeholder.jpg'
 import styles from './Product.module.css'
 
-const Product = ({ cover, title, description, onDeleteProduct }) => (
-  <div className={styles.product}>
-    <div className={styles.product__img}>
-      <Image src={cover} />
+const Product = ({ id, cover, title, description, onDeleteProduct }) => {
+  const handleDeleteAction = useCallback(() => onDeleteProduct(id), [id, onDeleteProduct])
+
+  return (
+    <div className={styles.product}>
+      <div className={styles.product__img}>
+        <Image src={cover} />
+      </div>
+      <div className={styles.product__desc}>
+        <Content title={title} description={description} />
+      </div>
+      <div className={styles.product__footer}>
+        <Button title="Delete" variant="tertiary" onClick={handleDeleteAction} />
+        <Button title="Edit" variant="secondary" />
+      </div>
     </div>
-    <div className={styles.product__desc}>
-      <Content title={title} description={description} />
-    </div>
-    <div className={styles.product__footer}>
-      <Button title="Delete" variant="tertiary" onClick={onDeleteProduct} />
-      <Button title="Edit" variant="secondary" />
-    </div>
-  </div>
-)
+  )
+}
 
 Product.propTypes = {
+  id: PropTypes.number,
   cover: PropTypes.string,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,

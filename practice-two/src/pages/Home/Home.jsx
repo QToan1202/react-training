@@ -54,18 +54,15 @@ const Home = () => {
     (data) => {
       if (!data?.length) return <h1 className={styles.empty}>There no products yet</h1>
 
-      return data?.map(({ id, name, description }) => {
-        const handleActionDelete = () => handleDeleteProduct(id)
-
-        return <Product key={id} title={name} description={description} onDeleteProduct={handleActionDelete} />
-      })
+      return data?.map(({ id, name, description }) => (
+        <Product key={id} id={id} title={name} description={description} onDeleteProduct={handleDeleteProduct} />
+      ))
     },
     [handleDeleteProduct]
   )
 
   const handleChangeSearchValue = useCallback((e) => setSearchValue(e.target.value), [])
 
-  if (isLoading || isFinding) return <LoadingSpinner />
   if (error) return handleNotifyError(error)
 
   return (
@@ -88,7 +85,8 @@ const Home = () => {
         </div>
         <div>{!searchValue.trim() ? renderProducts(products) : renderProducts(find)}</div>
       </div>
-      <Popup isShow={showDialog} onCancel={handleCancel} onConfirm={handleConfirm} />
+      {showDialog && <Popup isShow={showDialog} onCancel={handleCancel} onConfirm={handleConfirm} />}
+      {(isLoading || isFinding) && <LoadingSpinner />}
     </div>
   )
 }
