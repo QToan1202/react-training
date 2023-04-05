@@ -2,20 +2,21 @@ import { memo, useCallback, useEffect, useId } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import useSWRMutation from 'swr/mutation'
+import PropTypes from 'prop-types'
 import { Button, Form, FormItem, Input } from '@components'
 import { productService } from '@services'
 import { toastConfig } from '@utils'
 import { MESSAGES } from '@constants'
 import styles from './AddProduct.module.css'
 
-const AddProduct = () => {
+const AddProduct = ({ defaultValues }) => {
   const { trigger } = useSWRMutation(import.meta.env.VITE_API_PRODUCTS, productService.add)
   const {
     register,
     reset,
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
-  } = useForm()
+  } = useForm({ defaultValues })
 
   const handleAddProduct = useCallback(
     async (data) => {
@@ -103,6 +104,14 @@ const AddProduct = () => {
       </Form>
     </div>
   )
+}
+
+AddProduct.propTypes = {
+  defaultValues: PropTypes.object,
+}
+
+AddProduct.defaultProps = {
+  defaultValues: {},
 }
 
 export default memo(AddProduct)

@@ -4,8 +4,9 @@ import { Button, Content, Image } from '../index'
 import placeHolder from '@assets/images/placeholder.jpg'
 import styles from './Product.module.css'
 
-const Product = ({ id, cover, title, description, onDeleteProduct }) => {
+const Product = ({ id, cover, title, description, onDeleteProduct, onEditProduct }) => {
   const handleDeleteAction = useCallback(() => onDeleteProduct(id), [id, onDeleteProduct])
+  const handleEditAction = useCallback(() => onEditProduct(id), [id, onEditProduct])
 
   return (
     <div className={styles.product}>
@@ -17,7 +18,7 @@ const Product = ({ id, cover, title, description, onDeleteProduct }) => {
       </div>
       <div className={styles.product__footer}>
         <Button title="Delete" variant="tertiary" onClick={handleDeleteAction} />
-        <Button title="Edit" variant="secondary" />
+        <Button title="Edit" variant="secondary" onClick={handleEditAction} />
       </div>
     </div>
   )
@@ -29,6 +30,7 @@ Product.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   onDeleteProduct: PropTypes.func,
+  onEditProduct: PropTypes.func,
 }
 
 Product.defaultProps = {
@@ -36,6 +38,7 @@ Product.defaultProps = {
   title: '',
   description: '',
   onDeleteProduct: () => undefined,
+  onEditProduct: () => undefined,
 }
 
 export default memo(Product)
