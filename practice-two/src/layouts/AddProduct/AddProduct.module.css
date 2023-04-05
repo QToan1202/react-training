@@ -1,5 +1,6 @@
 .container {
-  margin: 20px 100px;
+  margin: 20px auto;
+  max-width: 800px;
 }
 
 .error_message {

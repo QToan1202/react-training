@@ -2,7 +2,6 @@ import { memo, useCallback, useEffect, useId } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import useSWRMutation from 'swr/mutation'
-import { useNavigate } from 'react-router-dom'
 import { Button, Form, FormItem, Input } from '@components'
 import { productService } from '@services'
 import { toastConfig } from '@utils'
@@ -17,7 +16,6 @@ const AddProduct = () => {
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
   } = useForm()
-  const navigate = useNavigate()
 
   const handleAddProduct = useCallback(
     async (data) => {
@@ -32,11 +30,10 @@ const AddProduct = () => {
       toast.success(MESSAGES.CREATE_SUCCESS, toastConfig(notifyId, toast.POSITION.TOP_CENTER))
     }
     if (isSubmitSuccessful) {
-      navigate(-1)
       handleNotifySuccess()
       reset({ name: '', description: '', image: '', category: '' })
     }
-  }, [isSubmitSuccessful, reset, notifyId, navigate])
+  }, [isSubmitSuccessful, reset, notifyId])
 
   return (
     <div className={styles.container}>
