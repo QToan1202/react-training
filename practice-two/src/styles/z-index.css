@@ -1,4 +1,6 @@
 :root {
   --header-logo: 1;
   --search-bar: 3;
+  --overlay: 5;
+  --modal: 7;
 }
