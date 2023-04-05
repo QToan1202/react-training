@@ -8,13 +8,13 @@ const Modal = styled.div`
   display: ${({ isShow }) => (isShow === true ? 'block' : 'none')};
 `
 
-const Popup = ({ isShow, onCancel, onConfirm }) => {
+const Popup = ({ title, isShow, onCancel, onConfirm }) => {
   return (
     <Modal isShow={isShow}>
       <div className={styles.overlay} />
       <div className={styles.modal}>
         <div className={styles.content}>
-          <p className={styles.title}>Are you sure wanna delete this product?</p>
+          <p className={styles.title}>{title}</p>
           <div className={styles.spacing_top}>
             <Button title="Cancel" onClick={onCancel} />
             <Button title="Confirm" variant="secondary" onClick={onConfirm} />
@@ -26,6 +26,7 @@ const Popup = ({ isShow, onCancel, onConfirm }) => {
 }
 
 Popup.propTypes = {
+  title: PropTypes.string.isRequired,
   isShow: PropTypes.bool,
   onCancel: PropTypes.func,
   onConfirm: PropTypes.func,
