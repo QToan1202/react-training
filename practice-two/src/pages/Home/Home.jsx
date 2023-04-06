@@ -10,15 +10,27 @@ import { MESSAGES } from '@constants'
 import styles from './Home.module.css'
 
 const API_PRODUCTS = import.meta.env.VITE_API_PRODUCTS
+const API_SORT_PRODUCTS = import.meta.env.VITE_SORT_PRODUCT
 
 const Home = () => {
-  const { data: products, error, isLoading, mutate } = useSWR(API_PRODUCTS, productService.get)
+  const [sortType, setSortType] = useState('none')
+  const getProductsEndPoint = useCallback(() => {
+    switch (sortType) {
+      case 'none':
+        return API_PRODUCTS
+
+      default:
+        return API_SORT_PRODUCTS + sortType
+    }
+  }, [sortType])
+  const { data: products, error, isLoading, mutate } = useSWR(getProductsEndPoint, productService.get)
   const [searchValue, setSearchValue] = useState('')
   const debouncedValue = useDebounce(searchValue, 1000)
   const { data: find, isLoading: isFinding } = useSWR(
     debouncedValue.length ? [API_PRODUCTS, debouncedValue] : null,
     ([path, query]) => productService.find(path, query)
   )
+
   const notifyId = useId()
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const [showAddDialog, setShowAddDialog] = useState(false)
@@ -92,6 +104,8 @@ const Home = () => {
 
   const handleChangeSearchValue = useCallback((e) => setSearchValue(e.target.value), [])
 
+  const handleSortChange = useCallback((e) => setSortType(e.target.value), [])
+
   if (error) return handleNotifyError(error)
 
   return (
@@ -104,9 +118,10 @@ const Home = () => {
             <Tag>Book</Tag>
             <Tag>Tablet</Tag>
           </div>
-          <Select defaultValue="book">
-            <Option value="book" disabled label="Book" />
-            <Option value="tablet" label="Tablet" />
+          <Select onSelect={handleSortChange} value={sortType}>
+            <Option value="none" label="None" />
+            <Option value="asc" label="A-Z" />
+            <Option value="desc" label="Z-A" />
           </Select>
         </div>
         <div>
