@@ -24,8 +24,8 @@ const add = async (path, { arg: values }) => {
   return res.data
 }
 
-const edit = async (path, id, { arg: values }) => {
-  const res = await request.patch(import.meta.env.VITE_API_PRODUCTS + `/${id}`, values).catch((error) => {
+const edit = async (path, { arg: values }) => {
+  const res = await request.patch(path + `/${values?.id}`, values).catch((error) => {
     throw error
   })
 

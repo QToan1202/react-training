@@ -5,6 +5,7 @@ const MESSAGES = {
   DELETE_FAILED: "Can't delete current product",
   DELETE_SUCCESS: 'Product has been removed successfully',
   CREATE_SUCCESS: 'Create new product success',
+  UPDATE_SUCCESS: 'Product updated success',
 }
 
 export default MESSAGES

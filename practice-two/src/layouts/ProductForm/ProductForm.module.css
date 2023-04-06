@@ -28,3 +28,13 @@
 .title {
   font-size: 20px;
 }
+
+.container {
+  max-width: 800px;
+}
+
+.error_message {
+  position: relative;
+  color: var(--red);
+  left: 105px;
+}
