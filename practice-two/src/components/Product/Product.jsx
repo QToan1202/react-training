@@ -17,8 +17,8 @@ const Product = ({ id, cover, title, description, onDeleteProduct, onEditProduct
         <Content title={title} description={description} />
       </div>
       <div className={styles.product__footer}>
-        <Button title="Delete" variant="tertiary" onClick={handleDeleteAction} />
-        <Button title="Edit" variant="secondary" onClick={handleEditAction} />
+        <Button title="Delete" variant="secondary" onClick={handleDeleteAction} />
+        <Button title="Edit" onClick={handleEditAction} />
       </div>
     </div>
   )
