@@ -1,8 +1,8 @@
 import { useCallback, useId, useState } from 'react'
 import useSWR from 'swr'
 import { toast } from 'react-toastify'
-import { Input, LoadingSpinner, Option, Popup, Product, SearchBar, Select, Tag } from '@components'
-import { AddProduct, EditProduct } from '@layouts'
+import { Button, Input, LoadingSpinner, Option, Popup, Product, SearchBar, Select, Tag } from '@components'
+import { ProductForm } from '@layouts'
 import { productService } from '@services'
 import { useDebounce } from '@hooks'
 import { toastConfig } from '@utils'
@@ -20,7 +20,8 @@ const Home = () => {
     ([path, query]) => productService.find(path, query)
   )
   const notifyId = useId()
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false)
+  const [showAddDialog, setShowAddDialog] = useState(false)
   const [showEditDialog, setShowEditDialog] = useState(false)
   const [selectedProductId, setSelectedProductId] = useState(undefined)
   const [shouldFetch, setShouldFetch] = useState(false)
@@ -37,7 +38,7 @@ const Home = () => {
   )
 
   const handleDeleteProduct = useCallback((id) => {
-    setShowDialog(true)
+    setShowDeleteDialog(true)
     setSelectedProductId(id)
   }, [])
 
@@ -45,17 +46,18 @@ const Home = () => {
     (id) => {
       setSelectedProductId(id)
       setShouldFetch(true)
-      if (!isFetch) {
-        setShouldFetch(false)
-        setShowEditDialog(true)
-      }
+      if (!isFetch) setShowEditDialog(true)
     },
     [isFetch]
   )
 
   const handleCloseEditForm = useCallback(() => setShowEditDialog(false), [])
 
-  const handleCancel = useCallback(() => setShowDialog(false), [])
+  const handleOpenAddForm = useCallback(() => setShowAddDialog(true), [])
+
+  const handleCloseAddForm = useCallback(() => setShowAddDialog(false), [])
+
+  const handleCancel = useCallback(() => setShowDeleteDialog(false), [])
 
   const handleConfirm = useCallback(async () => {
     const remainProducts = products.filter((item) => item.id !== selectedProductId)
@@ -67,7 +69,7 @@ const Home = () => {
       revalidate: false,
     })
 
-    setShowDialog(false)
+    setShowDeleteDialog(false)
   }, [products, handleNotifyError, notifyId, mutate, selectedProductId])
 
   const renderProducts = useCallback(
@@ -108,20 +110,34 @@ const Home = () => {
           </Select>
         </div>
         <div>
-          <AddProduct />
+          <Button size="md" variant="primary" title="Create new product" onClick={handleOpenAddForm} />
           {!searchValue.trim() ? renderProducts(products) : renderProducts(find)}
         </div>
       </div>
-      {showDialog && (
+      {showDeleteDialog && (
         <Popup
           title="Are you sure wanna delete this product?"
-          isShow={showDialog}
+          isShow={showDeleteDialog}
           onCancel={handleCancel}
           onConfirm={handleConfirm}
         />
       )}
+      {showAddDialog && (
+        <ProductForm
+          action="add"
+          isShow={showAddDialog}
+          onCancel={handleCloseAddForm}
+          onSubmitSuccess={handleCloseAddForm}
+        />
+      )}
       {showEditDialog && !isFetch && (
-        <EditProduct productData={data} isShow={showEditDialog} onCancel={handleCloseEditForm} />
+        <ProductForm
+          action="edit"
+          defaultValues={data}
+          isShow={showEditDialog}
+          onCancel={handleCloseEditForm}
+          onSubmitSuccess={handleCloseEditForm}
+        />
       )}
       {(isLoading || isFinding) && <LoadingSpinner />}
     </div>
