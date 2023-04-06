@@ -124,6 +124,7 @@ const Home = () => {
       )}
       {showAddDialog && (
         <ProductForm
+          title="Add Product"
           action="add"
           isShow={showAddDialog}
           onCancel={handleCloseAddForm}
@@ -132,6 +133,7 @@ const Home = () => {
       )}
       {showEditDialog && !isFetch && (
         <ProductForm
+          title="Edit Product"
           action="edit"
           defaultValues={data}
           isShow={showEditDialog}
