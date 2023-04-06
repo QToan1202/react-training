@@ -39,7 +39,8 @@ const Home = () => {
   const [shouldFetch, setShouldFetch] = useState(false)
   const { data, isLoading: isFetch } = useSWR(
     shouldFetch ? API_PRODUCTS + `/${selectedProductId}` : null,
-    productService.get
+    productService.get,
+    { revalidateOnFocus: false }
   )
 
   const handleNotifyError = useCallback(
