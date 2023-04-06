@@ -16,7 +16,7 @@ const Modal = styled.div`
   display: ${({ isShow }) => (isShow === true ? 'block' : 'none')};
 `
 
-const ProductForm = ({ defaultValues, action, onCancel, title, isShow }) => {
+const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitSuccess }) => {
   const { trigger: triggerAddAPI } = useSWRMutation(API_PRODUCTS, productService.add)
   const { trigger: triggerEditAPI } = useSWRMutation(API_PRODUCTS, productService.edit)
   const {
@@ -57,8 +57,9 @@ const ProductForm = ({ defaultValues, action, onCancel, title, isShow }) => {
     if (isSubmitSuccessful) {
       handleNotifySuccess()
       reset({ name: '', description: '', image: '', category: '' })
+      onSubmitSuccess()
     }
-  }, [isSubmitSuccessful, reset, notifyId, action])
+  }, [isSubmitSuccessful, reset, notifyId, action, onSubmitSuccess])
 
   return (
     <Modal isShow={isShow}>
@@ -128,14 +129,9 @@ const ProductForm = ({ defaultValues, action, onCancel, title, isShow }) => {
                 )}
               </FormItem>
               <FormItem>
+                <Button type="reset" title="Cancel" onClick={onCancel} size="lg" />
                 {action === 'add' && <Button type="submit" title="Add" size="lg" />}
-
-                {action === 'edit' && (
-                  <>
-                    <Button type="reset" title="Cancel" onClick={onCancel} />
-                    <Button type="submit" title="Confirm" variant="secondary" />
-                  </>
-                )}
+                {action === 'edit' && <Button type="submit" title="Confirm" variant="secondary" size="lg" />}
               </FormItem>
             </Form>
           </div>
@@ -151,12 +147,14 @@ ProductForm.propTypes = {
   isShow: PropTypes.bool,
   defaultValues: PropTypes.object,
   onCancel: PropTypes.func,
+  onSubmitSuccess: PropTypes.func,
 }
 
 ProductForm.defaultProps = {
   defaultValues: {},
   isShow: false,
   onCancel: () => undefined,
+  onSubmitSuccess: () => undefined,
 }
 
 export default memo(ProductForm)
