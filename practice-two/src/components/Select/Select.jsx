@@ -14,9 +14,4 @@ Select.propTypes = {
   onSelect: PropTypes.func.isRequired,
 }
 
-Select.defaultProps = {
-  placeHolder: 'Choose a value',
-  onSelect: () => void 0,
-}
-
 export default Select

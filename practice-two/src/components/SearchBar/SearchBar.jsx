@@ -21,14 +21,13 @@ const SearchBar = ({ value, placeholder, name, onChange }) => (
 )
 
 SearchBar.propTypes = {
-  value: PropTypes.string,
+  value: PropTypes.string.isRequired,
   name: PropTypes.string,
   placeholder: PropTypes.string,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
 }
 
 SearchBar.defaultProps = {
-  value: '',
   placeholder: 'Enter a Product name...',
 }
 

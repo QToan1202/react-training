@@ -15,8 +15,6 @@ Option.propTypes = {
 }
 
 Option.defaultProps = {
-  value: 'test',
-  label: 'Testing value',
   disabled: false,
   hidden: false,
 }

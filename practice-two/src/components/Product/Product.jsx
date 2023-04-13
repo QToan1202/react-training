@@ -11,11 +11,13 @@ const Product = ({ id, cover, title, description, onDeleteProduct, onEditProduct
   return (
     <div className={styles.product}>
       <div className={styles.product__img}>
-        <Image src={cover} />
+        <Image src={cover} alt="my image" />
       </div>
-      <div className={styles.product__desc}>
-        <Content title={title} description={description} />
-      </div>
+      {description && (
+        <div className={styles.product__desc}>
+          <Content title={title} description={description} />
+        </div>
+      )}
       <div className={styles.product__footer}>
         <Button title="Delete" variant="secondary" onClick={handleDeleteAction} />
         <Button title="Edit" onClick={handleEditAction} />
@@ -25,20 +27,17 @@ const Product = ({ id, cover, title, description, onDeleteProduct, onEditProduct
 }
 
 Product.propTypes = {
+  title: PropTypes.string.isRequired,
   id: PropTypes.number,
   cover: PropTypes.string,
-  title: PropTypes.string.isRequired,
   description: PropTypes.string,
-  onDeleteProduct: PropTypes.func,
-  onEditProduct: PropTypes.func,
+  onDeleteProduct: PropTypes.func.isRequired,
+  onEditProduct: PropTypes.func.isRequired,
 }
 
 Product.defaultProps = {
   cover: placeHolder,
-  title: '',
   description: '',
-  onDeleteProduct: () => undefined,
-  onEditProduct: () => undefined,
 }
 
 export default memo(Product)

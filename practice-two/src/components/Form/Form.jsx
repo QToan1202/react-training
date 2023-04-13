@@ -9,16 +9,15 @@ const Form = ({ action, method, onSubmit, children }) => (
 )
 
 Form.propTypes = {
-  action: PropTypes.string.isRequired,
-  method: PropTypes.string.isRequired,
+  action: PropTypes.string,
+  method: PropTypes.string,
   onSubmit: PropTypes.func.isRequired,
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)]).isRequired,
 }
 
 Form.defaultProps = {
   action: '#',
   method: 'get',
-  onSubmit: () => undefined,
 }
 
 export default memo(Form)

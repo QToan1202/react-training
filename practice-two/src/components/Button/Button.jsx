@@ -63,20 +63,18 @@ const Button = ({ title, size, variant, type, onClick, customStyle }) => (
 )
 
 Button.propTypes = {
-  type: PropTypes.oneOf(['button', 'submit', 'reset']),
   title: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
   variant: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
-  onClick: PropTypes.func,
   customStyle: PropTypes.string,
 }
 
 Button.defaultProps = {
   type: 'button',
-  title: 'Button',
   size: 'sm',
   variant: 'primary',
-  onClick: () => undefined,
   customStyle: '',
 }
 

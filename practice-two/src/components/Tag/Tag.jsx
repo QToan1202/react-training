@@ -15,12 +15,7 @@ const Tag = ({ children, onClick }) => {
 
 Tag.propTypes = {
   children: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
-}
-
-Tag.defaultProps = {
-  children: 'Tag',
-  onClick: () => void 0,
+  onClick: PropTypes.func.isRequired,
 }
 
 export default memo(Tag)
