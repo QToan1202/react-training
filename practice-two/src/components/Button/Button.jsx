@@ -2,7 +2,7 @@ import { memo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const changeBtnSpacing = (size) => {
+const getBtnSpacing = (size) => {
   switch (size) {
     case 'sm':
       return '8px 34px'
@@ -18,11 +18,8 @@ const changeBtnSpacing = (size) => {
   }
 }
 
-const changeBtnFontSize = (size) => {
+const getBtnFontSize = (size) => {
   switch (size) {
-    case 'sm':
-      return '16px'
-
     case 'md':
       return '18px'
 
@@ -34,11 +31,8 @@ const changeBtnFontSize = (size) => {
   }
 }
 
-const changeBtnTheme = (theme) => {
+const getBtnTheme = (theme) => {
   switch (theme) {
-    case 'primary':
-      return 'transparent'
-
     case 'secondary':
       return 'var(--blue)'
 
@@ -54,12 +48,12 @@ const RadiusButton = styled.button`
   margin-right: 10px;
   border: 1px solid var(--gray);
   border-radius: 40px;
-  padding: ${({ size }) => changeBtnSpacing(size)};
+  padding: ${({ size }) => getBtnSpacing(size)};
   cursor: pointer;
-  background-color: ${({ variant }) => changeBtnTheme(variant)};
+  background-color: ${({ variant }) => getBtnTheme(variant)};
   color: ${({ variant }) => variant !== 'primary' && 'white'};
   font-weight: 500;
-  font-size: ${({ size }) => changeBtnFontSize(size)};
+  font-size: ${({ size }) => getBtnFontSize(size)};
 `
 
 const Button = ({ title, size, variant, type, onClick, customStyle }) => (
