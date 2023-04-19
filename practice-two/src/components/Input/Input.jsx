@@ -1,32 +1,14 @@
 import { memo, useId } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import styles from './Input.module.css'
-
-const Wrapper = styled.div`
-  display: ${({ hasLabel }) => (hasLabel ? 'grid' : 'block')};
-  grid-template-columns: 100px 1fr;
-  column-gap: 5px;
-`
+import { CInput, CLabel, Wrapper } from './Input.styles'
 
 const Input = ({ type, placeholder, autoComplete, label, register, config }) => {
   const id = useId()
 
   return (
     <Wrapper hasLabel={!!label}>
-      {label ? (
-        <label className={styles.label} htmlFor={id}>
-          {label}
-        </label>
-      ) : null}
-      <input
-        id={id}
-        className={styles.input}
-        type={type}
-        placeholder={placeholder}
-        autoComplete={autoComplete}
-        {...register(label, config)}
-      />
+      {label ? <CLabel htmlFor={id}>{label}</CLabel> : null}
+      <CInput id={id} type={type} placeholder={placeholder} autoComplete={autoComplete} {...register(label, config)} />
     </Wrapper>
   )
 }
