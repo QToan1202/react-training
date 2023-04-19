@@ -2,6 +2,7 @@
   height: 78px;
   background-color: var(--header-bg);
   position: relative;
+  width: 100%;
 }
 
 .header__logo {

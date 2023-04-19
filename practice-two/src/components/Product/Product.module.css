@@ -1,7 +1,7 @@
 .product {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: minmax(252px, max-content) minmax(434px, 1fr);
+  grid-template-columns: minmax(50px, max-content) minmax(100px, 1fr);
   grid-template-rows: 195px 45px;
   border: 2px solid var(--gray);
   margin-bottom: var(--spacing-lg);
@@ -26,4 +26,28 @@
   border-top: 2px solid var(--gray);
   font-size: 18px;
   font-weight: 600;
+}
+
+@media only screen and (min-width: 480px) {
+  .product {
+    grid-template-columns: minmax(182px, max-content) minmax(334px, 1fr);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .product {
+    grid-template-columns: minmax(202px, max-content) minmax(230px, 1fr);
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .product {
+    grid-template-columns: minmax(252px, max-content) minmax(250px, 1fr);
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .product {
+    grid-template-columns: minmax(252px, max-content) minmax(434px, 1fr);
+  }
 }
