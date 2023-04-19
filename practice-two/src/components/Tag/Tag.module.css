@@ -7,7 +7,7 @@
   width: fit-content;
 }
 
-.tag__label {
+.tag__content {
   padding: var(--spacing-sm);
 }
 

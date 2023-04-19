@@ -116,8 +116,8 @@ const Home = () => {
         <div className={styles.filter}>
           <Input placeholder="Enter filter category" />
           <div className={styles.filter__tag}>
-            <Tag>Book</Tag>
-            <Tag>Tablet</Tag>
+            <Tag title="Book" />
+            <Tag title="Tablet" />
           </div>
           <Select onSelect={handleSortChange} value={sortType}>
             <Option value="none" label="None" />

@@ -2,10 +2,12 @@ import { memo } from 'react'
 import PropTypes from 'prop-types'
 import styles from './Tag.module.css'
 
-const Tag = ({ children, onClick }) => {
+const Tag = ({ title, onClick }) => {
   return (
     <div className={styles.tag}>
-      <p className={styles.tag__label}>{children}</p>
+      <div className={styles.tag__content}>
+        <p>{title}</p>
+      </div>
       <button className={styles.tag__btn} onClick={onClick}>
         &#10006;
       </button>
@@ -14,7 +16,7 @@ const Tag = ({ children, onClick }) => {
 }
 
 Tag.propTypes = {
-  children: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 }
 

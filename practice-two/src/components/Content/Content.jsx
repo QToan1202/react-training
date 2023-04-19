@@ -4,7 +4,9 @@ import styles from './Content.module.css'
 
 const Content = ({ title, description }) => (
   <div className={styles.container}>
-    <h2 className={styles.title}>{title}</h2>
+    <div className={styles.title_wrapper}>
+      <h2 className={styles.title}>{title}</h2>
+    </div>
     {description && <p className={styles.desc}>{description}</p>}
   </div>
 )
