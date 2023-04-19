@@ -1,11 +1,6 @@
 import { memo } from 'react'
-import styled from 'styled-components'
 import PropTypes from 'prop-types'
-
-const ProductImage = styled.img`
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
-`
+import ProductImage from './Image.styles'
 
 const Image = ({ width, height, src, alt }) => <ProductImage width={width} height={height} src={src} alt={alt} />
 
@@ -14,11 +9,6 @@ Image.propTypes = {
   alt: PropTypes.string.isRequired,
   width: PropTypes.number,
   height: PropTypes.number,
-}
-
-Image.defaultProps = {
-  width: 252,
-  height: 240,
 }
 
 export default memo(Image)
