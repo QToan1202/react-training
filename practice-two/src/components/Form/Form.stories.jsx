@@ -14,7 +14,7 @@ const FormContent = (args) => (
       <Input placeholder="Enter your email" />
     </FormItem>
     <FormItem>
-      <Button size="sm" />
+      <Button size="sm" title="Submit" />
     </FormItem>
   </Form>
 )

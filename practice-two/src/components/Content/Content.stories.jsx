@@ -8,15 +8,12 @@ export default {
 const Template = (args) => <Content {...args} />
 
 export const Default = Template.bind({})
-Default.args = {}
+Default.args = {
+  title: 'Hello',
+}
 
 export const ContentWithTitle = Template.bind({})
 ContentWithTitle.args = {
-  title: 'Hello',
-  description: 'Lorem ipsum dolor sit.',
-}
-
-export const ContentHeadless = Template.bind({})
-ContentWithTitle.args = {
+  title: 'My title',
   description: 'Lorem ipsum dolor sit.',
 }
