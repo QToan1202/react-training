@@ -1,5 +1,13 @@
+beforeAll(() => {
+  console.log("Start a test");
+});
+
+afterAll(() => {
+  console.log("Finish test");
+});
+
 test("adds 1 + 2", () => {
-  const value = 1 + 2
+  const value = 1 + 2;
 
   expect(value).toBe(3);
   expect(value).toBeLessThan(5);
@@ -22,5 +30,18 @@ const fnThrowError = () => {
 // Fail
 test("a function that throw error", () => {
   expect(() => fnThrowError()).toThrow();
-  expect(() => fnThrowError()).toThrow('Errors');
+  expect(() => fnThrowError()).toThrow("Errors");
+});
+
+const mockFn = jest
+  .fn(() => "default")
+  .mockImplementationOnce(() => "first")
+  .mockImplementationOnce(() => "second")
+  .mockImplementationOnce(() => "third");
+
+test.only("mock function", () => {
+  expect(mockFn()).toBe("first");
+  expect(mockFn()).toBe("second");
+  expect(mockFn()).toBe("third");
+  expect(mockFn()).toBe("default");
 });
