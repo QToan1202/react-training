@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App > renders button 1`] = `
+<button>
+  hello
+</button>
+`;
