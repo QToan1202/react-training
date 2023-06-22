@@ -1,5 +1,6 @@
 import logo from '../../assets/images/logo.svg'
 import { Image } from '../index'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 export default {
   title: 'Image',
@@ -21,9 +22,9 @@ export default {
       },
     },
   },
-}
+} as ComponentMeta<typeof Image>
 
-const Template = (args) => <Image {...args} />
+const Template: ComponentStory<typeof Image> = (args) => <Image {...args} />
 
 export const Default = Template.bind({})
 Default.args = {}
