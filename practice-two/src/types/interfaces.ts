@@ -13,3 +13,10 @@ export interface IContentProps {
   title: string
   description?: string
 }
+
+export interface IFormProps {
+  action?: HTMLFormElement['action']
+  method?: HTMLFormElement['method']
+  onSubmit(event: React.FormEvent): void
+  children: JSX.Element | JSX.Element[]
+}
