@@ -1,4 +1,6 @@
-const toastConfig = (toastId, position) => {
+import { ToastPosition } from 'react-toastify';
+
+const toastConfig = (toastId: string, position: ToastPosition) => {
   return {
     toastId, // Prevent duplicate toast
     position,
