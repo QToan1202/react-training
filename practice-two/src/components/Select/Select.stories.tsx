@@ -1,11 +1,12 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { Option, Select } from '../index'
 
 export default {
   title: 'Select',
   component: Select,
-}
+} as ComponentMeta<typeof Select>
 
-const Template = (args) => <Select {...args} />
+const Template: ComponentStory<typeof Select> = (args) => <Select {...args} />
 const fruitsList = (
   <>
     <Option value="orange" label="Orange" disabled />

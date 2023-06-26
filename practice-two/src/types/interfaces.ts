@@ -59,3 +59,10 @@ export interface ISearchBarProps {
   name?: string
   onChange(event: React.FormEvent): void
 }
+
+export interface ISelectProps {
+  defaultValue?: string
+  children: JSX.Element | JSX.Element[]
+  onSelect(event: React.ChangeEvent): void
+  value: string
+}
