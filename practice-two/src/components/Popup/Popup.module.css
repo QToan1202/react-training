@@ -32,3 +32,11 @@
 .spacing_top {
   margin-top: 20px;
 }
+
+.block {
+  display: block;
+}
+
+.none {
+  display: none;
+}

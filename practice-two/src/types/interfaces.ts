@@ -31,3 +31,15 @@ export interface IImageProps {
 export interface IInputProps extends Partial<HTMLInputElement> {
   label?: string
 }
+
+export interface IOptionProps extends Partial<HTMLOptionElement> {
+  value: string
+  label: string
+}
+
+export interface IPopupProps {
+  title: string
+  isShow?: boolean
+  onCancel(): void
+  onConfirm(): void
+}

@@ -1,16 +1,11 @@
 import { memo } from 'react'
-import PropTypes from 'prop-types'
 import { Button } from '@components'
 import styles from './Popup.module.css'
-import styled from 'styled-components'
+import { IPopupProps } from '@types'
 
-const Modal = styled.div`
-  display: ${({ isShow }) => (isShow === true ? 'block' : 'none')};
-`
-
-const Popup = ({ title, isShow, onCancel, onConfirm }) => {
+const Popup = ({ title, isShow, onCancel, onConfirm }: IPopupProps) => {
   return (
-    <Modal isShow={isShow}>
+    <div className={isShow ? styles.block : styles.none} >
       <div className={styles.overlay} />
       <div className={styles.modal}>
         <div className={styles.content}>
@@ -21,21 +16,12 @@ const Popup = ({ title, isShow, onCancel, onConfirm }) => {
           </div>
         </div>
       </div>
-    </Modal>
+    </div>
   )
-}
-
-Popup.propTypes = {
-  title: PropTypes.string.isRequired,
-  isShow: PropTypes.bool,
-  onCancel: PropTypes.func,
-  onConfirm: PropTypes.func,
 }
 
 Popup.defaultProps = {
   isShow: false,
-  onCancel: () => undefined,
-  onConfirm: () => undefined,
 }
 
 export default memo(Popup)
