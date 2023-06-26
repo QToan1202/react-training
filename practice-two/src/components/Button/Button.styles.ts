@@ -1,6 +1,7 @@
+import { IButtonProps, TButtonSize, TButtonVariant } from '@types';
 import styled from 'styled-components'
 
-const getBtnSpacing = (size) => {
+const getBtnSpacing = (size: TButtonSize | undefined) => {
   switch (size) {
     case 'sm':
       return '8px 34px'
@@ -16,7 +17,7 @@ const getBtnSpacing = (size) => {
   }
 }
 
-const getBtnFontSize = (size) => {
+const getBtnFontSize = (size: TButtonSize | undefined) => {
   switch (size) {
     case 'md':
       return '18px'
@@ -29,7 +30,7 @@ const getBtnFontSize = (size) => {
   }
 }
 
-const getBtnTheme = (theme) => {
+const getBtnTheme = (theme: TButtonVariant | undefined) => {
   switch (theme) {
     case 'secondary':
       return 'var(--blue)'
@@ -42,7 +43,7 @@ const getBtnTheme = (theme) => {
   }
 }
 
-const RadiusButton = styled.button`
+const RadiusButton = styled.button<Pick<IButtonProps, 'size' | 'variant'>>`
   margin-right: 10px;
   border: 1px solid var(--gray);
   border-radius: 40px;
