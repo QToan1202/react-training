@@ -71,3 +71,7 @@ export interface ITagProps {
   title: string
   onClick(event: React.MouseEvent): void
 }
+
+export interface IHeaderProps {
+  logo: HTMLImageElement['src']
+}

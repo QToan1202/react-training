@@ -1,16 +1,12 @@
-import PropTypes from 'prop-types'
 import styles from './Header.module.css'
 import logo from '@assets/logo.svg'
+import { IHeaderProps } from '@types'
 
-const Header = ({ logo }) => (
+const Header = ({ logo }: IHeaderProps) => (
   <header className={styles.header}>
     <img className={styles.header__logo} src={logo} alt="header-logo" loading="lazy" />
   </header>
 )
-
-Header.propTypes = {
-  logo: PropTypes.string.isRequired,
-}
 
 Header.defaultProps = {
   logo: logo,
