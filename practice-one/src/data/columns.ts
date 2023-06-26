@@ -18,7 +18,7 @@ const columns = {
     'terms of use',
     'cookies',
   ],
-  FOLLOW_US: [],
+  FOLLOW_US: [''],
 };
 
 export default columns;

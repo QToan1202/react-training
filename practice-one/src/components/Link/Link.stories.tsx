@@ -1,3 +1,4 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { Link } from '../index'
 
 export default {
@@ -22,7 +23,7 @@ export default {
     },
     children: {
       type: {
-        name: 'any',
+        name: 'string',
         required: true,
       },
       defaultValue: 'My link',
@@ -32,14 +33,14 @@ export default {
         },
       },
       control: {
-        type: 'text',
+        type: 'string',
       },
       description: 'The content represent the link',
     },
   },
-}
+} as ComponentMeta<typeof Link>
 
-const Template = (args) => <Link {...args} />
+const Template: ComponentStory<typeof Link> = (args) => <Link {...args} />
 
 export const Default = Template.bind({})
 Default.args = {}
