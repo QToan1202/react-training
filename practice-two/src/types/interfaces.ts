@@ -53,3 +53,9 @@ export interface IProductProps {
   onEditProduct(id: number): void
 }
 
+export interface ISearchBarProps {
+  value: string | number
+  placeholder?: string
+  name?: string
+  onChange(event: React.FormEvent): void
+}
