@@ -1,4 +1,5 @@
-import { TButtonSize, TButtonVariant } from "@types"
+import { TButtonSize, TButtonVariant, TProduct, TProductFormAction } from "@types"
+import { FieldError, RegisterOptions, UseFormRegister } from "react-hook-form"
 
 export interface IButtonProps {
   title: string
@@ -29,7 +30,9 @@ export interface IImageProps {
 }
 
 export interface IInputProps extends Partial<HTMLInputElement> {
-  label?: string
+  label: keyof TProduct
+  config: RegisterOptions
+  register: UseFormRegister<Partial<TProduct>>
 }
 
 export interface IOptionProps extends Partial<HTMLOptionElement> {
@@ -74,4 +77,13 @@ export interface ITagProps {
 
 export interface IHeaderProps {
   logo: HTMLImageElement['src']
+}
+
+export interface IProductFormProps {
+  defaultValues?: Partial<TProduct>
+  action: TProductFormAction
+  onCancel(): void
+  title: string
+  isShow?: boolean
+  onSubmitSuccess(): void
 }

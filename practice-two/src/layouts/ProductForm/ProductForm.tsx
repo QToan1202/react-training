@@ -1,22 +1,17 @@
-import { memo, useCallback, useEffect, useId } from 'react'
+import { Fragment, memo, useCallback, useEffect, useId } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import useSWRMutation from 'swr/mutation'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { Button, Form, FormItem, Input } from '@components'
 import { productService } from '@services'
 import { toastConfig } from '@utils'
 import { MESSAGES } from '@constants'
 import styles from './ProductForm.module.css'
+import { IProductFormProps, TProduct } from '@types'
 
 const API_PRODUCTS = import.meta.env.VITE_API_PRODUCTS
 
-const Modal = styled.div`
-  display: ${({ isShow }) => (isShow === true ? 'block' : 'none')};
-`
-
-const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitSuccess }) => {
+const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitSuccess }: IProductFormProps) => {
   const { trigger: triggerAddAPI } = useSWRMutation(API_PRODUCTS, productService.add)
   const { trigger: triggerEditAPI } = useSWRMutation(API_PRODUCTS, productService.edit)
   const {
@@ -27,7 +22,7 @@ const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitS
   } = useForm({ defaultValues })
 
   const handleFormAction = useCallback(
-    async (data) => {
+    async (data: Partial<TProduct>) => {
       const sendData = { ...defaultValues, ...data }
 
       switch (action) {
@@ -62,7 +57,7 @@ const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitS
   }, [isSubmitSuccessful, reset, notifyId, action, onSubmitSuccess])
 
   return (
-    <Modal isShow={isShow}>
+    <div className={isShow ? styles.block : styles.none}>
       <div className={styles.overlay} />
       <div className={styles.modal}>
         <div className={styles.content}>
@@ -77,10 +72,12 @@ const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitS
                     required: MESSAGES.REQUIRED,
                   }}
                 />
-                {errors.name && (
+                {errors.name ? (
                   <p role="alert" className={styles.error_message}>
-                    {errors.name?.message}
+                    {errors.name.message}
                   </p>
+                ) : (
+                  <Fragment />
                 )}
               </FormItem>
               <FormItem>
@@ -94,10 +91,12 @@ const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitS
                     },
                   }}
                 />
-                {errors.description && (
+                {errors.description ? (
                   <p role="alert" className={styles.error_message}>
-                    {errors.description?.message}
+                    {errors.description.message}
                   </p>
+                ) : (
+                  <Fragment />
                 )}
               </FormItem>
               <FormItem>
@@ -108,11 +107,11 @@ const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitS
                     required: MESSAGES.REQUIRED,
                   }}
                 />
-                {errors.image && (
+                {errors.image ? (
                   <p role="alert" className={styles.error_message}>
-                    {errors.image?.message}
+                    {errors.image.message}
                   </p>
-                )}
+                ) : <Fragment />}
               </FormItem>
               <FormItem>
                 <Input
@@ -122,39 +121,27 @@ const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitS
                     required: MESSAGES.REQUIRED,
                   }}
                 />
-                {errors.category && (
+                {errors.category ? (
                   <p role="alert" className={styles.error_message}>
-                    {errors.category?.message}
+                    {errors.category.message}
                   </p>
-                )}
+                ) : <Fragment />}
               </FormItem>
               <FormItem>
                 <Button type="reset" title="Cancel" onClick={onCancel} size="lg" />
-                {action === 'add' && <Button type="submit" title="Add" size="lg" />}
-                {action === 'edit' && <Button type="submit" title="Confirm" variant="secondary" size="lg" />}
+                {action === 'add' ? <Button type="submit" title="Add" size="lg" /> : <Fragment/>}
+                {action === 'edit' ? <Button type="submit" title="Confirm" variant="secondary" size="lg" /> : <Fragment />}
               </FormItem>
             </Form>
           </div>
         </div>
       </div>
-    </Modal>
+    </div>
   )
 }
 
-ProductForm.propTypes = {
-  title: PropTypes.string.isRequired,
-  action: PropTypes.oneOf(['edit', 'add']).isRequired,
-  isShow: PropTypes.bool,
-  defaultValues: PropTypes.object,
-  onCancel: PropTypes.func,
-  onSubmitSuccess: PropTypes.func,
-}
-
 ProductForm.defaultProps = {
-  defaultValues: {},
   isShow: false,
-  onCancel: () => undefined,
-  onSubmitSuccess: () => undefined,
 }
 
 export default memo(ProductForm)

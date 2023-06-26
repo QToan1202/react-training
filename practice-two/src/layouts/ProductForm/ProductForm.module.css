@@ -38,3 +38,11 @@
   color: var(--red);
   left: 105px;
 }
+
+.block {
+  display: block;
+}
+
+.none {
+  display: none;
+}
