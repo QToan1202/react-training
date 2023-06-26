@@ -20,3 +20,10 @@ export interface IFormProps {
   onSubmit(event: React.FormEvent): void
   children: JSX.Element | JSX.Element[]
 }
+
+export interface IImageProps {
+  src: HTMLImageElement['src'],
+  alt: HTMLImageElement['alt'],
+  width?: number
+  height?: number
+}
