@@ -43,3 +43,13 @@ export interface IPopupProps {
   onCancel(): void
   onConfirm(): void
 }
+
+export interface IProductProps {
+  id: number
+  title: string
+  cover: string
+  description?: string
+  onDeleteProduct(id: number): void
+  onEditProduct(id: number): void
+}
+

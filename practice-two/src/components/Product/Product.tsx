@@ -1,10 +1,10 @@
 import { memo, useCallback } from 'react'
-import PropTypes from 'prop-types'
 import { Button, Content, Image } from '../index'
 import placeHolder from '@assets/images/placeholder.jpg'
 import styles from './Product.module.css'
+import { IProductProps } from '@types'
 
-const Product = ({ id, cover, title, description, onDeleteProduct, onEditProduct }) => {
+const Product = ({ id, cover, title, description, onDeleteProduct, onEditProduct }: IProductProps) => {
   const handleDeleteAction = useCallback(() => onDeleteProduct(id), [id, onDeleteProduct])
   const handleEditAction = useCallback(() => onEditProduct(id), [id, onEditProduct])
 
@@ -24,15 +24,6 @@ const Product = ({ id, cover, title, description, onDeleteProduct, onEditProduct
       </div>
     </div>
   )
-}
-
-Product.propTypes = {
-  title: PropTypes.string.isRequired,
-  id: PropTypes.number,
-  cover: PropTypes.string,
-  description: PropTypes.string,
-  onDeleteProduct: PropTypes.func.isRequired,
-  onEditProduct: PropTypes.func.isRequired,
 }
 
 Product.defaultProps = {
