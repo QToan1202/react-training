@@ -27,3 +27,7 @@ export interface IImageProps {
   width?: number
   height?: number
 }
+
+export interface IInputProps extends Partial<HTMLInputElement> {
+  label?: string
+}

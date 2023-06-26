@@ -1,6 +1,7 @@
+import { IInputProps } from '@types'
 import styled from 'styled-components'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ hasLabel: boolean }>`
   display: ${({ hasLabel }) => (hasLabel ? 'grid' : 'block')};
   grid-template-columns: 100px 1fr;
   column-gap: 5px;
