@@ -1,8 +1,8 @@
 import { memo } from 'react'
-import PropTypes from 'prop-types'
 import styles from './Tag.module.css'
+import { ITagProps } from '@types'
 
-const Tag = ({ title, onClick }) => {
+const Tag = ({ title, onClick }: ITagProps) => {
   return (
     <div className={styles.tag}>
       <div className={styles.tag__content}>
@@ -13,11 +13,6 @@ const Tag = ({ title, onClick }) => {
       </button>
     </div>
   )
-}
-
-Tag.propTypes = {
-  title: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
 }
 
 export default memo(Tag)

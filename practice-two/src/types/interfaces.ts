@@ -66,3 +66,8 @@ export interface ISelectProps {
   onSelect(event: React.ChangeEvent): void
   value: string
 }
+
+export interface ITagProps {
+  title: string
+  onClick(event: React.MouseEvent): void
+}
