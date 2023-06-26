@@ -8,3 +8,8 @@ export interface IButtonProps {
   variant?: TButtonVariant
   customStyle?: string
 }
+
+export interface IContentProps {
+  title: string
+  description?: string
+}

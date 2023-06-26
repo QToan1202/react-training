@@ -1,8 +1,8 @@
 import { memo } from 'react'
-import PropTypes from 'prop-types'
 import styles from './Content.module.css'
+import { IContentProps } from '@types'
 
-const Content = ({ title, description }) => (
+const Content = ({ title, description }: IContentProps) => (
   <div className={styles.container}>
     <div className={styles.title_wrapper}>
       <h2 className={styles.title}>{title}</h2>
@@ -10,14 +10,5 @@ const Content = ({ title, description }) => (
     {description && <p className={styles.desc}>{description}</p>}
   </div>
 )
-
-Content.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string,
-}
-
-Content.defaultProps = {
-  description: '',
-}
 
 export default memo(Content)
