@@ -6,6 +6,6 @@ const MESSAGES = {
   DELETE_SUCCESS: 'Product has been removed successfully',
   CREATE_SUCCESS: 'Create new product success',
   UPDATE_SUCCESS: 'Product updated success',
-}
+} as const
 
 export default MESSAGES
