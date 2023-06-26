@@ -1,6 +1,6 @@
 import './product.css'
 import { Button, Image, HeadingText, Text } from '../index'
-import { IProductProps } from '../../types/interfaces'
+import { IProductProps } from '@types'
 
 const Product = ({ product }: IProductProps) => {
   const { image, title, description, price } = product

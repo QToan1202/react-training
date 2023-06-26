@@ -1,4 +1,4 @@
-import { IHeadingTextProps } from '../../types/interfaces'
+import { IHeadingTextProps } from '@types'
 import './headingText.css'
 
 const HeadingText = ({ content, type }: IHeadingTextProps) => (

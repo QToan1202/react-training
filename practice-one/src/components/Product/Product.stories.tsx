@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import image from '../../assets/images/product.png'
+import image from '@assets/images/product.png'
 import { Product } from '../index'
 
 export default {

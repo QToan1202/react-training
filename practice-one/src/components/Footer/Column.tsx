@@ -1,7 +1,7 @@
 import './column.css'
 import { Link, Image } from '../index'
-import { clearUnderscore } from '../../helper/string'
-import { IColumnProps } from '../../types/interfaces'
+import { clearUnderscore } from '@helper/string'
+import { IColumnProps } from '@types'
 
 const Column = ({ contents, socialIcon = '' }: IColumnProps) => {
   const colName = Object.keys(contents) as (keyof typeof contents)[]

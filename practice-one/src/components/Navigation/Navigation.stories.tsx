@@ -1,7 +1,7 @@
-import logo from '../../assets/images/logo.svg'
-import user from '../../assets/icons/user.svg'
-import search from '../../assets/icons/search.svg'
-import cart from '../../assets/icons/cart.svg'
+import logo from '@assets/images/logo.svg'
+import user from '@assets/icons/user.svg'
+import search from '@assets/icons/search.svg'
+import cart from '@assets/icons/cart.svg'
 import { Navigation } from '../index'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 

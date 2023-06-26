@@ -1,7 +1,7 @@
-import logo from '../../assets/images/logo.svg'
-import socials_icon from '../../assets/icons/socials.svg'
-import columns from '../../data/columns'
-import { Footer } from '../index'
+import logo from '@assets/images/logo.svg'
+import socials_icon from '@assets/icons/socials.svg'
+import columns from '@data/columns'
+import Footer from './Footer'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 export default {

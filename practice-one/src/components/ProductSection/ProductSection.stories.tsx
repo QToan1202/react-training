@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import headPhone from '../../assets/images/black_headphone.png'
+import headPhone from '@assets/images/black_headphone.png'
 import { ProductSection } from '../index'
 
 export default {

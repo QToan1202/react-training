@@ -1,5 +1,5 @@
 import './text.css'
-import { ITextProps } from '../../types/interfaces'
+import { ITextProps } from '@types'
 
 const Text = ({ children, weight, color, price, priceSection }: ITextProps) => {
   const styleClass = ['text']

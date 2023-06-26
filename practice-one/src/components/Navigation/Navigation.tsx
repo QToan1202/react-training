@@ -1,6 +1,6 @@
 import './navigation.css'
 import { Link, Image } from '../index'
-import { INavigationProps } from '../../types/interfaces'
+import { INavigationProps } from '@types'
 
 const Navigation = ({ logo, links, icons }: INavigationProps) => (
   <div className="nav">
