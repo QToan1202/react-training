@@ -1,4 +1,4 @@
-import { HTMLProps, forwardRef, memo, useId } from 'react'
+import { forwardRef, memo, useId } from 'react'
 import { CInput, CLabel, Wrapper } from './Input.styles'
 import { IInputProps } from '@types'
 
