@@ -4,7 +4,7 @@ import { IconContext } from 'react-icons/lib'
 import styles from './SearchBar.module.css'
 import { ISearchBarProps } from '@types'
 
-const SearchBar = ({ value, placeholder, name, onChange }: ISearchBarProps) => (
+const SearchBar = ({ value, placeholder = "Enter a Product name...", name, onChange }: ISearchBarProps) => (
   <div className={styles.search}>
     <input
       className={styles.search__input}
@@ -19,9 +19,5 @@ const SearchBar = ({ value, placeholder, name, onChange }: ISearchBarProps) => (
     </IconContext.Provider>
   </div>
 )
-
-SearchBar.defaultProps = {
-  placeholder: 'Enter a Product name...',
-}
 
 export default memo(SearchBar)

@@ -4,7 +4,7 @@ import placeHolder from '@assets/images/placeholder.jpg'
 import styles from './Product.module.css'
 import { IProductProps } from '@types'
 
-const Product = ({ id, cover, title, description, onDeleteProduct, onEditProduct }: IProductProps) => {
+const Product = ({ id, cover = placeHolder, title, description, onDeleteProduct, onEditProduct }: IProductProps) => {
   const handleDeleteAction = useCallback(() => onDeleteProduct(id), [id, onDeleteProduct])
   const handleEditAction = useCallback(() => onEditProduct(id), [id, onEditProduct])
 
@@ -24,11 +24,6 @@ const Product = ({ id, cover, title, description, onDeleteProduct, onEditProduct
       </div>
     </div>
   )
-}
-
-Product.defaultProps = {
-  cover: placeHolder,
-  description: '',
 }
 
 export default memo(Product)

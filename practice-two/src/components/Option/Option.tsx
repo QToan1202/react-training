@@ -7,9 +7,4 @@ const Option = ({ value, label, disabled, hidden }: IOptionProps) => (
   </option>
 )
 
-Option.defaultProps = {
-  disabled: false,
-  hidden: false,
-}
-
 export default memo(Option)

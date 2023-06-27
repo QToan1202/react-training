@@ -20,8 +20,4 @@ const Popup = ({ title, isShow, onCancel, onConfirm }: IPopupProps) => {
   )
 }
 
-Popup.defaultProps = {
-  isShow: false,
-}
-
 export default memo(Popup)
