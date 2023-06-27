@@ -6,14 +6,27 @@ import { Button, Form, FormItem, Input } from '@components'
 import { productService } from '@services'
 import { toastConfig } from '@utils'
 import { MESSAGES } from '@constants'
-import styles from './ProductForm.module.css'
 import { IProductFormProps, TProduct } from '@types'
+import styles from './ProductForm.module.css'
 
 const API_PRODUCTS = import.meta.env.VITE_API_PRODUCTS
 
-const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitSuccess }: IProductFormProps) => {
-  const { trigger: triggerAddAPI } = useSWRMutation(API_PRODUCTS, productService.add)
-  const { trigger: triggerEditAPI } = useSWRMutation(API_PRODUCTS, productService.edit)
+const ProductForm = ({
+  defaultValues,
+  action,
+  onCancel,
+  title,
+  isShow = false,
+  onSubmitSuccess,
+}: IProductFormProps) => {
+  const { trigger: triggerAddAPI } = useSWRMutation<TProduct, Error, string, Omit<TProduct, 'id'>>(
+    API_PRODUCTS,
+    productService.add
+  )
+  const { trigger: triggerEditAPI } = useSWRMutation<TProduct, Error, string, Partial<TProduct>>(
+    API_PRODUCTS,
+    productService.edit
+  )
   const {
     register,
     reset,
@@ -27,7 +40,7 @@ const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitS
 
       switch (action) {
         case 'add':
-          await triggerAddAPI(sendData)
+          await triggerAddAPI(sendData as Required<Omit<TProduct, 'id'>>)
           break
 
         case 'edit':
@@ -67,10 +80,9 @@ const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitS
               <FormItem>
                 <Input
                   label="name"
-                  register={register}
-                  config={{
+                  {...register('name', {
                     required: MESSAGES.REQUIRED,
-                  }}
+                  })}
                 />
                 {errors.name ? (
                   <p role="alert" className={styles.error_message}>
@@ -83,13 +95,12 @@ const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitS
               <FormItem>
                 <Input
                   label="description"
-                  register={register}
-                  config={{
+                  {...register('description', {
                     maxLength: {
                       value: 200,
                       message: MESSAGES.MAX_LENGTH,
                     },
-                  }}
+                  })}
                 />
                 {errors.description ? (
                   <p role="alert" className={styles.error_message}>
@@ -102,35 +113,41 @@ const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitS
               <FormItem>
                 <Input
                   label="image"
-                  register={register}
-                  config={{
+                  {...register('image', {
                     required: MESSAGES.REQUIRED,
-                  }}
+                  })}
                 />
                 {errors.image ? (
                   <p role="alert" className={styles.error_message}>
                     {errors.image.message}
                   </p>
-                ) : <Fragment />}
+                ) : (
+                  <Fragment />
+                )}
               </FormItem>
               <FormItem>
                 <Input
                   label="category"
-                  register={register}
-                  config={{
+                  {...register('category', {
                     required: MESSAGES.REQUIRED,
-                  }}
+                  })}
                 />
                 {errors.category ? (
                   <p role="alert" className={styles.error_message}>
                     {errors.category.message}
                   </p>
-                ) : <Fragment />}
+                ) : (
+                  <Fragment />
+                )}
               </FormItem>
               <FormItem>
                 <Button type="reset" title="Cancel" onClick={onCancel} size="lg" />
-                {action === 'add' ? <Button type="submit" title="Add" size="lg" /> : <Fragment/>}
-                {action === 'edit' ? <Button type="submit" title="Confirm" variant="secondary" size="lg" /> : <Fragment />}
+                {action === 'add' ? <Button type="submit" title="Add" size="lg" /> : <Fragment />}
+                {action === 'edit' ? (
+                  <Button type="submit" title="Confirm" variant="secondary" size="lg" />
+                ) : (
+                  <Fragment />
+                )}
               </FormItem>
             </Form>
           </div>
@@ -138,10 +155,6 @@ const ProductForm = ({ defaultValues, action, onCancel, title, isShow, onSubmitS
       </div>
     </div>
   )
-}
-
-ProductForm.defaultProps = {
-  isShow: false,
 }
 
 export default memo(ProductForm)
