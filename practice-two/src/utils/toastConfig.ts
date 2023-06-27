@@ -1,6 +1,7 @@
 import { ToastPosition } from 'react-toastify';
+import { ToastProps } from 'react-toastify/dist/types';
 
-const toastConfig = (toastId: string, position: ToastPosition) => {
+const toastConfig = (toastId: string, position: ToastPosition): Partial<ToastProps> => {
   return {
     toastId, // Prevent duplicate toast
     position,

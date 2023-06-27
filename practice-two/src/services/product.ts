@@ -1,4 +1,4 @@
-import { AxiosError, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import request from '@utils/request'
 import { TProduct } from '@types'
 
