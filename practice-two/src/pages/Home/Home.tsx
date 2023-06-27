@@ -81,7 +81,7 @@ const Home = () => {
   const handleCancel = useCallback(() => setShowDeleteDialog(false), [])
 
   const handleConfirm = useCallback(async () => {
-    if (selectedProductId === undefined) return
+    if (!selectedProductId) return
     if (!products) return
 
     const remainProducts = (products).filter((item) => item.id !== selectedProductId)
