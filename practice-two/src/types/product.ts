@@ -8,11 +8,10 @@ export type TProduct = {
   image: string
 }
 
-export interface IProductProps {
+export interface IProductProps extends Partial<TProduct> {
   id: number
   title: string
   cover?: string
-  description?: string
   onDeleteProduct(id: number): void
   onEditProduct(id: number): void
 }

@@ -1,4 +1,4 @@
-import { TButtonSize, TButtonVariant, TProduct } from '@types'
+import { TButtonSize, TButtonVariant } from '@types'
 import React from 'react'
 
 export interface IButtonProps
@@ -29,7 +29,7 @@ export interface IImageProps extends React.DetailedHTMLProps<React.ImgHTMLAttrib
 
 export interface IInputProps
   extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  label: string
+  label?: string
 }
 
 export interface IOptionProps
@@ -62,7 +62,7 @@ export interface ISelectProps
 
 export interface ITagProps {
   title: string
-  onClick(event: React.MouseEvent): void
+  onClick?(event: React.MouseEvent): void
 }
 
 export interface IHeaderProps {
