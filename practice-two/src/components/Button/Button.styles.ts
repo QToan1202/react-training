@@ -1,7 +1,7 @@
 import { IButtonProps, TButtonSize, TButtonVariant } from '@types';
 import styled from 'styled-components'
 
-const getBtnSpacing = (size: TButtonSize | undefined) => {
+const getBtnSpacing = (size: TButtonSize | undefined): string => {
   switch (size) {
     case 'sm':
       return '8px 34px'
@@ -17,7 +17,7 @@ const getBtnSpacing = (size: TButtonSize | undefined) => {
   }
 }
 
-const getBtnFontSize = (size: TButtonSize | undefined) => {
+const getBtnFontSize = (size: TButtonSize | undefined): string => {
   switch (size) {
     case 'md':
       return '18px'
@@ -30,7 +30,7 @@ const getBtnFontSize = (size: TButtonSize | undefined) => {
   }
 }
 
-const getBtnTheme = (theme: TButtonVariant | undefined) => {
+const getBtnTheme = (theme: TButtonVariant | undefined): string => {
   switch (theme) {
     case 'secondary':
       return 'var(--blue)'
