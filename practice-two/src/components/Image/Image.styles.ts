@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const ProductImage = styled.img`
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
+  object-fit: contain;
 
   @media only screen and (min-width: 480px) {
     width: 182px;
