@@ -3,10 +3,9 @@ import { COLORS } from '@practice-three/modules/shared/utils'
 
 export interface CustomButtonProps extends ButtonProps {
   title: string
-  variant?: string
 }
 
-export function CustomButton({ title }: CustomButtonProps) {
+export function CustomButton({ title, ...rest }: CustomButtonProps) {
   return (
     <Button
       p="10px 30px"
@@ -23,6 +22,7 @@ export function CustomButton({ title }: CustomButtonProps) {
         color: COLORS.BLACK,
         textDecoration: 'underline',
       }}
+      {...rest}
     >
       {title}
     </Button>
