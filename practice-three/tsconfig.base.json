@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@practice-three/modules/shared/ui": ["modules/shared/ui/src/index.ts"]
+      "@practice-three/modules/shared/ui": ["modules/shared/ui/src/index.ts"],
+      "@practice-three/modules/shared/utils": ["modules/shared/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
