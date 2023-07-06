@@ -1,7 +1,7 @@
-import { Button } from '@chakra-ui/react'
+import { Button, ButtonProps } from '@chakra-ui/react'
 import { COLORS } from '@practice-three/modules/shared/utils'
 
-export interface CustomButtonProps {
+export interface CustomButtonProps extends ButtonProps {
   title: string
   variant?: string
 }
@@ -9,8 +9,8 @@ export interface CustomButtonProps {
 export function CustomButton({ title }: CustomButtonProps) {
   return (
     <Button
+      p="10px 30px"
       bgColor={COLORS.BLACK}
-      colorScheme={COLORS.WHITE}
       borderWidth="3px"
       borderRadius="3xl"
       borderColor={COLORS.BLACK}
@@ -18,7 +18,6 @@ export function CustomButton({ title }: CustomButtonProps) {
       fontWeight="bold"
       fontSize="20px"
       textTransform="capitalize"
-      p="10px 30px"
       _hover={{
         bgColor: 'transparent',
         color: COLORS.BLACK,
