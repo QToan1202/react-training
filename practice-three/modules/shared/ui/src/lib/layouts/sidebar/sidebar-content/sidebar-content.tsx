@@ -17,8 +17,8 @@ export function SidebarContent({ onClose, items, ...rest }: SidebarProps) {
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {items.map((link) => (
-        <SidebarItem key={link.name} icon={link.icon} title={link.name} to="#" />
+      {items.map((item: SidebarItemProps) => (
+        <SidebarItem key={item.name} icon={item.icon} title={item.name} to={item.to} />
       ))}
     </Box>
   )
