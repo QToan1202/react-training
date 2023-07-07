@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react'
 
-import LoginForm from './login-form'
+import RegisterForm from './register-form'
 
 describe('LoginForm', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<LoginForm />)
+    const { baseElement } = render(<RegisterForm />)
     expect(baseElement).toBeTruthy()
   })
 })

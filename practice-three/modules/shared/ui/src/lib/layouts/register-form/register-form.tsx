@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form'
 import { FormValues } from '@practice-three/modules/shared/types'
 import { COLORS } from '@practice-three/modules/shared/utils'
 
-export interface LoginFormProps {
+export interface RegisterFormProps {
   onSubmit: () => void
 }
 
-export function LoginForm({ onSubmit }: LoginFormProps) {
+export function RegisterForm({ onSubmit }: RegisterFormProps) {
   const {
     register,
     handleSubmit,
@@ -121,4 +121,4 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
   )
 }
 
-export default LoginForm
+export default RegisterForm
