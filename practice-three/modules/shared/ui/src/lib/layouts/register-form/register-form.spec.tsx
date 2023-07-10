@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'
 
 import RegisterForm from './register-form'
 
-describe('LoginForm', () => {
+describe('RegisterForm', () => {
   const mockOnSubmit = vi.fn()
 
   beforeEach(() => {
