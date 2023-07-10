@@ -1,10 +1,4 @@
-export interface FormValues {
-  firstName: string
-  lastName: string
-  email: string
-  password: string
-  phone: string
-}
+type TUserRole = 'admin' | 'member'
 
 export interface IBook {
   id: number
@@ -15,3 +9,15 @@ export interface IBook {
   quantity: number
   cover: string
 }
+
+export interface IUser {
+  id: number
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  phone: string
+  role: TUserRole
+}
+
+export type FormValues = Omit<IUser, 'id' | 'role'>
