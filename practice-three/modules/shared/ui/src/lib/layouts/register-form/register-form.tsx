@@ -5,7 +5,7 @@ import { FormValues } from '@practice-three/modules/shared/types'
 import { COLORS } from '@practice-three/modules/shared/utils'
 
 export interface RegisterFormProps {
-  onSubmit: () => void
+  onSubmit: (values: FormValues) => void
 }
 
 export function RegisterForm({ onSubmit }: RegisterFormProps) {
@@ -16,7 +16,7 @@ export function RegisterForm({ onSubmit }: RegisterFormProps) {
   } = useForm<FormValues>()
 
   return (
-    <Box bgColor={COLORS.WHITE} border={`2px solid ${COLORS.GRAY}`} p={10}>
+    <Box bgColor={COLORS.WHITE} border={`2px solid ${COLORS.GRAY}`} p={10} maxW={960}>
       <Box mb={4}>
         <Text fontWeight="bold" fontSize="3xl" textTransform="capitalize">
           Account info:
@@ -79,6 +79,7 @@ export function RegisterForm({ onSubmit }: RegisterFormProps) {
             <FormLabel htmlFor="password">Password</FormLabel>
             <Input
               id="password"
+              autoComplete='off'
               placeholder="Password"
               type="password"
               {...register('password', {
