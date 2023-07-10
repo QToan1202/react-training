@@ -1,0 +1,34 @@
+{
+  "name": "modules-shared-utils",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "modules/shared/utils/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/modules/shared/utils",
+        "main": "modules/shared/utils/src/index.ts",
+        "tsConfig": "modules/shared/utils/tsconfig.lib.json",
+        "assets": ["modules/shared/utils/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["modules/shared/utils/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["coverage/modules/shared/utils"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../coverage/modules/shared/utils"
+      }
+    }
+  },
+  "tags": []
+}
