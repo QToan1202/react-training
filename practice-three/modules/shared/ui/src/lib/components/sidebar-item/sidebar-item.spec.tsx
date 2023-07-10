@@ -9,7 +9,7 @@ describe('SidebarItem', () => {
   beforeEach(() => {
     render(
       <BrowserRouter>
-        <SidebarItem icon={<FaBeer />} title="item" to="move" />
+        <SidebarItem icon={FaBeer} title="item" to="move" />
       </BrowserRouter>
     )
   })
