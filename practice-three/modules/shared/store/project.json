@@ -1,0 +1,34 @@
+{
+  "name": "modules-shared-store",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "modules/shared/store/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/modules/shared/store",
+        "main": "modules/shared/store/src/index.ts",
+        "tsConfig": "modules/shared/store/tsconfig.lib.json",
+        "assets": ["modules/shared/store/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["modules/shared/store/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["coverage/modules/shared/store"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../../coverage/modules/shared/store"
+      }
+    }
+  },
+  "tags": []
+}
