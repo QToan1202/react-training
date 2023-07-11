@@ -1,6 +1,7 @@
-import React, { useCallback, useState } from 'react'
-import { Box, Flex } from '@chakra-ui/react'
+import { useCallback, useState } from 'react'
+import { Box, Flex, Icon } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
+import { IconType } from 'react-icons/lib'
 import { Link } from 'react-router-dom'
 
 import { COLORS } from '@practice-three/modules/shared/utils'
@@ -8,7 +9,7 @@ import { COLORS } from '@practice-three/modules/shared/utils'
 export interface SidebarItemProps {
   to: string
   title: string
-  icon: React.ReactNode
+  icon: IconType
 }
 
 export function SidebarItem({ title, to, icon }: SidebarItemProps) {
@@ -19,22 +20,26 @@ export function SidebarItem({ title, to, icon }: SidebarItemProps) {
 
   return (
     <Box
-      bg={COLORS.WHITE}
+      bg="transparent"
       color={COLORS.BLACK}
       as={motion.div}
       onHoverStart={handleHoverItem}
       onHoverEnd={handleHoverItem}
+      _hover={{
+        bg: COLORS.WHITE,
+      }}
     >
       <Flex
         columnGap="5px"
+        py={4}
         as={motion.div}
         alignItems="center"
         whileHover={{
           x: 30,
         }}
       >
-        <Box as={motion.div} animate={{ x: isHovered ? 0 : -100 }}>
-          {icon}
+        <Box as={motion.div} display="flex" animate={{ x: isHovered ? 0 : -100 }}>
+          <Icon as={icon} boxSize={6} color={COLORS.PRIMARY} />
         </Box>
         <Link to={to}>{title}</Link>
       </Flex>
