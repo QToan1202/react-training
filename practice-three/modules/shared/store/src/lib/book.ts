@@ -1,9 +1,11 @@
 import { create } from 'zustand'
 
 import { IBook } from '@practice-three/modules/shared/types'
+import { get } from '@practice-three/modules/shared/services'
 
 interface BookState {
-  books?: IBook[]
+  books: IBook[]
+  get: (path: string) => void
   add: (book: IBook) => void
   update: (book: IBook) => void
   remove: (id: number) => void
@@ -11,16 +13,19 @@ interface BookState {
 }
 
 export const useBookStore = create<BookState>()((set) => ({
-  books: undefined,
+  books: [],
 
-  add: (book) => set((state) => {
-      if (!state.books) return state
+  get: async (path: string) => {
+    const bookList: IBook[] = await get(path)
+
+    return set((state) => ({ books: [...state.books, ...bookList] }))
+  },
+
+  add: (book: IBook) => set((state) => {
       return { books: [...state.books, book] }
     }),
 
-  update: (book) => set((state) => {
-      if (!state.books) return state
-
+  update: (book: IBook) => set((state) => {
       const data = state.books.map((item) => {
         if (item.id === book.id) return { ...item, ...book }
 
@@ -31,12 +36,10 @@ export const useBookStore = create<BookState>()((set) => ({
     }),
 
   remove: (id: number) => set((state) => {
-      if (!state.books) return state
-
       const afterDelete = state.books.filter((item) => item.id !== id)
 
       return { books: afterDelete }
     }),
 
-  reset: () => set({ books: undefined })
+  reset: () => set({ books: undefined }),
 }))
