@@ -1,8 +1,21 @@
-import { Box, Button, Checkbox, FormControl, FormErrorMessage, FormLabel, Input, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Center,
+  Checkbox,
+  Divider,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  Text,
+  Link,
+} from '@chakra-ui/react'
+import { Link as RouterLink } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
 import { FormValues } from '@practice-three/modules/shared/types'
-import { COLORS } from '@practice-three/modules/shared/utils'
+import { COLORS, SHADOW } from '@practice-three/modules/shared/utils'
 
 export interface LoginFormProps {
   onSubmit: (values: FormValues) => void
@@ -16,7 +29,15 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
   } = useForm<FormValues>()
 
   return (
-    <Box bgColor={COLORS.WHITE} border={`2px solid ${COLORS.GRAY}`} p={10} maxW={460}>
+    <Box
+      bgColor={COLORS.WHITE}
+      border={`2px solid ${COLORS.GRAY}`}
+      borderRadius={10}
+      shadow={SHADOW.FORM}
+      p={10}
+      maxW={460}
+      margin="0 auto"
+    >
       <Box mb={4}>
         <Text fontWeight="bold" fontSize="3xl" textTransform="capitalize">
           manager login
@@ -73,12 +94,21 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
           color={COLORS.WHITE}
           fontWeight="bold"
           _hover={{
-            filter: 'brightness(70%)'
+            filter: 'brightness(70%)',
           }}
         >
           sign in
         </Button>
       </form>
+      <Center my={6}>
+        <Divider orientation="horizontal" />
+      </Center>
+      <Text textAlign="center">
+        Don't have an account?
+        <Link color={COLORS.PRIMARY} as={RouterLink} to={'/register-page'}>
+          Sign Up!
+        </Link>
+      </Text>
     </Box>
   )
 }
