@@ -6,11 +6,13 @@ const getUsers = async (path: string, email: string): Promise<IUser[]> => {
   return get<IUser>(path, { params: { email } })
 }
 
-export const isLoginSuccess = async (path: string, email: string, password: string): Promise<boolean> => {
+export const login = async (path: string, email: string, password: string): Promise<IUser> => {
   const userList: IUser[] = await getUsers(path, email)
 
-  if (!userList.length) return false
-  return userList.some((user) => user.password === password)
+  if (!userList.length) throw Error('Wrong email')
+  if (userList.some((user) => user.password !== password)) throw Error('Wrong password')
+
+  return userList[0]
 }
 
 export const register = async (path: string, userInfo: Omit<IUser, 'id' | 'role'>): Promise<IUser> => {
@@ -19,5 +21,5 @@ export const register = async (path: string, userInfo: Omit<IUser, 'id' | 'role'
   const isEmailExisted = userList.some(user => user.email === email)
 
   if (isEmailExisted) throw Error(ERROR_MESSAGES.EMAIL_EXISTED) 
-  return add<IUser>(path, { ...userInfo, ...{ role: 'member' } })
+  return add<IUser>(path, { ...userInfo, role: 'member'})
 }
