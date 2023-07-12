@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from 'axios'
 import { create } from 'zustand'
 
 import { IBook } from '@practice-three/modules/shared/types'
@@ -5,7 +6,7 @@ import { get } from '@practice-three/modules/shared/services'
 
 interface BookState {
   books: IBook[]
-  get: (path: string) => void
+  get: (path: string, options?: AxiosRequestConfig) => void
   add: (book: IBook) => void
   update: (book: IBook) => void
   remove: (id: number) => void
@@ -15,8 +16,8 @@ interface BookState {
 export const useBookStore = create<BookState>()((set) => ({
   books: [],
 
-  get: async (path: string) => {
-    const bookList: IBook[] = await get(path)
+  get: async (path: string, options: AxiosRequestConfig = {}) => {
+    const bookList: IBook[] = await get(path, options)
 
     return set((state) => ({ books: [...state.books, ...bookList] }))
   },
@@ -41,5 +42,5 @@ export const useBookStore = create<BookState>()((set) => ({
       return { books: afterDelete }
     }),
 
-  reset: () => set({ books: undefined }),
+  reset: () => set({ books: [] }),
 }))
