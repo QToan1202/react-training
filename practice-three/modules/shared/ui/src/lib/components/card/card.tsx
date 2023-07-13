@@ -12,8 +12,8 @@ export interface CardProps {
 
 export function Card({ imageUrl, name, author, alt, fallbackImage = '/assets/images/placeholder.png' }: CardProps) {
   return (
-    <Box margin={5} maxW={200}>
-      <AspectRatio maxW="inherit" ratio={2 / 3}>
+    <Box margin={5} flexDir="column" alignItems="center">
+      <AspectRatio ratio={2 / 3}>
         <Image
           objectFit="cover"
           src={imageUrl}
@@ -36,7 +36,9 @@ export function Card({ imageUrl, name, author, alt, fallbackImage = '/assets/ima
         <Text fontWeight="bold" noOfLines={2}>
           {name}
         </Text>
-        <Text color="GrayText" noOfLines={2}>{author}</Text>
+        <Text color="GrayText" noOfLines={2}>
+          {author}
+        </Text>
       </Box>
     </Box>
   )

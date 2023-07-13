@@ -10,7 +10,7 @@ interface SidebarProps extends BoxProps {
 
 export function SidebarContent({ onClose, items, ...rest }: SidebarProps) {
   return (
-    <Box pos="fixed" bg={COLORS.GRAY} minW={{ base: 'full', md: 60 }} minH="full" {...rest}>
+    <Box pos="fixed" zIndex={3} bg={COLORS.GRAY} minW={{ base: 'full', md: 60 }} minH="full" {...rest}>
       <Flex h="20" alignItems="center" mx="7" justifyContent="space-between">
         <Text fontSize="2xl" fontWeight="bold">
           Logo

@@ -25,7 +25,7 @@ export function Header({ onOpen }: HeaderProps) {
       justifyContent={{ base: 'space-between', md: 'flex-end' }}
       alignItems="center"
       borderBottomWidth="1px"
-      borderBottomColor={COLORS.GRAY}
+      borderBottomColor={COLORS.GRAY_100}
       p="16px"
     >
       <IconButton

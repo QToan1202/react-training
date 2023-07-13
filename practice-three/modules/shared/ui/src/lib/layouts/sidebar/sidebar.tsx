@@ -1,11 +1,14 @@
-import { Drawer, DrawerContent, useDisclosure } from '@chakra-ui/react'
+import { Drawer, DrawerContent } from '@chakra-ui/react'
 
-import Header from '../header/header'
 import { SidebarContent } from './sidebar-content/sidebar-content'
 import { ITEMS } from '@practice-three/modules/shared/utils'
 
-export function Sidebar() {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+export interface SideBarProps {
+  isOpen: boolean
+  onClose: () => void
+}
+
+export function Sidebar({ isOpen, onClose }: SideBarProps) {
 
   return (
     <>
@@ -23,7 +26,6 @@ export function Sidebar() {
           <SidebarContent items={ITEMS} onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      <Header onOpen={onOpen} />
     </>
   )
 }
