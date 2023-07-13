@@ -1,5 +1,5 @@
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
-import request from 'modules/shared/utils/src/lib/request'
+import { request } from '@practice-three/modules/shared/utils'
 
 export const get = async <T>(path: string, options: AxiosRequestConfig = {}): Promise<T[]> => {
   const res = await request.get(path, options).catch((error) => {
