@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@practice-three/modules/admin": ["modules/admin/src/index.ts"],
       "@practice-three/modules/shared/services": ["modules/shared/services/src/index.ts"],
       "@practice-three/modules/shared/store": ["modules/shared/store/src/index.ts"],
       "@practice-three/modules/shared/types": ["modules/shared/types/src/index.ts"],
