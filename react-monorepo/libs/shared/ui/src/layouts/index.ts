@@ -1,3 +1,4 @@
+export * from './drawer/drawer'
 export * from './sidebar/sidebar'
 export * from './register-form/register-form'
 export * from './navbar/navbar'
