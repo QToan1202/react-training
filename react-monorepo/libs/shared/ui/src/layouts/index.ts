@@ -1,3 +1,4 @@
+export * from './navbar/navbar'
 export * from './management-table/management-table'
 export * from './login-form/login-form'
 export * from './header/header'
