@@ -2,7 +2,18 @@
   "name": "@react-monorepo/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "admin:serve": "nx run admin:serve",
+    "member:serve": "nx run member:serve",
+    "admin:test": "nx run admin:test",
+    "member:test": "nx run member:test",
+    "admin:lint": "nx run admin:lint",
+    "member:lint": "nx run member:lint",
+    "admin:build": "nx run admin:build",
+    "member:build": "nx run member:build",
+    "graph": "nx graph",
+    "server": "json-server --watch server/db.json"
+  },
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^2.7.1",
