@@ -1,0 +1,51 @@
+import { memo } from 'react'
+import { Link } from 'react-router-dom'
+import { AspectRatio, Box, Image, Text } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
+
+import { COLORS, SHADOW } from '@react-monorepo/shared/utils'
+
+export interface CardProps {
+  href: string
+  imageUrl: string
+  name: string
+  author: string
+  alt: string
+  fallbackImage?: string
+}
+
+export const Card = memo(
+  ({ href, imageUrl, name, author, alt, fallbackImage = '../../../assets/images/placeholder.png' }: CardProps) => {
+    return (
+      <Box as={Link} to={href} margin={5} flexDir="column" alignItems="center">
+        <AspectRatio ratio={2 / 3}>
+          <Image
+            objectFit="cover"
+            src={imageUrl}
+            fallbackSrc={fallbackImage}
+            alt={alt}
+            borderRadius="lg"
+            as={motion.img}
+            whileHover={{
+              y: -10,
+              filter: 'brightness(70%)',
+              backgroundColor: COLORS.BLACK,
+              boxShadow: SHADOW.BOOK_CARD,
+            }}
+            whileTap={{
+              scale: 1.1,
+            }}
+          />
+        </AspectRatio>
+        <Box p={3} textAlign="center" textTransform="capitalize">
+          <Text fontWeight="bold" noOfLines={2}>
+            {name}
+          </Text>
+          <Text color="GrayText" noOfLines={2}>
+            {author}
+          </Text>
+        </Box>
+      </Box>
+    )
+  }
+)
