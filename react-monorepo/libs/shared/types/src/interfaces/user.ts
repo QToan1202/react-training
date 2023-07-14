@@ -1,4 +1,4 @@
-import { TUserRole } from "./common"
+import { TUserRole } from './common'
 
 export interface IUser {
   id: number
@@ -9,3 +9,5 @@ export interface IUser {
   phone: string
   role: TUserRole
 }
+
+export type TUserForm = Omit<IUser, 'id' | 'role'>
