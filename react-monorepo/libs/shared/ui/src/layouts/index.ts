@@ -1,3 +1,4 @@
+export * from './sidebar/sidebar'
 export * from './register-form/register-form'
 export * from './navbar/navbar'
 export * from './management-table/management-table'
