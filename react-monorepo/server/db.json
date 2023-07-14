@@ -1,0 +1,62 @@
+{
+  "users": [
+    {
+      "name": "Admin 1",
+      "email": "admin@gmail.com",
+      "password": "12345678",
+      "phone": "0123456789",
+      "role": "admin",
+      "id": 1
+    },
+    {
+      "name": "User 1",
+      "email": "member1@gmail.com",
+      "password": "12345678",
+      "phone": "0123456789",
+      "role": "member",
+      "id": 2
+    },
+    {
+      "name": "Member 2",
+      "email": "member2@gmail.com",
+      "password": "12345678",
+      "phone": "0123456789",
+      "role": "member",
+      "id": 3
+    }
+  ],
+  "books": [
+    {
+      "name": "Blue Book: A Devotional Guide for Every Season of Your Life",
+      "author": "Jim Branch",
+      "publish_date": "01/01/1998",
+      "description": "A year-long devotional guide designed to offer space and structure, Scripture and prayers, as well as readings and reflections for your daily time with God. The hope is that through using this book you might discover the ancient rhythms that were whispered into you when God breathed you into being.",
+      "quantity": 10,
+      "id": 1
+    },
+    {
+      "name": "How to Make an Apple Pie and See the World (Dragonfly Books)",
+      "author": "Marjorie Priceman",
+      "publish_date": "01/01/1998",
+      "description": "Illus. in full color. An apple pie is easy to make...if the market is open. But if the market is closed, the world becomes your grocery store. This deliciously silly recipe for apple pie takes readers around the globe to gather ingredients. First hop a steamboat to Italy for the finest semolina wheat. Then hitch a ride to England and hijack a cow for the freshest possible milk. And, oh yes! Don't forget to go apple picking in Vermont! A simple recipe for apple pie is included.",
+      "quantity": 10,
+      "id": 2
+    },
+    {
+      "name": "Baja Adventure Book",
+      "author": "Walt Peterson",
+      "publish_date": "01/01/1998",
+      "description": "A where-to, how-to guide to one of the most interesting places on earth, describing the full spectrum of adventure available in Baja California, Mexico. Scuba diving, hiking, backpacking, fishing, boating, bicycling, and windsurfing are just some of the exciting activities covered.",
+      "quantity": 10,
+      "id": 3
+    },
+    {
+      "name": "Gentlemen of the Road: A Tale of Adventure",
+      "author": "Michael Chabon",
+      "publish_date": "01/01/1998",
+      "description": "Michael Chabon's Pulitzer Prize-winning bestseller, The Amazing Adventures of Kavalier & Clay, sprang from an early passion for the derring-do and larger-than-life heroes of classic comic books. Now, once more mining the rich past, Chabon summons the rollicking spirit of legendary adventures–from The Arabian Nights to Alexandre Dumas to Fritz Leiber’s Fafhrd and the Gray Mouser stories–in a wonderful new novel brimming with breathless action, raucous humor, cliff-hanging suspense, and a cast of colorful characters worthy of Scheherazade’s most tantalizing tales.They’re an odd pair, to be sure: pale, rail-thin, black-clad Zelikman, a moody, itinerant physician fond of jaunty headgear, and ex-soldier Amram, a gray-haired giant of a man as quick with a razor-tongued witticism as he is with a sharpened battle-ax. Brothers under the skin, comrades in arms, they make their rootless way through the Caucasus Mountains, circa A.D. 950, living as they please and surviving however they can–as blades and thieves for hire and as practiced bamboozlers, cheerfully separating the gullible from their money. No strangers to tight scrapes and close shaves, they’ve left many a fist shaking in their dust, tasted their share of enemy steel, and made good any number of hasty exits under hostile circumstances.None of which has necessarily prepared them to be dragooned into service as escorts and defenders to a prince of the Khazar Empire. Usurped by his brutal uncle, the callow and decidedly ill-tempered young royal burns to reclaim his rightful throne. But doing so will demand wicked cunning, outrageous daring, and foolhardy bravado . . . not to mention an army. Zelikman and Amram can at least supply the former. But are these gentlemen of the road prepared to become generals in a full-scale revolution? The only certainty is that getting there–along a path paved with warriors and whores, evil emperors and extraordinary elephants, secrets, swordplay, and such stuff as the grandest adventures are made of-will be much more than half the fun.From the Hardcover edition.",
+      "quantity": 10,
+      "id": 4
+    }
+  ]
+}
