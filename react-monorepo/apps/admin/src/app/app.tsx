@@ -1,14 +1,13 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
+import { ChakraProvider } from '@chakra-ui/react'
+import { LoginPage } from '@react-monorepo/shared/ui'
+import { Route, Routes } from 'react-router-dom'
 
-import NxWelcome from './nx-welcome';
-
-export function App() {
+export const App = () => {
   return (
-    <div>
-      <NxWelcome title="admin" />
-    </div>
-  );
+    <ChakraProvider toastOptions={{ defaultOptions: { position: 'bottom', duration: 3000, isClosable: true } }}>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+      </Routes>
+    </ChakraProvider>
+  )
 }
-
-export default App;
