@@ -4,6 +4,12 @@ export const COLORS = {
   GRAY: '#f6f6f6',
   GRAY_100: '#edf2f7',
   PRIMARY: '#4bc1d2',
+  GREEN_100: '#d2fde6',
+  GREEN: '#00974f',
+  RED_100: '#fff3f2',
+  RED: '#d91a1a',
+  BLUE_100: '#ddebff',
+  BLUE: '#004fcf',
 }
 
 export const SHADOW = {
