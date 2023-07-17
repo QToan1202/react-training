@@ -1,10 +1,11 @@
 import { useCallback } from 'react'
 import { Box, Button, useToast } from '@chakra-ui/react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useMutation } from '@tanstack/react-query'
 
 import { LoginForm, Navbar } from '../../layouts'
 import { useUserStore } from '@react-monorepo/shared/stores'
-import { TUserForm } from '@react-monorepo/shared/types'
+import { IUser, TUserForm } from '@react-monorepo/shared/types'
 import { login } from '@react-monorepo/shared/services'
 import { COLORS } from '@react-monorepo/shared/utils'
 
@@ -14,29 +15,40 @@ export const LoginPage = () => {
   const setLoginUser = useUserStore((state) => state.login)
   const toast = useToast()
   const navigate = useNavigate()
-  const handleSubmit = useCallback(
-    async (values: TUserForm) => {
-      try {
-        const user = await login('/users', values.email, values.password)
-        setLoginUser(user)
-        toast({
-          title: 'Login success',
-          description: 'Welcome back!',
-          status: 'success',
-        })
-        navigate('/dashboard')
-      } catch (error) {
-        if (error instanceof Error)
-          toast({
-            title: error.message,
-            description: 'Please check your entered information.',
-            status: 'error',
-          })
 
-        return null
-      }
+  const { mutate } = useMutation({
+    mutationFn: (variables: { path: string; email: string; password: string }): Promise<IUser> =>
+      login(variables.path, variables.email, variables.password),
+
+    onError: (error: unknown) => {
+      if (error instanceof Error)
+        toast({
+          title: error.message,
+          description: 'Please check your entered information.',
+          status: 'error',
+        })
     },
-    [setLoginUser, toast, navigate]
+
+    onSuccess: (data: IUser) => {
+      setLoginUser(data)
+      toast({
+        title: 'Login success',
+        description: 'Welcome back!',
+        status: 'success',
+      })
+      // navigate('/dashboard')
+    },
+  })
+
+  const handleSubmit = useCallback(
+    (values: TUserForm) => {
+      mutate({
+        path: '/users',
+        email: values.email,
+        password: values.password,
+      })
+    },
+    [mutate]
   )
 
   return (
