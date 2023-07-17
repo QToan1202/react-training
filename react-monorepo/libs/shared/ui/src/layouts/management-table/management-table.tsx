@@ -1,56 +1,24 @@
 import { memo, useState } from 'react'
-import { Button, HStack, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { Flex, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr, chakra } from '@chakra-ui/react'
 import {
   useReactTable,
   flexRender,
   getCoreRowModel,
   SortingState,
   getSortedRowModel,
-  createColumnHelper,
+  ColumnDef,
 } from '@tanstack/react-table'
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
 
 import { IUser } from '@react-monorepo/shared/types'
 
 export interface ManagementTableProps {
-  data: (IUser & Partial<Record<'action', string>>)[]
+  data: IUser[]
+  columns: ColumnDef<IUser, unknown>[]
   caption?: string
 }
 
-const columnHelper = createColumnHelper<IUser & Partial<Record<'action', string>>>()
-const columns = [
-  columnHelper.accessor('id', {
-    cell: (info) => info.getValue(),
-    header: 'Id',
-  }),
-  columnHelper.accessor('firstName', {
-    cell: (info) => info.getValue(),
-    header: 'First Name',
-  }),
-  columnHelper.accessor('lastName', {
-    cell: (info) => info.getValue(),
-    header: 'Last Name',
-  }),
-  columnHelper.accessor('email', {
-    cell: (info) => info.getValue(),
-    header: 'Email',
-  }),
-  columnHelper.accessor('phone', {
-    cell: (info) => info.getValue(),
-    header: 'Phone',
-  }),
-  columnHelper.accessor('action', {
-    cell: () => (
-      <HStack>
-        <Button colorScheme="whatsapp">Confirm</Button>
-        <Button colorScheme="blue">Edit</Button>
-        <Button colorScheme="red">Delete</Button>
-      </HStack>
-    ),
-    header: 'Action',
-  }),
-]
-
-export const ManagementTable = memo(({ data, caption }: ManagementTableProps) => {
+export const ManagementTable = memo(({ data, caption, columns }: ManagementTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([])
   const table = useReactTable({
     columns,
@@ -65,7 +33,7 @@ export const ManagementTable = memo(({ data, caption }: ManagementTableProps) =>
 
   return (
     <TableContainer>
-      <Table variant="striped" colorScheme="cyan">
+      <Table variant="striped">
         {caption && <TableCaption>{caption}</TableCaption>}
         <Thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -73,7 +41,17 @@ export const ManagementTable = memo(({ data, caption }: ManagementTableProps) =>
               {headerGroup.headers.map((header) => {
                 return (
                   <Th cursor="pointer" key={header.id} onClick={header.column.getToggleSortingHandler()}>
-                    {flexRender(header.column.columnDef.header, header.getContext())}
+                    <Flex align="center" pos="relative">
+                      {flexRender(header.column.columnDef.header, header.getContext())}
+                      <chakra.span pos="absolute" right={0}>
+                        {header.column.getIsSorted() &&
+                          (header.column.getIsSorted() === 'asc' ? (
+                            <FiChevronUp size={20} />
+                          ) : (
+                            <FiChevronDown size={20} />
+                          ))}
+                      </chakra.span>
+                    </Flex>
                   </Th>
                 )
               })}

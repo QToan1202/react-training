@@ -2,8 +2,16 @@ import { render } from '@testing-library/react'
 
 import { ManagementTable } from './management-table'
 import { IUser } from '@react-monorepo/shared/types'
+import { Column, createColumnHelper } from '@tanstack/react-table'
 
 describe('ManagementTable', () => {
+  const columnHelper = createColumnHelper<IUser>()
+  const columns = [
+    columnHelper.accessor('id', {
+      cell: (info) => info.getValue(),
+      header: 'Id',
+    }),
+  ] as Column<IUser>[]
   const data: IUser[] = [
     {
       id: 1,
@@ -17,7 +25,7 @@ describe('ManagementTable', () => {
   ]
 
   it('should render successfully', () => {
-    const { baseElement } = render(<ManagementTable data={data} />)
+    const { baseElement } = render(<ManagementTable data={data} columns={columns} />)
     expect(baseElement).toBeTruthy()
   })
 })
