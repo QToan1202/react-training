@@ -21,7 +21,7 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import { FiEdit2, FiTrash2 } from 'react-icons/fi'
 
@@ -70,7 +70,7 @@ export const BookDetail = () => {
   }, [toast, error, toastID])
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate()
-
+  const queryClient = useQueryClient()
   const { mutate } = useMutation({
     mutationFn: (variables: { path: string; id: number }): Promise<AxiosResponse['status']> =>
       remove(variables.path, variables.id),
@@ -84,6 +84,7 @@ export const BookDetail = () => {
     },
 
     onSuccess: (_, variables) => {
+      queryClient.invalidateQueries(['books'])
       removeBook(variables.id)
       toast({
         title: 'Delete book success',

@@ -1,7 +1,7 @@
 import { useCallback, useId } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Center, useToast } from '@chakra-ui/react'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { shallow } from 'zustand/shallow'
 
 import { add } from '@react-monorepo/shared/services'
@@ -14,6 +14,7 @@ export const AddBookPage = () => {
   const toastID = useId()
   const navigate = useNavigate()
   const { addBook } = useBookStore((state) => ({ addBook: state.add }), shallow)
+  const queryClient = useQueryClient()
   const { mutate } = useMutation({
     mutationFn: (variables: { path: string; option: Readonly<Omit<IBook, 'id'>> }) =>
       add(variables.path, variables.option),
@@ -28,6 +29,7 @@ export const AddBookPage = () => {
     },
 
     onSuccess: (data) => {
+      queryClient.invalidateQueries(['books'])
       addBook(data)
       toast({
         id: toastID,
