@@ -29,7 +29,7 @@ export const useUserStore = create<UserState>()(
       update: (user: IUser) => {
         set((state) => {
           const afterUpdate: IUser[] = state.users.map((item) => {
-            if (item.id === user.id) return { ...item, ...user }
+            if (item.id === user.id) return user
 
             return item
           })

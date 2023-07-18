@@ -24,7 +24,7 @@ export const useBookStore = create<BookState>()(
       update: (book: IBook) => {
         set((state) => {
           const afterUpdate: IBook[] = state.books.map((item) => {
-            if (item.id === book.id) return { ...item, ...book }
+            if (item.id === book.id) return book
 
             return item
           })
