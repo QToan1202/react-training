@@ -105,6 +105,8 @@ export const BookDetail = () => {
     })
   }, [bookId, mutate])
 
+  const handleEditBook = useCallback(() => navigate(`/admin/edit-book/${bookId}`), [navigate, bookId])
+
   return (
     <Grid
       templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: '2fr 7fr 3fr' }}
@@ -118,6 +120,7 @@ export const BookDetail = () => {
         </AspectRatio>
         <ButtonGroup mt={5}>
           <Button
+            onClick={handleEditBook}
             leftIcon={<FiEdit2 />}
             variant="outline"
             _hover={{
