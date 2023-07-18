@@ -12,12 +12,12 @@ import { get } from '@react-monorepo/shared/services'
 import { IBook } from '@react-monorepo/shared/types'
 
 export const AdminDashboard = () => {
-  const { books } = useBookStore((state) => ({ books: state.books, clearAllBooks: state.reset }), shallow)
+  const { books } = useBookStore((state) => ({ books: state.books }), shallow)
   const toast = useToast()
   const toastID = useId()
 
   const { data, isError, error } = useQuery({
-    queryKey: ['books'],
+    queryKey: ['books', books],
     queryFn: (): Promise<IBook[]> => get('/books'),
   })
 
