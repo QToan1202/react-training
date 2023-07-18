@@ -1,23 +1,21 @@
-import { FiHome, FiLogOut, FiPlus } from 'react-icons/fi'
 import { Box, useDisclosure } from '@chakra-ui/react'
 import { Outlet } from 'react-router-dom'
 
 import { Drawer, Header, Sidebar } from '../../layouts'
+import { ISideBarItem } from '@react-monorepo/shared/types'
 
-const data = [
-  { name: 'Home', icon: FiHome, href: '/next' },
-  { name: 'Add book', icon: FiPlus, href: '/add-book' },
-  { name: 'Log out', icon: FiLogOut, href: '/' },
-]
+export interface DashboardProps {
+  sidebar: ISideBarItem[]
+}
 
-export const Dashboard = () => {
+export const Dashboard = ({ sidebar }: DashboardProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <Box>
-      <Sidebar onClose={onClose} items={data} display={{ base: 'none', md: 'block' }} />
+      <Sidebar onClose={onClose} items={sidebar} display={{ base: 'none', md: 'block' }} />
       <Drawer isOpen={isOpen} onClose={onClose}>
-        <Sidebar onClose={onClose} items={data} />
+        <Sidebar onClose={onClose} items={sidebar} />
       </Drawer>
       <Header onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }}>
