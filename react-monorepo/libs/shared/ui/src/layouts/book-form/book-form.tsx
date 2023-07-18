@@ -50,7 +50,6 @@ export const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
                   value: REGEX.NOT_CONTAIN_NUMBER,
                   message: 'Book should not contain number',
                 },
-                maxLength: { value: 50, message: 'Maximum length should be 50' },
               })}
             />
             <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
@@ -105,10 +104,10 @@ export const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
               <FormLabel htmlFor="quantity">Quantity</FormLabel>
               <Input
                 id="quantity"
-                type="number"
                 min={1}
                 placeholder="Quantity"
                 {...register('quantity', {
+                  valueAsNumber: true,
                   required: 'Please enter book quantity',
                   max: {
                     value: 50,
