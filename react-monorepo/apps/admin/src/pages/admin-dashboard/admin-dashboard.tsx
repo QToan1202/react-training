@@ -17,8 +17,9 @@ export const AdminDashboard = () => {
   const toastID = useId()
 
   const { data, isError, error } = useQuery({
-    queryKey: ['books', books],
+    queryKey: ['books'],
     queryFn: (): Promise<IBook[]> => get('/books'),
+    refetchInterval: 1000 * 60 * 10,
   })
 
   const renderData: React.ReactNode = useMemo(() => {
@@ -48,7 +49,7 @@ export const AdminDashboard = () => {
 
   useEffect(() => {
     if (!data) return
-    data && useBookStore.setState({ books: data })
+    useBookStore.setState({ books: data })
   }, [data])
 
   return (
