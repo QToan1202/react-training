@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useId, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { shallow } from 'zustand/shallow'
 import {
   AspectRatio,
+  Button,
+  ButtonGroup,
   Grid,
   GridItem,
   Heading,
@@ -15,19 +17,26 @@ import {
   Text,
   VStack,
   chakra,
+  useDisclosure,
   useToast,
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
+import { FiEdit2, FiTrash2 } from 'react-icons/fi'
 
 import { useBookStore } from '@react-monorepo/shared/stores'
 import { IBook } from '@react-monorepo/shared/types'
 import { COLORS, MESSAGES } from '@react-monorepo/shared/utils'
-import { find } from '@react-monorepo/shared/services'
+import { find, remove } from '@react-monorepo/shared/services'
+import { ConfirmDialog } from '../../components'
 
 export const BookDetail = () => {
   const { bookId } = useParams()
-  const { books, add } = useBookStore((state) => ({ books: state.books, add: state.add }), shallow)
+  const { books, add, removeBook } = useBookStore(
+    (state) => ({ books: state.books, add: state.add, removeBook: state.remove }),
+    shallow
+  )
   const initState = useCallback(() => {
     if (!bookId) return
     const selectedBook: IBook | undefined = books.find((item) => item.id === +bookId)
@@ -41,6 +50,13 @@ export const BookDetail = () => {
     enabled: !(bookId && bookData),
     queryFn: (): Promise<IBook> => find<IBook>(`/books/${bookId}`),
   })
+
+  useEffect(() => {
+    if (!data) return
+    add(data)
+    setBookData((prevState) => ({ ...prevState, ...data }))
+  }, [data, add])
+
   const toast = useToast()
   const toastID = useId()
   const renderError = useCallback(() => {
@@ -52,12 +68,41 @@ export const BookDetail = () => {
         status: 'error',
       })
   }, [toast, error, toastID])
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const navigate = useNavigate()
 
-  useEffect(() => {
-    if (!data) return
-    add(data)
-    setBookData((prevState) => ({ ...prevState, ...data }))
-  }, [data, add])
+  const { mutate } = useMutation({
+    mutationFn: (variables: { path: string; id: number }): Promise<AxiosResponse['status']> =>
+      remove(variables.path, variables.id),
+    onError: (error: unknown) => {
+      if (error instanceof Error)
+        toast({
+          title: error.message,
+          description: "Action can't be performed.",
+          status: 'error',
+        })
+    },
+
+    onSuccess: (_, variables) => {
+      removeBook(variables.id)
+      toast({
+        title: 'Delete book success',
+        description: `Book ${bookData?.name} have been deleted successfully.`,
+        status: 'success',
+      })
+      navigate('/admin/dashboard')
+    },
+
+    onMutate: () => onClose(),
+  })
+
+  const handleDeleteBook = useCallback(() => {
+    if (!bookId) return
+    mutate({
+      path: '/books',
+      id: +bookId,
+    })
+  }, [bookId, mutate])
 
   return (
     <Grid
@@ -70,6 +115,29 @@ export const BookDetail = () => {
         <AspectRatio ratio={2 / 3}>
           <Image objectFit="cover" src={bookData?.cover} borderRadius="lg" />
         </AspectRatio>
+        <ButtonGroup mt={5}>
+          <Button
+            leftIcon={<FiEdit2 />}
+            variant="outline"
+            _hover={{
+              bgColor: COLORS.BLUE_100,
+              color: COLORS.BLUE,
+            }}
+          >
+            Edit
+          </Button>
+          <Button
+            onClick={onOpen}
+            leftIcon={<FiTrash2 />}
+            variant="outline"
+            _hover={{
+              bgColor: COLORS.RED_100,
+              color: COLORS.RED,
+            }}
+          >
+            Delete
+          </Button>
+        </ButtonGroup>
       </GridItem>
 
       <GridItem>
@@ -103,6 +171,15 @@ export const BookDetail = () => {
           </TabPanels>
         </Tabs>
       </GridItem>
+      {
+        <ConfirmDialog
+          isOpen={isOpen}
+          onClose={onClose}
+          onDelete={handleDeleteBook}
+          header={`Delete ${bookData?.name} book`}
+          body={`Are you sure? You can't undo this action afterwards.`}
+        />
+      }
       {isError && renderError()}
     </Grid>
   )
