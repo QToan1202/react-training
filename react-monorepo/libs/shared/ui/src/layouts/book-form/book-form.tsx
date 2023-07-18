@@ -19,17 +19,17 @@ import { FiFile } from 'react-icons/fi'
 import { COLORS, REGEX } from '@react-monorepo/shared/utils'
 import { IBook } from '@react-monorepo/shared/types'
 
-/* eslint-disable-next-line */
 export interface BookFormProps {
+  bookValues?: IBook
   onSubmit: (values: IBook) => void
 }
 
-export const BookForm = memo(({ onSubmit }: BookFormProps) => {
+export const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<IBook>()
+  } = useForm<IBook>({ defaultValues: bookValues })
   return (
     <Box bgColor={COLORS.WHITE} border={`2px solid ${COLORS.GRAY}`} p={10} maxW={960}>
       <Box mb={4}>
