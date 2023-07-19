@@ -1,7 +1,8 @@
 import { useCallback } from 'react'
 import { Box, Button, useToast } from '@chakra-ui/react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
+import { shallow } from 'zustand/shallow'
 
 import { LoginForm, Navbar } from '../../layouts'
 import { useUserStore } from '@react-monorepo/shared/stores'
@@ -12,7 +13,10 @@ import { COLORS } from '@react-monorepo/shared/utils'
 const navbarLink = ['pricing', 'support', 'contact Us']
 
 export const LoginPage = () => {
-  const setLoginUser = useUserStore((state) => state.login)
+  const { loginUser, setLoginUser } = useUserStore(
+    (state) => ({ loginUser: state.loginUser, setLoginUser: state.login }),
+    shallow
+  )
   const toast = useToast()
   const navigate = useNavigate()
 
@@ -36,7 +40,7 @@ export const LoginPage = () => {
         description: 'Welcome back!',
         status: 'success',
       })
-      // navigate('/dashboard')
+      navigate('/admin/dashboard')
     },
   })
 
@@ -50,6 +54,8 @@ export const LoginPage = () => {
     },
     [mutate]
   )
+
+  if (loginUser) return <Navigate to="/admin/dashboard" />
 
   return (
     <Box h="100vh" bgImage="/libs/shared/ui/assets/images/squiggle-pattern-gray.jpg">
