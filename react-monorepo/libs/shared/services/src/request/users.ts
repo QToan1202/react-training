@@ -22,5 +22,5 @@ export const register = async (path: string, userInfo: TUserForm): Promise<IUser
   const isEmailExisted = userList.some((user) => user.email === email)
 
   if (isEmailExisted) throw Error(MESSAGES.EMAIL_EXISTED)
-  return add<IUser>(path, { ...userInfo, role: 'member' })
+  return add<IUser>(path, { ...userInfo, ...{ role: 'member', hireRequests: 5 } })
 }
