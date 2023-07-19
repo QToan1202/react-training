@@ -10,7 +10,7 @@ import {
 } from '@tanstack/react-table'
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
 
-import { SHADOW } from '@react-monorepo/shared/utils'
+import { COLORS, SHADOW, isOverDue } from '@react-monorepo/shared/utils'
 
 export interface ManagementTableProps<T> {
   data: T[]
@@ -33,7 +33,7 @@ export const ManagementTable = memo(<T extends object>({ data, caption, columns 
 
   return (
     <TableContainer shadow={SHADOW.FORM}>
-      <Table variant="striped">
+      <Table>
         {caption && <TableCaption>{caption}</TableCaption>}
         <Thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -60,7 +60,11 @@ export const ManagementTable = memo(<T extends object>({ data, caption, columns 
         </Thead>
         <Tbody>
           {table.getRowModel().rows.map((row) => (
-            <Tr key={row.id}>
+            <Tr
+              key={row.id}
+              bgColor={isOverDue(row.getValue('borrow_date')) ? COLORS.RED_200 : COLORS.WHITE}
+              color={isOverDue(row.getValue('borrow_date')) ? COLORS.WHITE : COLORS.BLACK}
+            >
               {row.getVisibleCells().map((cell) => (
                 <Td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Td>
               ))}
