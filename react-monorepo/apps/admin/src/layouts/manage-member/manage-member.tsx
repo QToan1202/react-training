@@ -73,8 +73,8 @@ export const ManageMember = () => {
             px={4}
             py={1}
             borderRadius="2xl"
-            bgColor={info.getValue() === 'admin' ? COLORS.RED_100 : COLORS.GREEN_100}
-            color={info.getValue() === 'admin' ? COLORS.RED : COLORS.GREEN}
+            bgColor={COLORS.GREEN_100}
+            color={COLORS.GREEN}
             textTransform="capitalize"
           >
             {info.getValue()}
