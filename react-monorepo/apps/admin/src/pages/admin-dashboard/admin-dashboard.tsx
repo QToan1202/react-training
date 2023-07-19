@@ -10,6 +10,7 @@ import { Card } from '@react-monorepo/shared/ui'
 import { COLORS, MESSAGES } from '@react-monorepo/shared/utils'
 import { get } from '@react-monorepo/shared/services'
 import { IBook } from '@react-monorepo/shared/types'
+import { ManageMember, ManagementHireRequests } from '../../layouts'
 
 export const AdminDashboard = () => {
   const { books } = useBookStore((state) => ({ books: state.books }), shallow)
@@ -53,7 +54,7 @@ export const AdminDashboard = () => {
   }, [data])
 
   return (
-    <Tabs isFitted variant="unstyled">
+    <Tabs isFitted isLazy variant="unstyled">
       <TabList>
         <Tab textTransform="capitalize">books</Tab>
         <Tab textTransform="capitalize">members</Tab>
@@ -77,11 +78,11 @@ export const AdminDashboard = () => {
         </TabPanel>
 
         <TabPanel>
-          <p>members</p>
+          <ManageMember />
         </TabPanel>
 
         <TabPanel>
-          <p>hire</p>
+          <ManagementHireRequests />
         </TabPanel>
       </TabPanels>
       {isError && renderError()}
