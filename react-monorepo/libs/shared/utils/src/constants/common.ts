@@ -7,6 +7,7 @@ export const COLORS = {
   PRIMARY: '#4bc1d2',
   GREEN_100: '#d2fde6',
   GREEN: '#00974f',
+  RED_200: '#ff5252',
   RED_100: '#fff3f2',
   RED: '#d91a1a',
   BLUE_100: '#ddebff',
