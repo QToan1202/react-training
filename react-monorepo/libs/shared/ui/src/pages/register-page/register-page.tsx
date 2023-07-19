@@ -36,7 +36,7 @@ export const RegisterPage = () => {
         description: "We've created your account for you.",
         status: 'success',
       })
-      navigate('/dashboard')
+      navigate('/')
     },
   })
 
