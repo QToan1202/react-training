@@ -10,15 +10,15 @@ import {
 } from '@tanstack/react-table'
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
 
-import { IUser } from '@react-monorepo/shared/types'
+import { SHADOW } from '@react-monorepo/shared/utils'
 
-export interface ManagementTableProps {
-  data: IUser[]
-  columns: ColumnDef<IUser, unknown>[]
+export interface ManagementTableProps<T> {
+  data: T[]
+  columns: ColumnDef<T, unknown>[]
   caption?: string
 }
 
-export const ManagementTable = memo(({ data, caption, columns }: ManagementTableProps) => {
+export const ManagementTable = memo(<T extends object>({ data, caption, columns }: ManagementTableProps<T>) => {
   const [sorting, setSorting] = useState<SortingState>([])
   const table = useReactTable({
     columns,
@@ -32,7 +32,7 @@ export const ManagementTable = memo(({ data, caption, columns }: ManagementTable
   })
 
   return (
-    <TableContainer>
+    <TableContainer shadow={SHADOW.FORM}>
       <Table variant="striped">
         {caption && <TableCaption>{caption}</TableCaption>}
         <Thead>
