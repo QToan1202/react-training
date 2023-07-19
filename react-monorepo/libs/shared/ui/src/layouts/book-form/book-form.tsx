@@ -6,7 +6,6 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  HStack,
   Input,
   InputGroup,
   InputLeftElement,
@@ -85,7 +84,7 @@ export const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
             <FormErrorMessage>{errors.description && errors.description.message}</FormErrorMessage>
           </FormControl>
 
-          <HStack>
+          <Flex rowGap={6} columnGap={2} flexDirection={{ base: 'column', md: 'row' }}>
             <FormControl isInvalid={!!errors.publish_date}>
               <FormLabel htmlFor="publish_date">Publish date</FormLabel>
               <Input
@@ -138,7 +137,7 @@ export const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
               </InputGroup>
               <FormErrorMessage>{errors.cover && errors.cover.message}</FormErrorMessage>
             </FormControl>
-          </HStack>
+          </Flex>
           <Button
             mt={4}
             bgColor={COLORS.PRIMARY}
