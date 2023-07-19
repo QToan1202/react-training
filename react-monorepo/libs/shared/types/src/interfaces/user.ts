@@ -7,7 +7,8 @@ export interface IUser {
   email: string
   password: string
   phone: string
+  hireRequests: number
   role: TUserRole
 }
 
-export type TUserForm = Omit<IUser, 'id' | 'role'>
+export type TUserForm = Omit<IUser, 'id' | 'role' | 'hireRequests'>
