@@ -2,19 +2,20 @@ import { memo } from 'react'
 import { Box, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, Text } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 
-import { TUserForm } from '@react-monorepo/shared/types'
+import { IUser, TUserForm } from '@react-monorepo/shared/types'
 import { COLORS, REGEX, SHADOW } from '@react-monorepo/shared/utils'
 
 export interface RegisterFormProps {
+  userInfo?: IUser
   onSubmit: (values: TUserForm) => void
 }
 
-export const RegisterForm = memo(({ onSubmit }: RegisterFormProps) => {
+export const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<TUserForm>()
+  } = useForm<TUserForm>({ defaultValues: userInfo })
 
   return (
     <Box
