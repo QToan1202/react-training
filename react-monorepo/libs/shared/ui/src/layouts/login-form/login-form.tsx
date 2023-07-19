@@ -106,7 +106,7 @@ export const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
       </Center>
       <Text textAlign="center">
         Don't have an account?
-        <Link color={COLORS.PRIMARY} as={RouterLink} to={'/register-page'}>
+        <Link color={COLORS.PRIMARY} as={RouterLink} to={'/register'}>
           Sign Up!
         </Link>
       </Text>
