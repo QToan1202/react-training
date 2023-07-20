@@ -15,8 +15,12 @@ export const Navbar = memo(({ children }: NavbarProps) => {
         <Text>Logo</Text>
         <HStack spacing={5}>
           {children}
-          <CustomButton as={Link} title="login" />
-          <CustomButton as={Link} title="get started" />
+          <Link to="/login">
+            <CustomButton title="login" />
+          </Link>
+          <Link to="/register">
+            <CustomButton title="get started" />
+          </Link>
         </HStack>
       </Flex>
     </Box>
