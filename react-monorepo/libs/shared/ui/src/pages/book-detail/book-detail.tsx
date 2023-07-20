@@ -182,6 +182,24 @@ export const BookDetail = () => {
 
   const handleHireBook = useCallback(() => {
     if (!bookData) return
+    if (!currentUser) return
+
+    if (bookData.quantity <= 0) {
+      return toast({
+        title: 'Hire book fail',
+        description: `Book ${bookData.name} have been out of stock.`,
+        status: 'error',
+      })
+    }
+
+    if (currentUser?.hireRequests <= 0) {
+      return toast({
+        title: 'Hire book fail',
+        description: `User ${currentUser.firstName} ${currentUser.lastName} have been out of hire request.`,
+        status: 'error',
+      })
+    }
+
     mutateHireBook({
       path: '/hire-requests',
       options: {
@@ -190,7 +208,7 @@ export const BookDetail = () => {
         borrow_date: new Date().toJSON().slice(0, 10),
       },
     })
-  }, [mutateHireBook, bookData, currentUser])
+  }, [mutateHireBook, bookData, currentUser, toast])
 
   return (
     <Grid
