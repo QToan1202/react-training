@@ -8,6 +8,7 @@ import { useUserStore } from '@react-monorepo/shared/stores'
 import { IUser, TUserForm } from '@react-monorepo/shared/types'
 import { COLORS } from '@react-monorepo/shared/utils'
 import { register } from '@react-monorepo/shared/services'
+import backgroundImg from '../../../assets/images/squiggle-pattern-gray.jpg'
 
 const navbarLink = ['pricing', 'support', 'contact Us']
 
@@ -51,7 +52,7 @@ export const RegisterPage = () => {
   )
 
   return (
-    <Box h="100vh" bgImage="/libs/shared/ui/assets/images/squiggle-pattern-gray.jpg">
+    <Box h="100vh" bgImage={backgroundImg}>
       <Navbar>
         {navbarLink.map((item) => (
           <Button
