@@ -41,7 +41,7 @@ export const LoginPage = () => {
         description: 'Welcome back!',
         status: 'success',
       })
-      navigate('/admin/dashboard')
+      navigate('/')
     },
   })
 
@@ -56,10 +56,10 @@ export const LoginPage = () => {
     [mutate]
   )
 
-  if (loginUser) return <Navigate to="/admin/dashboard" />
+  if (loginUser) return <Navigate to="/" />
 
   return (
-    <Box h="100vh" bgImage="/libs/shared/ui/assets/images/squiggle-pattern-gray.jpg">
+    <Box h="100vh" bgImage={backgroundImg}>
       <Navbar>
         {navbarLink.map((item) => (
           <Button
