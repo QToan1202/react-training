@@ -35,7 +35,7 @@ export const ConfirmDialog = memo(({ isOpen, onClose, onDelete, header, body }: 
               Cancel
             </Button>
             <Button colorScheme="red" onClick={onDelete} ml={3}>
-              Delete
+              Confirm
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
