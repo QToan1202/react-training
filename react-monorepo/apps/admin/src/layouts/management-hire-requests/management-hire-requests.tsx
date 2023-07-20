@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useId, useMemo, useState } from 'react'
-import { FiCheck, FiTrash2 } from 'react-icons/fi'
+import { FiCheck } from 'react-icons/fi'
 import { Column, createColumnHelper } from '@tanstack/react-table'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { shallow } from 'zustand/shallow'
-import { HStack, IconButton, useDisclosure, useToast } from '@chakra-ui/react'
+import { IconButton, useDisclosure, useToast } from '@chakra-ui/react'
 import qs from 'qs'
 
 import { useBookStore, useHiredStore, useUserStore } from '@react-monorepo/shared/stores'
@@ -26,7 +26,7 @@ export const ManagementHireRequests = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [selectedRequestId, setRequestMemberId] = useState<number>()
 
-  const handleClickDeleteBtn = useCallback(
+  const handleClickConfirmBtn = useCallback(
     (event: React.MouseEvent) => {
       onOpen()
       const memberId = event.currentTarget.getAttribute('data-id')
@@ -62,32 +62,22 @@ export const ManagementHireRequests = () => {
       columnHelper.display({
         id: 'actions',
         cell: (info) => (
-          <HStack>
-            <IconButton
-              icon={<FiCheck />}
-              aria-label="confirm button"
-              variant="ghost"
-              _hover={{
-                bgColor: COLORS.GREEN_100,
-                color: COLORS.GREEN,
-              }}
-            />
-            <IconButton
-              data-id={info.row.getValue('id')}
-              onClick={handleClickDeleteBtn}
-              icon={<FiTrash2 />}
-              aria-label="delete button"
-              variant="ghost"
-              _hover={{
-                bgColor: COLORS.RED_100,
-                color: COLORS.RED,
-              }}
-            />
-          </HStack>
+          <IconButton
+            icon={<FiCheck />}
+            data-id={info.row.getValue('id')}
+            onClick={handleClickConfirmBtn}
+            aria-label="confirm button"
+            variant="ghost"
+            _hover={{
+              bgColor: COLORS.GREEN_100,
+              color: COLORS.GREEN,
+            }}
+          />
         ),
       }),
     ] as Column<IUser>[]
-  }, [handleClickDeleteBtn])
+  }, [handleClickConfirmBtn])
+
   const { data } = useQuery({
     queryKey: ['hire-requests'],
     queryFn: () =>
@@ -165,7 +155,7 @@ export const ManagementHireRequests = () => {
     )
   }, [mutateUpdate, hireRequests, selectedRequestId, updateUserHireRequest])
 
-  const { mutate: mutateDelete } = useMutation({
+  const { mutate: mutateConfirm } = useMutation({
     mutationFn: (variables: { path: string; id: number }): Promise<AxiosResponse['status']> =>
       remove(variables.path, variables.id),
     onError: (error: unknown) => {
@@ -181,11 +171,13 @@ export const ManagementHireRequests = () => {
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries(['hire-requests'])
       deleteRequest(variables.id)
-      Promise.all([updateBooks(), updateRequest()])
+      updateBooks()
+      updateRequest()
+      // Promise.all([updateBooks(), updateRequest()])
       toast({
         id: toastID,
-        title: 'Delete request success',
-        description: `Request have been deleted successfully.`,
+        title: 'Confirm request success',
+        description: `User has been returned the book successfully.`,
         status: 'success',
       })
     },
@@ -193,13 +185,13 @@ export const ManagementHireRequests = () => {
     onMutate: () => onClose(),
   })
 
-  const handleDeleteMember = useCallback(() => {
+  const handleCompleteRequest = useCallback(() => {
     if (!selectedRequestId) return
-    mutateDelete({
+    mutateConfirm({
       path: '/hire-requests',
       id: selectedRequestId,
     })
-  }, [mutateDelete, selectedRequestId])
+  }, [mutateConfirm, selectedRequestId])
 
   return (
     <>
@@ -208,9 +200,9 @@ export const ManagementHireRequests = () => {
         <ConfirmDialog
           isOpen={isOpen}
           onClose={onClose}
-          onDelete={handleDeleteMember}
-          header={`Delete request`}
-          body={`Are you sure? You can't undo this action afterwards.`}
+          onDelete={handleCompleteRequest}
+          header={`Confirm to complete hire request`}
+          body={`Are you sure? This action mark user have return there book and remove this hire request. You can't undo this action afterwards.`}
         />
       }
     </>
