@@ -1,4 +1,4 @@
-import { useId, useMemo, useCallback, useEffect } from 'react'
+import { useId, useMemo, useCallback, useEffect, memo } from 'react'
 import { shallow } from 'zustand/shallow'
 import { useToast, Grid, Text } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
@@ -9,7 +9,7 @@ import { Card } from '@react-monorepo/shared/ui'
 import { MESSAGES } from '@react-monorepo/shared/utils'
 import { get } from '@react-monorepo/shared/services'
 
-export const BookList = () => {
+export const BookList = memo(() => {
   const { books } = useBookStore((state) => ({ books: state.books }), shallow)
   const toast = useToast()
   const toastID = useId()
@@ -64,4 +64,4 @@ export const BookList = () => {
       {isError && renderError()}
     </Grid>
   )
-}
+})

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useId, useMemo, useState } from 'react'
+import React, { memo, useCallback, useEffect, useId, useMemo, useState } from 'react'
 import { FiEdit2, FiTrash2 } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import { Column, createColumnHelper } from '@tanstack/react-table'
@@ -13,7 +13,7 @@ import { COLORS } from '@react-monorepo/shared/utils'
 import { get, remove } from '@react-monorepo/shared/services'
 import { AxiosResponse } from 'axios'
 
-export const ManageMember = () => {
+export const ManageMember = memo(() => {
   const { users, deleteUser } = useUserStore((state) => ({ users: state.users, deleteUser: state.remove }), shallow)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate()
@@ -176,4 +176,4 @@ export const ManageMember = () => {
       }
     </>
   )
-}
+})

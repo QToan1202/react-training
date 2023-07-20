@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useId, useMemo, useState } from 'react'
+import React, { memo, useCallback, useEffect, useId, useMemo, useState } from 'react'
 import { FiCheck } from 'react-icons/fi'
 import { Column, createColumnHelper } from '@tanstack/react-table'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -13,7 +13,7 @@ import { COLORS } from '@react-monorepo/shared/utils'
 import { get, remove, edit } from '@react-monorepo/shared/services'
 import { AxiosResponse } from 'axios'
 
-export const ManagementHireRequests = () => {
+export const ManagementHireRequests = memo(() => {
   const { hireRequests, deleteRequest } = useHiredStore(
     (state) => ({ hireRequests: state.hireRequests, deleteRequest: state.remove }),
     shallow
@@ -207,4 +207,4 @@ export const ManagementHireRequests = () => {
       }
     </>
   )
-}
+})
