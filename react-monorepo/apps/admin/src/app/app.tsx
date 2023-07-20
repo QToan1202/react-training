@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { FiHome, FiLogOut, FiPlus } from 'react-icons/fi'
 import { shallow } from 'zustand/shallow'
-import { ChakraProvider} from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { BookDetail, Dashboard, LoginPage, RegisterPage } from '@react-monorepo/shared/ui'
@@ -27,19 +27,30 @@ export const App = () => {
     <QueryClientProvider client={queryClient}>
       <ChakraProvider toastOptions={{ defaultOptions: { position: 'bottom', duration: 3000, isClosable: true } }}>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          {loginUser && (
-            <Route path="/admin" element={<Dashboard sidebar={sidebarContent} />}>
-              <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="add-book" element={<AddBookPage />} />
-              <Route path="edit-book/:bookId" element={<EditBookPage />} />
-              <Route path="edit-member/:userId" element={<EditMemberPage />} />
-              <Route path="books/:bookId" element={<BookDetail />} />
-            </Route>
-          )}
+        {loginUser
+          ? <Route path="/*" element={<PrivateRoutes />} />
+          : <Route path="/*" element={<PublicRoutes />} />}
         </Routes>
       </ChakraProvider>
     </QueryClientProvider>
   )
 }
+
+const PublicRoutes = () => (
+  <Routes>
+    <Route path="/login" element={<LoginPage />} />
+    <Route path="/register" element={<RegisterPage />} />
+  </Routes>
+)
+
+const PrivateRoutes = () => (
+  <Routes>
+    <Route path="/admin" element={<Dashboard sidebar={sidebarContent} />}>
+      <Route path="dashboard" element={<AdminDashboard />} />
+      <Route path="add-book" element={<AddBookPage />} />
+      <Route path="edit-book/:bookId" element={<EditBookPage />} />
+      <Route path="edit-member/:userId" element={<EditMemberPage />} />
+      <Route path="books/:bookId" element={<BookDetail />} />
+    </Route>
+  </Routes>
+)
