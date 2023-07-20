@@ -1,5 +1,17 @@
 import { memo, useState } from 'react'
-import { Flex, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr, chakra } from '@chakra-ui/react'
+import {
+  ChakraProps,
+  Flex,
+  Table,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  chakra,
+} from '@chakra-ui/react'
 import {
   useReactTable,
   flexRender,
@@ -7,12 +19,20 @@ import {
   SortingState,
   getSortedRowModel,
   ColumnDef,
+  Row,
+  RowData,
 } from '@tanstack/react-table'
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
 
 import { COLORS, SHADOW, isOverDue } from '@react-monorepo/shared/utils'
 
-export interface ManagementTableProps<T> {
+declare module '@tanstack/react-table' {
+  interface TableMeta<TData extends RowData> {
+    getRowStyles: (row: Row<TData>) => ChakraProps['sx']
+  }
+}
+
+export interface ManagementTableProps<T extends object> {
   data: T[]
   columns: ColumnDef<T, unknown>[]
   caption?: string
@@ -29,10 +49,20 @@ export const ManagementTable = memo(<T extends object>({ data, caption, columns 
     state: {
       sorting,
     },
+    meta: {
+      getRowStyles: (row: Row<T & Partial<Record<'borrow_date', string>>>): ChakraProps['sx'] => {
+        if (!row.original.borrow_date) return {}
+
+        return {
+          bgColor: isOverDue(row.original.borrow_date) ? COLORS.RED_200 : COLORS.WHITE,
+          color: isOverDue(row.original.borrow_date) ? COLORS.WHITE : COLORS.BLACK,
+        }
+      },
+    },
   })
 
   return (
-    <TableContainer shadow={SHADOW.FORM}>
+    <TableContainer shadow={SHADOW.FORM} borderRadius="xl">
       <Table>
         {caption && <TableCaption>{caption}</TableCaption>}
         <Thead>
@@ -60,11 +90,7 @@ export const ManagementTable = memo(<T extends object>({ data, caption, columns 
         </Thead>
         <Tbody>
           {table.getRowModel().rows.map((row) => (
-            <Tr
-              key={row.id}
-              bgColor={isOverDue(row.getValue('borrow_date')) ? COLORS.RED_200 : COLORS.WHITE}
-              color={isOverDue(row.getValue('borrow_date')) ? COLORS.WHITE : COLORS.BLACK}
-            >
+            <Tr key={row.id} sx={table.options.meta?.getRowStyles(row)}>
               {row.getVisibleCells().map((cell) => (
                 <Td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Td>
               ))}
