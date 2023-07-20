@@ -20,7 +20,7 @@ export const find = async <T>(path: string, options: AxiosRequestConfig = {}): P
   return res.data
 }
 
-export const add = async <T>(path: string, options: Readonly<Omit<T, 'id'>>): Promise<T> => {
+export const add = async <T>(path: string, options: Partial<T>): Promise<T> => {
   const res = await request.post(path, options).catch((error) => {
     throw error
   })
