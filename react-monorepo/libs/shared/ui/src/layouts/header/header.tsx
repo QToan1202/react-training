@@ -1,10 +1,13 @@
-import { memo } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 import {
+  AspectRatio,
   Avatar,
   Box,
   Flex,
   HStack,
   IconButton,
+  Link,
+  Image,
   Menu,
   MenuButton,
   MenuDivider,
@@ -18,7 +21,7 @@ import { shallow } from 'zustand/shallow'
 
 import { COLORS } from '@react-monorepo/shared/utils'
 import { useUserStore } from '@react-monorepo/shared/stores'
-
+import logo from '../../../assets/images/library-logo.png'
 export interface HeaderProps {
   onOpen: () => void
 }
@@ -42,9 +45,12 @@ export const Header = memo(({ onOpen }: HeaderProps) => {
         icon={<FiMenu />}
         onClick={onOpen}
       />
-      <Text display={{ md: 'none' }} fontSize="2xl" fontWeight="bold">
-        Logo
-      </Text>
+
+      <Link as={RouterLink} to="/" display={{ md: 'none' }}>
+        <AspectRatio ratio={2.8 / 1} minW="140px">
+          <Image objectFit="cover" src={logo} />
+        </AspectRatio>
+      </Link>
 
       <Flex alignItems="center">
         <Menu>

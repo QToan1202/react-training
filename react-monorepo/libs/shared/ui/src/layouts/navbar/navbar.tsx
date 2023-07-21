@@ -1,8 +1,10 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Flex, HStack, Text } from '@chakra-ui/react'
+import { AspectRatio, Box, Flex, HStack, IconButton, Image } from '@chakra-ui/react'
 
 import { CustomButton } from '../../components'
+import { FiMenu } from 'react-icons/fi'
+import logo from '../../../assets/images/library-logo.png'
 
 export interface NavbarProps {
   children: React.ReactNode
@@ -10,10 +12,14 @@ export interface NavbarProps {
 
 export const Navbar = memo(({ children }: NavbarProps) => {
   return (
-    <Box mx="auto" py={5} maxW={1200}>
+    <Box mx="auto" p={5} maxW={1200}>
       <Flex alignItems="center" justifyContent="space-between">
-        <Text>Logo</Text>
-        <HStack spacing={5}>
+        <Link to="/">
+          <AspectRatio ratio={2.8 / 1} minW="140px">
+            <Image objectFit="cover" src={logo} />
+          </AspectRatio>
+        </Link>
+        <HStack spacing={5} display={{ base: 'none', md: 'flex' }}>
           {children}
           <Link to="/login">
             <CustomButton title="login" />
@@ -22,6 +28,12 @@ export const Navbar = memo(({ children }: NavbarProps) => {
             <CustomButton title="get started" />
           </Link>
         </HStack>
+        <IconButton
+          display={{ base: 'flex', md: 'none' }}
+          aria-label="open menu"
+          bg="transparent"
+          icon={<FiMenu size={24} />}
+        />
       </Flex>
     </Box>
   )
