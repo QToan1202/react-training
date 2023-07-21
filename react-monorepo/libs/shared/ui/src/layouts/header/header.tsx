@@ -1,3 +1,4 @@
+import { memo, useCallback } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import {
   AspectRatio,
@@ -15,19 +16,32 @@ import {
   MenuList,
   Text,
   VStack,
+  useToast,
 } from '@chakra-ui/react'
 import { FiChevronDown, FiMenu } from 'react-icons/fi'
 import { shallow } from 'zustand/shallow'
 
 import { COLORS } from '@react-monorepo/shared/utils'
-import { useUserStore } from '@react-monorepo/shared/stores'
+import { useBookStore, useHiredStore, useUserStore } from '@react-monorepo/shared/stores'
 import logo from '../../../assets/images/library-logo.png'
 export interface HeaderProps {
   onOpen: () => void
 }
 
 export const Header = memo(({ onOpen }: HeaderProps) => {
-  const { user } = useUserStore((state) => ({ user: state.loginUser }), shallow)
+  const toast = useToast()
+  const { user, logOut } = useUserStore((state) => ({ user: state.loginUser, logOut: state.logout }), shallow)
+  const handleLogOut = useCallback(() => {
+    logOut()
+    useUserStore.persist.clearStorage()
+    useBookStore.persist.clearStorage()
+    useHiredStore.persist.clearStorage()
+    toast({
+      title: 'Log out success',
+      description: 'Hope to see you soon.',
+      status: 'success',
+    })
+  }, [logOut, toast])
 
   return (
     <Flex
@@ -73,7 +87,7 @@ export const Header = memo(({ onOpen }: HeaderProps) => {
             <MenuItem>Settings</MenuItem>
             <MenuItem>Billing</MenuItem>
             <MenuDivider />
-            <MenuItem>Sign out</MenuItem>
+            <MenuItem onClick={handleLogOut}>Sign out</MenuItem>
           </MenuList>
         </Menu>
       </Flex>
