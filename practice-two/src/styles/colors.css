@@ -1,0 +1,12 @@
+:root {
+  --blue: #127bbe;
+  --gray: #d3dde0;
+  --red: #e71c1c;
+  --black: #000;
+  --white: #fff;
+  --focus: #0f62fe;
+  --header-bg: #f5f6f7;
+  --card-shadow: rgba(149, 157, 165, 0.2);
+  --filter-box: #f1f4f5;
+  --bg-overlay : rgba(0, 0, 0, 0.5);
+}

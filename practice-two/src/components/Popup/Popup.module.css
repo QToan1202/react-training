@@ -1,0 +1,42 @@
+.overlay {
+  position: fixed;
+  z-index: var(--overlay);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: var(--bg-overlay);
+}
+
+.modal {
+  z-index: var(--modal);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--white);
+  border-radius: 4px;
+  border: 2px solid var(--gray);
+}
+
+.content {
+  padding: 25px;
+  text-align: center;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.spacing_top {
+  margin-top: 20px;
+}
+
+.block {
+  display: block;
+}
+
+.none {
+  display: none;
+}

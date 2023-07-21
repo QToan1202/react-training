@@ -1,0 +1,22 @@
+.search {
+  margin: var(--spacing-lg) 0;
+  width: 100%;
+  position: relative;
+}
+
+.search__input {
+  box-sizing: border-box;
+  font-size: 21px;
+  padding: 21px 30px;
+  width: 100%;
+  border: 2px solid var(--gray);
+}
+
+.search__icon {
+  position: absolute;
+  top: 19px;
+  right: 30px;
+  font-size: 32px;
+  color: var(--gray);
+  z-index: var(--search-bar);
+}

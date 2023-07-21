@@ -1,0 +1,18 @@
+{
+  "products": [
+    {
+      "name": "Notebook",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "category": "book",
+      "image": "/",
+      "id": 1
+    },
+    {
+      "name": "Tablet",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "category": "tablet",
+      "image": "/",
+      "id": 2
+    }
+  ]
+}
