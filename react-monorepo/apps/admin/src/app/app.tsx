@@ -1,14 +1,23 @@
-import { useMemo } from 'react'
+import { Suspense, lazy, useMemo } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { FiHome, FiPlus } from 'react-icons/fi'
 import { shallow } from 'zustand/shallow'
-import { ChakraProvider } from '@chakra-ui/react'
+import { AbsoluteCenter, Box, ChakraProvider, Spinner } from '@chakra-ui/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import { BookDetail, Dashboard, LoginPage, RegisterPage } from '@react-monorepo/shared/ui'
 import { useUserStore } from '@react-monorepo/shared/stores'
-import { AdminDashboard, EditBookPage, AddBookPage, EditMemberPage } from '../pages'
 import { ISideBarItem } from '@react-monorepo/shared/types'
+import { COLORS } from '@react-monorepo/shared/utils'
+
+const BookDetail = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.BookDetail })))
+const Dashboard = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Dashboard })))
+const LoginPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.LoginPage })))
+const RegisterPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.RegisterPage })))
+
+const AdminDashboard = lazy(() => import('../pages').then((module) => ({ default: module.AdminDashboard })))
+const EditBookPage = lazy(() => import('../pages').then((module) => ({ default: module.EditBookPage })))
+const AddBookPage = lazy(() => import('../pages').then((module) => ({ default: module.AddBookPage })))
+const EditMemberPage = lazy(() => import('../pages').then((module) => ({ default: module.EditMemberPage })))
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,9 +31,15 @@ export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider toastOptions={{ defaultOptions: { position: 'bottom', duration: 3000, isClosable: true } }}>
-        <Routes>
-          {loginUser ? <Route path="/*" element={<PrivateRoutes />} /> : <Route path="/*" element={<PublicRoutes />} />}
-        </Routes>
+        <Suspense fallback={<OverlayLoading />}>
+          <Routes>
+            {loginUser ? (
+              <Route path="/*" element={<PrivateRoutes />} />
+            ) : (
+              <Route path="/*" element={<PublicRoutes />} />
+            )}
+          </Routes>
+        </Suspense>
       </ChakraProvider>
     </QueryClientProvider>
   )
@@ -60,3 +75,11 @@ const PrivateRoutes = () => {
     </Routes>
   )
 }
+
+const OverlayLoading = () => (
+  <Box position="relative" h="100vh" bgColor={COLORS.BLACK} opacity={0.5}>
+    <AbsoluteCenter axis="both">
+      <Spinner thickness="4px" speed="0.65s" color={COLORS.PRIMARY} size="xl" />
+    </AbsoluteCenter>
+  </Box>
+)
