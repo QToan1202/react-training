@@ -13,7 +13,7 @@ export const Dashboard = ({ sidebar }: DashboardProps) => {
 
   return (
     <Box>
-      <Sidebar onClose={onClose} items={sidebar} display={{ base: 'none', md: 'block' }} />
+      <Sidebar onClose={onClose} items={sidebar} display={{ base: 'none', md: 'flex' }} />
       <Drawer isOpen={isOpen} onClose={onClose}>
         <Sidebar onClose={onClose} items={sidebar} />
       </Drawer>
