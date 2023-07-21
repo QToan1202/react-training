@@ -97,13 +97,14 @@ const Home = () => {
   }, [products, handleNotifyError, notifyId, mutate, selectedProductId])
 
   const renderProducts = useCallback(
-    (data: TProduct[] | null | undefined) => {
+    (data: TProduct[] | null | undefined): JSX.Element | JSX.Element[] => {
       if (!data?.length) return <h1 className={styles.empty}>There no products yet</h1>
 
-      return data?.map(({ id, name, description }) => (
+      return data?.map(({ id, name, description, image }) => (
         <Product
           key={id}
           id={id}
+          cover={image}
           title={name}
           description={description}
           onDeleteProduct={handleDeleteProduct}
@@ -117,8 +118,6 @@ const Home = () => {
   const handleChangeSearchValue = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value), [])
 
   const handleSortChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => setSortType(e.target.value), [])
-
-  if (error) return handleNotifyError(error)
 
   return (
     <div className={styles.container}>
@@ -162,7 +161,7 @@ const Home = () => {
         <ProductForm
           title="Edit Product"
           action="edit"
-          defaultValues={data}
+          defaultValues={data && data[0]}
           isShow={showEditDialog}
           onCancel={handleCloseEditForm}
           onSubmitSuccess={handleCloseEditForm}
