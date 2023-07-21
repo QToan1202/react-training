@@ -1,27 +1,23 @@
-import PropTypes from 'prop-types'
 import './product.css'
 import { Button, Image, HeadingText, Text } from '../index'
+import { IProductProps } from '@types'
 
-const Product = ({ product }) => {
-  const { imageURL, title, content, price } = product
+const Product = ({ product }: IProductProps) => {
+  const { image, title, description, price } = product
 
   return (
     <div className="card">
-      <Image src={imageURL} alt="product-image" />
+      <Image src={image} alt="product-image" />
       <HeadingText content={title} type="primary" />
-      <Text leading="relaxed">{content}</Text>
+      <Text leading="relaxed">{description}</Text>
       <div className="flex">
         <Text color="yellow-700" weight="semibold" price>
           ${price}
         </Text>
-        <Button type="primary" size="small" title="buy now" />
+        <Button variant="primary" size="small" title="buy now" />
       </div>
     </div>
   )
-}
-
-Product.propTypes = {
-  product: PropTypes.object.isRequired,
 }
 
 export default Product

@@ -3,4 +3,4 @@
  * @param {String} content
  * @returns String
  */
-export const clearUnderscore = (content) => content.replace('_', ' ').toLowerCase()
+export const clearUnderscore = (content: string) => content.replace('_', ' ').toLowerCase()

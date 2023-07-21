@@ -1,8 +1,8 @@
 import './navigation.css'
-import PropTypes from 'prop-types'
 import { Link, Image } from '../index'
+import { INavigationProps } from '@types'
 
-const Header = ({ logo, links, icons }) => (
+const Navigation = ({ logo, links, icons }: INavigationProps) => (
   <div className="nav">
     <Image src={logo} alt="logo" />
     <div className="nav-item">
@@ -22,10 +22,4 @@ const Header = ({ logo, links, icons }) => (
   </div>
 )
 
-Header.propTypes = {
-  logo: PropTypes.string.isRequired,
-  links: PropTypes.array.isRequired,
-  icons: PropTypes.array.isRequired,
-}
-
-export default Header
+export default Navigation

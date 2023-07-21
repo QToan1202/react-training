@@ -1,15 +1,16 @@
-import headPhone from '../../assets/images/black_headphone.png'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
+import headPhone from '@assets/images/black_headphone.png'
 import { ProductSection } from '../index'
 
 export default {
   title: 'Product Section',
   component: ProductSection,
-}
+} as ComponentMeta<typeof ProductSection>
 
-const Template = (args) => <ProductSection {...args} />
+const Template: ComponentStory<typeof ProductSection> = (args) => <ProductSection {...args} />
 
 const product = {
-  productImg: headPhone,
+  image: headPhone,
   title: 'Experience your music like never before.',
   upperTitle: 'Beats Studio3 Wireless',
   price: 299.95,

@@ -1,14 +1,14 @@
-import PropTypes from 'prop-types'
 import './productSection.css'
 import { Button, Text, Image, HeadingText } from '../index'
+import { IProductProps } from '@types'
 
-const ProductSection = ({ product }) => {
-  const { productImg, title, upperTitle, price, description } = product
+const ProductSection = ({ product }: IProductProps) => {
+  const { image, title, upperTitle, price, description } = product
 
   return (
     <div className="container">
       <div className="product_image">
-        <Image src={productImg} alt="photo for the header section" />
+        <Image src={image} alt="photo for the header section" />
       </div>
       <div className="content">
         <Text color="white" weight="medium">
@@ -19,7 +19,7 @@ const ProductSection = ({ product }) => {
           <Text color="white" priceSection>
             &#36;{price}
           </Text>
-          <Button size="medium" type="secondary" title="buy now" />
+          <Button size="medium" variant="secondary" title="buy now" />
         </div>
         <Text color="yellow-400" weight="medium">
           {description}
@@ -27,10 +27,6 @@ const ProductSection = ({ product }) => {
       </div>
     </div>
   )
-}
-
-ProductSection.propTypes = {
-  product: PropTypes.object.isRequired,
 }
 
 export default ProductSection

@@ -1,8 +1,9 @@
-import logo from '../../assets/images/logo.svg'
-import user from '../../assets/icons/user.svg'
-import search from '../../assets/icons/search.svg'
-import cart from '../../assets/icons/cart.svg'
+import logo from '@assets/images/logo.svg'
+import user from '@assets/icons/user.svg'
+import search from '@assets/icons/search.svg'
+import cart from '@assets/icons/cart.svg'
 import { Navigation } from '../index'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 export default {
   title: 'Navigation',
@@ -20,15 +21,11 @@ export default {
         },
       },
       control: {
-        type: 'text',
+        type: 'string',
       },
       description: 'Header logo',
     },
     links: {
-      type: {
-        name: 'array',
-        required: true,
-      },
       defaultValue: ['headphones', 'earphones', 'speakers', 'explore'],
       table: {
         defaultValue: {
@@ -41,10 +38,6 @@ export default {
       description: 'Header links to another page',
     },
     icons: {
-      type: {
-        name: 'array',
-        required: true,
-      },
       defaultValue: [search, user, cart],
       table: {
         defaultValue: {
@@ -57,9 +50,9 @@ export default {
       description: 'All the icons that can be show on the header navigation bar',
     },
   },
-}
+} as ComponentMeta<typeof Navigation>
 
-const Template = (args) => <Navigation {...args} />
+const Template: ComponentStory<typeof Navigation> = (args) => <Navigation {...args} />
 
 export const Default = Template.bind({})
 Default.args = {}

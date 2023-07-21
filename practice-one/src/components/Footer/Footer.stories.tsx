@@ -1,7 +1,8 @@
-import logo from '../../assets/images/logo.svg'
-import socials_icon from '../../assets/icons/socials.svg'
-import columns from '../../data/columns'
-import { Footer } from '../index'
+import logo from '@assets/images/logo.svg'
+import socials_icon from '@assets/icons/socials.svg'
+import columns from '@data/columns'
+import Footer from './Footer'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 export default {
   title: 'Footer',
@@ -56,10 +57,6 @@ export default {
       description: 'The copyright notice at the bottom of the page',
     },
     columns: {
-      type: {
-        name: 'array',
-        required: true,
-      },
       table: {
         defaultValue: {
           summary: columns,
@@ -72,8 +69,8 @@ export default {
       description: 'Data for each column',
     },
   },
-}
+} as ComponentMeta<typeof Footer>
 
-const Template = (args) => <Footer {...args} />
+const Template: ComponentStory<typeof Footer> = (args) => <Footer {...args} />
 
 export const Default = Template.bind({})
