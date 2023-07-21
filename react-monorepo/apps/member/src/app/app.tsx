@@ -1,11 +1,13 @@
-import { FiHome, FiLogOut } from 'react-icons/fi'
+import { useMemo } from 'react'
+import { FiHome } from 'react-icons/fi'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { shallow } from 'zustand/shallow'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { useUserStore } from '@react-monorepo/shared/stores'
 import { BookDetail, Dashboard, LoginPage, RegisterPage } from '@react-monorepo/shared/ui'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ISideBarItem } from '@react-monorepo/shared/types'
 import { Home } from '../pages'
 
 const queryClient = new QueryClient({
@@ -13,11 +15,6 @@ const queryClient = new QueryClient({
     queries: { staleTime: 1000 * 60 * 10 },
   },
 })
-
-const sidebarContent = [
-  { name: 'Home', icon: FiHome, href: '/' },
-  { name: 'Log out', icon: FiLogOut, href: '#' },
-]
 
 export const App = () => {
   const { loginUser } = useUserStore((state) => ({ loginUser: state.loginUser }), shallow)
@@ -43,12 +40,18 @@ const PublicRoutes = () => (
   </Routes>
 )
 
-const PrivateRoutes = () => (
-  <Routes>
-    <Route path="/*" element={<Dashboard sidebar={sidebarContent} />}>
-      <Route path="home" element={<Home />} />
-      <Route path="books/:bookId" element={<BookDetail />} />
-      <Route path="/*" element={<Navigate to="/home" />} />
-    </Route>
-  </Routes>
-)
+const PrivateRoutes = () => {
+  const sidebarContent: ISideBarItem[] = useMemo(() => [
+    { name: 'Home', icon: FiHome, href: '/' },
+  ], [])
+
+  return (
+    <Routes>
+      <Route path="/*" element={<Dashboard sidebar={sidebarContent} />}>
+        <Route path="home" element={<Home />} />
+        <Route path="books/:bookId" element={<BookDetail />} />
+        <Route path="/*" element={<Navigate to="/home" />} />
+      </Route>
+    </Routes>
+  )
+}
