@@ -1,14 +1,20 @@
-import { useMemo } from 'react'
+import { Suspense, lazy, useMemo } from 'react'
 import { FiHome } from 'react-icons/fi'
-import { ChakraProvider } from '@chakra-ui/react'
+import { AbsoluteCenter, Box, ChakraProvider, Spinner } from '@chakra-ui/react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { shallow } from 'zustand/shallow'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { useUserStore } from '@react-monorepo/shared/stores'
-import { BookDetail, Dashboard, LoginPage, RegisterPage } from '@react-monorepo/shared/ui'
 import { ISideBarItem } from '@react-monorepo/shared/types'
-import { Home } from '../pages'
+import { COLORS } from '@react-monorepo/shared/utils'
+
+const BookDetail = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.BookDetail })))
+const Dashboard = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Dashboard })))
+const LoginPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.LoginPage })))
+const RegisterPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.RegisterPage })))
+
+const Home = lazy(() => import('../pages').then((module) => ({ default: module.Home })))
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,11 +28,15 @@ export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider toastOptions={{ defaultOptions: { position: 'bottom', duration: 3000, isClosable: true } }}>
-        <Routes>
-          {loginUser
-          ? <Route path="/*" element={<PrivateRoutes />} />
-          : <Route path="/*" element={<PublicRoutes />} />}
-        </Routes>
+        <Suspense fallback={<OverlayLoading />}>
+          <Routes>
+            {loginUser ? (
+              <Route path="/*" element={<PrivateRoutes />} />
+            ) : (
+              <Route path="/*" element={<PublicRoutes />} />
+            )}
+          </Routes>
+        </Suspense>
       </ChakraProvider>
     </QueryClientProvider>
   )
@@ -41,9 +51,7 @@ const PublicRoutes = () => (
 )
 
 const PrivateRoutes = () => {
-  const sidebarContent: ISideBarItem[] = useMemo(() => [
-    { name: 'Home', icon: FiHome, href: '/' },
-  ], [])
+  const sidebarContent: ISideBarItem[] = useMemo(() => [{ name: 'Home', icon: FiHome, href: '/' }], [])
 
   return (
     <Routes>
@@ -55,3 +63,11 @@ const PrivateRoutes = () => {
     </Routes>
   )
 }
+
+const OverlayLoading = () => (
+  <Box position="relative" h="100vh" bgColor={COLORS.BLACK} opacity={0.5}>
+    <AbsoluteCenter axis="both">
+      <Spinner thickness="4px" speed="0.65s" color={COLORS.PRIMARY} size="xl" />
+    </AbsoluteCenter>
+  </Box>
+)
