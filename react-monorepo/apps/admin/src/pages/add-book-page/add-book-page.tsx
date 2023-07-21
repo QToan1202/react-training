@@ -17,7 +17,7 @@ export const AddBookPage = () => {
   const queryClient = useQueryClient()
   const { mutate } = useMutation({
     mutationFn: (variables: { path: string; option: Readonly<Omit<IBook, 'id'>> }) =>
-      add(variables.path, variables.option),
+      add<IBook>(variables.path, variables.option),
     onError: (error: unknown) => {
       if (error instanceof Error)
         toast({
