@@ -23,7 +23,7 @@ import { shallow } from 'zustand/shallow'
 
 import { COLORS } from '@react-monorepo/shared/utils'
 import { useBookStore, useHiredStore, useUserStore } from '@react-monorepo/shared/stores'
-import logo from '../../../assets/images/library-logo.png'
+import logo from '../../../assets/images/library-logo.webp'
 export interface HeaderProps {
   onOpen: () => void
 }
@@ -62,7 +62,7 @@ export const Header = memo(({ onOpen }: HeaderProps) => {
 
       <Link as={RouterLink} to="/" display={{ md: 'none' }}>
         <AspectRatio ratio={2.8 / 1} minW="140px">
-          <Image objectFit="cover" src={logo} />
+          <Image objectFit="cover" src={logo} alt="logo of library website" />
         </AspectRatio>
       </Link>
 

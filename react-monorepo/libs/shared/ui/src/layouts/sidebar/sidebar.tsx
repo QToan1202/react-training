@@ -8,7 +8,7 @@ import { useBookStore, useHiredStore, useUserStore } from '@react-monorepo/share
 import { COLORS } from '@react-monorepo/shared/utils'
 import { ISideBarItem } from '@react-monorepo/shared/types'
 import { SidebarItem } from '../../components'
-import logo from '../../../assets/images/library-logo.png'
+import logo from '../../../assets/images/library-logo.webp'
 
 export interface SidebarProps extends BoxProps {
   onClose: () => void
@@ -46,7 +46,7 @@ export const Sidebar = memo(({ onClose, items, ...rest }: SidebarProps) => {
         <Flex h="20" alignItems="center" mx="7" justifyContent="space-between">
           <Link as={RouterLink} to="/">
             <AspectRatio ratio={2.8 / 1} minW="140px">
-              <Image objectFit="cover" src={logo} />
+              <Image objectFit="cover" src={logo} alt="logo of library website" />
             </AspectRatio>
           </Link>
           <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />

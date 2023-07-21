@@ -219,7 +219,7 @@ export const BookDetail = () => {
     >
       <GridItem>
         <AspectRatio ratio={2 / 3}>
-          <Image objectFit="cover" src={bookData?.cover} borderRadius="lg" />
+          <Image objectFit="cover" src={bookData?.cover} borderRadius="lg" alt="cover of book" />
         </AspectRatio>
         <ButtonGroup mt={5}>
           <Button

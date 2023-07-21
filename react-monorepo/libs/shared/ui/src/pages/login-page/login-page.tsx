@@ -9,7 +9,7 @@ import { useUserStore } from '@react-monorepo/shared/stores'
 import { IUser, TUserForm } from '@react-monorepo/shared/types'
 import { login } from '@react-monorepo/shared/services'
 import { COLORS } from '@react-monorepo/shared/utils'
-import backgroundImg from '../../../assets/images/squiggle-pattern-gray.jpg'
+import backgroundImg from '../../../assets/images/squiggle-pattern-gray.webp'
 
 const navbarLink = ['pricing', 'support', 'contact Us']
 

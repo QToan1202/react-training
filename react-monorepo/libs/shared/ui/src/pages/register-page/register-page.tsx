@@ -1,14 +1,14 @@
 import { useCallback } from 'react'
 import { Box, Button, Text, useToast } from '@chakra-ui/react'
 import { Link, useNavigate } from 'react-router-dom'
-import {useMutation} from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 
 import { Navbar, RegisterForm } from '../../layouts'
 import { useUserStore } from '@react-monorepo/shared/stores'
 import { IUser, TUserForm } from '@react-monorepo/shared/types'
 import { COLORS } from '@react-monorepo/shared/utils'
 import { register } from '@react-monorepo/shared/services'
-import backgroundImg from '../../../assets/images/squiggle-pattern-gray.jpg'
+import backgroundImg from '../../../assets/images/squiggle-pattern-gray.webp'
 
 const navbarLink = ['pricing', 'support', 'contact Us']
 

@@ -4,7 +4,7 @@ import { AspectRatio, Box, Image, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 import { COLORS, SHADOW } from '@react-monorepo/shared/utils'
-import placeholderImage from '../../../assets/images/placeholder.png'
+import placeholderImage from '../../../assets/images/placeholder.webp'
 
 export interface CardProps {
   href: string

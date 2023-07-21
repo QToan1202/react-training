@@ -4,7 +4,7 @@ import { AspectRatio, Box, Flex, HStack, IconButton, Image } from '@chakra-ui/re
 
 import { CustomButton } from '../../components'
 import { FiMenu } from 'react-icons/fi'
-import logo from '../../../assets/images/library-logo.png'
+import logo from '../../../assets/images/library-logo.webp'
 
 export interface NavbarProps {
   children: React.ReactNode
@@ -16,7 +16,7 @@ export const Navbar = memo(({ children }: NavbarProps) => {
       <Flex alignItems="center" justifyContent="space-between">
         <Link to="/">
           <AspectRatio ratio={2.8 / 1} minW="140px">
-            <Image objectFit="cover" src={logo} />
+            <Image objectFit="cover" src={logo} alt="logo of library website" />
           </AspectRatio>
         </Link>
         <HStack spacing={5} display={{ base: 'none', md: 'flex' }}>
