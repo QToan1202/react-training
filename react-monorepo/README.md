@@ -23,17 +23,18 @@ Estimate: **7 days** (_July 05, 2023 - July 13, 2023_)
 
 ## Technical
 
-- Nx
-- React 18
-- React router DOM
-- React-hook-form
-- Vite
-- Vitest
-- Zustand
-- React Query
-- Chakra UI
-- Json-server
-- TypeScript
+- Nx (v16.5.1)
+- React (v18.2)
+- React router DOM (v18.2)
+- React-hook-form (v7.45.1)
+- Vite (v4.3.9)
+- Vitest (v0.32)
+- Zustand (v4.3.9)
+- Tanstack Query (v4.29.25)
+- Tanstack Table (v8.9.3)
+- Chakra UI (v2.7.1)
+- Json-server (v0.17.3)
+- TypeScript (v5.1.3)
 
 ## Target
 
