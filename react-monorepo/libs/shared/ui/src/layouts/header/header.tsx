@@ -70,7 +70,7 @@ export const Header = memo(({ onOpen }: HeaderProps) => {
         <Menu>
           <MenuButton py={2}>
             <HStack>
-              <Avatar src="https://bit.ly/dan-abramov" size="sm" />
+              <Avatar name={`${user?.firstName}-${user?.lastName}-avatar`} src="https://bit.ly/dan-abramov" size="sm"  />
               <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml={2}>
                 <Text fontSize="sm">{`${user?.firstName} ${user?.lastName}`}</Text>
                 <Text fontSize="xs" color="gray.600" textTransform="capitalize">
