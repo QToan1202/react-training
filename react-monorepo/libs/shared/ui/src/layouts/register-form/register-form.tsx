@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { Box, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, Text } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormErrorMessage, FormLabel, HStack, Heading, Input } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 
 import { IUser, TUserForm } from '@react-monorepo/shared/types'
@@ -27,14 +27,16 @@ export const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => 
       shadow={SHADOW.FORM}
     >
       <Box mb={4}>
-        <Text fontWeight="bold" fontSize="3xl" textTransform="capitalize">
+        <Heading fontWeight="bold" fontSize="3xl" textTransform="capitalize">
           Account info:
-        </Text>
+        </Heading>
       </Box>
       <form onSubmit={handleSubmit(onSubmit)}>
         <HStack>
-          <FormControl isInvalid={!!errors.firstName}>
-            <FormLabel htmlFor="firstName">First name</FormLabel>
+          <FormControl isInvalid={!!errors.firstName} mb={7} pos="relative">
+            <FormLabel mb={0} htmlFor="firstName">
+              First name
+            </FormLabel>
             <Input
               id="firstName"
               placeholder="First name"
@@ -47,11 +49,15 @@ export const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => 
                 maxLength: { value: 30, message: 'Maximum length should be 30' },
               })}
             />
-            <FormErrorMessage>{errors.firstName && errors.firstName.message}</FormErrorMessage>
+            <FormErrorMessage mt={0} pos="absolute">
+              {errors.firstName && errors.firstName.message}
+            </FormErrorMessage>
           </FormControl>
 
-          <FormControl isInvalid={!!errors.lastName}>
-            <FormLabel htmlFor="lastName">Last name</FormLabel>
+          <FormControl isInvalid={!!errors.lastName} mb={7} pos="relative">
+            <FormLabel mb={0} htmlFor="lastName">
+              Last name
+            </FormLabel>
             <Input
               id="lastName"
               placeholder="Last name"
@@ -64,13 +70,17 @@ export const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => 
                 maxLength: { value: 30, message: 'Maximum length should be 30' },
               })}
             />
-            <FormErrorMessage>{errors.lastName && errors.lastName.message}</FormErrorMessage>
+            <FormErrorMessage mt={0} pos="absolute">
+              {errors.lastName && errors.lastName.message}
+            </FormErrorMessage>
           </FormControl>
         </HStack>
 
         <HStack>
-          <FormControl isInvalid={!!errors.email}>
-            <FormLabel htmlFor="email">Email</FormLabel>
+          <FormControl isInvalid={!!errors.email} mb={7} pos="relative">
+            <FormLabel mb={0} htmlFor="email">
+              Email
+            </FormLabel>
             <Input
               id="email"
               placeholder="Email"
@@ -82,10 +92,14 @@ export const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => 
                 },
               })}
             />
-            <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
+            <FormErrorMessage mt={0} pos="absolute">
+              {errors.email && errors.email.message}
+            </FormErrorMessage>
           </FormControl>
-          <FormControl isInvalid={!!errors.password}>
-            <FormLabel htmlFor="password">Password</FormLabel>
+          <FormControl isInvalid={!!errors.password} mb={7} pos="relative">
+            <FormLabel mb={0} htmlFor="password">
+              Password
+            </FormLabel>
             <Input
               id="password"
               autoComplete="off"
@@ -103,12 +117,16 @@ export const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => 
                 },
               })}
             />
-            <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
+            <FormErrorMessage mt={0} pos="absolute">
+              {errors.password && errors.password.message}
+            </FormErrorMessage>
           </FormControl>
         </HStack>
 
-        <FormControl isInvalid={!!errors.phone}>
-          <FormLabel htmlFor="phone">Phone</FormLabel>
+        <FormControl isInvalid={!!errors.phone} mb={7} pos="relative">
+          <FormLabel mb={0} htmlFor="phone">
+            Phone
+          </FormLabel>
           <Input
             id="phone"
             placeholder="Phone"
@@ -121,7 +139,9 @@ export const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => 
               maxLength: { value: 10, message: 'Maximum length should be 10' },
             })}
           />
-          <FormErrorMessage>{errors.phone && errors.phone.message}</FormErrorMessage>
+          <FormErrorMessage mt={0} pos="absolute">
+            {errors.phone && errors.phone.message}
+          </FormErrorMessage>
         </FormControl>
         <Button
           mt={4}

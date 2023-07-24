@@ -13,6 +13,7 @@ import {
   Input,
   Text,
   Link,
+  Heading,
 } from '@chakra-ui/react'
 
 import { COLORS, REGEX, SHADOW } from '@react-monorepo/shared/utils'
@@ -40,13 +41,15 @@ export const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
       margin="0 auto"
     >
       <Box mb={4}>
-        <Text fontWeight="bold" fontSize="3xl" textTransform="capitalize">
+        <Heading fontWeight="bold" fontSize="3xl" textTransform="capitalize">
           manager login
-        </Text>
+        </Heading>
       </Box>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl isInvalid={!!errors.email}>
-          <FormLabel htmlFor="email">Email</FormLabel>
+        <FormControl isInvalid={!!errors.email} mb={7} pos="relative">
+          <FormLabel htmlFor="email" m={0}>
+            Email
+          </FormLabel>
           <Input
             id="email"
             placeholder="Email"
@@ -58,10 +61,14 @@ export const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
               },
             })}
           />
-          <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
+          <FormErrorMessage mt={0} pos="absolute">
+            {errors.email && errors.email.message}
+          </FormErrorMessage>
         </FormControl>
-        <FormControl isInvalid={!!errors.password}>
-          <FormLabel htmlFor="password">Password</FormLabel>
+        <FormControl isInvalid={!!errors.password} mb={7} pos="relative">
+          <FormLabel htmlFor="password" m={0}>
+            Password
+          </FormLabel>
           <Input
             id="password"
             autoComplete="off"
@@ -79,7 +86,9 @@ export const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
               },
             })}
           />
-          <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
+          <FormErrorMessage mt={0} pos="absolute">
+            {errors.password && errors.password.message}
+          </FormErrorMessage>
         </FormControl>
         <Box mt={4}>
           <Checkbox textTransform="capitalize">remember me</Checkbox>
@@ -106,7 +115,7 @@ export const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
       </Center>
       <Text textAlign="center">
         Don't have an account?
-        <Link color={COLORS.PRIMARY} as={RouterLink} to={'/register'}>
+        <Link color={COLORS.PRIMARY} as={RouterLink} to={'/register'} px={1}>
           Sign Up!
         </Link>
       </Text>
