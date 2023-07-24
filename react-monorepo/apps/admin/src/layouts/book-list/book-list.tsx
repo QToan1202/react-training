@@ -1,24 +1,19 @@
-import { useId, useMemo, useCallback, useEffect, memo } from 'react'
+import { useId, useMemo, useCallback, useEffect, memo, lazy } from 'react'
 import { shallow } from 'zustand/shallow'
 import { useToast, Grid, Text } from '@chakra-ui/react'
-import { useQuery } from '@tanstack/react-query'
 
 import { useBookStore } from '@react-monorepo/shared/stores'
-import { IBook } from '@react-monorepo/shared/types'
-import { Card } from '@react-monorepo/shared/ui'
 import { MESSAGES } from '@react-monorepo/shared/utils'
-import { get } from '@react-monorepo/shared/services'
+import { useGetBooks } from '@react-monorepo/shared/hooks'
+
+const Card = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Card })))
+const Loading = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Loading })))
 
 export const BookList = memo(() => {
   const { books } = useBookStore((state) => ({ books: state.books }), shallow)
   const toast = useToast()
   const toastID = useId()
-
-  const { data, isError, error } = useQuery({
-    queryKey: ['books'],
-    queryFn: (): Promise<IBook[]> => get('/books'),
-    refetchInterval: 1000 * 60 * 10,
-  })
+  const { data, isLoading, isError, error } = useGetBooks()
 
   const renderData: React.ReactNode = useMemo(() => {
     if (!books.length) return <Text textAlign="center">Oops! There's no books.</Text>
@@ -37,7 +32,7 @@ export const BookList = memo(() => {
 
   const renderError = useCallback(() => {
     if (error instanceof Error)
-      return toast({
+      toast({
         id: toastID,
         title: error.message,
         description: MESSAGES.ERROR_REQUEST,
@@ -48,7 +43,11 @@ export const BookList = memo(() => {
   useEffect(() => {
     if (!data) return
     useBookStore.setState({ books: data })
-  }, [data])
+
+    isError && renderError()
+  }, [data, isError, renderError])
+
+  if (isLoading) return <Loading />
 
   return (
     <Grid
@@ -61,7 +60,6 @@ export const BookList = memo(() => {
       }}
     >
       {renderData}
-      {isError && renderError()}
     </Grid>
   )
 })
