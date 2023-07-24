@@ -5,7 +5,7 @@ import { COLORS } from '@react-monorepo/shared/utils'
 
 export const Loading = memo(() => {
   return (
-    <Box position="relative" h="100vh" bgColor={COLORS.BLACK} opacity={0.5}>
+    <Box position="relative" h="100vh">
       <AbsoluteCenter axis="both">
         <Spinner thickness="4px" speed="0.65s" color={COLORS.PRIMARY} size="xl" />
       </AbsoluteCenter>
