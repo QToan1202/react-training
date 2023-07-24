@@ -1,3 +1,4 @@
+export * from './loading/loading'
 export * from './confirm-dialog/confirm-dialog'
 export * from './sidebar-item/sidebar-item'
 export * from './search/search'
