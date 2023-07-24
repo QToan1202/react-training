@@ -21,8 +21,8 @@ export const ManagementHireRequests = memo(() => {
   const { updateBookQuantity } = useBookStore((state) => ({
     books: state.books,
     updateBookQuantity: state.update,
-  }))
-  const { updateUserHireRequest } = useUserStore((state) => ({ updateUserHireRequest: state.update }))
+  }), shallow)
+  const { currentUser, updateUserHireRequest, updateLoginUser } = useUserStore((state) => ({ currentUser: state.loginUser, updateUserHireRequest: state.update, updateLoginUser: state.login }), shallow)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [selectedRequestId, setRequestMemberId] = useState<number>()
 
@@ -95,7 +95,7 @@ export const ManagementHireRequests = memo(() => {
   const toast = useToast()
   const toastID = useId()
   const queryClient = useQueryClient()
-  const { mutateAsync: mutateUpdate } = useMutation({
+  const { mutate: mutateUpdate } = useMutation({
     mutationFn: (variables: {
       path: string
       id: number
@@ -145,15 +145,18 @@ export const ManagementHireRequests = memo(() => {
       {
         path: '/users',
         id: item.userId,
-        options: { ...item.user, ...{ hireRequests: item.user?.hireRequests + 1 } },
+        options: { ...item.user, ...{ hireRequests: item.user.hireRequests + 1 } },
       },
       {
         onSuccess: (data) => {
-          if ('email' in data) return updateUserHireRequest(data)
+          if ('email' in data) {
+            updateUserHireRequest(data)
+            if (data.id === currentUser?.id) updateLoginUser({...currentUser, ...data})
+          }
         },
       }
     )
-  }, [mutateUpdate, hireRequests, selectedRequestId, updateUserHireRequest])
+  }, [mutateUpdate, hireRequests, selectedRequestId, updateUserHireRequest, updateLoginUser, currentUser])
 
   const { mutate: mutateConfirm } = useMutation({
     mutationFn: (variables: { path: string; id: number }): Promise<AxiosResponse['status']> =>
@@ -173,7 +176,6 @@ export const ManagementHireRequests = memo(() => {
       deleteRequest(variables.id)
       updateBooks()
       updateRequest()
-      // Promise.all([updateBooks(), updateRequest()])
       toast({
         id: toastID,
         title: 'Confirm request success',
