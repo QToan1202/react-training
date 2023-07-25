@@ -104,7 +104,18 @@ export const BookDetail = () => {
       description: `Book ${bookData?.name} have been hired successfully.`,
       status: 'success',
     })
-  }, [addHireRequest, bookData, hireError, isHireError, isHireSuccess, onClose, renderError, returnData, toast, toastId])
+  }, [
+    addHireRequest,
+    bookData,
+    hireError,
+    isHireError,
+    isHireSuccess,
+    onClose,
+    renderError,
+    returnData,
+    toast,
+    toastId,
+  ])
 
   const handleEditBook = useCallback(() => navigate(`/admin/edit-book/${bookId}`), [navigate, bookId])
 
@@ -151,31 +162,33 @@ export const BookDetail = () => {
         <AspectRatio ratio={2 / 3}>
           <Image objectFit="cover" src={bookData?.cover} borderRadius="lg" alt="cover of book" />
         </AspectRatio>
-        <ButtonGroup mt={5}>
-          <Button
-            onClick={handleEditBook}
-            isDisabled={currentUser?.role !== 'admin'}
-            leftIcon={<FiEdit2 />}
-            variant="outline"
-            _hover={{
-              bgColor: COLORS.BLUE_100,
-              color: COLORS.BLUE,
-            }}
-          >
-            Edit
-          </Button>
-          <Button
-            onClick={onOpen}
-            isDisabled={currentUser?.role !== 'admin'}
-            leftIcon={<FiTrash2 />}
-            variant="outline"
-            _hover={{
-              bgColor: COLORS.RED_100,
-              color: COLORS.RED,
-            }}
-          >
-            Delete
-          </Button>
+        <ButtonGroup float='right' mt={5}>
+          {currentUser?.role === 'admin' && (
+            <>
+              <Button
+                onClick={handleEditBook}
+                leftIcon={<FiEdit2 />}
+                variant="outline"
+                _hover={{
+                  bgColor: COLORS.BLUE_100,
+                  color: COLORS.BLUE,
+                }}
+              >
+                Edit
+              </Button>
+              <Button
+                onClick={onOpen}
+                leftIcon={<FiTrash2 />}
+                variant="outline"
+                _hover={{
+                  bgColor: COLORS.RED_100,
+                  color: COLORS.RED,
+                }}
+              >
+                Delete
+              </Button>
+            </>
+          )}
           <Button
             onClick={handleHireBook}
             leftIcon={<FiBook />}
