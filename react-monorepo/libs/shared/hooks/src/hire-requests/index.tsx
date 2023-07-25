@@ -1,4 +1,4 @@
-import { useMutateUpdate } from './../common/index'
+import { useMutateUpdate } from '../common/index'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { shallow } from 'zustand/shallow'
 
