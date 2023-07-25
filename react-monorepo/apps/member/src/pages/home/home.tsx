@@ -3,13 +3,10 @@
 import { useId, useMemo, useCallback, useEffect, lazy } from 'react'
 import { shallow } from 'zustand/shallow'
 import { useToast, Grid, Text } from '@chakra-ui/react'
-import { useQuery } from '@tanstack/react-query'
 
 import { useBookStore } from '@react-monorepo/shared/stores'
-import { IBook } from '@react-monorepo/shared/types'
-import { Card } from '@react-monorepo/shared/ui'
 import { MESSAGES } from '@react-monorepo/shared/utils'
-import { get } from '@react-monorepo/shared/services'
+import { useGetBooks } from '@react-monorepo/shared/hooks'
 
 const Card = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Card })))
 
@@ -18,11 +15,7 @@ export const Home = () => {
   const toast = useToast()
   const toastID = useId()
 
-  const { data, isError, error } = useQuery({
-    queryKey: ['books'],
-    queryFn: (): Promise<IBook[]> => get('/books'),
-    refetchInterval: 1000 * 60 * 10,
-  })
+  const { data, isError, error } = useGetBooks()
 
   const renderData: React.ReactNode = useMemo(() => {
     if (!books.length) return <Text textAlign="center">Oops! There's no books.</Text>
