@@ -1,53 +1,41 @@
-import { useCallback, useId, useMemo } from 'react'
+import { lazy, useCallback, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useToast } from '@chakra-ui/react'
-import shallow from 'zustand/shallow'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { shallow } from 'zustand/shallow'
 
-import { edit } from '@react-monorepo/shared/services'
 import { useUserStore } from '@react-monorepo/shared/stores'
-import { IUser, TUserForm } from '@react-monorepo/shared/types'
-import { RegisterForm } from '@react-monorepo/shared/ui'
+import { TUserForm } from '@react-monorepo/shared/types'
+import { useFindUser, useMutateEditUser } from '@react-monorepo/shared/hooks'
+
+const RegisterForm = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.RegisterForm })))
+const Loading = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Loading })))
 
 export const EditMemberPage = () => {
   const { userId } = useParams()
   const toast = useToast()
-  const toastID = useId()
   const navigate = useNavigate()
-  const { users, editUser } = useUserStore((state) => ({ users: state.users, editUser: state.update }), shallow)
-  const userData: IUser | undefined = useMemo(() => {
-    if (!userId) return
-    const selectedUser: IUser | undefined = users.find((item) => item.id === +userId)
+  const { editUser } = useUserStore((state) => ({ editUser: state.update }), shallow)
+  const { data: userData, isLoading } = useFindUser(userId)
+  const { mutate, isSuccess, data, error } = useMutateEditUser()
 
-    if (!selectedUser) return
-    return selectedUser
-  }, [userId, users])
-  const queryClient = useQueryClient()
-  const { mutate } = useMutation({
-    mutationFn: (variables: { path: string; id: number; options: Readonly<Partial<IUser>> }) =>
-      edit(variables.path, variables.id, variables.options),
-    onError: (error: unknown) => {
-      if (error instanceof Error)
-        toast({
-          id: toastID,
-          title: error.message,
-          description: "Action can't be performed.",
-          status: 'error',
-        })
-    },
-
-    onSuccess: (data) => {
-      queryClient.invalidateQueries(['users'])
+  useEffect(() => {
+    if (isSuccess) {
       editUser(data)
       toast({
-        id: toastID,
         title: 'Edit user success',
         description: `User ${data.firstName} ${data.lastName} have been modify successfully.`,
         status: 'success',
       })
-      navigate(-1)
-    },
-  })
+      navigate('/')
+    }
+
+    if (error instanceof Error)
+      toast({
+        title: error.message,
+        description: "Action can't be performed.",
+        status: 'error',
+      })
+  }, [data, editUser, error, isSuccess, navigate, toast])
 
   const handleOnSubmit = useCallback(
     (values: TUserForm) => {
@@ -60,6 +48,8 @@ export const EditMemberPage = () => {
     },
     [mutate, userId]
   )
+
+  if (isLoading) return <Loading />
 
   return <RegisterForm onSubmit={handleOnSubmit} userInfo={userData} />
 }

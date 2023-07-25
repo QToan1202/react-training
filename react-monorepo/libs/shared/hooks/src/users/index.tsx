@@ -1,6 +1,6 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { get, login, register, remove } from '@react-monorepo/shared/services'
+import { edit, find, get, login, register, remove } from '@react-monorepo/shared/services'
 import { IUser, TUserForm } from '@react-monorepo/shared/types'
 import { AxiosResponse } from 'axios'
 import { useUserStore } from '@react-monorepo/shared/stores'
@@ -43,4 +43,26 @@ export const useGetUsers = () => {
   })
 
   return getQuery
+}
+
+export const useMutateEditUser = () => {
+  const queryClient = useQueryClient()
+  const editMutation = useMutation({
+    mutationFn: (variables: { path: string; id: number; options: Partial<IUser> }) =>
+      edit(variables.path, variables.id, variables.options),
+
+    onSuccess: () => queryClient.invalidateQueries(['users']),
+  })
+
+  return editMutation
+}
+
+export const useFindUser = (userId: number | string | undefined) => {
+  const userQuery = useQuery({
+    queryKey: ['users', Number(userId)],
+    enabled: !!userId,
+    queryFn: (): Promise<IUser> => find(`/users/${userId}`),
+  })
+
+  return userQuery
 }

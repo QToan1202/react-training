@@ -1,45 +1,38 @@
-import { useCallback, useId } from 'react'
+import { lazy, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Center, useToast } from '@chakra-ui/react'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { shallow } from 'zustand/shallow'
 
-import { add } from '@react-monorepo/shared/services'
 import { IBook } from '@react-monorepo/shared/types'
-import { BookForm } from '@react-monorepo/shared/ui'
 import { useBookStore } from '@react-monorepo/shared/stores'
+import { useMutateAddBook } from '@react-monorepo/shared/hooks'
+
+const BookForm = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.BookForm })))
 
 export const AddBookPage = () => {
   const toast = useToast()
-  const toastID = useId()
   const navigate = useNavigate()
   const { addBook } = useBookStore((state) => ({ addBook: state.add }), shallow)
-  const queryClient = useQueryClient()
-  const { mutate } = useMutation({
-    mutationFn: (variables: { path: string; option: Readonly<Omit<IBook, 'id'>> }) =>
-      add<IBook>(variables.path, variables.option),
-    onError: (error: unknown) => {
-      if (error instanceof Error)
-        toast({
-          id: toastID,
-          title: error.message,
-          description: "Action can't be performed.",
-          status: 'error',
-        })
-    },
+  const { mutate, isSuccess, error, data } = useMutateAddBook()
 
-    onSuccess: (data) => {
-      queryClient.invalidateQueries(['books'])
+  useEffect(() => {
+    if (isSuccess) {
       addBook(data)
       toast({
-        id: toastID,
         title: 'Add book success',
         description: `Book ${data.name} have been add successfully.`,
         status: 'success',
       })
-      navigate('/admin/dashboard')
-    },
-  })
+      navigate('/')
+    }
+
+    if (error instanceof Error)
+      toast({
+        title: error.message,
+        description: "Action can't be performed.",
+        status: 'error',
+      })
+  }, [addBook, data, error, isSuccess, navigate, toast])
 
   const handleOnSubmit = useCallback(
     (values: IBook) => {
@@ -50,6 +43,7 @@ export const AddBookPage = () => {
     },
     [mutate]
   )
+
   return (
     <Center mt={10} px={5}>
       <BookForm onSubmit={handleOnSubmit} />

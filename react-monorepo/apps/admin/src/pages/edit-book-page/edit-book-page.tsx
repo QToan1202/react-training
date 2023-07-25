@@ -1,53 +1,41 @@
-import { useCallback,  useId, useMemo } from 'react'
+import { lazy, useCallback, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Center, useToast } from '@chakra-ui/react'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { shallow } from 'zustand/shallow'
 
-import { edit } from '@react-monorepo/shared/services'
 import { IBook } from '@react-monorepo/shared/types'
-import { BookForm } from '@react-monorepo/shared/ui'
 import { useBookStore } from '@react-monorepo/shared/stores'
+import { useGetBookDetail, useMutateEditBook } from '@react-monorepo/shared/hooks'
+
+const BookForm = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.BookForm })))
+const Loading = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Loading })))
 
 export const EditBookPage = () => {
   const { bookId } = useParams()
   const toast = useToast()
-  const toastID = useId()
   const navigate = useNavigate()
-  const { books, editBook } = useBookStore((state) => ({ books: state.books, editBook: state.update }), shallow)
-  const bookData: IBook | undefined = useMemo(() => {
-    if (!bookId) return
-    const selectedBook: IBook | undefined = books.find((item) => item.id === +bookId)
+  const { editBook } = useBookStore((state) => ({ editBook: state.update }), shallow)
+  const { data: bookData, isLoading } = useGetBookDetail(bookId)
+  const { mutate, isSuccess, data, error } = useMutateEditBook()
 
-    if (!selectedBook) return
-    return selectedBook
-  }, [bookId, books])
-  const queryClient = useQueryClient()
-  const { mutate } = useMutation({
-    mutationFn: (variables: { path: string; id: number; options: Readonly<Partial<IBook>> }) =>
-      edit(variables.path, variables.id, variables.options),
-    onError: (error: unknown) => {
-      if (error instanceof Error)
-        toast({
-          id: toastID,
-          title: error.message,
-          description: "Action can't be performed.",
-          status: 'error',
-        })
-    },
-
-    onSuccess: (data) => {
-      queryClient.invalidateQueries(['books'])
+  useEffect(() => {
+    if (isSuccess) {
       editBook(data)
       toast({
-        id: toastID,
         title: 'Edit book success',
         description: `Book ${data.name} have been modify successfully.`,
         status: 'success',
       })
-      navigate('/admin/dashboard')
-    },
-  })
+      navigate('/')
+    }
+
+    if (error instanceof Error)
+      toast({
+        title: error.message,
+        description: "Action can't be performed.",
+        status: 'error',
+      })
+  }, [data, editBook, error, isSuccess, navigate, toast])
 
   const handleOnSubmit = useCallback(
     (values: IBook) => {
@@ -60,6 +48,8 @@ export const EditBookPage = () => {
     },
     [mutate, bookId]
   )
+
+  if (isLoading) return <Loading />
 
   return (
     <Center mt={10} px={5}>
