@@ -87,6 +87,5 @@ npm run server
 **_Step 5:_** Run project in dev mode
 
 ```bash
-npm run admin:serve
-npm run member:serve
+npm start
 ```
