@@ -9,6 +9,7 @@ import { useAuthStore } from '@react-monorepo/shared/stores'
 import { ISideBarItem } from '@react-monorepo/shared/types'
 import { COLORS } from '@react-monorepo/shared/utils'
 
+const NavbarOutlet = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.NavbarOutlet })))
 const BookDetail = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.BookDetail })))
 const Dashboard = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Dashboard })))
 const LoginPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Login })))
@@ -44,9 +45,11 @@ const App = () => {
 
 const PublicRoutes = () => (
   <Routes>
-    <Route path="login" element={<LoginPage />} />
-    <Route path="register" element={<RegisterPage />} />
-    <Route path="*" element={<Navigate to="login" />} />
+    <Route path="*" element={<NavbarOutlet />}>
+      <Route path="login" element={<LoginPage />} />
+      <Route path="register" element={<RegisterPage />} />
+      <Route path="*" element={<Navigate to="login" />} />
+    </Route>
   </Routes>
 )
 
