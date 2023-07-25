@@ -61,7 +61,7 @@ const PrivateRoutes = () => {
       <Route path="/*" element={<Dashboard sidebar={sidebarContent} />}>
         <Route path="home" element={<Home />} />
         <Route path="books/:bookId" element={<BookDetail />} />
-        <Route path="/*" element={<Navigate to="/home" />} />
+        <Route path="*" element={<Navigate to="home" />} />
       </Route>
     </Routes>
   )
