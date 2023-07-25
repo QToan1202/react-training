@@ -74,5 +74,5 @@
       }
     }
   },
-  "tags": []
+  "tags": ["type:member", "scope:app"]
 }
