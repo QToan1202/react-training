@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "npx nx run-many --target=serve --all=true",
+    "start": "nx run-many --target=serve --all=true",
     "admin:serve": "nx run admin:serve",
     "member:serve": "nx run member:serve",
     "admin:test": "nx run admin:test",
