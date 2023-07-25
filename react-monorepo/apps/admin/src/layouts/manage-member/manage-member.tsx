@@ -5,13 +5,13 @@ import { Column, createColumnHelper } from '@tanstack/react-table'
 import { shallow } from 'zustand/shallow'
 import { Badge, HStack, IconButton, useDisclosure, useToast } from '@chakra-ui/react'
 
-import { useUserStore } from '@react-monorepo/shared/stores'
-import { IUser } from '@react-monorepo/shared/types'
-import { COLORS } from '@react-monorepo/shared/utils'
-import { useDeleteMember, useGetUsers } from '@react-monorepo/shared/hooks'
+import { useUserStore } from '@react-monorepo/stores'
+import { IUser } from '@react-monorepo/types'
+import { COLORS } from '@react-monorepo/utils'
+import { useDeleteMember, useGetUsers } from '@react-monorepo/hooks'
 
-const ConfirmDialog = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.ConfirmDialog })))
-const ManagementTable = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.ManagementTable })))
+const ConfirmDialog = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ConfirmDialog })))
+const ManagementTable = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ManagementTable })))
 
 const ManageMember = memo(() => {
   const { users } = useUserStore((state) => ({ users: state.users }), shallow)

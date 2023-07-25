@@ -4,13 +4,13 @@ import { Column, createColumnHelper } from '@tanstack/react-table'
 import { shallow } from 'zustand/shallow'
 import { IconButton, useDisclosure, useToast } from '@chakra-ui/react'
 
-import { useHiredStore } from '@react-monorepo/shared/stores'
-import { IHireRequest, IUser } from '@react-monorepo/shared/types'
-import { COLORS } from '@react-monorepo/shared/utils'
-import { useGetHireRequests, useMutateHireRequest } from '@react-monorepo/shared/hooks'
+import { useHiredStore } from '@react-monorepo/stores'
+import { IHireRequest, IUser } from '@react-monorepo/types'
+import { COLORS } from '@react-monorepo/utils'
+import { useGetHireRequests, useMutateHireRequest } from '@react-monorepo/hooks'
 
-const ConfirmDialog = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.ConfirmDialog })))
-const ManagementTable = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.ManagementTable })))
+const ConfirmDialog = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ConfirmDialog })))
+const ManagementTable = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ManagementTable })))
 
 const ManagementHireRequests = memo(() => {
   const { hireRequests, deleteHireRequest } = useHiredStore(
@@ -101,7 +101,7 @@ const ManagementHireRequests = memo(() => {
       isSuccess: isHireSuccess,
       isError: isHireError,
       error: hireError,
-      data: returnData
+      data: returnData,
     },
   } = useMutateHireRequest(selectedItem?.book, selectedItem?.user, 'confirm')
 

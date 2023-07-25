@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { Center, useToast } from '@chakra-ui/react'
 import { shallow } from 'zustand/shallow'
 
-import { IBook } from '@react-monorepo/shared/types'
-import { useBookStore } from '@react-monorepo/shared/stores'
-import { useMutateAddBook } from '@react-monorepo/shared/hooks'
+import { IBook } from '@react-monorepo/types'
+import { useBookStore } from '@react-monorepo/stores'
+import { useMutateAddBook } from '@react-monorepo/hooks'
 
-const BookForm = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.BookForm })))
+const BookForm = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.BookForm })))
 
 const AddBook = () => {
   const toast = useToast()

@@ -3,12 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Center, useToast } from '@chakra-ui/react'
 import { shallow } from 'zustand/shallow'
 
-import { IBook } from '@react-monorepo/shared/types'
-import { useBookStore } from '@react-monorepo/shared/stores'
-import { useGetBookDetail, useMutateEditBook } from '@react-monorepo/shared/hooks'
+import { IBook } from '@react-monorepo/types'
+import { useBookStore } from '@react-monorepo/stores'
+import { useGetBookDetail, useMutateEditBook } from '@react-monorepo/hooks'
 
-const BookForm = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.BookForm })))
-const Loading = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Loading })))
+const BookForm = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.BookForm })))
+const Loading = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Loading })))
 
 const EditBook = () => {
   const { bookId } = useParams()

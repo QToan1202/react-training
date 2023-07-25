@@ -1,0 +1,68 @@
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+
+import { edit, find, get, login, register, remove } from '@react-monorepo/services'
+import { IUser, TUserForm } from '@react-monorepo/types'
+import { AxiosResponse } from 'axios'
+import { useUserStore } from '@react-monorepo/stores'
+import { shallow } from 'zustand/shallow'
+
+export const useLoginUser = () => {
+  const loginMutate = useMutation({
+    mutationFn: (variables: { path: string; email: string; password: string }): Promise<IUser> =>
+      login(variables.path, variables.email, variables.password),
+  })
+
+  return loginMutate
+}
+
+export const useRegisterUser = () => {
+  const registerMutate = useMutation({
+    mutationFn: (variables: { path: string; user: TUserForm }): Promise<IUser> =>
+      register(variables.path, variables.user),
+  })
+
+  return registerMutate
+}
+
+export const useDeleteMember = () => {
+  const { deleteMember } = useUserStore((state) => ({ deleteMember: state.remove }), shallow)
+  const deleteMutation = useMutation({
+    mutationFn: (variables: { path: string; id: number }): Promise<AxiosResponse['status']> =>
+      remove(variables.path, variables.id),
+
+    onSuccess: (_, variables) => deleteMember(variables.id),
+  })
+
+  return deleteMutation
+}
+
+export const useGetUsers = () => {
+  const getQuery = useQuery({
+    queryKey: ['users'],
+    queryFn: () => get<IUser>('/users'),
+  })
+
+  return getQuery
+}
+
+export const useMutateEditUser = () => {
+  const queryClient = useQueryClient()
+  const editMutation = useMutation({
+    mutationFn: (variables: { path: string; id: number; options: Partial<IUser> }) =>
+      edit(variables.path, variables.id, variables.options),
+
+    onSuccess: () => queryClient.invalidateQueries(['users']),
+  })
+
+  return editMutation
+}
+
+export const useFindUser = (userId: number | string | undefined) => {
+  const userQuery = useQuery({
+    queryKey: ['users', Number(userId)],
+    enabled: !!userId,
+    queryFn: (): Promise<IUser> => find(`/users/${userId}`),
+  })
+
+  return userQuery
+}

@@ -3,12 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useToast } from '@chakra-ui/react'
 import { shallow } from 'zustand/shallow'
 
-import { useUserStore } from '@react-monorepo/shared/stores'
-import { TUserForm } from '@react-monorepo/shared/types'
-import { useFindUser, useMutateEditUser } from '@react-monorepo/shared/hooks'
+import { useUserStore } from '@react-monorepo/stores'
+import { TUserForm } from '@react-monorepo/types'
+import { useFindUser, useMutateEditUser } from '@react-monorepo/hooks'
 
-const RegisterForm = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.RegisterForm })))
-const Loading = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Loading })))
+const RegisterForm = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.RegisterForm })))
+const Loading = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Loading })))
 
 const EditMember = () => {
   const { userId } = useParams()

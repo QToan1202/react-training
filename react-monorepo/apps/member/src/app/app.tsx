@@ -5,15 +5,15 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { shallow } from 'zustand/shallow'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import { useAuthStore } from '@react-monorepo/shared/stores'
-import { ISideBarItem } from '@react-monorepo/shared/types'
-import { COLORS } from '@react-monorepo/shared/utils'
+import { useAuthStore } from '@react-monorepo/stores'
+import { ISideBarItem } from '@react-monorepo/types'
+import { COLORS } from '@react-monorepo/utils'
 
-const NavbarOutlet = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.NavbarOutlet })))
-const BookDetail = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.BookDetail })))
-const Dashboard = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Dashboard })))
-const LoginPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Login })))
-const RegisterPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Register })))
+const NavbarOutlet = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.NavbarOutlet })))
+const BookDetail = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.BookDetail })))
+const Dashboard = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Dashboard })))
+const LoginPage = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Login })))
+const RegisterPage = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Register })))
 
 const Home = lazy(() => import('../pages').then((module) => ({ default: module.Home })))
 
