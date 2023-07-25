@@ -6,16 +6,16 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Heading,
   Input,
   InputGroup,
   InputLeftElement,
-  Text,
   Textarea,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { FiFile } from 'react-icons/fi'
 
-import { COLORS, REGEX } from '@react-monorepo/shared/utils'
+import { COLORS, REGEX, SHADOW } from '@react-monorepo/shared/utils'
 import { IBook } from '@react-monorepo/shared/types'
 
 export interface BookFormProps {
@@ -30,19 +30,21 @@ export const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
     formState: { errors, isSubmitting },
   } = useForm<IBook>({ defaultValues: bookValues })
   return (
-    <Box bgColor={COLORS.WHITE} border={`2px solid ${COLORS.GRAY}`} p={10} maxW={960}>
+    <Box bgColor={COLORS.WHITE} border={`2px solid ${COLORS.GRAY}`} p={10} maxW={960} shadow={SHADOW.FORM}>
       <Box mb={4}>
-        <Text fontWeight="bold" fontSize="3xl" textTransform="capitalize">
+        <Heading fontWeight="bold" fontSize="3xl" textTransform="capitalize">
           item information:
-        </Text>
+        </Heading>
       </Box>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex direction="column" rowGap={6}>
-          <FormControl isInvalid={!!errors.name}>
-            <FormLabel htmlFor="firstName">Name</FormLabel>
+          <FormControl isInvalid={!!errors.name} pos="relative">
+            <FormLabel htmlFor="firstName" m={0}>
+              Name
+            </FormLabel>
             <Input
               id="name"
-              placeholder="Name"
+              placeholder="Enter the title"
               {...register('name', {
                 required: 'Please enter book name',
                 pattern: {
@@ -51,14 +53,18 @@ export const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
                 },
               })}
             />
-            <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
+            <FormErrorMessage pos="absolute" mt={0}>
+              {errors.name && errors.name.message}
+            </FormErrorMessage>
           </FormControl>
 
-          <FormControl isInvalid={!!errors.author}>
-            <FormLabel htmlFor="author">Author</FormLabel>
+          <FormControl isInvalid={!!errors.author} pos="relative">
+            <FormLabel htmlFor="author" m={0}>
+              Author
+            </FormLabel>
             <Input
               id="author"
-              placeholder="Author"
+              placeholder="Author of the book"
               {...register('author', {
                 required: 'Please enter author name',
                 pattern: {
@@ -68,25 +74,34 @@ export const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
                 maxLength: { value: 30, message: 'Maximum length should be 30' },
               })}
             />
-            <FormErrorMessage>{errors.author && errors.author.message}</FormErrorMessage>
+            <FormErrorMessage pos="absolute" mt={0}>
+              {errors.author && errors.author.message}
+            </FormErrorMessage>
           </FormControl>
 
-          <FormControl isInvalid={!!errors.description}>
-            <FormLabel htmlFor="description">Description</FormLabel>
+          <FormControl isInvalid={!!errors.description} pos="relative">
+            <FormLabel htmlFor="description" m={0}>
+              Description
+            </FormLabel>
             <Textarea
               id="description"
               resize="vertical"
               rows={5}
+              placeholder="Enter your description about the book your wanna add!!!"
               {...register('description', {
                 required: 'Please enter your description',
               })}
             />
-            <FormErrorMessage>{errors.description && errors.description.message}</FormErrorMessage>
+            <FormErrorMessage pos="absolute" mt={0}>
+              {errors.description && errors.description.message}
+            </FormErrorMessage>
           </FormControl>
 
           <Flex rowGap={6} columnGap={2} flexDirection={{ base: 'column', md: 'row' }}>
-            <FormControl isInvalid={!!errors.publish_date}>
-              <FormLabel htmlFor="publish_date">Publish date</FormLabel>
+            <FormControl isInvalid={!!errors.publish_date} m={0} pos="relative">
+              <FormLabel htmlFor="publish_date" m={0}>
+                Publish date
+              </FormLabel>
               <Input
                 id="publish_date"
                 autoComplete="off"
@@ -96,11 +111,15 @@ export const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
                   required: 'Please enter publish date',
                 })}
               />
-              <FormErrorMessage>{errors.publish_date && errors.publish_date.message}</FormErrorMessage>
+              <FormErrorMessage pos="absolute" mt={0}>
+                {errors.publish_date && errors.publish_date.message}
+              </FormErrorMessage>
             </FormControl>
 
-            <FormControl isInvalid={!!errors.quantity}>
-              <FormLabel htmlFor="quantity">Quantity</FormLabel>
+            <FormControl isInvalid={!!errors.quantity} pos="relative">
+              <FormLabel htmlFor="quantity" m={0}>
+                Quantity
+              </FormLabel>
               <Input
                 id="quantity"
                 min={1}
@@ -118,11 +137,15 @@ export const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
                   },
                 })}
               />
-              <FormErrorMessage>{errors.quantity && errors.quantity.message}</FormErrorMessage>
+              <FormErrorMessage pos="absolute" mt={0}>
+                {errors.quantity && errors.quantity.message}
+              </FormErrorMessage>
             </FormControl>
 
-            <FormControl isInvalid={!!errors.cover}>
-              <FormLabel htmlFor="cover">Cover</FormLabel>
+            <FormControl isInvalid={!!errors.cover} pos="relative">
+              <FormLabel htmlFor="cover" m={0}>
+                Cover
+              </FormLabel>
               <InputGroup>
                 <InputLeftElement pointerEvents="none">
                   <FiFile />
@@ -135,7 +158,9 @@ export const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
                   })}
                 />
               </InputGroup>
-              <FormErrorMessage>{errors.cover && errors.cover.message}</FormErrorMessage>
+              <FormErrorMessage pos="absolute" mt={0}>
+                {errors.cover && errors.cover.message}
+              </FormErrorMessage>
             </FormControl>
           </Flex>
           <Button
