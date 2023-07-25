@@ -1,8 +1,9 @@
 import { useCallback, useEffect } from 'react'
 import { Box, Button, Heading, Text, useToast } from '@chakra-ui/react'
 import { Link, useNavigate } from 'react-router-dom'
+import { shallow } from 'zustand/shallow'
 
-import { useUserStore } from '@react-monorepo/shared/stores'
+import { useAuthStore } from '@react-monorepo/shared/stores'
 import {  TUserForm } from '@react-monorepo/shared/types'
 import { COLORS } from '@react-monorepo/shared/utils'
 import { useRegisterUser } from '@react-monorepo/shared/hooks'
@@ -13,7 +14,7 @@ import backgroundImg from '../../../assets/images/squiggle-pattern-gray.webp'
 const navbarLink = ['pricing', 'support', 'contact Us']
 
 export const RegisterPage = () => {
-  const setLoginUser = useUserStore((state) => state.login)
+  const {setLoginUser} = useAuthStore((state) => ({setLoginUser: state.login}), shallow)
   const { mutate, isLoading, error, isSuccess, data } = useRegisterUser()
   const toast = useToast()
   const navigate = useNavigate()

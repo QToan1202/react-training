@@ -23,14 +23,14 @@ import {
 import { motion } from 'framer-motion'
 import { FiBook, FiEdit2, FiTrash2 } from 'react-icons/fi'
 
-import { useHiredStore, useUserStore } from '@react-monorepo/shared/stores'
+import { useAuthStore, useHiredStore } from '@react-monorepo/shared/stores'
 import { COLORS, MESSAGES } from '@react-monorepo/shared/utils'
 import { useGetBookDetail, useMutateHireRequest, useMutateDeleteBook } from '@react-monorepo/shared/hooks'
 import { ConfirmDialog, Loading } from '../../components'
 
 export const BookDetail = () => {
   const { bookId } = useParams()
-  const { currentUser } = useUserStore((state) => ({ currentUser: state.loginUser }), shallow)
+  const { currentUser } = useAuthStore((state) => ({ currentUser: state.user }), shallow)
   const { addHireRequest } = useHiredStore((state) => ({ addHireRequest: state.add }), shallow)
   const toast = useToast()
   const toastId = useId()

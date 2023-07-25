@@ -22,7 +22,7 @@ import { FiChevronDown, FiMenu } from 'react-icons/fi'
 import { shallow } from 'zustand/shallow'
 
 import { COLORS } from '@react-monorepo/shared/utils'
-import { useUserStore } from '@react-monorepo/shared/stores'
+import { useAuthStore } from '@react-monorepo/shared/stores'
 import logo from '../../../assets/images/library-logo.webp'
 export interface HeaderProps {
   onOpen: () => void
@@ -30,10 +30,10 @@ export interface HeaderProps {
 
 export const Header = memo(({ onOpen }: HeaderProps) => {
   const toast = useToast()
-  const { user, logOut } = useUserStore((state) => ({ user: state.loginUser, logOut: state.logout }), shallow)
+  const { user, logOut } = useAuthStore((state) => ({ user: state.user, logOut: state.logout }), shallow)
   const handleLogOut = useCallback(() => {
     logOut()
-    useUserStore.persist.clearStorage()
+    useAuthStore.persist.clearStorage()
     toast({
       title: 'Log out success',
       description: 'Hope to see you soon.',

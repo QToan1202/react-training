@@ -2,13 +2,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { shallow } from 'zustand/shallow'
 
 import { edit } from '@react-monorepo/shared/services'
-import { useBookStore, useUserStore } from '@react-monorepo/shared/stores'
+import { useAuthStore, useBookStore } from '@react-monorepo/shared/stores'
 import { IBook, IUser } from '@react-monorepo/shared/types'
 
 export const useMutateUpdate = () => {
   const { updateBook } = useBookStore((state) => ({ updateBook: state.update }), shallow)
-  const { currentUser, updateUser } = useUserStore(
-    (state) => ({ currentUser: state.loginUser, updateUser: state.login }),
+  const { currentUser, updateUser } = useAuthStore(
+    (state) => ({ currentUser: state.user, updateUser: state.login }),
     shallow
   )
   const queryClient = useQueryClient()

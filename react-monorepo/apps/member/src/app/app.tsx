@@ -5,7 +5,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { shallow } from 'zustand/shallow'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import { useUserStore } from '@react-monorepo/shared/stores'
+import { useAuthStore } from '@react-monorepo/shared/stores'
 import { ISideBarItem } from '@react-monorepo/shared/types'
 import { COLORS } from '@react-monorepo/shared/utils'
 
@@ -23,14 +23,14 @@ const queryClient = new QueryClient({
 })
 
 export const App = () => {
-  const { loginUser } = useUserStore((state) => ({ loginUser: state.loginUser }), shallow)
+  const { authUser } = useAuthStore((state) => ({ authUser: state.user }), shallow)
 
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider toastOptions={{ defaultOptions: { position: 'bottom', duration: 3000, isClosable: true } }}>
         <Suspense fallback={<OverlayLoading />}>
           <Routes>
-            {loginUser ? (
+            {authUser ? (
               <Route path="/*" element={<PrivateRoutes />} />
             ) : (
               <Route path="/*" element={<PublicRoutes />} />

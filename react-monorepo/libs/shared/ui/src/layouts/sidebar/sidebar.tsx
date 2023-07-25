@@ -4,7 +4,7 @@ import { AspectRatio, Box, BoxProps, Button, CloseButton, Flex, Link, Image, use
 import { FiLogOut } from 'react-icons/fi'
 import { shallow } from 'zustand/shallow'
 
-import { useUserStore } from '@react-monorepo/shared/stores'
+import { useAuthStore } from '@react-monorepo/shared/stores'
 import { COLORS } from '@react-monorepo/shared/utils'
 import { ISideBarItem } from '@react-monorepo/shared/types'
 import { SidebarItem } from '../../components'
@@ -17,10 +17,10 @@ export interface SidebarProps extends BoxProps {
 
 export const Sidebar = memo(({ onClose, items, ...rest }: SidebarProps) => {
   const toast = useToast()
-  const { logOut } = useUserStore((state) => ({ logOut: state.logout }), shallow)
+  const { logOut } = useAuthStore((state) => ({ logOut: state.logout }), shallow)
   const handleLogOut = useCallback(() => {
     logOut()
-    useUserStore.persist.clearStorage()
+    useAuthStore.persist.clearStorage()
     toast({
       title: 'Log out success',
       description: 'Hope to see you soon.',
