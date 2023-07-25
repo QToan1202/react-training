@@ -20,9 +20,9 @@ export const useMutateUpdate = () => {
     }): Promise<IBook | IUser> => edit<IBook | IUser>(variables.path, variables.id, variables.options),
 
     onSuccess: (data) => {
-      queryClient.invalidateQueries(['books', 'users'])
       if ('author' in data) {
         updateBook(data)
+        queryClient.invalidateQueries(['books'])
       }
       if ('email' in data) updateUser({ ...currentUser, ...data })
     },
