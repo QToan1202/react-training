@@ -1,5 +1,3 @@
-
-
 import { useId, useMemo, useCallback, useEffect, lazy } from 'react'
 import { shallow } from 'zustand/shallow'
 import { useToast, Grid, Text } from '@chakra-ui/react'
@@ -33,6 +31,7 @@ export const Home = () => {
   }, [books])
 
   const renderError = useCallback(() => {
+    if (toast.isActive(toastID)) return
     if (error instanceof Error)
       return toast({
         id: toastID,
@@ -45,7 +44,8 @@ export const Home = () => {
   useEffect(() => {
     if (!data) return
     useBookStore.setState({ books: data })
-  }, [data])
+    isError && renderError()
+  }, [data, isError, renderError])
 
   return (
     <Grid
@@ -58,7 +58,6 @@ export const Home = () => {
       }}
     >
       {renderData}
-      {isError && renderError()}
     </Grid>
   )
 }
