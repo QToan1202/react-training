@@ -1,45 +1,40 @@
-import { useCallback } from 'react'
-import { Box, Button, Text, useToast } from '@chakra-ui/react'
+import { useCallback, useEffect } from 'react'
+import { Box, Button, Heading, Text, useToast } from '@chakra-ui/react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useMutation } from '@tanstack/react-query'
 
-import { Navbar, RegisterForm } from '../../layouts'
 import { useUserStore } from '@react-monorepo/shared/stores'
-import { IUser, TUserForm } from '@react-monorepo/shared/types'
+import {  TUserForm } from '@react-monorepo/shared/types'
 import { COLORS } from '@react-monorepo/shared/utils'
-import { register } from '@react-monorepo/shared/services'
+import { useRegisterUser } from '@react-monorepo/shared/hooks'
+import { Navbar, RegisterForm } from '../../layouts'
+import { Loading } from '../../components'
 import backgroundImg from '../../../assets/images/squiggle-pattern-gray.webp'
 
 const navbarLink = ['pricing', 'support', 'contact Us']
 
 export const RegisterPage = () => {
   const setLoginUser = useUserStore((state) => state.login)
+  const { mutate, isLoading, error, isSuccess, data } = useRegisterUser()
   const toast = useToast()
   const navigate = useNavigate()
 
-  const { mutate } = useMutation({
-    mutationFn: (variables: { path: string; user: TUserForm }): Promise<IUser> =>
-      register(variables.path, variables.user),
-
-    onError: (error: unknown) => {
-      if (error instanceof Error)
-        toast({
-          title: error.message,
-          description: 'Please check your entered information.',
-          status: 'error',
-        })
-    },
-
-    onSuccess: (data: IUser) => {
+  useEffect(() => {
+    if (isSuccess) {
       setLoginUser(data)
       toast({
         title: 'Account created.',
         description: "We've created your account for you.",
         status: 'success',
       })
-      navigate('/')
-    },
-  })
+    }
+
+    if (error instanceof Error)
+      toast({
+        title: error.message,
+        description: 'Please check your entered information.',
+        status: 'error',
+      })
+  }, [data, error, isSuccess, navigate, setLoginUser, toast])
 
   const handleSubmit = useCallback(
     (values: TUserForm) => {
@@ -50,6 +45,8 @@ export const RegisterPage = () => {
     },
     [mutate]
   )
+
+  if (isLoading) return <Loading />
 
   return (
     <Box h="100vh" bgImage={backgroundImg}>
@@ -68,9 +65,9 @@ export const RegisterPage = () => {
           </Button>
         ))}
       </Navbar>
-      <Text textAlign="center" fontWeight="black" fontSize="70px">
+      <Heading textAlign="center" fontWeight="black" fontSize="70px">
         Sign up now!
-      </Text>
+      </Heading>
       <Text textAlign="center" fontWeight="light" fontSize="30px">
         Check out our library, we have everything from everywhere.
       </Text>

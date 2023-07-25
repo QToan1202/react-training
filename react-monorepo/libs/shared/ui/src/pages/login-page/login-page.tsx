@@ -1,49 +1,41 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { Box, Button, useToast } from '@chakra-ui/react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
-import { useMutation } from '@tanstack/react-query'
+import { Link, useNavigate } from 'react-router-dom'
 import { shallow } from 'zustand/shallow'
 
 import { LoginForm, Navbar } from '../../layouts'
 import { useUserStore } from '@react-monorepo/shared/stores'
-import { IUser, TUserForm } from '@react-monorepo/shared/types'
-import { login } from '@react-monorepo/shared/services'
+import { TUserForm } from '@react-monorepo/shared/types'
 import { COLORS } from '@react-monorepo/shared/utils'
 import backgroundImg from '../../../assets/images/squiggle-pattern-gray.webp'
+import { Loading } from '../../components'
+import { useLoginUser } from '@react-monorepo/shared/hooks'
 
 const navbarLink = ['pricing', 'support', 'contact Us']
 
 export const LoginPage = () => {
-  const { loginUser, setLoginUser } = useUserStore(
-    (state) => ({ loginUser: state.loginUser, setLoginUser: state.login }),
-    shallow
-  )
+  const { setLoginUser } = useUserStore((state) => ({ setLoginUser: state.login }), shallow)
+  const { mutate, isLoading, error, isSuccess, data } = useLoginUser()
   const toast = useToast()
   const navigate = useNavigate()
 
-  const { mutate } = useMutation({
-    mutationFn: (variables: { path: string; email: string; password: string }): Promise<IUser> =>
-      login(variables.path, variables.email, variables.password),
-
-    onError: (error: unknown) => {
-      if (error instanceof Error)
-        toast({
-          title: error.message,
-          description: 'Please check your entered information.',
-          status: 'error',
-        })
-    },
-
-    onSuccess: (data: IUser) => {
+  useEffect(() => {
+    if (isSuccess) {
       setLoginUser(data)
       toast({
         title: 'Login success',
         description: 'Welcome back!',
         status: 'success',
       })
-      navigate('/')
-    },
-  })
+    }
+
+    if (error instanceof Error)
+      toast({
+        title: error.message,
+        description: 'Please check your entered information.',
+        status: 'error',
+      })
+  }, [data, error, isSuccess, navigate, setLoginUser, toast])
 
   const handleSubmit = useCallback(
     (values: TUserForm) => {
@@ -56,7 +48,7 @@ export const LoginPage = () => {
     [mutate]
   )
 
-  if (loginUser) return <Navigate to="/" />
+  if (isLoading) return <Loading />
 
   return (
     <Box h="100vh" bgImage={backgroundImg}>
