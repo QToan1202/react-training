@@ -1,6 +1,6 @@
 
 
-import { useId, useMemo, useCallback, useEffect } from 'react'
+import { useId, useMemo, useCallback, useEffect, lazy } from 'react'
 import { shallow } from 'zustand/shallow'
 import { useToast, Grid, Text } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
@@ -10,6 +10,8 @@ import { IBook } from '@react-monorepo/shared/types'
 import { Card } from '@react-monorepo/shared/ui'
 import { MESSAGES } from '@react-monorepo/shared/utils'
 import { get } from '@react-monorepo/shared/services'
+
+const Card = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Card })))
 
 export const Home = () => {
   const { books } = useBookStore((state) => ({ books: state.books }), shallow)
