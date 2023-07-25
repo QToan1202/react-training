@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { AspectRatio, Box, Flex, HStack, IconButton, Image } from '@chakra-ui/react'
+import { FiMenu } from 'react-icons/fi'
 
 import { CustomButton } from '../../components'
-import { FiMenu } from 'react-icons/fi'
 import logo from '../../../assets/images/library-logo.webp'
 
 export interface NavbarProps {
