@@ -11,8 +11,8 @@ import { COLORS } from '@react-monorepo/shared/utils'
 
 const BookDetail = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.BookDetail })))
 const Dashboard = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Dashboard })))
-const LoginPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.LoginPage })))
-const RegisterPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.RegisterPage })))
+const LoginPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Login })))
+const RegisterPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Register })))
 
 const Home = lazy(() => import('../pages').then((module) => ({ default: module.Home })))
 

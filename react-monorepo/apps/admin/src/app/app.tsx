@@ -11,13 +11,13 @@ import { COLORS } from '@react-monorepo/shared/utils'
 
 const BookDetail = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.BookDetail })))
 const Dashboard = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Dashboard })))
-const LoginPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.LoginPage })))
-const RegisterPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.RegisterPage })))
+const LoginPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Login })))
+const RegisterPage = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Register })))
 
 const AdminDashboard = lazy(() => import('../pages').then((module) => ({ default: module.AdminDashboard })))
-const EditBookPage = lazy(() => import('../pages').then((module) => ({ default: module.EditBookPage })))
-const AddBookPage = lazy(() => import('../pages').then((module) => ({ default: module.AddBookPage })))
-const EditMemberPage = lazy(() => import('../pages').then((module) => ({ default: module.EditMemberPage })))
+const EditBookPage = lazy(() => import('../pages').then((module) => ({ default: module.EditBook })))
+const AddBookPage = lazy(() => import('../pages').then((module) => ({ default: module.AddBook })))
+const EditMemberPage = lazy(() => import('../pages').then((module) => ({ default: module.EditMember })))
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react'
 
-import EditMemberPage from './edit-member-page'
+import Login from './login'
 
-describe('EditMemberPage', () => {
+describe('LoginPage', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<EditMemberPage />)
+    const { baseElement } = render(<Login />)
     expect(baseElement).toBeTruthy()
   })
 })

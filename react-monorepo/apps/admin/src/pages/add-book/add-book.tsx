@@ -9,7 +9,7 @@ import { useMutateAddBook } from '@react-monorepo/shared/hooks'
 
 const BookForm = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.BookForm })))
 
-const AddBookPage = () => {
+const AddBook = () => {
   const toast = useToast()
   const navigate = useNavigate()
   const { addBook } = useBookStore((state) => ({ addBook: state.add }), shallow)
@@ -51,4 +51,4 @@ const AddBookPage = () => {
   )
 }
 
-export default AddBookPage
+export default AddBook

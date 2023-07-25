@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react'
 
-import EditBookPage from './edit-book-page'
+import Register from './register'
 
-describe('EditBookPage', () => {
+describe('RegisterPage', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<EditBookPage />)
+    const { baseElement } = render(<Register />)
     expect(baseElement).toBeTruthy()
   })
 })

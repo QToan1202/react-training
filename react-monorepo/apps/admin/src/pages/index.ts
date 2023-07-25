@@ -1,4 +1,4 @@
-export { default as EditMemberPage } from './edit-member-page/edit-member-page'
-export { default as EditBookPage } from './edit-book-page/edit-book-page'
-export { default as AddBookPage } from './add-book-page/add-book-page'
+export { default as EditMember } from './edit-member/edit-member-page'
+export { default as EditBook } from './edit-book/edit-book'
+export { default as AddBook } from './add-book/add-book'
 export { default as AdminDashboard } from './admin-dashboard/admin-dashboard'
