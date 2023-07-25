@@ -7,7 +7,7 @@ export interface CustomButtonProps extends ButtonProps {
   title: string
 }
 
-export const CustomButton = memo(({title, ...rest}: CustomButtonProps) => {
+const CustomButton = memo(({title, ...rest}: CustomButtonProps) => {
   return (
     <Button
       p="10px 30px"
@@ -30,3 +30,5 @@ export const CustomButton = memo(({title, ...rest}: CustomButtonProps) => {
     </Button>
   )
 })
+
+export default CustomButton

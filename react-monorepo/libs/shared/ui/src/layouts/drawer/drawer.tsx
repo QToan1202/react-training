@@ -7,7 +7,7 @@ export interface DrawerProps {
   onClose: () => void
 }
 
-export const Drawer = memo(({ isOpen, onClose, children }: DrawerProps) => {
+const Drawer = memo(({ isOpen, onClose, children }: DrawerProps) => {
   return (
     <ChakraDrawer
       autoFocus={false}
@@ -24,3 +24,5 @@ export const Drawer = memo(({ isOpen, onClose, children }: DrawerProps) => {
     </ChakraDrawer>
   )
 })
+
+export default Drawer

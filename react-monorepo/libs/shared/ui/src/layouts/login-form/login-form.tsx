@@ -23,7 +23,7 @@ export interface LoginFormProps {
   onSubmit: (values: TUserForm) => void
 }
 
-export const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
+const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
   const {
     register,
     handleSubmit,
@@ -122,3 +122,5 @@ export const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
     </Box>
   )
 })
+
+export default LoginForm

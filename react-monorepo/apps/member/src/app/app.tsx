@@ -22,7 +22,7 @@ const queryClient = new QueryClient({
   },
 })
 
-export const App = () => {
+const App = () => {
   const { authUser } = useAuthStore((state) => ({ authUser: state.user }), shallow)
 
   return (
@@ -71,3 +71,5 @@ const OverlayLoading = () => (
     </AbsoluteCenter>
   </Box>
 )
+
+export default App

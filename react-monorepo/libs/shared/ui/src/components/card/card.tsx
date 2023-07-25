@@ -15,7 +15,7 @@ export interface CardProps {
   fallbackImage?: string
 }
 
-export const Card = memo(({ href, imageUrl, name, author, alt, fallbackImage = placeholderImage }: CardProps) => {
+const Card = memo(({ href, imageUrl, name, author, alt, fallbackImage = placeholderImage }: CardProps) => {
   return (
     <Box as={Link} to={href} margin={5} flexDir="column" alignItems="center">
       <AspectRatio ratio={2 / 3}>
@@ -48,3 +48,5 @@ export const Card = memo(({ href, imageUrl, name, author, alt, fallbackImage = p
     </Box>
   )
 })
+
+export default Card

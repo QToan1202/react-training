@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import { FiHome } from 'react-icons/fi'
 
-import { Sidebar } from './sidebar'
+import Sidebar from './sidebar'
 
 describe('Sidebar', () => {
   const mockFn = vi.fn()

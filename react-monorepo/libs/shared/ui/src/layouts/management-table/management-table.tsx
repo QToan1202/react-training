@@ -38,7 +38,7 @@ export interface ManagementTableProps<T extends object> {
   caption?: string
 }
 
-export const ManagementTable = memo(<T extends object>({ data, caption, columns }: ManagementTableProps<T>) => {
+const ManagementTable = memo(<T extends object>({ data, caption, columns }: ManagementTableProps<T>) => {
   const [sorting, setSorting] = useState<SortingState>([])
   const table = useReactTable({
     columns,
@@ -101,3 +101,5 @@ export const ManagementTable = memo(<T extends object>({ data, caption, columns 
     </TableContainer>
   )
 })
+
+export default ManagementTable

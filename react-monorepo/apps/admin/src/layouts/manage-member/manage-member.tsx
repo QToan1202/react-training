@@ -13,7 +13,7 @@ import { useDeleteMember, useGetUsers } from '@react-monorepo/shared/hooks'
 const ConfirmDialog = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.ConfirmDialog })))
 const ManagementTable = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.ManagementTable })))
 
-export const ManageMember = memo(() => {
+const ManageMember = memo(() => {
   const { users } = useUserStore((state) => ({ users: state.users }), shallow)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate()
@@ -161,3 +161,5 @@ export const ManageMember = memo(() => {
     </>
   )
 })
+
+export default ManageMember

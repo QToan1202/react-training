@@ -28,7 +28,7 @@ export interface HeaderProps {
   onOpen: () => void
 }
 
-export const Header = memo(({ onOpen }: HeaderProps) => {
+const Header = memo(({ onOpen }: HeaderProps) => {
   const toast = useToast()
   const { user, logOut } = useAuthStore((state) => ({ user: state.user, logOut: state.logout }), shallow)
   const handleLogOut = useCallback(() => {
@@ -92,3 +92,5 @@ export const Header = memo(({ onOpen }: HeaderProps) => {
     </Flex>
   )
 })
+
+export default Header

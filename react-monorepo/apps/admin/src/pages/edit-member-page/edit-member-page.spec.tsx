@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 
-import { EditMemberPage } from './edit-member-page'
+import EditMemberPage from './edit-member-page'
 
 describe('EditMemberPage', () => {
   it('should render successfully', () => {

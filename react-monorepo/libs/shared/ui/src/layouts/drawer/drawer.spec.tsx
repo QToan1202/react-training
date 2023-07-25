@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react'
 import { FiHome } from 'react-icons/fi'
 
-import { Drawer } from './drawer'
-import { Sidebar } from '../sidebar/sidebar'
+import Drawer from './drawer'
+import Sidebar from '../sidebar/sidebar'
 
 describe('Drawer', () => {
   const mockFn = vi.fn()

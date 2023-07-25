@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 
-import { ManagementTable } from './management-table'
+import ManagementTable from './management-table'
 import { IUser } from '@react-monorepo/shared/types'
 import { Column, createColumnHelper } from '@tanstack/react-table'
 
@@ -20,6 +20,7 @@ describe('ManagementTable', () => {
       email: 'admin@gmail.com',
       password: '12345678',
       phone: '0123456789',
+      hireRequests: 1,
       role: 'admin',
     },
   ]

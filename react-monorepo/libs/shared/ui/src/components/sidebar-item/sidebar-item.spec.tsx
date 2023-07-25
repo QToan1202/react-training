@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import { FaBeer } from 'react-icons/fa';
 
-import { SidebarItem } from './sidebar-item'
+import SidebarItem from './sidebar-item'
 
 describe('SidebarItem', () => {
   it('should render successfully', () => {

@@ -12,7 +12,7 @@ import { useGetHireRequests, useMutateHireRequest } from '@react-monorepo/shared
 const ConfirmDialog = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.ConfirmDialog })))
 const ManagementTable = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.ManagementTable })))
 
-export const ManagementHireRequests = memo(() => {
+const ManagementHireRequests = memo(() => {
   const { hireRequests, deleteHireRequest } = useHiredStore(
     (state) => ({ hireRequests: state.hireRequests, deleteHireRequest: state.remove }),
     shallow
@@ -146,3 +146,5 @@ export const ManagementHireRequests = memo(() => {
     </>
   )
 })
+
+export default ManagementHireRequests

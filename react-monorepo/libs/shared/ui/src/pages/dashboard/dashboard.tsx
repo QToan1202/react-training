@@ -8,7 +8,7 @@ export interface DashboardProps {
   sidebar: ISideBarItem[]
 }
 
-export const Dashboard = ({ sidebar }: DashboardProps) => {
+const Dashboard = ({ sidebar }: DashboardProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -24,3 +24,5 @@ export const Dashboard = ({ sidebar }: DashboardProps) => {
     </Box>
   )
 }
+
+export default Dashboard

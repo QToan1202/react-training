@@ -3,7 +3,7 @@ import { AbsoluteCenter, Box, Spinner } from '@chakra-ui/react'
 
 import { COLORS } from '@react-monorepo/shared/utils'
 
-export const Loading = memo(() => {
+const Loading = memo(() => {
   return (
     <Box position="relative" h="100vh">
       <AbsoluteCenter axis="both">
@@ -12,3 +12,5 @@ export const Loading = memo(() => {
     </Box>
   )
 })
+
+export default Loading

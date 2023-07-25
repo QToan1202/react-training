@@ -10,7 +10,7 @@ import { useFindUser, useMutateEditUser } from '@react-monorepo/shared/hooks'
 const RegisterForm = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.RegisterForm })))
 const Loading = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Loading })))
 
-export const EditMemberPage = () => {
+const EditMemberPage = () => {
   const { userId } = useParams()
   const toast = useToast()
   const navigate = useNavigate()
@@ -53,3 +53,5 @@ export const EditMemberPage = () => {
 
   return <RegisterForm onSubmit={handleOnSubmit} userInfo={userData} />
 }
+
+export default EditMemberPage

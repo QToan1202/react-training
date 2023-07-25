@@ -10,7 +10,7 @@ import { useGetBookDetail, useMutateEditBook } from '@react-monorepo/shared/hook
 const BookForm = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.BookForm })))
 const Loading = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Loading })))
 
-export const EditBookPage = () => {
+const EditBookPage = () => {
   const { bookId } = useParams()
   const toast = useToast()
   const navigate = useNavigate()
@@ -57,3 +57,5 @@ export const EditBookPage = () => {
     </Center>
   )
 }
+
+export default EditBookPage

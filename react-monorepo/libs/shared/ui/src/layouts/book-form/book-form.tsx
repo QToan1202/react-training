@@ -23,7 +23,7 @@ export interface BookFormProps {
   onSubmit: (values: IBook) => void
 }
 
-export const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
+const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
   const {
     register,
     handleSubmit,
@@ -179,3 +179,5 @@ export const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
     </Box>
   )
 })
+
+export default BookForm

@@ -10,7 +10,7 @@ export interface NavbarProps {
   children: React.ReactNode
 }
 
-export const Navbar = memo(({ children }: NavbarProps) => {
+const Navbar = memo(({ children }: NavbarProps) => {
   return (
     <Box mx="auto" p={5} maxW={1200}>
       <Flex alignItems="center" justifyContent="space-between">
@@ -38,3 +38,5 @@ export const Navbar = memo(({ children }: NavbarProps) => {
     </Box>
   )
 })
+
+export default Navbar

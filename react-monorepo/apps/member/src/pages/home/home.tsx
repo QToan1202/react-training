@@ -8,7 +8,7 @@ import { useGetBooks } from '@react-monorepo/shared/hooks'
 
 const Card = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Card })))
 
-export const Home = () => {
+const Home = () => {
   const { books } = useBookStore((state) => ({ books: state.books }), shallow)
   const toast = useToast()
   const toastID = useId()
@@ -61,3 +61,5 @@ export const Home = () => {
     </Grid>
   )
 }
+
+export default Home

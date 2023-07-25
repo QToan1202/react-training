@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 
-import { AdminDashboard } from './admin-dashboard'
+import AdminDashboard  from './admin-dashboard'
 
 describe('AdminDashboard', () => {
   it('should render successfully', () => {

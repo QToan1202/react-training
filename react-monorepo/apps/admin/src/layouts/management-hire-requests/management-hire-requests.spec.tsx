@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 
-import { ManagementHireRequests } from './management-hire-requests'
+import ManagementHireRequests from './management-hire-requests'
 
 describe('ManagementHireRequests', () => {
   it('should render successfully', () => {

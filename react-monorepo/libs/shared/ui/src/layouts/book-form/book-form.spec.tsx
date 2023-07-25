@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 
-import { BookForm } from './book-form'
+import BookForm from './book-form'
 
 describe('BookForm', () => {
   const mockFn = vi.fn()

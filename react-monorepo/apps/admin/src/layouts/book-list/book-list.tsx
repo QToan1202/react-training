@@ -9,7 +9,7 @@ import { useGetBooks } from '@react-monorepo/shared/hooks'
 const Card = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Card })))
 const Loading = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.Loading })))
 
-export const BookList = memo(() => {
+const BookList = memo(() => {
   const { books } = useBookStore((state) => ({ books: state.books }), shallow)
   const toast = useToast()
   const toastID = useId()
@@ -63,3 +63,5 @@ export const BookList = memo(() => {
     </Grid>
   )
 })
+
+export default BookList

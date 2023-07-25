@@ -28,7 +28,7 @@ import { COLORS, MESSAGES } from '@react-monorepo/shared/utils'
 import { useGetBookDetail, useMutateHireRequest, useMutateDeleteBook } from '@react-monorepo/shared/hooks'
 import { ConfirmDialog, Loading } from '../../components'
 
-export const BookDetail = () => {
+const BookDetail = () => {
   const { bookId } = useParams()
   const { currentUser } = useAuthStore((state) => ({ currentUser: state.user }), shallow)
   const { addHireRequest } = useHiredStore((state) => ({ addHireRequest: state.add }), shallow)
@@ -162,7 +162,7 @@ export const BookDetail = () => {
         <AspectRatio ratio={2 / 3}>
           <Image objectFit="cover" src={bookData?.cover} borderRadius="lg" alt="cover of book" />
         </AspectRatio>
-        <ButtonGroup float='right' mt={5}>
+        <ButtonGroup float="right" mt={5}>
           {currentUser?.role === 'admin' && (
             <>
               <Button
@@ -246,3 +246,5 @@ export const BookDetail = () => {
     </Grid>
   )
 }
+
+export default BookDetail

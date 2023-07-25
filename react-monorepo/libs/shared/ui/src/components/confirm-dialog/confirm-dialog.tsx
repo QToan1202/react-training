@@ -17,7 +17,7 @@ export interface ConfirmDialogProps {
   onDelete: () => void
 }
 
-export const ConfirmDialog = memo(({ isOpen, onClose, onDelete, header, body }: ConfirmDialogProps) => {
+const ConfirmDialog = memo(({ isOpen, onClose, onDelete, header, body }: ConfirmDialogProps) => {
   const cancelRef = useRef(null)
 
   return (
@@ -43,3 +43,5 @@ export const ConfirmDialog = memo(({ isOpen, onClose, onDelete, header, body }: 
     </AlertDialog>
   )
 })
+
+export default ConfirmDialog

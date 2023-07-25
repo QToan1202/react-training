@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 
-import { ConfirmDialog } from './confirm-dialog'
+import ConfirmDialog from './confirm-dialog'
 
 describe('ConfirmDialog', () => {
   it('should render successfully', () => {

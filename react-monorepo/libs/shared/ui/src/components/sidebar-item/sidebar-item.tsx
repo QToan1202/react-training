@@ -12,7 +12,7 @@ export interface SidebarItemProps {
   icon: IconType
 }
 
-export const SidebarItem = memo(({ title, to, icon }: SidebarItemProps) => {
+const SidebarItem = memo(({ title, to, icon }: SidebarItemProps) => {
   const [isHovered, SetIsHovered] = useState(false)
   const handleHoverItem = useCallback(() => {
     SetIsHovered((prevState) => !prevState)
@@ -48,3 +48,5 @@ export const SidebarItem = memo(({ title, to, icon }: SidebarItemProps) => {
     </Link>
   )
 })
+
+export default SidebarItem

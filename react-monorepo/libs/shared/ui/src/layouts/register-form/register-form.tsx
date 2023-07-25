@@ -10,7 +10,7 @@ export interface RegisterFormProps {
   onSubmit: (values: TUserForm) => void
 }
 
-export const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => {
+const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => {
   const {
     register,
     handleSubmit,
@@ -159,3 +159,5 @@ export const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => 
     </Box>
   )
 })
+
+export default RegisterForm

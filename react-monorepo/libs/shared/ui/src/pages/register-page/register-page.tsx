@@ -13,7 +13,7 @@ import backgroundImg from '../../../assets/images/squiggle-pattern-gray.webp'
 
 const navbarLink = ['pricing', 'support', 'contact Us']
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
   const {setLoginUser} = useAuthStore((state) => ({setLoginUser: state.login}), shallow)
   const { mutate, isLoading, error, isSuccess, data } = useRegisterUser()
   const toast = useToast()
@@ -78,3 +78,5 @@ export const RegisterPage = () => {
     </Box>
   )
 }
+
+export default RegisterPage

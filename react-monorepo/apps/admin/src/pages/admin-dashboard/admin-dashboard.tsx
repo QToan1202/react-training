@@ -1,10 +1,9 @@
 import { Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
 
 import { COLORS } from '@react-monorepo/shared/utils'
-import { ManageMember, ManagementHireRequests } from '../../layouts'
-import { BookList } from '../../layouts/book-list/book-list'
+import { ManageMember, ManagementHireRequests, BookList } from '../../layouts'
 
-export const AdminDashboard = () => {
+const AdminDashboard = () => {
   return (
     <Tabs isFitted isLazy variant="unstyled">
       <TabList>
@@ -30,3 +29,5 @@ export const AdminDashboard = () => {
     </Tabs>
   )
 }
+
+export default AdminDashboard

@@ -7,7 +7,7 @@ export interface SearchProps extends InputProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Search = memo(({ value, onChange, ...rest }: SearchProps) => {
+const Search = memo(({ value, onChange, ...rest }: SearchProps) => {
   return (
     <InputGroup>
       <InputLeftElement pointerEvents="none">
@@ -26,3 +26,5 @@ export const Search = memo(({ value, onChange, ...rest }: SearchProps) => {
     </InputGroup>
   )
 })
+
+export default Search

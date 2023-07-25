@@ -13,7 +13,7 @@ import { Loading } from '../../components'
 
 const navbarLink = ['pricing', 'support', 'contact Us']
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const { setLoginUser } = useAuthStore((state) => ({ setLoginUser: state.login }), shallow)
   const { mutate, isLoading, error, isSuccess, data } = useLoginUser()
   const toast = useToast()
@@ -73,3 +73,5 @@ export const LoginPage = () => {
     </Box>
   )
 }
+
+export default LoginPage

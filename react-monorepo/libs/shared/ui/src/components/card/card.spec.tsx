@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 
-import { Card, CardProps } from './card'
+import Card, { CardProps } from './card'
 
 const props: CardProps = {
   href: '#',
