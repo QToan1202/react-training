@@ -48,11 +48,11 @@ const App = () => {
 
 const PublicRoutes = () => (
   <Routes>
-    <Route path="/" element={<NavbarOutlet />}>
+    <Route path="*" element={<NavbarOutlet />}>
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
+      <Route path="*" element={<Navigate to="login" />} />
     </Route>
-    <Route path="*" element={<Navigate to="/login" />} />
   </Routes>
 )
 
