@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 
 import { get, login, register, remove } from '@react-monorepo/shared/services'
 import { IUser, TUserForm } from '@react-monorepo/shared/types'
