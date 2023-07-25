@@ -1,28 +1,30 @@
-import React, { memo, useCallback, useEffect, useId, useMemo, useState } from 'react'
+import React, { lazy, memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { FiEdit2, FiTrash2 } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import { Column, createColumnHelper } from '@tanstack/react-table'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { shallow } from 'zustand/shallow'
 import { Badge, HStack, IconButton, useDisclosure, useToast } from '@chakra-ui/react'
 
 import { useUserStore } from '@react-monorepo/shared/stores'
 import { IUser } from '@react-monorepo/shared/types'
-import { ConfirmDialog, ManagementTable } from '@react-monorepo/shared/ui'
 import { COLORS } from '@react-monorepo/shared/utils'
-import { get, remove } from '@react-monorepo/shared/services'
-import { AxiosResponse } from 'axios'
+import { useDeleteMember, useGetUsers } from '@react-monorepo/shared/hooks'
+
+const ConfirmDialog = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.ConfirmDialog })))
+const ManagementTable = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.ManagementTable })))
 
 export const ManageMember = memo(() => {
-  const { users, deleteUser } = useUserStore((state) => ({ users: state.users, deleteUser: state.remove }), shallow)
+  const { users } = useUserStore((state) => ({ users: state.users }), shallow)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate()
   const [selectedMemberId, setSelectedMemberId] = useState<number>()
-  const initState: IUser[] = useMemo(() => {
-    return users.filter((item) => item.role !== 'admin')
-  }, [users])
+  const memberList: IUser[] = useMemo(() => users.filter((item) => item.role !== 'admin'), [users])
+  const { data } = useGetUsers()
 
-  const [memberList, setMemberList] = useState(initState)
+  useEffect(() => {
+    if (!data) return
+    useUserStore.setState({ users: data })
+  }, [data])
 
   const handleClickDeleteBtn = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,6 +46,7 @@ export const ManageMember = memo(() => {
     },
     [onOpen, navigate]
   )
+
   const columnTemplate = useMemo(() => {
     const columnHelper = createColumnHelper<IUser>()
     return [
@@ -113,46 +116,27 @@ export const ManageMember = memo(() => {
       }),
     ] as Column<IUser>[]
   }, [handleClickEditBtn, handleClickDeleteBtn])
-  const { data } = useQuery({
-    queryKey: ['users'],
-    queryFn: () => get<IUser>('/users'),
-  })
-
-  useEffect(() => {
-    if (!data) return
-    useUserStore.setState({ users: data })
-  }, [data])
 
   const toast = useToast()
-  const toastID = useId()
-  const queryClient = useQueryClient()
-  const { mutate } = useMutation({
-    mutationFn: (variables: { path: string; id: number }): Promise<AxiosResponse['status']> =>
-      remove(variables.path, variables.id),
-    onError: (error: unknown) => {
-      if (error instanceof Error)
-        toast({
-          id: toastID,
-          title: error.message,
-          description: "Action can't be performed.",
-          status: 'error',
-        })
-    },
+  const { mutate, error, isSuccess, variables } = useDeleteMember()
 
-    onSuccess: (_, variables) => {
-      queryClient.invalidateQueries(['users'])
-      deleteUser(variables.id)
-      setMemberList((prevState) => prevState.filter((item) => item.id !== variables.id))
+  useEffect(() => {
+    onClose()
+    if (isSuccess && variables) {
       toast({
-        id: toastID,
-        title: 'Delete member success',
-        description: `Member have been deleted successfully.`,
+        title: 'Delete member success.',
+        description: 'Member have been deleted successfully.',
         status: 'success',
       })
-    },
+    }
 
-    onMutate: () => onClose(),
-  })
+    if (error instanceof Error)
+      toast({
+        title: error.message,
+        description: 'Please check your entered information.',
+        status: 'error',
+      })
+  }, [error, isSuccess, onClose, toast, variables])
 
   const handleDeleteMember = useCallback(() => {
     if (!selectedMemberId) return

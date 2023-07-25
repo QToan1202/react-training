@@ -1,50 +1,74 @@
+import { AxiosResponse } from 'axios'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import qs from 'qs'
 import { useMutateUpdate } from '../common/index'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { shallow } from 'zustand/shallow'
 
-import { add } from '@react-monorepo/shared/services'
+import { add, get, remove } from '@react-monorepo/shared/services'
 import { IBook, IHireRequest, IUser } from '@react-monorepo/shared/types'
-import { useHiredStore } from '@react-monorepo/shared/stores'
 
-export const useMutateAddHireRequest = (
+export const useGetHireRequests = () => {
+  const hireRequestQuery = useQuery({
+    queryKey: ['hire-requests'],
+    queryFn: () =>
+      get<IHireRequest>('/hire-requests', {
+        params: { _expand: ['book', 'user'] },
+        paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
+      }),
+  })
+
+  return hireRequestQuery
+}
+
+export const useMutateHireRequest = (
   bookData: IBook | undefined,
-  user: IUser | undefined
+  user: IUser | undefined,
+  action: 'add' | 'confirm'
 ) => {
   const queryClient = useQueryClient()
-  const { addHireRequest } = useHiredStore((state) => ({ addHireRequest: state.add }), shallow)
   const { mutate: mutateUpdate } = useMutateUpdate()
 
   const updateBooksQuantity = () => {
     if (!bookData) return
-    mutateUpdate(
-      {
-        path: '/books',
-        id: +bookData.id,
-        options: { ...bookData, ...{ quantity: bookData.quantity - 1 } },
-      }
-    )
+    const bookQuantity = action === 'add' ? { quantity: bookData.quantity - 1 } : { quantity: bookData.quantity + 1 }
+
+    mutateUpdate({
+      path: '/books',
+      id: +bookData.id,
+      options: { ...bookData, ...bookQuantity },
+    })
   }
 
   const updateUserHireRequest = () => {
     if (!user) return
+    const userRequest =
+      action === 'add' ? { hireRequests: user.hireRequests - 1 } : { hireRequests: user.hireRequests + 1 }
+
     mutateUpdate({
       path: '/users',
       id: user.id,
-      options: { ...user, ...{ hireRequests: user.hireRequests - 1 } },
+      options: { ...user, ...userRequest },
     })
   }
 
   const addMutation = useMutation({
     mutationFn: (variables: { path: string; options: Partial<IHireRequest> }): Promise<IHireRequest> =>
-      add<IHireRequest>(variables.path, variables.options),
-
-    onSuccess: (data) => {
+    add<IHireRequest>(variables.path, variables.options),
+    onSuccess: () => {
       queryClient.invalidateQueries(['hire-requests'])
-      addHireRequest(data)
       updateBooksQuantity()
       updateUserHireRequest()
     },
   })
 
-  return addMutation
+  const confirmMutation = useMutation({
+    mutationFn: (variables: { path: string; id: number }): Promise<AxiosResponse['status']> =>
+    remove(variables.path, variables.id),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['hire-requests'])
+      updateBooksQuantity()
+      updateUserHireRequest()
+    },
+  })
+
+  return {addMutation, confirmMutation}
 }

@@ -1,7 +1,10 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { login, register } from '@react-monorepo/shared/services'
+import { get, login, register, remove } from '@react-monorepo/shared/services'
 import { IUser, TUserForm } from '@react-monorepo/shared/types'
+import { AxiosResponse } from 'axios'
+import { useUserStore } from '@react-monorepo/shared/stores'
+import { shallow } from 'zustand/shallow'
 
 export const useLoginUser = () => {
   const loginMutate = useMutation({
@@ -19,4 +22,25 @@ export const useRegisterUser = () => {
   })
 
   return registerMutate
+}
+
+export const useDeleteMember = () => {
+  const { deleteMember } = useUserStore((state) => ({ deleteMember: state.remove }), shallow)
+  const deleteMutation = useMutation({
+    mutationFn: (variables: { path: string; id: number }): Promise<AxiosResponse['status']> =>
+      remove(variables.path, variables.id),
+
+    onSuccess: (_, variables) => deleteMember(variables.id),
+  })
+
+  return deleteMutation
+}
+
+export const useGetUsers = () => {
+  const getQuery = useQuery({
+    queryKey: ['users'],
+    queryFn: () => get<IUser>('/users'),
+  })
+
+  return getQuery
 }

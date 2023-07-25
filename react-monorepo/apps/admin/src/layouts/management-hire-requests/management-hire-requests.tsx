@@ -1,40 +1,37 @@
-import React, { memo, useCallback, useEffect, useId, useMemo, useState } from 'react'
+import React, { lazy, memo, useCallback, useEffect, useId, useMemo, useState } from 'react'
 import { FiCheck } from 'react-icons/fi'
 import { Column, createColumnHelper } from '@tanstack/react-table'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { shallow } from 'zustand/shallow'
 import { IconButton, useDisclosure, useToast } from '@chakra-ui/react'
-import qs from 'qs'
 
-import { useBookStore, useHiredStore, useUserStore } from '@react-monorepo/shared/stores'
-import { IBook, IHireRequest, IUser } from '@react-monorepo/shared/types'
-import { ConfirmDialog, ManagementTable } from '@react-monorepo/shared/ui'
+import { useHiredStore } from '@react-monorepo/shared/stores'
+import { IHireRequest, IUser } from '@react-monorepo/shared/types'
 import { COLORS } from '@react-monorepo/shared/utils'
-import { get, remove, edit } from '@react-monorepo/shared/services'
-import { AxiosResponse } from 'axios'
+import { useGetHireRequests, useMutateHireRequest } from '@react-monorepo/shared/hooks'
+
+const ConfirmDialog = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.ConfirmDialog })))
+const ManagementTable = lazy(() => import('@react-monorepo/shared/ui').then((module) => ({ default: module.ManagementTable })))
 
 export const ManagementHireRequests = memo(() => {
-  const { hireRequests, deleteRequest } = useHiredStore(
-    (state) => ({ hireRequests: state.hireRequests, deleteRequest: state.remove }),
+  const { hireRequests, deleteHireRequest } = useHiredStore(
+    (state) => ({ hireRequests: state.hireRequests, deleteHireRequest: state.remove }),
     shallow
   )
-  const { updateBookQuantity } = useBookStore((state) => ({
-    books: state.books,
-    updateBookQuantity: state.update,
-  }), shallow)
-  const { currentUser, updateUserHireRequest, updateLoginUser } = useUserStore((state) => ({ currentUser: state.loginUser, updateUserHireRequest: state.update, updateLoginUser: state.login }), shallow)
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [selectedRequestId, setRequestMemberId] = useState<number>()
+  const toast = useToast()
+  const toastID = useId()
+  const [selectedItem, setSelectedItem] = useState<IHireRequest>()
 
   const handleClickConfirmBtn = useCallback(
     (event: React.MouseEvent) => {
       onOpen()
       const memberId = event.currentTarget.getAttribute('data-id')
-
       if (!memberId) return
-      setRequestMemberId(+memberId)
+      const item = hireRequests.find((item) => item.id === +memberId)
+      if (!item) return
+      setSelectedItem((prevState) => ({ ...prevState, ...item }))
     },
-    [onOpen]
+    [hireRequests, onOpen]
   )
   const columnTemplate = useMemo(() => {
     const columnHelper = createColumnHelper<IHireRequest>()
@@ -78,122 +75,61 @@ export const ManagementHireRequests = memo(() => {
     ] as Column<IUser>[]
   }, [handleClickConfirmBtn])
 
-  const { data } = useQuery({
-    queryKey: ['hire-requests'],
-    queryFn: () =>
-      get<IHireRequest>('/hire-requests', {
-        params: { _expand: ['book', 'user'] },
-        paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
-      }),
-  })
+  const { data } = useGetHireRequests()
 
   useEffect(() => {
     if (!data) return
     useHiredStore.setState({ hireRequests: data })
   }, [data])
 
-  const toast = useToast()
-  const toastID = useId()
-  const queryClient = useQueryClient()
-  const { mutate: mutateUpdate } = useMutation({
-    mutationFn: (variables: {
-      path: string
-      id: number
-      options: Readonly<Partial<IBook | IUser>>
-    }): Promise<IBook | IUser> => edit<IBook | IUser>(variables.path, variables.id, variables.options),
-
-    onError: (error: unknown) => {
-      if (error instanceof Error)
+  const renderError = useCallback(
+    (error: unknown) => {
+      if (error instanceof Error) {
         toast({
-          id: toastID,
           title: error.message,
           description: "Action can't be performed.",
           status: 'error',
         })
-    },
-
-    onSuccess: () => queryClient.invalidateQueries(['books', 'users']),
-  })
-
-  const updateBooks = useCallback(() => {
-    const item = hireRequests.find((item) => item.id === selectedRequestId)
-
-    if (!item) return
-    if (!item.book) return
-
-    mutateUpdate(
-      {
-        path: '/books',
-        id: item.bookId,
-        options: { ...item.book, ...{ quantity: item.book?.quantity + 1 } },
-      },
-      {
-        onSuccess: (data) => {
-          if ('author' in data) return updateBookQuantity(data)
-        },
       }
-    )
-  }, [mutateUpdate, hireRequests, selectedRequestId, updateBookQuantity])
-
-  const updateRequest = useCallback(() => {
-    const item = hireRequests.find((item) => item.id === selectedRequestId)
-
-    if (!item) return
-    if (!item.user) return
-
-    mutateUpdate(
-      {
-        path: '/users',
-        id: item.userId,
-        options: { ...item.user, ...{ hireRequests: item.user.hireRequests + 1 } },
-      },
-      {
-        onSuccess: (data) => {
-          if ('email' in data) {
-            updateUserHireRequest(data)
-            if (data.id === currentUser?.id) updateLoginUser({...currentUser, ...data})
-          }
-        },
-      }
-    )
-  }, [mutateUpdate, hireRequests, selectedRequestId, updateUserHireRequest, updateLoginUser, currentUser])
-
-  const { mutate: mutateConfirm } = useMutation({
-    mutationFn: (variables: { path: string; id: number }): Promise<AxiosResponse['status']> =>
-      remove(variables.path, variables.id),
-    onError: (error: unknown) => {
-      if (error instanceof Error)
-        toast({
-          id: toastID,
-          title: error.message,
-          description: "Action can't be performed.",
-          status: 'error',
-        })
     },
+    [toast]
+  )
 
-    onSuccess: (_, variables) => {
-      queryClient.invalidateQueries(['hire-requests'])
-      deleteRequest(variables.id)
-      updateBooks()
-      updateRequest()
-      toast({
-        id: toastID,
-        title: 'Confirm request success',
-        description: `User has been returned the book successfully.`,
-        status: 'success',
-      })
+  const {
+    confirmMutation: {
+      mutate: mutateConfirm,
+      isSuccess: isHireSuccess,
+      isError: isHireError,
+      error: hireError,
+      data: returnData
     },
-
-    onMutate: () => onClose(),
-  })
+  } = useMutateHireRequest(selectedItem?.book, selectedItem?.user, 'confirm')
 
   const handleCompleteRequest = useCallback(() => {
-    if (!selectedRequestId) return
+    if (!selectedItem) return
     mutateConfirm({
       path: '/hire-requests',
-      id: selectedRequestId,
+      id: selectedItem.id,
     })
-  }, [mutateConfirm, selectedRequestId])
+    onClose()
+  }, [mutateConfirm, onClose, selectedItem])
+
+  useEffect(() => {
+    if (!isHireSuccess) return
+    if (isHireError) {
+      renderError(hireError)
+      return
+    }
+    if (!returnData) return
+    if (toast.isActive(toastID)) return
+    deleteHireRequest(returnData)
+    toast({
+      id: toastID,
+      title: 'Return book success',
+      description: `Book have been return successfully.`,
+      status: 'success',
+    })
+  }, [deleteHireRequest, hireError, isHireError, isHireSuccess, renderError, returnData, toast, toastID])
 
   return (
     <>

@@ -23,14 +23,15 @@ import {
 import { motion } from 'framer-motion'
 import { FiBook, FiEdit2, FiTrash2 } from 'react-icons/fi'
 
-import { useUserStore } from '@react-monorepo/shared/stores'
+import { useHiredStore, useUserStore } from '@react-monorepo/shared/stores'
 import { COLORS, MESSAGES } from '@react-monorepo/shared/utils'
-import { useGetBookDetail, useMutateAddHireRequest, useMutateDeleteBook } from '@react-monorepo/shared/hooks'
+import { useGetBookDetail, useMutateHireRequest, useMutateDeleteBook } from '@react-monorepo/shared/hooks'
 import { ConfirmDialog, Loading } from '../../components'
 
 export const BookDetail = () => {
   const { bookId } = useParams()
   const { currentUser } = useUserStore((state) => ({ currentUser: state.loginUser }), shallow)
+  const { addHireRequest } = useHiredStore((state) => ({ addHireRequest: state.add }), shallow)
   const toast = useToast()
   const toastId = useId()
   const navigate = useNavigate()
@@ -76,27 +77,33 @@ export const BookDetail = () => {
   }, [isDeleteBookSuccess, deleteError, renderError, toast, navigate])
 
   const {
-    mutate: mutateHireBook,
-    isSuccess: isHireSuccess,
-    isError: isHireError,
-    error: hireError,
-  } = useMutateAddHireRequest(bookData, currentUser)
+    addMutation: {
+      mutate: mutateHireBook,
+      isSuccess: isHireSuccess,
+      isError: isHireError,
+      error: hireError,
+      data: returnData,
+    },
+  } = useMutateHireRequest(bookData, currentUser, 'add')
 
   useEffect(() => {
+    onClose()
     if (!bookData) return
     if (!isHireSuccess) return
     if (isHireError) {
       renderError(hireError)
       return
     }
+    if (!returnData) return
     if (toast.isActive(toastId)) return
+    addHireRequest(returnData)
     toast({
       id: toastId,
       title: 'Hire book success',
       description: `Book ${bookData?.name} have been hired successfully.`,
       status: 'success',
     })
-  }, [bookData, hireError, isHireError, isHireSuccess, renderError, toast, toastId])
+  }, [addHireRequest, bookData, hireError, isHireError, isHireSuccess, onClose, renderError, returnData, toast, toastId])
 
   const handleEditBook = useCallback(() => navigate(`/admin/edit-book/${bookId}`), [navigate, bookId])
 

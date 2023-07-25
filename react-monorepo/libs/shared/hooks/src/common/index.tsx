@@ -16,7 +16,7 @@ export const useMutateUpdate = () => {
     mutationFn: (variables: {
       path: string
       id: number
-      options: Readonly<Partial<IBook | IUser>>
+      options: Partial<IBook | IUser>
     }): Promise<IBook | IUser> => edit<IBook | IUser>(variables.path, variables.id, variables.options),
 
     onSuccess: (data) => {
@@ -24,7 +24,10 @@ export const useMutateUpdate = () => {
         updateBook(data)
         queryClient.invalidateQueries(['books'])
       }
-      if ('email' in data) updateUser({ ...currentUser, ...data })
+      if ('email' in data) {
+        updateUser({ ...currentUser, ...data })
+        queryClient.invalidateQueries(['users'])
+      }
     },
   })
 
