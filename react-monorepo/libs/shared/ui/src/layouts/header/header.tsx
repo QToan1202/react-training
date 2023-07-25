@@ -22,7 +22,7 @@ import { FiChevronDown, FiMenu } from 'react-icons/fi'
 import { shallow } from 'zustand/shallow'
 
 import { COLORS } from '@react-monorepo/shared/utils'
-import { useBookStore, useHiredStore, useUserStore } from '@react-monorepo/shared/stores'
+import { useUserStore } from '@react-monorepo/shared/stores'
 import logo from '../../../assets/images/library-logo.webp'
 export interface HeaderProps {
   onOpen: () => void
@@ -34,8 +34,6 @@ export const Header = memo(({ onOpen }: HeaderProps) => {
   const handleLogOut = useCallback(() => {
     logOut()
     useUserStore.persist.clearStorage()
-    useBookStore.persist.clearStorage()
-    useHiredStore.persist.clearStorage()
     toast({
       title: 'Log out success',
       description: 'Hope to see you soon.',

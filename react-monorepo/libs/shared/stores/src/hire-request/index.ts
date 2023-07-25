@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
 import { IHireRequest } from '@react-monorepo/shared/types'
 
 interface HiredState {
@@ -10,41 +9,34 @@ interface HiredState {
   reset: () => void
 }
 
-export const useHiredStore = create<HiredState>()(
-  persist(
-    (set) => ({
-      hireRequests: [],
+export const useHiredStore = create<HiredState>((set) => ({
+  hireRequests: [],
 
-      add: (hireRequest: IHireRequest) => {
-        set((state) => {
-          return { hireRequests: [...state.hireRequests, hireRequest] }
-        })
-      },
+  add: (hireRequest: IHireRequest) => {
+    set((state) => {
+      return { hireRequests: [...state.hireRequests, hireRequest] }
+    })
+  },
 
-      update: (hireRequest: IHireRequest) => {
-        set((state) => {
-          const afterUpdate: IHireRequest[] = state.hireRequests.map((item) => {
-            if (item.id === hireRequest.id) return hireRequest
+  update: (hireRequest: IHireRequest) => {
+    set((state) => {
+      const afterUpdate: IHireRequest[] = state.hireRequests.map((item) => {
+        if (item.id === hireRequest.id) return hireRequest
 
-            return item
-          })
+        return item
+      })
 
-          return { hireRequests: afterUpdate }
-        })
-      },
+      return { hireRequests: afterUpdate }
+    })
+  },
 
-      remove: (id: number) => {
-        set((state) => {
-          const afterDelete: IHireRequest[] = state.hireRequests.filter((item) => item.id !== id)
+  remove: (id: number) => {
+    set((state) => {
+      const afterDelete: IHireRequest[] = state.hireRequests.filter((item) => item.id !== id)
 
-          return { hireRequests: afterDelete }
-        })
-      },
+      return { hireRequests: afterDelete }
+    })
+  },
 
-      reset: () => set({ hireRequests: [] }),
-    }),
-    {
-      name: 'hire-request-store',
-    }
-  )
-)
+  reset: () => set({ hireRequests: [] }),
+}))
