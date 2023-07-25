@@ -53,7 +53,7 @@ export const BookDetail = () => {
     isError && renderError(error)
   }, [isError, renderError, error])
 
-  const { mutate: mutateDeleteBook, isSuccess: isDeleteBookSuccess, error: deleteError } = useMutateDeleteBook(onClose)
+  const { mutate: mutateDeleteBook, isSuccess: isDeleteBookSuccess, error: deleteError } = useMutateDeleteBook()
 
   const handleDeleteBook = useCallback(() => {
     if (!bookId) return
@@ -61,7 +61,8 @@ export const BookDetail = () => {
       path: '/books',
       id: +bookId,
     })
-  }, [bookId, mutateDeleteBook])
+    onClose()
+  }, [bookId, mutateDeleteBook, onClose])
 
   useEffect(() => {
     if (!isDeleteBookSuccess) {
