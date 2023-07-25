@@ -1,20 +1,16 @@
 import { useCallback, useEffect } from 'react'
-import { Box, Button, Heading, Text, useToast } from '@chakra-ui/react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Box, Heading, Text, useToast } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 import { shallow } from 'zustand/shallow'
 
 import { useAuthStore } from '@react-monorepo/shared/stores'
-import {  TUserForm } from '@react-monorepo/shared/types'
-import { COLORS } from '@react-monorepo/shared/utils'
+import { TUserForm } from '@react-monorepo/shared/types'
 import { useRegisterUser } from '@react-monorepo/shared/hooks'
-import { Navbar, RegisterForm } from '../../layouts'
+import { RegisterForm } from '../../layouts'
 import { Loading } from '../../components'
-import backgroundImg from '../../../assets/images/squiggle-pattern-gray.webp'
-
-const navbarLink = ['pricing', 'support', 'contact Us']
 
 const Register = () => {
-  const {setLoginUser} = useAuthStore((state) => ({setLoginUser: state.login}), shallow)
+  const { setLoginUser } = useAuthStore((state) => ({ setLoginUser: state.login }), shallow)
   const { mutate, isLoading, error, isSuccess, data } = useRegisterUser()
   const toast = useToast()
   const navigate = useNavigate()
@@ -50,22 +46,7 @@ const Register = () => {
   if (isLoading) return <Loading />
 
   return (
-    <Box h="100vh" bgImage={backgroundImg}>
-      <Navbar>
-        {navbarLink.map((item) => (
-          <Button
-            key={item}
-            as={Link}
-            to="#"
-            textTransform="capitalize"
-            variant="ghost"
-            px={8}
-            _hover={{ textDecor: 'underline', bgColor: COLORS.GRAY_100 }}
-          >
-            {item}
-          </Button>
-        ))}
-      </Navbar>
+    <>
       <Heading textAlign="center" fontWeight="black" fontSize="70px">
         Sign up now!
       </Heading>
@@ -75,7 +56,7 @@ const Register = () => {
       <Box mt={20}>
         <RegisterForm onSubmit={handleSubmit} />
       </Box>
-    </Box>
+    </>
   )
 }
 

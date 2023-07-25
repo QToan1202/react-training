@@ -1,3 +1,4 @@
+export { default as NavbarOutlet } from './navbar/navbar'
 export { default as BookDetail } from './book-detail/book-detail'
 export { default as Dashboard } from './dashboard/dashboard'
 export { default as Register } from './register/register'
