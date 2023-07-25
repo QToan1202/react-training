@@ -18,6 +18,7 @@ export const useGetBooks = (): UseQueryResult<IBook[], unknown> => {
 export const useGetBookDetail = (bookId: number | string | undefined): UseQueryResult<IBook, unknown> => {
   const bookQuery = useQuery({
     queryKey: ['books', bookId],
+    enabled: !!bookId,
     queryFn: (): Promise<IBook> => find<IBook>(`/books/${bookId}`),
   })
 
@@ -33,7 +34,7 @@ export const useMutateDeleteBook = (onClose: () => void) => {
       remove(variables.path, variables.id),
 
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries(['books'])
+      queryClient.invalidateQueries(['books'], { exact: true })
       removeBook(variables.id)
     },
 
