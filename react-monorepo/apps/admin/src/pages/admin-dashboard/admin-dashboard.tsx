@@ -1,4 +1,4 @@
-import { Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
+import { Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 
 import { COLORS } from '@react-monorepo/utils'
 import { ManageMember, ManagementHireRequests, BookList } from '../../layouts'
