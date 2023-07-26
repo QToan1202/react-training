@@ -43,7 +43,7 @@ const EditBook = () => {
       mutate({
         path: '/books',
         id: +bookId,
-        options: values,
+        values,
       })
     },
     [mutate, bookId]

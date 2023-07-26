@@ -141,7 +141,7 @@ const BookDetail = () => {
 
     mutateHireBook({
       path: '/hire-requests',
-      options: {
+      values: {
         bookId: bookData.id,
         userId: currentUser?.id,
         borrow_date: new Date().toJSON().slice(0, 10),

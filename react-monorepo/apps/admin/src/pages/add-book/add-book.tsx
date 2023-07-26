@@ -38,7 +38,7 @@ const AddBook = () => {
     (values: IBook) => {
       mutate({
         path: '/books',
-        option: values,
+        values: values,
       })
     },
     [mutate]

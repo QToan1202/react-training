@@ -43,7 +43,7 @@ const EditMember = () => {
       mutate({
         path: '/users',
         id: +userId,
-        options: values,
+        values,
       })
     },
     [mutate, userId]
