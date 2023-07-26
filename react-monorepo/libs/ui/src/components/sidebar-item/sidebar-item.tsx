@@ -3,6 +3,7 @@ import { Box, Flex, Icon, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { IconType } from 'react-icons/lib'
 import { Link } from 'react-router-dom'
+import isEqual from 'react-fast-compare'
 
 import { COLORS } from '@react-monorepo/utils'
 
@@ -47,6 +48,6 @@ const SidebarItem = memo(({ title, to, icon }: SidebarItemProps) => {
       </Box>
     </Link>
   )
-})
+}, (oldProps, newProps) => isEqual(oldProps, newProps))
 
 export default SidebarItem

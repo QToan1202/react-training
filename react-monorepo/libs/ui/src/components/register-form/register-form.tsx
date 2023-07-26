@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import { Box, Button, FormControl, FormErrorMessage, FormLabel, HStack, Heading, Input } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
+import isEqual from 'react-fast-compare'
 
 import { IUser, TUserForm } from '@react-monorepo/types'
 import { COLORS, REGEX, SHADOW } from '@react-monorepo/utils'
@@ -158,6 +159,6 @@ const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => {
       </form>
     </Box>
   )
-})
+}, (oldProps, newProps) => isEqual(oldProps, newProps))
 
 export default RegisterForm

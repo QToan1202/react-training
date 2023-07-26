@@ -1,5 +1,7 @@
+import { memo } from 'react'
 import { Box, useDisclosure } from '@chakra-ui/react'
 import { Outlet } from 'react-router-dom'
+import isEqual from 'react-fast-compare'
 
 import { Drawer, Header, Sidebar } from '../../components'
 import { ISideBarItem } from '@react-monorepo/types'
@@ -8,7 +10,7 @@ export interface DashboardProps {
   sidebar: ISideBarItem[]
 }
 
-const Dashboard = ({ sidebar }: DashboardProps) => {
+const Dashboard = memo(({ sidebar }: DashboardProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -23,6 +25,6 @@ const Dashboard = ({ sidebar }: DashboardProps) => {
       </Box>
     </Box>
   )
-}
+}, (oldProps, newProps) => isEqual(oldProps, newProps))
 
 export default Dashboard

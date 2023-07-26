@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { FiFile } from 'react-icons/fi'
+import isEqual from 'react-fast-compare'
 
 import { COLORS, REGEX, SHADOW } from '@react-monorepo/utils'
 import { IBook } from '@react-monorepo/types'
@@ -178,6 +179,6 @@ const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
       </form>
     </Box>
   )
-})
+}, (oldProps, newProps) => isEqual(oldProps, newProps))
 
 export default BookForm

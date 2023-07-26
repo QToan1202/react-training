@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import { Drawer as ChakraDrawer, DrawerContent } from '@chakra-ui/react'
+import isEqual from 'react-fast-compare'
 
 export interface DrawerProps {
   isOpen: boolean
@@ -21,6 +22,6 @@ const Drawer = memo(({ isOpen, onClose, children }: DrawerProps) => {
       <DrawerContent>{children}</DrawerContent>
     </ChakraDrawer>
   )
-})
+}, (oldProps, newProps) => isEqual(oldProps, newProps))
 
 export default Drawer

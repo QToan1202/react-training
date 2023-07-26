@@ -3,11 +3,10 @@ import { Box, useToast } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { shallow } from 'zustand/shallow'
 
-import { LoginForm } from '../../layouts'
 import { useAuthStore } from '@react-monorepo/stores'
 import { TUserForm } from '@react-monorepo/types'
 import { useLoginUser } from '@react-monorepo/hooks'
-import { Loading } from '../../components'
+import { Loading, LoginForm } from '../../components'
 
 const Login = () => {
   const { setLoginUser } = useAuthStore((state) => ({ setLoginUser: state.login }), shallow)

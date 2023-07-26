@@ -27,6 +27,7 @@ import {
   RowData,
 } from '@tanstack/react-table'
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
+import isEqual from 'react-fast-compare'
 
 import { COLORS, SHADOW, isOverDue } from '@react-monorepo/utils'
 import noDataImg from '../../../assets/images/no-data.webp'
@@ -124,6 +125,6 @@ const ManagementTable = memo(<T extends object>({ data, caption, columns }: Mana
       </Table>
     </TableContainer>
   )
-})
+}, (oldProps, newProps) => isEqual(oldProps, newProps))
 
 export default ManagementTable

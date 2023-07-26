@@ -3,6 +3,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import { AspectRatio, Box, BoxProps, Button, CloseButton, Flex, Link, Image, useToast } from '@chakra-ui/react'
 import { FiLogOut } from 'react-icons/fi'
 import { shallow } from 'zustand/shallow'
+import isEqual from 'react-fast-compare'
 
 import { useAuthStore } from '@react-monorepo/stores'
 import { COLORS } from '@react-monorepo/utils'
@@ -70,6 +71,6 @@ const Sidebar = memo(({ onClose, items, ...rest }: SidebarProps) => {
       </Button>
     </Flex>
   )
-})
+}, (oldProps, newProps) => isEqual(oldProps, newProps))
 
 export default Sidebar

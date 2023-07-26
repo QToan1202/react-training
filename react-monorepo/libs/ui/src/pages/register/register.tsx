@@ -6,8 +6,7 @@ import { shallow } from 'zustand/shallow'
 import { useAuthStore } from '@react-monorepo/stores'
 import { TUserForm } from '@react-monorepo/types'
 import { useRegisterUser } from '@react-monorepo/hooks'
-import { RegisterForm } from '../../layouts'
-import { Loading } from '../../components'
+import { Loading, RegisterForm } from '../../components'
 
 const Register = () => {
   const { setLoginUser } = useAuthStore((state) => ({ setLoginUser: state.login }), shallow)

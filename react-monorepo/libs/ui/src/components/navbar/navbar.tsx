@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { AspectRatio, Box, Flex, HStack, IconButton, Image } from '@chakra-ui/react'
 import { FiMenu } from 'react-icons/fi'
+import isEqual from 'react-fast-compare'
 
 import { CustomButton } from '../../components'
 import logo from '../../../assets/images/library-logo.webp'
@@ -37,6 +38,6 @@ const Navbar = memo(({ children }: NavbarProps) => {
       </Flex>
     </Box>
   )
-})
+}, (oldProps, newProps) => isEqual(oldProps, newProps))
 
 export default Navbar
