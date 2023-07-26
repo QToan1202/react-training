@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { AspectRatio, Box, Image, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-import { COLORS, SHADOW } from '@react-monorepo/utils'
+import { SHADOW } from '@react-monorepo/utils'
 import placeholderImage from '../../../assets/images/placeholder.webp'
 
 export interface CardProps {
@@ -29,7 +29,6 @@ const Card = memo(({ href, imageUrl, name, author, alt, fallbackImage = placehol
           whileHover={{
             y: -10,
             filter: 'brightness(70%)',
-            backgroundColor: COLORS.BLACK,
             boxShadow: SHADOW.BOOK_CARD,
           }}
           whileTap={{

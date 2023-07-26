@@ -1,7 +1,11 @@
 import { memo, useState } from 'react'
 import {
+  AspectRatio,
+  Box,
   ChakraProps,
   Flex,
+  Heading,
+  Image,
   Table,
   TableCaption,
   TableContainer,
@@ -25,6 +29,7 @@ import {
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
 
 import { COLORS, SHADOW, isOverDue } from '@react-monorepo/utils'
+import noDataImg from '../../../assets/images/no-data.webp'
 
 declare module '@tanstack/react-table' {
   interface TableMeta<TData extends RowData> {
@@ -61,6 +66,16 @@ const ManagementTable = memo(<T extends object>({ data, caption, columns }: Mana
     },
   })
 
+  if (!data.length)
+    return (
+      <Box>
+        <AspectRatio ratio={1} maxW='300px' m='0 auto'>
+          <Image src={noDataImg} objectFit="contain" alt="no data found image" />
+        </AspectRatio>
+        <Heading fontSize={24} textAlign="center" fontWeight={'medium'} color={COLORS.GRAY_200}>There's no data!!!</Heading>
+      </Box>
+    )
+
   return (
     <TableContainer shadow={SHADOW.FORM} borderRadius="xl">
       <Table>
@@ -70,7 +85,14 @@ const ManagementTable = memo(<T extends object>({ data, caption, columns }: Mana
             <Tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <Th cursor="pointer" key={header.id} onClick={header.column.getToggleSortingHandler()}>
+                  <Th
+                    py={3}
+                    fontWeight="medium"
+                    cursor="pointer"
+                    color={COLORS.GRAY_200}
+                    key={header.id}
+                    onClick={header.column.getToggleSortingHandler()}
+                  >
                     <Flex align="center" pos="relative">
                       {flexRender(header.column.columnDef.header, header.getContext())}
                       <chakra.span pos="absolute" right={0}>
@@ -92,7 +114,9 @@ const ManagementTable = memo(<T extends object>({ data, caption, columns }: Mana
           {table.getRowModel().rows.map((row) => (
             <Tr key={row.id} sx={table.options.meta?.getRowStyles(row)}>
               {row.getVisibleCells().map((cell) => (
-                <Td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Td>
+                <Td fontSize="14px" py={2} key={cell.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </Td>
               ))}
             </Tr>
           ))}

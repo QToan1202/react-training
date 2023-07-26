@@ -1,7 +1,7 @@
 import { Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 
 import { COLORS } from '@react-monorepo/utils'
-import { ManageMember, ManagementHireRequests, BookList } from '../../layouts'
+import { ManageMember, ManagementHireRequests, BookList } from '../../components'
 
 const AdminDashboard = () => {
   return (

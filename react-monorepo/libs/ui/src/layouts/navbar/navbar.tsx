@@ -1,42 +1,33 @@
-import React, { memo } from 'react'
-import { Link } from 'react-router-dom'
-import { AspectRatio, Box, Flex, HStack, IconButton, Image } from '@chakra-ui/react'
-import { FiMenu } from 'react-icons/fi'
+import { Box, Button } from '@chakra-ui/react'
+import { Link, Outlet } from 'react-router-dom'
 
-import { CustomButton } from '../../components'
-import logo from '../../../assets/images/library-logo.webp'
+import { COLORS } from '@react-monorepo/utils'
+import { Navbar as NavbarLayout } from '../../components'
+import backgroundImg from '../../../assets/images/squiggle-pattern-gray.webp'
 
-export interface NavbarProps {
-  children: React.ReactNode
-}
+const navbarLink = ['pricing', 'support', 'contact us']
 
-const Navbar = memo(({ children }: NavbarProps) => {
+const Navbar = () => {
   return (
-    <Box mx="auto" p={5} maxW={1200}>
-      <Flex alignItems="center" justifyContent="space-between">
-        <Link to="/">
-          <AspectRatio ratio={2.8 / 1} minW="140px">
-            <Image objectFit="cover" src={logo} alt="logo of library website" />
-          </AspectRatio>
-        </Link>
-        <HStack spacing={5} display={{ base: 'none', md: 'flex' }}>
-          {children}
-          <Link to="/login">
-            <CustomButton title="login" />
-          </Link>
-          <Link to="/register">
-            <CustomButton title="get started" />
-          </Link>
-        </HStack>
-        <IconButton
-          display={{ base: 'flex', md: 'none' }}
-          aria-label="open menu"
-          bg="transparent"
-          icon={<FiMenu size={24} />}
-        />
-      </Flex>
+    <Box h="100vh" bgImage={backgroundImg}>
+      <NavbarLayout>
+        {navbarLink.map((item) => (
+          <Button
+            key={item}
+            as={Link}
+            to="#"
+            textTransform="capitalize"
+            variant="ghost"
+            px={8}
+            _hover={{ textDecor: 'underline', bgColor: COLORS.GRAY_100 }}
+          >
+            {item}
+          </Button>
+        ))}
+      </NavbarLayout>
+      <Outlet />
     </Box>
   )
-})
+}
 
 export default Navbar

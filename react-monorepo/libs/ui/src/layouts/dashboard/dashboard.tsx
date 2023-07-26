@@ -1,7 +1,7 @@
 import { Box, useDisclosure } from '@chakra-ui/react'
 import { Outlet } from 'react-router-dom'
 
-import { Drawer, Header, Sidebar } from '../../layouts'
+import { Drawer, Header, Sidebar } from '../../components'
 import { ISideBarItem } from '@react-monorepo/types'
 
 export interface DashboardProps {
