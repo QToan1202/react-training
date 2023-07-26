@@ -1,43 +1,41 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-
-import { edit, find, get, login, register, remove } from '@react-monorepo/services'
-import { IUser, TUserForm } from '@react-monorepo/types'
 import { AxiosResponse } from 'axios'
-import { useUserStore } from '@react-monorepo/stores'
+import { UseMutationResult, UseQueryResult, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { shallow } from 'zustand/shallow'
 
-export const useLoginUser = () => {
-  const loginMutate = useMutation({
-    mutationFn: (variables: { path: string; email: string; password: string }): Promise<IUser> =>
+import { edit, find, get, login, register, remove } from '@react-monorepo/services'
+import { IEditService, ILoginService, IRegisterService, IRemoveService, IUser } from '@react-monorepo/types'
+import { useUserStore } from '@react-monorepo/stores'
+
+export const useLoginUser = (): UseMutationResult<IUser, Error, ILoginService, undefined> => {
+  const loginMutate = useMutation<IUser, Error, ILoginService, undefined>({
+    mutationFn: (variables: ILoginService): Promise<IUser> =>
       login(variables.path, variables.email, variables.password),
   })
 
   return loginMutate
 }
 
-export const useRegisterUser = () => {
-  const registerMutate = useMutation({
-    mutationFn: (variables: { path: string; user: TUserForm }): Promise<IUser> =>
-      register(variables.path, variables.user),
+export const useRegisterUser = (): UseMutationResult<IUser, Error, IRegisterService, undefined> => {
+  const registerMutate = useMutation<IUser, Error, IRegisterService, undefined>({
+    mutationFn: (variables: IRegisterService): Promise<IUser> => register(variables.path, variables.user),
   })
 
   return registerMutate
 }
 
-export const useDeleteMember = () => {
+export const useDeleteMember = (): UseMutationResult<number, Error, IRemoveService, undefined> => {
   const { deleteMember } = useUserStore((state) => ({ deleteMember: state.remove }), shallow)
-  const deleteMutation = useMutation({
-    mutationFn: (variables: { path: string; id: number }): Promise<AxiosResponse['status']> =>
-      remove(variables.path, variables.id),
+  const deleteMutation = useMutation<number, Error, IRemoveService, undefined>({
+    mutationFn: (variables: IRemoveService): Promise<AxiosResponse['status']> => remove(variables.path, variables.id),
 
-    onSuccess: (_, variables) => deleteMember(variables.id),
+    onSuccess: (_, variables: IRemoveService) => deleteMember(variables.id),
   })
 
   return deleteMutation
 }
 
-export const useGetUsers = () => {
-  const getQuery = useQuery({
+export const useGetUsers = (): UseQueryResult<IUser[], Error> => {
+  const getQuery = useQuery<IUser[], Error, IUser[], string[]>({
     queryKey: ['users'],
     queryFn: () => get<IUser>('/users'),
   })
@@ -45,11 +43,10 @@ export const useGetUsers = () => {
   return getQuery
 }
 
-export const useMutateEditUser = () => {
+export const useMutateEditUser = (): UseMutationResult<IUser, Error, IEditService<IUser>, undefined> => {
   const queryClient = useQueryClient()
-  const editMutation = useMutation({
-    mutationFn: (variables: { path: string; id: number; options: Partial<IUser> }) =>
-      edit(variables.path, variables.id, variables.options),
+  const editMutation = useMutation<IUser, Error, IEditService<IUser>, undefined>({
+    mutationFn: (variables: IEditService<IUser>) => edit(variables.path, variables.id, variables.values),
 
     onSuccess: () => queryClient.invalidateQueries(['users']),
   })
@@ -57,8 +54,8 @@ export const useMutateEditUser = () => {
   return editMutation
 }
 
-export const useFindUser = (userId: number | string | undefined) => {
-  const userQuery = useQuery({
+export const useFindUser = (userId: number | string | undefined): UseQueryResult<IUser, Error> => {
+  const userQuery = useQuery<IUser, Error, IUser, (string | number)[]>({
     queryKey: ['users', Number(userId)],
     enabled: !!userId,
     queryFn: (): Promise<IUser> => find(`/users/${userId}`),

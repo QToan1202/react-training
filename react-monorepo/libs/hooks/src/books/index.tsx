@@ -1,13 +1,13 @@
 import { AxiosResponse } from 'axios'
 import { shallow } from 'zustand/shallow'
-import { UseQueryResult, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { UseMutationResult, UseQueryResult, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { add, edit, find, get, remove } from '@react-monorepo/services'
-import { IBook } from '@react-monorepo/types'
+import { IAddService, IBook, IEditService, IRemoveService } from '@react-monorepo/types'
 import { useBookStore } from '@react-monorepo/stores'
 
-export const useGetBooks = (): UseQueryResult<IBook[], unknown> => {
-  const bookQuery = useQuery({
+export const useGetBooks = (): UseQueryResult<IBook[], Error> => {
+  const bookQuery = useQuery<IBook[], Error, IBook[], string[]>({
     queryKey: ['books'],
     queryFn: (): Promise<IBook[]> => get<IBook>('/books'),
   })
@@ -15,8 +15,8 @@ export const useGetBooks = (): UseQueryResult<IBook[], unknown> => {
   return bookQuery
 }
 
-export const useGetBookDetail = (bookId: number | string | undefined) => {
-  const bookQuery = useQuery({
+export const useGetBookDetail = (bookId: number | string | undefined): UseQueryResult<IBook, Error> => {
+  const bookQuery = useQuery<IBook, Error, IBook, (string | number)[]>({
     queryKey: ['books', Number(bookId)],
     enabled: !!bookId,
     queryFn: (): Promise<IBook> => find<IBook>(`/books/${bookId}`),
@@ -25,15 +25,14 @@ export const useGetBookDetail = (bookId: number | string | undefined) => {
   return bookQuery
 }
 
-export const useMutateDeleteBook = () => {
+export const useMutateDeleteBook = (): UseMutationResult<number, Error, IRemoveService, undefined> => {
   const { removeBook } = useBookStore((state) => ({ removeBook: state.remove }), shallow)
   const queryClient = useQueryClient()
 
-  const mutateBook = useMutation({
-    mutationFn: (variables: { path: string; id: number }): Promise<AxiosResponse['status']> =>
-      remove(variables.path, variables.id),
+  const mutateBook = useMutation<number, Error, IRemoveService, undefined>({
+    mutationFn: (variables: IRemoveService): Promise<AxiosResponse['status']> => remove(variables.path, variables.id),
 
-    onSuccess: (_, variables) => {
+    onSuccess: (_, variables: IRemoveService) => {
       queryClient.invalidateQueries(['books'], { exact: true })
       removeBook(variables.id)
     },
@@ -42,11 +41,10 @@ export const useMutateDeleteBook = () => {
   return mutateBook
 }
 
-export const useMutateAddBook = () => {
+export const useMutateAddBook = (): UseMutationResult<IBook, Error, IAddService<Omit<IBook, 'id'>>, undefined> => {
   const queryClient = useQueryClient()
-  const addMutation = useMutation({
-    mutationFn: (variables: { path: string; option: Partial<Omit<IBook, 'id'>> }) =>
-      add<IBook>(variables.path, variables.option),
+  const addMutation = useMutation<IBook, Error, IAddService<Omit<IBook, 'id'>>, undefined>({
+    mutationFn: (variables: IAddService<Omit<IBook, 'id'>>) => add<IBook>(variables.path, variables.values),
 
     onSuccess: () => queryClient.invalidateQueries(['books']),
   })
@@ -54,13 +52,12 @@ export const useMutateAddBook = () => {
   return addMutation
 }
 
-export const useMutateEditBook = () => {
+export const useMutateEditBook = (): UseMutationResult<IBook, Error, IEditService<IBook>, undefined> => {
   const queryClient = useQueryClient()
-  const editMutation = useMutation({
-    mutationFn: (variables: { path: string; id: number; options: Partial<IBook> }) =>
-      edit(variables.path, variables.id, variables.options),
+  const editMutation = useMutation<IBook, Error, IEditService<IBook>, undefined>({
+    mutationFn: (variables: IEditService<IBook>) => edit(variables.path, variables.id, variables.values),
 
-    onSuccess: (data) => queryClient.invalidateQueries(['books', data.id]),
+    onSuccess: (data: IBook) => queryClient.invalidateQueries(['books', data.id]),
   })
 
   return editMutation

@@ -1,29 +1,21 @@
 import { AxiosResponse } from 'axios'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { UseMutationResult, UseQueryResult, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import qs from 'qs'
-import { useMutateUpdate } from '../common/index'
 
 import { add, get, remove } from '@react-monorepo/services'
-import { IBook, IHireRequest, IUser } from '@react-monorepo/types'
+import { IAddService, IBook, IHireRequest, IRemoveService, IUser } from '@react-monorepo/types'
+import { useMutateUpdate } from '../common/index'
 
-export const useGetHireRequests = () => {
-  const hireRequestQuery = useQuery({
-    queryKey: ['hire-requests'],
-    queryFn: () =>
-      get<IHireRequest>('/hire-requests', {
-        params: { _expand: ['book', 'user'] },
-        paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
-      }),
-  })
-
-  return hireRequestQuery
+interface useMutateHireRequestResult {
+  addMutation: UseMutationResult<IHireRequest, Error, IAddService<IHireRequest>, undefined>
+  confirmMutation: UseMutationResult<number, Error, IRemoveService, undefined>
 }
 
 export const useMutateHireRequest = (
   bookData: IBook | undefined,
   user: IUser | undefined,
   action: 'add' | 'confirm'
-) => {
+): useMutateHireRequestResult => {
   const queryClient = useQueryClient()
   const { mutate: mutateUpdate } = useMutateUpdate()
 
@@ -34,11 +26,11 @@ export const useMutateHireRequest = (
     mutateUpdate({
       path: '/books',
       id: +bookData.id,
-      options: { ...bookData, ...bookQuantity },
+      values: { ...bookData, ...bookQuantity },
     })
   }
 
-  const updateUserHireRequest = () => {
+  const updateUserHireRequest = (): void => {
     if (!user) return
     const userRequest =
       action === 'add' ? { hireRequests: user.hireRequests - 1 } : { hireRequests: user.hireRequests + 1 }
@@ -46,13 +38,13 @@ export const useMutateHireRequest = (
     mutateUpdate({
       path: '/users',
       id: user.id,
-      options: { ...user, ...userRequest },
+      values: { ...user, ...userRequest },
     })
   }
 
-  const addMutation = useMutation({
-    mutationFn: (variables: { path: string; options: Partial<IHireRequest> }): Promise<IHireRequest> =>
-      add<IHireRequest>(variables.path, variables.options),
+  const addMutation = useMutation<IHireRequest, Error, IAddService<IHireRequest>, undefined>({
+    mutationFn: (variables: IAddService<IHireRequest>): Promise<IHireRequest> =>
+      add<IHireRequest>(variables.path, variables.values),
     onSuccess: () => {
       queryClient.invalidateQueries(['hire-requests'])
       updateBooksQuantity()
@@ -60,8 +52,8 @@ export const useMutateHireRequest = (
     },
   })
 
-  const confirmMutation = useMutation({
-    mutationFn: (variables: { path: string; id: number }): Promise<AxiosResponse['status']> =>
+  const confirmMutation = useMutation<number, Error, IRemoveService, undefined>({
+    mutationFn: (variables: IRemoveService): Promise<AxiosResponse['status']> =>
       remove(variables.path, variables.id),
     onSuccess: () => {
       queryClient.invalidateQueries(['hire-requests'])
@@ -71,4 +63,17 @@ export const useMutateHireRequest = (
   })
 
   return { addMutation, confirmMutation }
+}
+
+export const useGetHireRequests = (): UseQueryResult<IHireRequest[], Error> => {
+  const hireRequestQuery = useQuery<IHireRequest[], Error, IHireRequest[], string[]>({
+    queryKey: ['hire-requests'],
+    queryFn: () =>
+      get<IHireRequest>('/hire-requests', {
+        params: { _expand: ['book', 'user'] },
+        paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
+      }),
+  })
+
+  return hireRequestQuery
 }
