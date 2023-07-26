@@ -9,9 +9,9 @@ import { useAuthStore } from '@react-monorepo/stores'
 import { ISideBarItem } from '@react-monorepo/types'
 import { COLORS } from '@react-monorepo/utils'
 
-const NavbarOutlet = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.NavbarOutlet })))
+const NavbarLayout = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.NavbarLayout })))
 const BookDetail = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.BookDetail })))
-const Dashboard = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Dashboard })))
+const DashboardLayout = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.DashboardLayout })))
 const LoginPage = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Login })))
 const RegisterPage = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Register })))
 
@@ -45,7 +45,7 @@ const App = () => {
 
 const PublicRoutes = () => (
   <Routes>
-    <Route path="*" element={<NavbarOutlet />}>
+    <Route path="*" element={<NavbarLayout />}>
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
       <Route path="*" element={<Navigate to="login" />} />
@@ -58,7 +58,7 @@ const PrivateRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/*" element={<Dashboard sidebar={sidebarContent} />}>
+      <Route path="/*" element={<DashboardLayout sidebar={sidebarContent} />}>
         <Route path="home" element={<Home />} />
         <Route path="books/:bookId" element={<BookDetail />} />
         <Route path="*" element={<Navigate to="home" />} />

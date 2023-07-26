@@ -1,2 +1,2 @@
-export { default as Dashboard } from './dashboard/dashboard'
-export { default as NavbarOutlet } from './navbar/navbar'
+export { default as DashboardLayout } from './dashboard/dashboard'
+export { default as NavbarLayout } from './navbar/navbar'
