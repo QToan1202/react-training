@@ -22,6 +22,6 @@ const Drawer = memo(({ isOpen, onClose, children }: DrawerProps) => {
       <DrawerContent>{children}</DrawerContent>
     </ChakraDrawer>
   )
-}, (oldProps, newProps) => isEqual(oldProps, newProps))
+}, isEqual)
 
 export default Drawer

@@ -71,6 +71,6 @@ const Sidebar = memo(({ onClose, items, ...rest }: SidebarProps) => {
       </Button>
     </Flex>
   )
-}, (oldProps, newProps) => isEqual(oldProps, newProps))
+}, isEqual)
 
 export default Sidebar

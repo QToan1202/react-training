@@ -48,6 +48,6 @@ const SidebarItem = memo(({ title, to, icon }: SidebarItemProps) => {
       </Box>
     </Link>
   )
-}, (oldProps, newProps) => isEqual(oldProps, newProps))
+}, isEqual)
 
 export default SidebarItem

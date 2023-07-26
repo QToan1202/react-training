@@ -25,6 +25,6 @@ const Dashboard = memo(({ sidebar }: DashboardProps) => {
       </Box>
     </Box>
   )
-}, (oldProps, newProps) => isEqual(oldProps, newProps))
+}, isEqual)
 
 export default Dashboard

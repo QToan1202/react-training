@@ -125,6 +125,6 @@ const ManagementTable = memo(<T extends object>({ data, caption, columns }: Mana
       </Table>
     </TableContainer>
   )
-}, (oldProps, newProps) => isEqual(oldProps, newProps))
+}, isEqual)
 
 export default ManagementTable

@@ -159,6 +159,6 @@ const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => {
       </form>
     </Box>
   )
-}, (oldProps, newProps) => isEqual(oldProps, newProps))
+}, isEqual)
 
 export default RegisterForm

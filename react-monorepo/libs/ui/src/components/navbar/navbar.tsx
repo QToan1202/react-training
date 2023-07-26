@@ -38,6 +38,6 @@ const Navbar = memo(({ children }: NavbarProps) => {
       </Flex>
     </Box>
   )
-}, (oldProps, newProps) => isEqual(oldProps, newProps))
+}, isEqual)
 
 export default Navbar

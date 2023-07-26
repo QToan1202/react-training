@@ -179,6 +179,6 @@ const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
       </form>
     </Box>
   )
-}, (oldProps, newProps) => isEqual(oldProps, newProps))
+}, isEqual)
 
 export default BookForm
