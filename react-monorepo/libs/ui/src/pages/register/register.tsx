@@ -7,6 +7,7 @@ import { useAuthStore } from '@react-monorepo/stores'
 import { TUserForm } from '@react-monorepo/types'
 import { useRegisterUser } from '@react-monorepo/hooks'
 import { Loading, RegisterForm } from '../../components'
+import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 
 const Register = () => {
   const { setLoginUser } = useAuthStore((state) => ({ setLoginUser: state.login }), shallow)
@@ -18,8 +19,8 @@ const Register = () => {
     if (isSuccess) {
       setLoginUser(data)
       toast({
-        title: 'Account created.',
-        description: "We've created your account for you.",
+        title: MESSAGES_SUCCESS.REGISTER.TITLE,
+        description: MESSAGES_SUCCESS.REGISTER.DESC,
         status: 'success',
       })
     }
@@ -27,7 +28,7 @@ const Register = () => {
     if (error instanceof Error)
       toast({
         title: error.message,
-        description: 'Please check your entered information.',
+        description: MESSAGES_ERRORS.RE_CHECK_INFO,
         status: 'error',
       })
   }, [data, error, isSuccess, navigate, setLoginUser, toast])

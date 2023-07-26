@@ -6,6 +6,7 @@ import { shallow } from 'zustand/shallow'
 import { useUserStore } from '@react-monorepo/stores'
 import { TUserForm } from '@react-monorepo/types'
 import { useFindUser, useMutateEditUser } from '@react-monorepo/hooks'
+import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 
 const RegisterForm = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.RegisterForm })))
 const Loading = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Loading })))
@@ -22,7 +23,7 @@ const EditMember = () => {
     if (isSuccess) {
       editUser(data)
       toast({
-        title: 'Edit user success',
+        title: MESSAGES_SUCCESS.EDIT.TITLE,
         description: `User ${data.firstName} ${data.lastName} have been modify successfully.`,
         status: 'success',
       })
@@ -32,7 +33,7 @@ const EditMember = () => {
     if (error instanceof Error)
       toast({
         title: error.message,
-        description: "Action can't be performed.",
+        description: MESSAGES_ERRORS.ACTION_FAIL,
         status: 'error',
       })
   }, [data, editUser, error, isSuccess, navigate, toast])

@@ -3,11 +3,11 @@ import { FiEdit2, FiTrash2 } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import { Column, createColumnHelper } from '@tanstack/react-table'
 import { shallow } from 'zustand/shallow'
-import { Badge, HStack, IconButton, useDisclosure, useToast } from '@chakra-ui/react'
+import { Badge, HStack, IconButton, UseToastOptions, useDisclosure, useToast } from '@chakra-ui/react'
 
 import { useUserStore } from '@react-monorepo/stores'
 import { IUser } from '@react-monorepo/types'
-import { COLORS } from '@react-monorepo/utils'
+import { COLORS, MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 import { useDeleteMember, useGetUsers } from '@react-monorepo/hooks'
 
 const ConfirmDialog = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ConfirmDialog })))
@@ -118,33 +118,32 @@ const ManageMember = memo(() => {
   }, [handleClickEditBtn, handleClickDeleteBtn])
 
   const toast = useToast()
-  const { mutate, error, isSuccess, variables } = useDeleteMember()
+  const renderToast = useCallback(
+    (title: string, description: string, status: UseToastOptions['status']) => {
+      toast({
+        title: title,
+        description: description,
+        status,
+      })
+    },
+    [toast]
+  )
+  const { mutate, error, isSuccess } = useDeleteMember()
 
   useEffect(() => {
-    onClose()
-    if (isSuccess && variables) {
-      toast({
-        title: 'Delete member success.',
-        description: 'Member have been deleted successfully.',
-        status: 'success',
-      })
-    }
+    if (isSuccess) renderToast(MESSAGES_SUCCESS.DELETE.TITLE, MESSAGES_SUCCESS.DELETE.DESC, 'success')
 
-    if (error instanceof Error)
-      toast({
-        title: error.message,
-        description: 'Please check your entered information.',
-        status: 'error',
-      })
-  }, [error, isSuccess, onClose, toast, variables])
+    if (error instanceof Error) renderToast(error.message, MESSAGES_ERRORS.RE_CHECK_INFO, 'error')
+  }, [error, isSuccess, renderToast])
 
   const handleDeleteMember = useCallback(() => {
     if (!selectedMemberId) return
+    onClose()
     mutate({
       path: '/users',
       id: selectedMemberId,
     })
-  }, [mutate, selectedMemberId])
+  }, [mutate, onClose, selectedMemberId])
 
   return (
     <>

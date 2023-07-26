@@ -6,6 +6,7 @@ import { shallow } from 'zustand/shallow'
 import { IBook } from '@react-monorepo/types'
 import { useBookStore } from '@react-monorepo/stores'
 import { useMutateAddBook } from '@react-monorepo/hooks'
+import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 
 const BookForm = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.BookForm })))
 
@@ -19,7 +20,7 @@ const AddBook = () => {
     if (isSuccess) {
       addBook(data)
       toast({
-        title: 'Add book success',
+        title: MESSAGES_SUCCESS.ADD.TITLE,
         description: `Book ${data.name} have been add successfully.`,
         status: 'success',
       })
@@ -29,7 +30,7 @@ const AddBook = () => {
     if (error instanceof Error)
       toast({
         title: error.message,
-        description: "Action can't be performed.",
+        description: MESSAGES_ERRORS.ACTION_FAIL,
         status: 'error',
       })
   }, [addBook, data, error, isSuccess, navigate, toast])

@@ -6,6 +6,7 @@ import { shallow } from 'zustand/shallow'
 import { useAuthStore } from '@react-monorepo/stores'
 import { TUserForm } from '@react-monorepo/types'
 import { useLoginUser } from '@react-monorepo/hooks'
+import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 import { Loading, LoginForm } from '../../components'
 
 const Login = () => {
@@ -18,8 +19,8 @@ const Login = () => {
     if (isSuccess) {
       setLoginUser(data)
       toast({
-        title: 'Login success',
-        description: 'Welcome back!',
+        title: MESSAGES_SUCCESS.LOGIN.TITLE,
+        description: MESSAGES_SUCCESS.LOGIN.DESC,
         status: 'success',
       })
     }
@@ -27,7 +28,7 @@ const Login = () => {
     if (error instanceof Error)
       toast({
         title: error.message,
-        description: 'Please check your entered information.',
+        description: MESSAGES_ERRORS.RE_CHECK_INFO,
         status: 'error',
       })
   }, [data, error, isSuccess, navigate, setLoginUser, toast])

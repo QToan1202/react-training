@@ -6,7 +6,7 @@ import { IconButton, useDisclosure, useToast } from '@chakra-ui/react'
 
 import { useHiredStore } from '@react-monorepo/stores'
 import { IHireRequest, IUser } from '@react-monorepo/types'
-import { COLORS } from '@react-monorepo/utils'
+import { COLORS, MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 import { useGetHireRequests, useMutateHireRequest } from '@react-monorepo/hooks'
 
 const ConfirmDialog = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ConfirmDialog })))
@@ -87,7 +87,7 @@ const ManagementHireRequests = memo(() => {
       if (error instanceof Error) {
         toast({
           title: error.message,
-          description: "Action can't be performed.",
+          description: MESSAGES_ERRORS.ACTION_FAIL,
           status: 'error',
         })
       }
@@ -125,8 +125,8 @@ const ManagementHireRequests = memo(() => {
     deleteHireRequest(returnData)
     toast({
       id: toastID,
-      title: 'Return book success',
-      description: `Book have been return successfully.`,
+      title: MESSAGES_SUCCESS.RETURN.TITLE,
+      description: MESSAGES_SUCCESS.RETURN.DESC,
       status: 'success',
     })
   }, [deleteHireRequest, hireError, isHireError, isHireSuccess, renderError, returnData, toast, toastID])

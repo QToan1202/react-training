@@ -3,7 +3,7 @@ import { shallow } from 'zustand/shallow'
 import { useToast, Grid, Text } from '@chakra-ui/react'
 
 import { useBookStore } from '@react-monorepo/stores'
-import { MESSAGES } from '@react-monorepo/utils'
+import { MESSAGES_ERRORS } from '@react-monorepo/utils'
 import { useGetBooks } from '@react-monorepo/hooks'
 
 const Card = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Card })))
@@ -36,7 +36,7 @@ const Home = () => {
       return toast({
         id: toastID,
         title: error.message,
-        description: MESSAGES.ERROR_REQUEST,
+        description: MESSAGES_ERRORS.ERROR_REQUEST,
         status: 'error',
       })
   }, [toast, error, toastID])

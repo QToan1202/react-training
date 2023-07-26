@@ -24,7 +24,7 @@ import { motion } from 'framer-motion'
 import { FiBook, FiEdit2, FiTrash2 } from 'react-icons/fi'
 
 import { useAuthStore, useHiredStore } from '@react-monorepo/stores'
-import { COLORS, MESSAGES } from '@react-monorepo/utils'
+import { COLORS, MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 import { useGetBookDetail, useMutateHireRequest, useMutateDeleteBook } from '@react-monorepo/hooks'
 import { ConfirmDialog, Loading } from '../../components'
 
@@ -41,7 +41,7 @@ const BookDetail = () => {
       if (error instanceof Error)
         return toast({
           title: error.message,
-          description: MESSAGES.ERROR_REQUEST,
+          description: MESSAGES_ERRORS.ERROR_REQUEST,
           status: 'error',
         })
     },
@@ -70,8 +70,8 @@ const BookDetail = () => {
       return
     }
     toast({
-      title: 'Delete book success',
-      description: `Book have been deleted successfully.`,
+      title: MESSAGES_SUCCESS.DELETE.TITLE,
+      description: MESSAGES_SUCCESS.DELETE.DESC,
       status: 'success',
     })
     navigate('/admin/dashboard')
@@ -100,7 +100,7 @@ const BookDetail = () => {
     addHireRequest(returnData)
     toast({
       id: toastId,
-      title: 'Hire book success',
+      title: MESSAGES_SUCCESS.HIRE.TITLE,
       description: `Book ${bookData?.name} have been hired successfully.`,
       status: 'success',
     })
@@ -125,7 +125,7 @@ const BookDetail = () => {
 
     if (bookData.quantity <= 0) {
       return toast({
-        title: 'Hire book fail',
+        title: MESSAGES_ERRORS.ACTION_FAIL,
         description: `Book ${bookData.name} have been out of stock.`,
         status: 'error',
       })
@@ -133,7 +133,7 @@ const BookDetail = () => {
 
     if (currentUser?.hireRequests <= 0) {
       return toast({
-        title: 'Hire book fail',
+        title: MESSAGES_ERRORS.ACTION_FAIL,
         description: `User ${currentUser.firstName} ${currentUser.lastName} have been out of hire request.`,
         status: 'error',
       })
