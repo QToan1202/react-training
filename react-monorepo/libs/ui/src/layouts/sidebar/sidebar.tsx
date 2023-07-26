@@ -49,8 +49,8 @@ const Sidebar = memo(({ onClose, items, ...rest }: SidebarProps) => {
           </Link>
           <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
         </Flex>
-        {items.map((item: ISideBarItem) => (
-          <SidebarItem key={item.name} icon={item.icon} title={item.name} to={item.href} />
+        {items.map(({name, icon, href}: ISideBarItem) => (
+          <SidebarItem key={name} icon={icon} title={name} to={href} />
         ))}
       </Box>
       <Button
