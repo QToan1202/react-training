@@ -138,7 +138,8 @@ const ManagementHireRequests = memo(() => {
         <ConfirmDialog
           isOpen={isOpen}
           onClose={onClose}
-          onDelete={handleCompleteRequest}
+          onConfirm={handleCompleteRequest}
+          confirmTitle='Complete'
           header={`Confirm to complete hire request`}
           body={`Are you sure? This action mark user have return there book and remove this hire request. You can't undo this action afterwards.`}
         />

@@ -239,7 +239,8 @@ const BookDetail = () => {
         <ConfirmDialog
           isOpen={isOpen}
           onClose={onClose}
-          onDelete={handleDeleteBook}
+          onConfirm={handleDeleteBook}
+          confirmTitle='delete'
           header={`Delete ${bookData?.name} book`}
           body={`Are you sure? You can't undo this action afterwards.`}
         />

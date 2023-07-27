@@ -145,7 +145,8 @@ const ManageMember = memo(() => {
         <ConfirmDialog
           isOpen={isOpen}
           onClose={onClose}
-          onDelete={handleDeleteMember}
+          onConfirm={handleDeleteMember}
+          confirmTitle='delete'
           header={`Delete row`}
           body={`Are you sure? You can't undo this action afterwards.`}
         />

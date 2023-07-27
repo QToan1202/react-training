@@ -12,12 +12,14 @@ import {
 export interface ConfirmDialogProps {
   header: string
   body: string
+  cancelTitle?: string
+  confirmTitle?: string
   isOpen: boolean
   onClose: () => void
-  onDelete: () => void
+  onConfirm: () => void
 }
 
-const ConfirmDialog = memo(({ isOpen, onClose, onDelete, header, body }: ConfirmDialogProps) => {
+const ConfirmDialog = memo(({ isOpen, onClose, onConfirm, header, body, cancelTitle = 'cancel', confirmTitle = 'confirm' }: ConfirmDialogProps) => {
   const cancelRef = useRef(null)
 
   return (
@@ -32,10 +34,10 @@ const ConfirmDialog = memo(({ isOpen, onClose, onDelete, header, body }: Confirm
 
           <AlertDialogFooter>
             <Button ref={cancelRef} onClick={onClose}>
-              Cancel
+              {cancelTitle}
             </Button>
-            <Button colorScheme="red" onClick={onDelete} ml={3}>
-              Confirm
+            <Button colorScheme="red" onClick={onConfirm} ml={3}>
+              {confirmTitle}
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
