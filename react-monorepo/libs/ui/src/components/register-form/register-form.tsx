@@ -8,10 +8,11 @@ import { REGEX } from '@react-monorepo/utils'
 
 export interface RegisterFormProps {
   userInfo?: IUser
+  confirmTitle?: string
   onSubmit: (values: TUserForm) => void
 }
 
-const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => {
+const RegisterForm = memo(({ onSubmit, userInfo, confirmTitle = 'start now' }: RegisterFormProps) => {
   const {
     register,
     handleSubmit,
@@ -138,7 +139,7 @@ const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => {
           </FormErrorMessage>
         </FormControl>
         <Button mt={4} isLoading={isSubmitting} type="submit" fontSize="24px" variant="primary">
-          Start now
+          {confirmTitle}
         </Button>
       </form>
     </Box>

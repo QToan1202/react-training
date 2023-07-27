@@ -1,6 +1,6 @@
 import { lazy, useCallback, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useToast } from '@chakra-ui/react'
+import { Box, useToast } from '@chakra-ui/react'
 import { shallow } from 'zustand/shallow'
 
 import { useUserStore } from '@react-monorepo/stores'
@@ -52,7 +52,11 @@ const EditMember = () => {
 
   if (isLoading) return <Loading />
 
-  return <RegisterForm onSubmit={handleOnSubmit} userInfo={userData} />
+  return (
+    <Box mt={10}>
+      <RegisterForm onSubmit={handleOnSubmit} userInfo={userData} confirmTitle="update" />
+    </Box>
+  )
 }
 
 export default EditMember
