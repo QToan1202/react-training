@@ -1,7 +1,6 @@
 export { default as Loading } from './common/loading/loading'
 export { default as ConfirmDialog } from './common/confirm-dialog/confirm-dialog'
 export { default as Search } from './common/search/search'
-export { default as CustomButton } from './common/custom-button/custom-button'
 export { default as Card } from './common/card/card'
 export { default as SidebarItem } from './sidebar-item/sidebar-item'
 export { default as BookForm } from './book-form/book-form'
