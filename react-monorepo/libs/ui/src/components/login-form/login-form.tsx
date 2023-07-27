@@ -16,7 +16,7 @@ import {
   Heading,
 } from '@chakra-ui/react'
 
-import { COLORS, REGEX, SHADOW } from '@react-monorepo/utils'
+import { REGEX } from '@react-monorepo/utils'
 import { TUserForm } from '@react-monorepo/types'
 
 export interface LoginFormProps {
@@ -32,10 +32,11 @@ const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
 
   return (
     <Box
-      bgColor={COLORS.WHITE}
-      border={`2px solid ${COLORS.GRAY}`}
+      bgColor='white'
+      border='2px solid'
+      borderColor='dust.50'
       borderRadius={10}
-      shadow={SHADOW.FORM}
+      shadow='form'
       p={10}
       maxW={460}
       margin="0 auto"
@@ -96,13 +97,8 @@ const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
         <Button
           w="100%"
           mt={4}
-          bgColor={COLORS.PRIMARY}
           isLoading={isSubmitting}
           type="submit"
-          textTransform="capitalize"
-          fontSize="24px"
-          color={COLORS.WHITE}
-          fontWeight="bold"
           _hover={{
             filter: 'brightness(70%)',
           }}
@@ -115,7 +111,7 @@ const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
       </Center>
       <Text textAlign="center">
         Don't have an account?
-        <Link color={COLORS.PRIMARY} as={RouterLink} to={'/register'} px={1}>
+        <Link color='primary' as={RouterLink} to={'/register'} px={1}>
           Sign Up!
         </Link>
       </Text>

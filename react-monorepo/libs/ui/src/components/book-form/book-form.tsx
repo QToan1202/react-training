@@ -16,7 +16,7 @@ import { useForm } from 'react-hook-form'
 import { FiFile } from 'react-icons/fi'
 import isEqual from 'react-fast-compare'
 
-import { COLORS, REGEX, SHADOW } from '@react-monorepo/utils'
+import { REGEX } from '@react-monorepo/utils'
 import { IBook } from '@react-monorepo/types'
 
 export interface BookFormProps {
@@ -31,7 +31,7 @@ const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
     formState: { errors, isSubmitting },
   } = useForm<IBook>({ defaultValues: bookValues })
   return (
-    <Box bgColor={COLORS.WHITE} border={`2px solid ${COLORS.GRAY}`} p={10} maxW={960} shadow={SHADOW.FORM}>
+    <Box bgColor="white" border="2px solid" borderColor="dust.50" p={10} maxW={960} shadow="form">
       <Box mb={4}>
         <Heading fontWeight="bold" fontSize="3xl" textTransform="capitalize">
           item information:
@@ -166,8 +166,8 @@ const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
           </Flex>
           <Button
             mt={4}
-            bgColor={COLORS.PRIMARY}
-            color={COLORS.WHITE}
+            bgColor="primary"
+            color="white"
             isLoading={isSubmitting}
             type="submit"
             textTransform="capitalize"

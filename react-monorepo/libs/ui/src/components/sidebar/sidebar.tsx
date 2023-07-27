@@ -6,7 +6,6 @@ import { shallow } from 'zustand/shallow'
 import isEqual from 'react-fast-compare'
 
 import { useAuthStore } from '@react-monorepo/stores'
-import { COLORS } from '@react-monorepo/utils'
 import { ISideBarItem } from '@react-monorepo/types'
 import { SidebarItem } from '../../components'
 import logo from '../../../assets/images/library-logo.webp'
@@ -35,7 +34,7 @@ const Sidebar = memo(({ onClose, items, ...rest }: SidebarProps) => {
       pos="fixed"
       zIndex={3}
       py={5}
-      bg={COLORS.GRAY}
+      bg="dust.50"
       minW={{ base: 'full', md: 60 }}
       minH="full"
       {...rest}
@@ -49,23 +48,11 @@ const Sidebar = memo(({ onClose, items, ...rest }: SidebarProps) => {
           </Link>
           <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
         </Flex>
-        {items.map(({name, icon, href}: ISideBarItem) => (
+        {items.map(({ name, icon, href }: ISideBarItem) => (
           <SidebarItem key={name} icon={icon} title={name} to={href} />
         ))}
       </Box>
-      <Button
-        onClick={handleLogOut}
-        leftIcon={<FiLogOut />}
-        mx={5}
-        borderWidth={2}
-        borderColor={COLORS.PRIMARY}
-        bgColor={COLORS.PRIMARY}
-        color={COLORS.WHITE}
-        _hover={{
-          bgColor: COLORS.WHITE,
-          color: COLORS.PRIMARY,
-        }}
-      >
+      <Button onClick={handleLogOut} leftIcon={<FiLogOut />} mx={5}>
         Log Out
       </Button>
     </Flex>

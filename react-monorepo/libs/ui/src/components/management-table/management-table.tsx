@@ -29,7 +29,7 @@ import {
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
 import isEqual from 'react-fast-compare'
 
-import { COLORS, SHADOW, isOverDue } from '@react-monorepo/utils'
+import { isOverDue } from '@react-monorepo/utils'
 import noDataImg from '../../../assets/images/no-data.webp'
 
 declare module '@tanstack/react-table' {
@@ -60,8 +60,8 @@ const ManagementTable = memo(<T extends object>({ data, caption, columns }: Mana
         if (!row.original.borrow_date) return {}
 
         return {
-          bgColor: isOverDue(row.original.borrow_date) ? COLORS.RED_200 : COLORS.WHITE,
-          color: isOverDue(row.original.borrow_date) ? COLORS.WHITE : COLORS.BLACK,
+          bgColor: isOverDue(row.original.borrow_date) ? 'red.200' : 'white',
+          color: isOverDue(row.original.borrow_date) ? 'white' : 'black',
         }
       },
     },
@@ -70,15 +70,17 @@ const ManagementTable = memo(<T extends object>({ data, caption, columns }: Mana
   if (!data.length)
     return (
       <Box>
-        <AspectRatio ratio={1} maxW='300px' m='0 auto'>
+        <AspectRatio ratio={1} maxW="300px" m="0 auto">
           <Image src={noDataImg} objectFit="contain" alt="no data found image" />
         </AspectRatio>
-        <Heading fontSize={24} textAlign="center" fontWeight={'medium'} color={COLORS.GRAY_200}>There's no data!!!</Heading>
+        <Heading fontSize={24} textAlign="center" fontWeight={'medium'} color="dust.200">
+          There's no data!!!
+        </Heading>
       </Box>
     )
 
   return (
-    <TableContainer shadow={SHADOW.FORM} borderRadius="xl">
+    <TableContainer shadow="form" borderRadius="xl">
       <Table>
         {caption && <TableCaption>{caption}</TableCaption>}
         <Thead>
@@ -90,7 +92,7 @@ const ManagementTable = memo(<T extends object>({ data, caption, columns }: Mana
                     py={3}
                     fontWeight="medium"
                     cursor="pointer"
-                    color={COLORS.GRAY_200}
+                    color="dust.200"
                     key={header.id}
                     onClick={header.column.getToggleSortingHandler()}
                   >

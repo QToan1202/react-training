@@ -1,10 +1,9 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
-import { AspectRatio, Box, Flex, HStack, IconButton, Image } from '@chakra-ui/react'
+import { AspectRatio, Box, Button, Flex, HStack, IconButton, Image } from '@chakra-ui/react'
 import { FiMenu } from 'react-icons/fi'
 import isEqual from 'react-fast-compare'
 
-import { CustomButton } from '../../components'
 import logo from '../../../assets/images/library-logo.webp'
 
 export interface NavbarProps {
@@ -23,10 +22,10 @@ const Navbar = memo(({ children }: NavbarProps) => {
         <HStack spacing={5} display={{ base: 'none', md: 'flex' }}>
           {children}
           <Link to="/login">
-            <CustomButton title="login" />
+            <Button variant='secondary'>login</Button>
           </Link>
           <Link to="/register">
-            <CustomButton title="get started" />
+            <Button variant='secondary'>get started</Button>
           </Link>
         </HStack>
         <IconButton

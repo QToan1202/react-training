@@ -7,7 +7,7 @@ import { Badge, HStack, IconButton, UseToastOptions, useDisclosure, useToast } f
 
 import { useUserStore } from '@react-monorepo/stores'
 import { IUser } from '@react-monorepo/types'
-import { COLORS, MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
+import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 import { useDeleteMember, useGetUsers } from '@react-monorepo/hooks'
 
 const ConfirmDialog = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ConfirmDialog })))
@@ -72,14 +72,7 @@ const ManageMember = memo(() => {
       }),
       columnHelper.accessor('role', {
         cell: (info) => (
-          <Badge
-            px={4}
-            py={1}
-            borderRadius="2xl"
-            bgColor={COLORS.GREEN_100}
-            color={COLORS.GREEN}
-            textTransform="capitalize"
-          >
+          <Badge px={4} py={1} borderRadius="2xl" bgColor="green.100" color="green" textTransform="capitalize">
             {info.getValue()}
           </Badge>
         ),
@@ -96,8 +89,8 @@ const ManageMember = memo(() => {
               aria-label="edit button"
               variant="ghost"
               _hover={{
-                bgColor: COLORS.BLUE_100,
-                color: COLORS.BLUE,
+                bgColor: 'blue.100',
+                color: 'blue',
               }}
             />
             <IconButton
@@ -107,8 +100,8 @@ const ManageMember = memo(() => {
               aria-label="delete button"
               variant="ghost"
               _hover={{
-                bgColor: COLORS.RED_100,
-                color: COLORS.RED,
+                bgColor: 'red.100',
+                color: 'red',
               }}
             />
           </HStack>

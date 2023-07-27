@@ -1,6 +1,5 @@
 import { Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 
-import { COLORS } from '@react-monorepo/utils'
 import { ManageMember, ManagementHireRequests, BookList } from '../../components'
 
 const AdminDashboard = () => {
@@ -11,7 +10,7 @@ const AdminDashboard = () => {
         <Tab textTransform="capitalize">members</Tab>
         <Tab textTransform="capitalize">hire requests</Tab>
       </TabList>
-      <TabIndicator h="2px" bg={COLORS.PRIMARY} />
+      <TabIndicator h="2px" bgColor="primary" />
 
       <TabPanels>
         <TabPanel>

@@ -21,7 +21,6 @@ import {
 import { FiChevronDown, FiMenu } from 'react-icons/fi'
 import { shallow } from 'zustand/shallow'
 
-import { COLORS } from '@react-monorepo/utils'
 import { useAuthStore } from '@react-monorepo/stores'
 import logo from '../../../assets/images/library-logo.webp'
 export interface HeaderProps {
@@ -45,14 +44,15 @@ const Header = memo(({ onOpen }: HeaderProps) => {
       justifyContent={{ base: 'space-between', md: 'flex-end' }}
       alignItems="center"
       borderBottomWidth="1px"
-      borderBottomColor={COLORS.GRAY_100}
+      borderBottomColor="dust.100"
       p="16px"
     >
       <IconButton
         display={{ base: 'flex', md: 'none' }}
         aria-label="open menu"
-        bg={COLORS.WHITE}
-        border={`2px solid ${COLORS.GRAY}`}
+        bg="white"
+        border="2px solid"
+        borderColor="dust.50"
         icon={<FiMenu />}
         onClick={onOpen}
       />
@@ -79,7 +79,7 @@ const Header = memo(({ onOpen }: HeaderProps) => {
               </Box>
             </HStack>
           </MenuButton>
-          <MenuList bg={COLORS.WHITE}>
+          <MenuList bg="white">
             <MenuItem>Profile</MenuItem>
             <MenuItem>Settings</MenuItem>
             <MenuItem>Billing</MenuItem>

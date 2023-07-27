@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import isEqual from 'react-fast-compare'
 
 import { IUser, TUserForm } from '@react-monorepo/types'
-import { COLORS, REGEX, SHADOW } from '@react-monorepo/utils'
+import { REGEX } from '@react-monorepo/utils'
 
 export interface RegisterFormProps {
   userInfo?: IUser
@@ -19,14 +19,7 @@ const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => {
   } = useForm<TUserForm>({ defaultValues: userInfo })
 
   return (
-    <Box
-      bgColor={COLORS.WHITE}
-      border={`2px solid ${COLORS.GRAY}`}
-      p={10}
-      maxW={960}
-      margin="0 auto"
-      shadow={SHADOW.FORM}
-    >
+    <Box bgColor="white" border="2px solid" borderColor="dust.50" p={10} maxW={960} margin="0 auto" shadow="form">
       <Box mb={4}>
         <Heading fontWeight="bold" fontSize="3xl" textTransform="capitalize">
           Account info:
@@ -146,12 +139,12 @@ const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => {
         </FormControl>
         <Button
           mt={4}
-          bgColor={COLORS.PRIMARY}
+          bgColor="primary"
           isLoading={isSubmitting}
           type="submit"
           textTransform="capitalize"
           fontSize="24px"
-          color={COLORS.WHITE}
+          color="white"
           fontWeight="bold"
         >
           Start now

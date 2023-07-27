@@ -6,7 +6,7 @@ import { IconButton, useDisclosure, useToast } from '@chakra-ui/react'
 
 import { useHiredStore } from '@react-monorepo/stores'
 import { IHireRequest, IUser } from '@react-monorepo/types'
-import { COLORS, MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
+import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 import { useGetHireRequests, useMutateHireRequest } from '@react-monorepo/hooks'
 
 const ConfirmDialog = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ConfirmDialog })))
@@ -66,8 +66,8 @@ const ManagementHireRequests = memo(() => {
             aria-label="confirm button"
             variant="ghost"
             _hover={{
-              bgColor: COLORS.GREEN_100,
-              color: COLORS.GREEN,
+              bgColor: 'green.100',
+              color: 'green',
             }}
           />
         ),

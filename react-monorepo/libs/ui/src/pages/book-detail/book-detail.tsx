@@ -24,7 +24,7 @@ import { motion } from 'framer-motion'
 import { FiBook, FiEdit2, FiTrash2 } from 'react-icons/fi'
 
 import { useAuthStore, useHiredStore } from '@react-monorepo/stores'
-import { COLORS, MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
+import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 import { useGetBookDetail, useMutateHireRequest, useMutateDeleteBook } from '@react-monorepo/hooks'
 import { ConfirmDialog, Loading } from '../../components'
 
@@ -170,8 +170,8 @@ const BookDetail = () => {
                 leftIcon={<FiEdit2 />}
                 variant="outline"
                 _hover={{
-                  bgColor: COLORS.BLUE_100,
-                  color: COLORS.BLUE,
+                  bgColor: 'blue.100',
+                  color: 'blue',
                 }}
               >
                 Edit
@@ -181,8 +181,8 @@ const BookDetail = () => {
                 leftIcon={<FiTrash2 />}
                 variant="outline"
                 _hover={{
-                  bgColor: COLORS.RED_100,
-                  color: COLORS.RED,
+                  bgColor: 'red.100',
+                  color: 'red',
                 }}
               >
                 Delete
@@ -194,8 +194,8 @@ const BookDetail = () => {
             leftIcon={<FiBook />}
             variant="outline"
             _hover={{
-              bgColor: COLORS.GREEN_100,
-              color: COLORS.GREEN,
+              bgColor: 'green.100',
+              color: 'green',
             }}
           >
             Hire
@@ -206,7 +206,7 @@ const BookDetail = () => {
       <GridItem>
         <Heading>{bookData?.name}</Heading>
         <VStack alignItems="flex-start">
-          <Text textColor={COLORS.GRAY_200} fontSize="2xl">
+          <Text textColor="dust.200" fontSize="2xl">
             {bookData?.author}
           </Text>
           <Text textTransform="capitalize">
@@ -219,7 +219,7 @@ const BookDetail = () => {
 
         <Tabs mt={4}>
           <TabList>
-            <Tab px={0} color={COLORS.PRIMARY}>
+            <Tab px={0} color="primary">
               <Text as="b" textTransform="capitalize" fontSize="xl">
                 descriptions
               </Text>

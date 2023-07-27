@@ -5,8 +5,6 @@ import { IconType } from 'react-icons/lib'
 import { Link } from 'react-router-dom'
 import isEqual from 'react-fast-compare'
 
-import { COLORS } from '@react-monorepo/utils'
-
 export interface SidebarItemProps {
   to: string
   title: string
@@ -23,12 +21,12 @@ const SidebarItem = memo(({ title, to, icon }: SidebarItemProps) => {
     <Link to={to}>
       <Box
         bg="transparent"
-        color={COLORS.BLACK}
+        color="black"
         as={motion.div}
         onHoverStart={handleHoverItem}
         onHoverEnd={handleHoverItem}
         _hover={{
-          bg: COLORS.WHITE,
+          bg: 'white',
         }}
       >
         <Flex
@@ -41,7 +39,7 @@ const SidebarItem = memo(({ title, to, icon }: SidebarItemProps) => {
           }}
         >
           <Box as={motion.div} display="flex" animate={{ x: isHovered ? 0 : -100 }}>
-            <Icon as={icon} boxSize={6} color={COLORS.PRIMARY} />
+            <Icon as={icon} boxSize={6} color="primary" />
           </Box>
           <Text>{title}</Text>
         </Flex>

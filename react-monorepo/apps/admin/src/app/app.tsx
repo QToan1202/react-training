@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { useAuthStore } from '@react-monorepo/stores'
 import { ISideBarItem } from '@react-monorepo/types'
-import { COLORS } from '@react-monorepo/utils'
+import { default as theme } from '@react-monorepo/themes'
 
 const NavbarLayout = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.NavbarLayout })))
 const BookDetail = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.BookDetail })))
@@ -31,7 +31,7 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider toastOptions={{ defaultOptions: { position: 'bottom', duration: 3000, isClosable: true } }}>
+      <ChakraProvider theme={theme} toastOptions={{ defaultOptions: { position: 'bottom', duration: 3000, isClosable: true } }}>
         <Suspense fallback={<OverlayLoading />}>
           <Routes>
             {authUser ? (
@@ -80,9 +80,9 @@ const PrivateRoutes = () => {
 }
 
 const OverlayLoading = () => (
-  <Box position="relative" h="100vh" bgColor={COLORS.BLACK} opacity={0.5}>
+  <Box position="relative" h="100vh" bgColor='black' opacity={0.5}>
     <AbsoluteCenter axis="both">
-      <Spinner thickness="4px" speed="0.65s" color={COLORS.PRIMARY} size="xl" />
+      <Spinner thickness="4px" speed="0.65s" color='primary' size="xl" />
     </AbsoluteCenter>
   </Box>
 )
