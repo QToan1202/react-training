@@ -22,6 +22,7 @@ import {
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { FiBook, FiEdit2, FiTrash2 } from 'react-icons/fi'
+import dayjs from 'dayjs'
 
 import { useAuthStore, useHiredStore } from '@react-monorepo/stores'
 import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
@@ -144,7 +145,7 @@ const BookDetail = () => {
       values: {
         bookId: bookData.id,
         userId: currentUser?.id,
-        borrow_date: new Date().toJSON().slice(0, 10),
+        borrow_date: dayjs().format('MM-DD-YYYY HH:mm:ss').toString(),
       },
     })
   }, [mutateHireBook, bookData, currentUser, toast])

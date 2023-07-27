@@ -1,10 +1,10 @@
-export const isOverDue = (borrow_date: string): boolean => {
-  const currentDate = new Date()
-  const examDate = new Date(borrow_date)
-  const timeDifference = Math.abs(examDate.getTime() - currentDate.getTime())
-  const daysRemaining = Math.ceil(timeDifference / (1000 * 60 * 60 * 24))
+import dayjs from 'dayjs'
 
-  if (daysRemaining >= 10) return true
+export const isOverDue = (borrow_date: string): boolean => {
+  const currentDate = dayjs()
+  const dateRemaining = currentDate.diff(borrow_date, 'd')
+
+  if (dateRemaining >= 10) return true
 
   return false
 }
