@@ -21,7 +21,6 @@ const Sidebar = memo(({ onClose, items, ...rest }: SidebarProps) => {
   const { logOut } = useAuthStore((state) => ({ logOut: state.logout }), shallow)
   const handleLogOut = useCallback(() => {
     logOut()
-    useAuthStore.persist.clearStorage()
     toast({
       title: 'Log out success',
       description: 'Hope to see you soon.',

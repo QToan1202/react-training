@@ -33,7 +33,6 @@ const Header = memo(({ onOpen }: HeaderProps) => {
   const { user, logOut } = useAuthStore((state) => ({ user: state.user, logOut: state.logout }), shallow)
   const handleLogOut = useCallback(() => {
     logOut()
-    useAuthStore.persist.clearStorage()
     toast({
       title: 'Log out success',
       description: 'Hope to see you soon.',

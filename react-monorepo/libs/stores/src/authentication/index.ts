@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 import { IUser } from '@react-monorepo/types'
+import { STORE_NAME } from '@react-monorepo/utils'
 
 interface AuthState {
   user: IUser | undefined
@@ -19,7 +20,7 @@ export const useAuthStore = create<AuthState>()(
       logout: () => set(() => ({ user: undefined })),
     }),
     {
-      name: 'authentic-store',
+      name: STORE_NAME.AUTHENTIC_STORE,
     }
   )
 )
