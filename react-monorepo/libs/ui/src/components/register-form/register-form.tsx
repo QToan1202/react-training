@@ -137,16 +137,7 @@ const RegisterForm = memo(({ onSubmit, userInfo }: RegisterFormProps) => {
             {errors.phone && errors.phone.message}
           </FormErrorMessage>
         </FormControl>
-        <Button
-          mt={4}
-          bgColor="primary"
-          isLoading={isSubmitting}
-          type="submit"
-          textTransform="capitalize"
-          fontSize="24px"
-          color="white"
-          fontWeight="bold"
-        >
+        <Button mt={4} isLoading={isSubmitting} type="submit" fontSize="24px" variant="primary">
           Start now
         </Button>
       </form>

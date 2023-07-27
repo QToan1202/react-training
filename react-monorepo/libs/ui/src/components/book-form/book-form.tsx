@@ -164,15 +164,7 @@ const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
               </FormErrorMessage>
             </FormControl>
           </Flex>
-          <Button
-            mt={4}
-            bgColor="primary"
-            color="white"
-            isLoading={isSubmitting}
-            type="submit"
-            textTransform="capitalize"
-            fontSize="20px"
-          >
+          <Button mt={4} variant="primary" isLoading={isSubmitting} type="submit" fontSize="20px">
             complete
           </Button>
         </Flex>

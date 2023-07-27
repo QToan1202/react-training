@@ -32,11 +32,11 @@ const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
 
   return (
     <Box
-      bgColor='white'
-      border='2px solid'
-      borderColor='dust.50'
+      bgColor="white"
+      border="2px solid"
+      borderColor="dust.50"
       borderRadius={10}
-      shadow='form'
+      shadow="form"
       p={10}
       maxW={460}
       margin="0 auto"
@@ -99,6 +99,7 @@ const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
           mt={4}
           isLoading={isSubmitting}
           type="submit"
+          variant="primary"
           _hover={{
             filter: 'brightness(70%)',
           }}
@@ -111,7 +112,7 @@ const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
       </Center>
       <Text textAlign="center">
         Don't have an account?
-        <Link color='primary' as={RouterLink} to={'/register'} px={1}>
+        <Link color="primary" as={RouterLink} to={'/register'} px={1}>
           Sign Up!
         </Link>
       </Text>

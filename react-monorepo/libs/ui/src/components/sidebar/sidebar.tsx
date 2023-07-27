@@ -52,7 +52,7 @@ const Sidebar = memo(({ onClose, items, ...rest }: SidebarProps) => {
           <SidebarItem key={name} icon={icon} title={name} to={href} />
         ))}
       </Box>
-      <Button onClick={handleLogOut} leftIcon={<FiLogOut />} mx={5}>
+      <Button onClick={handleLogOut} leftIcon={<FiLogOut />} mx={5} variant="primary">
         Log Out
       </Button>
     </Flex>

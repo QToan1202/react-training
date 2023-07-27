@@ -37,10 +37,12 @@ const Button: ComponentStyleConfig = defineStyleConfig({
         bgColor: 'dust.100',
       },
     },
+    outline: {
+      fontWeight: 'semibold',
+    }
   },
 
   defaultProps: {
-    variant: 'primary',
     size: 'md',
   },
 })
