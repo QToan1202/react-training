@@ -145,7 +145,7 @@ const BookDetail = () => {
       values: {
         bookId: bookData.id,
         userId: currentUser?.id,
-        borrow_date: dayjs().format('MM-DD-YYYY HH:mm:ss').toString(),
+        borrow_date: dayjs().format('MM-DD-YYYY HH:mm:ss'),
       },
     })
   }, [mutateHireBook, bookData, currentUser, toast])
