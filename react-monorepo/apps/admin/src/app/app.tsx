@@ -48,11 +48,12 @@ const App = () => {
 
 const PublicRoutes = () => (
   <Routes>
-    <Route path="*" element={<NavbarLayout />}>
+    <Route path="/" element={<NavbarLayout />} >
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
-      <Route path="*" element={<Navigate to="login" />} />
+      <Route path="/" element={<Navigate to="/login" />} />
     </Route>
+    <Route path="*" element={<Navigate to="/" />} />
   </Routes>
 )
 
@@ -73,8 +74,9 @@ const PrivateRoutes = () => {
         <Route path="edit-book/:bookId" element={<EditBookPage />} />
         <Route path="edit-member/:userId" element={<EditMemberPage />} />
         <Route path="books/:bookId" element={<BookDetail />} />
+        <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
       </Route>
-      <Route path="*" element={<Navigate to="admin/dashboard" />} />
+      <Route path="*" element={<Navigate to="/admin/dashboard" />} />
     </Routes>
   )
 }
