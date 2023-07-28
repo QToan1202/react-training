@@ -57,6 +57,28 @@ Estimate: **7 days** (_July 05, 2023 - July 13, 2023_)
 - The delete action requires confirmation
 - Validate each form controls
 
+## Project structure
+```bash
+  react-monorepo/
+  ├──...
+  ├──apps/                    # Contains the application projects
+  │  ├───admin                
+  │  └───member               
+  ├──libs/                    # Contains the library projects
+  │  ├───hooks                # Contains the custom hooks
+  │  ├───services             # Store all the API services
+  │  ├───stores               # All the state stores
+  │  ├───themes               # Contains override themes for third-party UI lib
+  │  ├───types                # Contains types and interfaces 
+  │  ├───ui                   # Collection of related presentational components
+  │  └───utils                # Collection of constants and function commonly used
+  ├──...
+  ├──nx.json                  # Configures the Nx CLI
+  ├──package.json
+  ├──pnpm-lock.yaml
+  ├──tsconfig.base.json       # Sets up the global TypeScript settings and creates aliases
+  └──README.md
+```
 ## Install and Run
 
 Open Windows PowerShell or cmd or [Windows Terminal](https://www.microsoft.com/en-gb/p/windows-terminal/9n0dx20hk701?rtc=1&activetab=pivot:overviewtab)
@@ -76,17 +98,17 @@ cd react-training/react-monorepo
 **_Step 3:_** Install project
 
 ```bash
-npm install
+pnpm install
 ```
 
 **_Step 4:_** Run json-server
 
 ```bash
-npm run server
+pnpm run server
 ```
 
 **_Step 5:_** Run project in dev mode
 
 ```bash
-npm start
+pnpm start
 ```
