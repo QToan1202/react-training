@@ -11,6 +11,8 @@ import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 const RegisterForm = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.RegisterForm })))
 const Loading = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Loading })))
 
+const USERS_ENDPOINT = import.meta.env.VITE_USERS_ENDPOINT
+
 const EditMember = () => {
   const { userId } = useParams()
   const toast = useToast()
@@ -42,7 +44,7 @@ const EditMember = () => {
     (values: TUserForm) => {
       if (!userId) return
       mutate({
-        path: '/users',
+        path: USERS_ENDPOINT,
         id: +userId,
         values,
       })

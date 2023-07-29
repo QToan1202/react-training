@@ -11,6 +11,8 @@ import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 const BookForm = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.BookForm })))
 const Loading = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Loading })))
 
+const BOOKS_ENDPOINT = import.meta.env.VITE_BOOKS_ENDPOINT
+
 const EditBook = () => {
   const { bookId } = useParams()
   const toast = useToast()
@@ -42,7 +44,7 @@ const EditBook = () => {
     (values: IBook) => {
       if (!bookId) return
       mutate({
-        path: '/books',
+        path: BOOKS_ENDPOINT,
         id: +bookId,
         values,
       })

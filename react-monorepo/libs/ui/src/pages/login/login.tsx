@@ -9,6 +9,8 @@ import { useLoginUser } from '@react-monorepo/hooks'
 import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 import { Loading, LoginForm } from '../../components'
 
+const USERS_ENDPOINT = import.meta.env.VITE_USERS_ENDPOINT
+
 const Login = () => {
   const { setLoginUser } = useAuthStore((state) => ({ setLoginUser: state.login }), shallow)
   const { mutate, isLoading, error, isSuccess, data } = useLoginUser()
@@ -36,7 +38,7 @@ const Login = () => {
   const handleSubmit = useCallback(
     (values: TUserForm) => {
       mutate({
-        path: '/users',
+        path: USERS_ENDPOINT,
         email: values.email,
         password: values.password,
       })

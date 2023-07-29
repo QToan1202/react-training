@@ -12,6 +12,8 @@ import { useGetHireRequests, useMutateHireRequest } from '@react-monorepo/hooks'
 const ConfirmDialog = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ConfirmDialog })))
 const ManagementTable = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ManagementTable })))
 
+const HIRE_REQUESTS_ENDPOINT = import.meta.env.VITE_HIRE_REQUESTS_ENDPOINT
+
 const ManagementHireRequests = memo(() => {
   const { hireRequests, deleteHireRequest } = useHiredStore(
     (state) => ({ hireRequests: state.hireRequests, deleteHireRequest: state.remove }),
@@ -108,7 +110,7 @@ const ManagementHireRequests = memo(() => {
   const handleCompleteRequest = useCallback(() => {
     if (!selectedItem) return
     mutateConfirm({
-      path: '/hire-requests',
+      path: HIRE_REQUESTS_ENDPOINT,
       id: selectedItem.id,
     })
     onClose()

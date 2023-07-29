@@ -9,6 +9,8 @@ import { useRegisterUser } from '@react-monorepo/hooks'
 import { Loading, RegisterForm } from '../../components'
 import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 
+const USERS_ENDPOINT = import.meta.env.VITE_USERS_ENDPOINT
+
 const Register = () => {
   const { setLoginUser } = useAuthStore((state) => ({ setLoginUser: state.login }), shallow)
   const { mutate, isLoading, error, isSuccess, data } = useRegisterUser()
@@ -36,7 +38,7 @@ const Register = () => {
   const handleSubmit = useCallback(
     (values: TUserForm) => {
       mutate({
-        path: '/users',
+        path: USERS_ENDPOINT,
         user: values,
       })
     },

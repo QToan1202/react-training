@@ -6,6 +6,8 @@ import { edit, find, get, login, register, remove } from '@react-monorepo/servic
 import { IEditService, ILoginService, IRegisterService, IRemoveService, IUser } from '@react-monorepo/types'
 import { useUserStore } from '@react-monorepo/stores'
 
+const USERS_ENDPOINT = import.meta.env.VITE_USERS_ENDPOINT
+
 export const useLoginUser = (): UseMutationResult<IUser, Error, ILoginService, undefined> => {
   const loginMutate = useMutation<IUser, Error, ILoginService, undefined>({
     mutationFn: (variables: ILoginService): Promise<IUser> =>
@@ -37,7 +39,7 @@ export const useDeleteMember = (): UseMutationResult<number, Error, IRemoveServi
 export const useGetUsers = (): UseQueryResult<IUser[], Error> => {
   const getQuery = useQuery<IUser[], Error, IUser[], string[]>({
     queryKey: ['users'],
-    queryFn: () => get<IUser>('/users'),
+    queryFn: () => get<IUser>(USERS_ENDPOINT),
   })
 
   return getQuery
@@ -58,7 +60,7 @@ export const useFindUser = (userId: number | string | undefined): UseQueryResult
   const userQuery = useQuery<IUser, Error, IUser, (string | number)[]>({
     queryKey: ['users', Number(userId)],
     enabled: !!userId,
-    queryFn: (): Promise<IUser> => find(`/users/${userId}`),
+    queryFn: (): Promise<IUser> => find(`${USERS_ENDPOINT}/${userId}`),
   })
 
   return userQuery

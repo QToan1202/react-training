@@ -29,6 +29,9 @@ import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 import { useGetBookDetail, useMutateHireRequest, useMutateDeleteBook } from '@react-monorepo/hooks'
 import { ConfirmDialog, Loading } from '../../components'
 
+const BOOKS_ENDPOINT = import.meta.env.VITE_BOOKS_ENDPOINT
+const VITE_HIRE_REQUESTS_ENDPOINT = import.meta.env.VITE_HIRE_REQUESTS_ENDPOINT
+
 const BookDetail = () => {
   const { bookId } = useParams()
   const { currentUser } = useAuthStore((state) => ({ currentUser: state.user }), shallow)
@@ -59,7 +62,7 @@ const BookDetail = () => {
   const handleDeleteBook = useCallback(() => {
     if (!bookId) return
     mutateDeleteBook({
-      path: '/books',
+      path: BOOKS_ENDPOINT,
       id: +bookId,
     })
     onClose()
@@ -141,7 +144,7 @@ const BookDetail = () => {
     }
 
     mutateHireBook({
-      path: '/hire-requests',
+      path: VITE_HIRE_REQUESTS_ENDPOINT,
       values: {
         bookId: bookData.id,
         userId: currentUser?.id,

@@ -13,6 +13,8 @@ import { useDeleteMember, useGetUsers } from '@react-monorepo/hooks'
 const ConfirmDialog = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ConfirmDialog })))
 const ManagementTable = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ManagementTable })))
 
+const USERS_ENDPOINT = import.meta.env.VITE_USERS_ENDPOINT
+
 const ManageMember = memo(() => {
   const { users } = useUserStore((state) => ({ users: state.users }), shallow)
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -133,7 +135,7 @@ const ManageMember = memo(() => {
     if (!selectedMemberId) return
     onClose()
     mutate({
-      path: '/users',
+      path: USERS_ENDPOINT,
       id: selectedMemberId,
     })
   }, [mutate, onClose, selectedMemberId])

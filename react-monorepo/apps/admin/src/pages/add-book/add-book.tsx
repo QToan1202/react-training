@@ -10,6 +10,8 @@ import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
 
 const BookForm = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.BookForm })))
 
+const BOOKS_ENDPOINT = import.meta.env.VITE_BOOKS_ENDPOINT
+
 const AddBook = () => {
   const toast = useToast()
   const navigate = useNavigate()
@@ -38,7 +40,7 @@ const AddBook = () => {
   const handleOnSubmit = useCallback(
     (values: IBook) => {
       mutate({
-        path: '/books',
+        path: BOOKS_ENDPOINT,
         values: values,
       })
     },

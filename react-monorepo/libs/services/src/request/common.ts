@@ -1,9 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const request: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:3000',
-  // baseURL: 'https://my-json-server.typicode.com/QToan1202/mock-server',
-  // baseURL: 'https://mock-server-react.vercel.app/',
+  baseURL: import.meta.env.VITE_BASE_URL,
 })
 
 export const get = async <T>(path: string, options: AxiosRequestConfig = {}): Promise<T[]> => {

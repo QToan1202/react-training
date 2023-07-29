@@ -11,6 +11,10 @@ interface useMutateHireRequestResult {
   confirmMutation: UseMutationResult<number, Error, IRemoveService, undefined>
 }
 
+const USERS_ENDPOINT = import.meta.env.VITE_USERS_ENDPOINT
+const BOOKS_ENDPOINT = import.meta.env.VITE_BOOKS_ENDPOINT
+const HIRE_REQUESTS_ENDPOINT = import.meta.env.VITE_HIRE_REQUESTS_ENDPOINT
+
 export const useMutateHireRequest = (
   bookData: IBook | undefined,
   user: IUser | undefined,
@@ -24,7 +28,7 @@ export const useMutateHireRequest = (
     const bookQuantity = action === 'add' ? { quantity: bookData.quantity - 1 } : { quantity: bookData.quantity + 1 }
 
     mutateUpdate({
-      path: '/books',
+      path: BOOKS_ENDPOINT,
       id: +bookData.id,
       values: { ...bookData, ...bookQuantity },
     })
@@ -36,7 +40,7 @@ export const useMutateHireRequest = (
       action === 'add' ? { hireRequests: user.hireRequests - 1 } : { hireRequests: user.hireRequests + 1 }
 
     mutateUpdate({
-      path: '/users',
+      path: USERS_ENDPOINT,
       id: user.id,
       values: { ...user, ...userRequest },
     })
@@ -69,7 +73,7 @@ export const useGetHireRequests = (): UseQueryResult<IHireRequest[], Error> => {
   const hireRequestQuery = useQuery<IHireRequest[], Error, IHireRequest[], string[]>({
     queryKey: ['hire-requests'],
     queryFn: () =>
-      get<IHireRequest>('/hire-requests', {
+      get<IHireRequest>(HIRE_REQUESTS_ENDPOINT, {
         params: { _expand: ['book', 'user'] },
         paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
       }),
