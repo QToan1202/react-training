@@ -8,7 +8,10 @@
       "runner": "nx-cloud",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "accessToken": "YWE3NmY5Y2YtZjE2Mi00NzZmLTg3MzMtZTkxMjg1MzYxMjU2fHJlYWQtd3JpdGU="
+        "accessToken": "YWE3NmY5Y2YtZjE2Mi00NzZmLTg3MzMtZTkxMjg1MzYxMjU2fHJlYWQtd3JpdGU=",
+        "cacheDirectory": "/tmp/nx-cache",
+        "token": "<token>",
+        "teamId": "<teamId>"
       }
     }
   },
