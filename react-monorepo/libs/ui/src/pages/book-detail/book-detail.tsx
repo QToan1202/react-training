@@ -57,7 +57,7 @@ const BookDetail = () => {
     isError && renderError(error)
   }, [isError, renderError, error])
 
-  const { mutate: mutateDeleteBook, isSuccess: isDeleteBookSuccess, error: deleteError } = useMutateDeleteBook()
+  const { mutate: mutateDeleteBook, isLoading: isDeleting, isSuccess: isDeleteBookSuccess, error: deleteError } = useMutateDeleteBook()
 
   const handleDeleteBook = useCallback(() => {
     if (!bookId) return
@@ -84,6 +84,7 @@ const BookDetail = () => {
   const {
     addMutation: {
       mutate: mutateHireBook,
+      isLoading: isHiring,
       isSuccess: isHireSuccess,
       isError: isHireError,
       error: hireError,
@@ -182,6 +183,7 @@ const BookDetail = () => {
               </Button>
               <Button
                 onClick={onOpen}
+                isLoading={isDeleting}
                 leftIcon={<FiTrash2 />}
                 variant="outline"
                 _hover={{
@@ -195,6 +197,7 @@ const BookDetail = () => {
           )}
           <Button
             onClick={handleHireBook}
+            isLoading={isHiring}
             leftIcon={<FiBook />}
             variant="outline"
             _hover={{
