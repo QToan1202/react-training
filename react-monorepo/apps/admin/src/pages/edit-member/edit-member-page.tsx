@@ -52,11 +52,10 @@ const EditMember = () => {
     [mutate, userId]
   )
 
-  if (isLoading) return <Loading />
-
   return (
     <Box mt={10}>
       <RegisterForm onSubmit={handleOnSubmit} userInfo={userData} confirmTitle="update" />
+      {isLoading && <Loading />}
     </Box>
   )
 }

@@ -14,16 +14,18 @@ import {
   Text,
   Link,
   Heading,
+  chakra,
 } from '@chakra-ui/react'
 
 import { REGEX } from '@react-monorepo/utils'
 import { TUserForm } from '@react-monorepo/types'
 
 export interface LoginFormProps {
+  isLogin?: boolean
   onSubmit: (values: TUserForm) => void
 }
 
-const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
+const LoginForm = memo(({ onSubmit, isLogin = false }: LoginFormProps) => {
   const {
     register,
     handleSubmit,
@@ -46,7 +48,7 @@ const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
           manager login
         </Heading>
       </Box>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <chakra.form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={!!errors.email} mb={7} pos="relative">
           <FormLabel htmlFor="email" m={0}>
             Email
@@ -97,7 +99,7 @@ const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
         <Button
           w="100%"
           mt={4}
-          isLoading={isSubmitting}
+          isLoading={isSubmitting || isLogin}
           type="submit"
           variant="primary"
           _hover={{
@@ -106,7 +108,7 @@ const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
         >
           sign in
         </Button>
-      </form>
+      </chakra.form>
       <Center my={6}>
         <Divider orientation="horizontal" />
       </Center>

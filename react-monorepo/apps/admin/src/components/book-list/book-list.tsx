@@ -33,12 +33,14 @@ const BookList = memo(() => {
   const renderError = useCallback(() => {
     if (toast.isActive(toastID)) return
     if (error instanceof Error)
-      return toast({
+      toast({
         id: toastID,
         title: error.message,
         description: MESSAGES_ERRORS.ERROR_REQUEST,
         status: 'error',
       })
+
+    return undefined
   }, [error, toast, toastID])
 
   useEffect(() => {
@@ -48,7 +50,6 @@ const BookList = memo(() => {
     isError && renderError()
   }, [data, isError, renderError])
 
-  if (isLoading) return <Loading />
 
   return (
     <Grid
@@ -61,6 +62,7 @@ const BookList = memo(() => {
       }}
     >
       {renderData}
+      {isLoading && <Loading />}
     </Grid>
   )
 })

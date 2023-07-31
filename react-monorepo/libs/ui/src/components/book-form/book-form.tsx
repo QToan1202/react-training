@@ -11,6 +11,7 @@ import {
   InputGroup,
   InputLeftElement,
   Textarea,
+  chakra,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { FiFile } from 'react-icons/fi'
@@ -20,15 +21,16 @@ import { REGEX } from '@react-monorepo/utils'
 import { IBook } from '@react-monorepo/types'
 
 export interface BookFormProps {
+  isSubmitting?: boolean
   bookValues?: IBook
   onSubmit: (values: IBook) => void
 }
 
-const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
+const BookForm = memo(({ onSubmit, bookValues, isSubmitting = false }: BookFormProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<IBook>({ defaultValues: bookValues })
   return (
     <Box bgColor="white" border="2px solid" borderColor="dust.50" p={10} maxW={960} shadow="form">
@@ -37,7 +39,7 @@ const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
           item information:
         </Heading>
       </Box>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <chakra.form onSubmit={handleSubmit(onSubmit)}>
         <Flex direction="column" rowGap={6}>
           <FormControl isInvalid={!!errors.name} pos="relative">
             <FormLabel htmlFor="firstName" m={0}>
@@ -168,7 +170,7 @@ const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
             complete
           </Button>
         </Flex>
-      </form>
+      </chakra.form>
     </Box>
   )
 }, isEqual)

@@ -11,6 +11,7 @@ import { useGetHireRequests, useMutateHireRequest } from '@react-monorepo/hooks'
 
 const ConfirmDialog = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ConfirmDialog })))
 const ManagementTable = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ManagementTable })))
+const Loading = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Loading })))
 
 const HIRE_REQUESTS_ENDPOINT = import.meta.env.VITE_HIRE_REQUESTS_ENDPOINT
 
@@ -77,7 +78,7 @@ const ManagementHireRequests = memo(() => {
     ] as Column<IUser>[]
   }, [handleClickConfirmBtn])
 
-  const { data } = useGetHireRequests()
+  const { data, isLoading } = useGetHireRequests()
 
   useEffect(() => {
     if (!data) return
@@ -136,16 +137,17 @@ const ManagementHireRequests = memo(() => {
   return (
     <>
       <ManagementTable data={hireRequests} columns={columnTemplate} />
-      {
+      {isOpen && (
         <ConfirmDialog
           isOpen={isOpen}
           onClose={onClose}
           onConfirm={handleCompleteRequest}
-          confirmTitle='Complete'
-          header={`Confirm to complete hire request`}
-          body={`Are you sure? This action mark user have return there book and remove this hire request. You can't undo this action afterwards.`}
+          confirmTitle="complete"
+          header="Confirm to complete hire request"
+          body="Are you sure? This action mark user have return there book and remove this hire request. You can't undo this action afterwards."
         />
-      }
+      )}
+      {isLoading && <Loading />}
     </>
   )
 })
