@@ -2,68 +2,188 @@
   "users": [
     {
       "firstName": "Admin",
-      "lastName": "Zef",
+      "lastName": "Lib",
       "email": "admin@gmail.com",
       "password": "12345678",
       "phone": "0123456789",
       "role": "admin",
+      "hireRequests": 4,
       "id": 1
     },
     {
       "firstName": "User",
       "lastName": "Ken",
-      "email": "member1@gmail.com",
+      "email": "member@gmail.com",
       "password": "12345678",
-      "phone": "0123456789",
+      "phone": "0444444446",
       "role": "member",
+      "hireRequests": 4,
       "id": 2
     },
     {
-      "firstName": "User",
-      "lastName": "Ken",
-      "email": "member2@gmail.com",
+      "firstName": "Toan",
+      "lastName": "Nguyen",
+      "email": "toan1246778@gmail.com",
       "password": "12345678",
-      "phone": "0123456789",
+      "phone": "0348987192",
       "role": "member",
+      "hireRequests": 4,
       "id": 3
+    },
+    {
+      "firstName": "Toan",
+      "lastName": "Nguyen",
+      "email": "toan@gmail.com",
+      "password": "12345678",
+      "phone": "0348987192",
+      "role": "member",
+      "hireRequests": 5,
+      "id": 4
+    },
+    {
+      "firstName": "Toàn",
+      "lastName": "Nguyễn",
+      "email": "toan124677@gmail.com",
+      "password": "abcde13912",
+      "phone": "0348987192",
+      "role": "member",
+      "hireRequests": 5,
+      "id": 5
+    },
+    {
+      "firstName": "Cathrine",
+      "lastName": "Ritchie",
+      "email": "Porter.Walsh39@yahoo.com",
+      "password": "HsPkdVIcobj9KgN",
+      "phone": "4929704034",
+      "role": "member",
+      "hireRequests": 5,
+      "id": 6
+    },
+    {
+      "firstName": "Aurore",
+      "lastName": "Rice",
+      "email": "Shany.Hirthe@hotmail.com",
+      "password": "j5jGl7RZx4t0UkD",
+      "phone": "2632535986",
+      "role": "member",
+      "hireRequests": 5,
+      "id": 7
+    },
+    {
+      "firstName": "Earl",
+      "lastName": "Kutch",
+      "email": "Daphne.Stehr33@yahoo.com",
+      "password": "QFJdb5PCdOxFnvj",
+      "phone": "8158170590",
+      "role": "member",
+      "hireRequests": 5,
+      "id": 8
+    },
+    {
+      "firstName": "Meta",
+      "lastName": "Franecki",
+      "email": "Thomas_Bashirian38@hotmail.com",
+      "password": "_VFOcgA9UnJ24wO",
+      "phone": "8134693124",
+      "role": "member",
+      "hireRequests": 5,
+      "id": 9
+    },
+    {
+      "firstName": "Leonardo",
+      "lastName": "Pfeffer",
+      "email": "Patience_Corkery65@yahoo.com",
+      "password": "2vWCG4qkV2r30Ch",
+      "phone": "9145180616",
+      "role": "member",
+      "hireRequests": 5,
+      "id": 10
     }
   ],
   "books": [
     {
-      "name": "Blue Book: A Devotional Guide for Every Season of Your Life",
-      "author": "Jim Branch",
-      "publish_date": "1998-01-01",
-      "description": "A year-long devotional guide designed to offer space and structure, Scripture and prayers, as well as readings and reflections for your daily time with God. The hope is that through using this book you might discover the ancient rhythms that were whispered into you when God breathed you into being.",
-      "quantity": 10,
-      "cover": "https://bit.ly/dan-abramov",
+      "name": "Licensed Steel Chair",
+      "author": "Celia.Heaney36",
+      "description": "Odit id expedita officia ratione quaerat laborum iusto corporis pariatur. Quis blanditiis vero ullam commodi explicabo tempore ipsum in. Est alias laudantium voluptates quasi provident aliquid et similique. Rerum voluptatum libero praesentium vero placeat. Facilis maiores neque hic vero expedita odio voluptas deleniti repudiandae.",
+      "publish_date": "1976-03-31",
+      "quantity": 20,
+      "cover": "https://res.cloudinary.com/doddoaz7h/image/upload/c_fit,q_auto:low,w_200/v1690731194/91821HS5xRL._AC_UF1000_1000_QL80_FMwebp__pkk7vv.webp",
       "id": 1
     },
     {
-      "name": "How to Make an Apple Pie and See the World (Dragonfly Books)",
-      "author": "Marjorie Priceman",
-      "publish_date": "1998-01-01",
-      "description": "Illus. in full color. An apple pie is easy to make...if the market is open. But if the market is closed, the world becomes your grocery store. This deliciously silly recipe for apple pie takes readers around the globe to gather ingredients. First hop a steamboat to Italy for the finest semolina wheat. Then hitch a ride to England and hijack a cow for the freshest possible milk. And, oh yes! Don't forget to go apple picking in Vermont! A simple recipe for apple pie is included.",
-      "quantity": 7,
-      "cover": "https://bit.ly/dan-abramov",
+      "name": "Oriental Fresh Chicken",
+      "author": "Anibal.Romaguera92",
+      "description": "Qui sed ratione perferendis dolores deleniti sapiente.\nNisi ullam in.\nDolorem odio aut quisquam aperiam debitis illum cum.",
+      "publish_date": "1969-11-16",
+      "quantity": 10,
+      "cover": "https://res.cloudinary.com/doddoaz7h/image/upload/c_fit,q_auto:low,w_200/v1690731194/91821HS5xRL._AC_UF1000_1000_QL80_FMwebp__pkk7vv.webp",
       "id": 2
     },
     {
-      "name": "Baja Adventure Book",
-      "author": "Walt Peterson",
-      "publish_date": "1998-01-01",
-      "description": "A where-to, how-to guide to one of the most interesting places on earth, describing the full spectrum of adventure available in Baja California, Mexico. Scuba diving, hiking, backpacking, fishing, boating, bicycling, and windsurfing are just some of the exciting activities covered.",
+      "name": "Licensed Fresh Towels",
+      "author": "Amaya51",
+      "description": "Iste iste aperiam voluptas aliquam perferendis distinctio. Expedita facere ducimus magni nostrum alias neque voluptatem. Illo voluptate itaque. Quo officiis quia quod ratione impedit a vel maiores.",
+      "publish_date": "1976-10-29",
       "quantity": 10,
-      "cover": "https://bit.ly/dan-abramov",
+      "cover": "https://res.cloudinary.com/doddoaz7h/image/upload/c_fit,q_auto:low,w_200/v1690731194/91821HS5xRL._AC_UF1000_1000_QL80_FMwebp__pkk7vv.webp",
       "id": 3
     },
     {
-      "name": "Gentlemen of the Road: A Tale of Adventure",
-      "author": "Michael Chabon",
-      "publish_date": "1998-01-01",
-      "description": "Michael Chabon's Pulitzer Prize-winning bestseller, The Amazing Adventures of Kavalier & Clay, sprang from an early passion for the derring-do and larger-than-life heroes of classic comic books. Now, once more mining the rich past, Chabon summons the rollicking spirit of legendary adventures–from The Arabian Nights to Alexandre Dumas to Fritz Leiber’s Fafhrd and the Gray Mouser stories–in a wonderful new novel brimming with breathless action, raucous humor, cliff-hanging suspense, and a cast of colorful characters worthy of Scheherazade’s most tantalizing tales.They’re an odd pair, to be sure: pale, rail-thin, black-clad Zelikman, a moody, itinerant physician fond of jaunty headgear, and ex-soldier Amram, a gray-haired giant of a man as quick with a razor-tongued witticism as he is with a sharpened battle-ax. Brothers under the skin, comrades in arms, they make their rootless way through the Caucasus Mountains, circa A.D. 950, living as they please and surviving however they can–as blades and thieves for hire and as practiced bamboozlers, cheerfully separating the gullible from their money. No strangers to tight scrapes and close shaves, they’ve left many a fist shaking in their dust, tasted their share of enemy steel, and made good any number of hasty exits under hostile circumstances.None of which has necessarily prepared them to be dragooned into service as escorts and defenders to a prince of the Khazar Empire. Usurped by his brutal uncle, the callow and decidedly ill-tempered young royal burns to reclaim his rightful throne. But doing so will demand wicked cunning, outrageous daring, and foolhardy bravado . . . not to mention an army. Zelikman and Amram can at least supply the former. But are these gentlemen of the road prepared to become generals in a full-scale revolution? The only certainty is that getting there–along a path paved with warriors and whores, evil emperors and extraordinary elephants, secrets, swordplay, and such stuff as the grandest adventures are made of-will be much more than half the fun.From the Hardcover edition.",
-      "quantity": 10,
-      "cover": "https://bit.ly/dan-abramov",
+      "name": "Ergonomic Metal Shirt",
+      "author": "Carolyne_Cummings",
+      "description": "Provident amet animi debitis magni repellat fugit error eligendi. Quam voluptatem deserunt commodi. Eos ad explicabo voluptas eveniet placeat cum.\nAliquam sunt inventore id ut et veniam inventore facere. Accusamus facilis placeat cumque temporibus pariatur. Consequatur iste temporibus quos autem hic nobis error placeat. ",
+      "publish_date": "2001-08-09",
+      "quantity": 50,
+      "cover": "https://res.cloudinary.com/doddoaz7h/image/upload/c_fit,q_auto:low,w_200/v1690731194/91821HS5xRL._AC_UF1000_1000_QL80_FMwebp__pkk7vv.webp",
       "id": 4
+    },
+    {
+      "name": "Luxurious Bronze Table",
+      "author": "Audreanne84",
+      "description": "Cum hic neque nobis. Nulla quam quidem velit culpa. Hic neque beatae doloribus. Animi et nemo saepe animi officiis exercitationem. Unde delectus corrupti veniam deserunt. Reiciendis ullam commodi hic.\nInventore cupiditate praesentium accusamus nulla asperiores. Debitis numquam optio ipsum repellendus aut aspernatur",
+      "publish_date": "1998-09-05",
+      "quantity": 23,
+      "cover": "https://res.cloudinary.com/doddoaz7h/image/upload/c_fit,q_auto:low,w_200/v1690731194/91821HS5xRL._AC_UF1000_1000_QL80_FMwebp__pkk7vv.webp",
+      "id": 5
+    },
+    {
+      "name": "Sleek Concrete Tuna",
+      "author": "Jerry_Brown36",
+      "description": "Aliquam eligendi in consequuntur ea. Optio tempora quos atque numquam possimus praesentium. Excepturi illum cupiditate pariatur amet maxime voluptatum ad. Praesentium cumque officiis ab impedit labore facilis.",
+      "publish_date": "1974-09-17",
+      "quantity": 43,
+      "cover": "https://res.cloudinary.com/doddoaz7h/image/upload/c_fit,q_auto:low,w_200/v1690731194/91821HS5xRL._AC_UF1000_1000_QL80_FMwebp__pkk7vv.webp",
+      "id": 6
+    },
+    {
+      "name": "Small Metal Bike",
+      "author": "Gretchen.Kuhic",
+      "description": "Facere ex in commodi explicabo consectetur vero eum. Rerum pariatur corporis non. Maiores velit temporibus quidem ullam optio reprehenderit.\nPossimus dolor aliquam modi quod. Tempore accusamus dolor facere neque eaque neque reiciendis architecto. In aliquam nam voluptas in quod labore hic.\nVoluptatem dicta optio exercitationem corrupti placeat facere vitae atque. Odio a ad cum neque illum nemo consequatur beatae autem. Ratione aliquam neque eveniet at. Facilis corrupti fuga tempora in nam iure consequatur fugiat. Cupiditate assumenda molestiae ipsa dolores.",
+      "publish_date": "1991-06-11",
+      "quantity": 13,
+      "cover": "https://res.cloudinary.com/doddoaz7h/image/upload/c_fit,q_auto:low,w_200/v1690731194/91821HS5xRL._AC_UF1000_1000_QL80_FMwebp__pkk7vv.webp",
+      "id": 7
+    }
+  ],
+  "hire-requests": [
+    {
+      "bookId": 4,
+      "userId": 1,
+      "borrow_date": "07-17-2023 15:09:14",
+      "id": 6
+    },
+    {
+      "bookId": 4,
+      "userId": 1,
+      "borrow_date": "07-27-2023 15:11:53",
+      "id": 7
+    },
+    {
+      "bookId": 1,
+      "userId": 1,
+      "borrow_date": "07-27-2023 15:22:52",
+      "id": 8
     }
   ]
 }
