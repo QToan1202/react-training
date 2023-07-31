@@ -20,7 +20,7 @@ const Dashboard = memo(({ sidebar }: DashboardProps) => {
         <Sidebar onClose={onClose} items={sidebar} />
       </Drawer>
       <Header onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }}>
+      <Box ml={{ base: 0, md: 60 }} pos="relative">
         <Outlet />
       </Box>
     </Box>
