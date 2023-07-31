@@ -112,3 +112,13 @@ pnpm run server
 ```bash
 pnpm start
 ```
+## Deployment
+- Admin: [link](https://react-training-admin.vercel.app)
+- Member: [link](https://react-training-member.vercel.app)
+- Account to login: admin@gmail.com-12345678 / member@gmail.com-12345678
+
+**_Note:_**
+_All the request make in these pages are fake, the real DB is persist_
+
+_If want to run locally using **.env.example** file create **.env** file then put them in the **root** folder of each applications_
+

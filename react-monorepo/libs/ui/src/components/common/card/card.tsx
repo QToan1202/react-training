@@ -35,7 +35,7 @@ const Card = memo(({ href, imageUrl, name, author, alt, fallbackImage = placehol
         />
       </AspectRatio>
       <Box p={3} textAlign="center" textTransform="capitalize">
-        <Text fontWeight="bold" noOfLines={2}>
+        <Text fontWeight="bold" noOfLines={2} minH={50}>
           {name}
         </Text>
         <Text color="GrayText" noOfLines={2}>

@@ -1,6 +1,5 @@
-import { memo, useState, useCallback } from 'react'
+import { memo } from 'react'
 import { Box, Flex, Icon, Text } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
 import { IconType } from 'react-icons/lib'
 import { Link } from 'react-router-dom'
 import isEqual from 'react-fast-compare'
@@ -12,33 +11,18 @@ export interface SidebarItemProps {
 }
 
 const SidebarItem = memo(({ title, to, icon }: SidebarItemProps) => {
-  const [isHovered, SetIsHovered] = useState(false)
-  const handleHoverItem = useCallback(() => {
-    SetIsHovered((prevState) => !prevState)
-  }, [])
-
   return (
     <Link to={to}>
       <Box
+        px={8}
         bg="transparent"
         color="black"
-        as={motion.div}
-        onHoverStart={handleHoverItem}
-        onHoverEnd={handleHoverItem}
         _hover={{
           bg: 'white',
         }}
       >
-        <Flex
-          columnGap="5px"
-          py={4}
-          as={motion.div}
-          alignItems="center"
-          whileHover={{
-            x: 30,
-          }}
-        >
-          <Box as={motion.div} display="flex" animate={{ x: isHovered ? 0 : -100 }}>
+        <Flex columnGap="5px" my={3} py={5} alignItems="center">
+          <Box display="flex" pr={3}>
             <Icon as={icon} boxSize={6} color="primary" />
           </Box>
           <Text>{title}</Text>
