@@ -1,5 +1,5 @@
 import { Suspense, lazy, useMemo } from 'react'
-import { FiHome } from 'react-icons/fi'
+import { FiAlertTriangle, FiDollarSign, FiHelpCircle, FiHome, FiInfo, FiMail } from 'react-icons/fi'
 import { AbsoluteCenter, Box, ChakraProvider, Spinner } from '@chakra-ui/react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { shallow } from 'zustand/shallow'
@@ -28,7 +28,10 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={theme} toastOptions={{ defaultOptions: { position: 'bottom', duration: 3000, isClosable: true } }}>
+      <ChakraProvider
+        theme={theme}
+        toastOptions={{ defaultOptions: { position: 'bottom', duration: 3000, isClosable: true } }}
+      >
         <Suspense fallback={<OverlayLoading />}>
           <Routes>
             {authUser ? (
@@ -45,7 +48,7 @@ const App = () => {
 
 const PublicRoutes = () => (
   <Routes>
-    <Route path="/"  element={<NavbarLayout />}>
+    <Route path="/" element={<NavbarLayout />}>
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
       <Route path="/" element={<Navigate to="/login" />} />
@@ -55,7 +58,17 @@ const PublicRoutes = () => (
 )
 
 const PrivateRoutes = () => {
-  const sidebarContent: ISideBarItem[] = useMemo(() => [{ name: 'Home', icon: FiHome, href: '/' }], [])
+  const sidebarContent: ISideBarItem[] = useMemo(
+    () => [
+      { name: 'Home', icon: FiHome, href: '/' },
+      { name: 'Billing', icon: FiDollarSign, href: '#' },
+      { name: 'Report issues', icon: FiAlertTriangle, href: '#' },
+      { name: 'Help', icon: FiHelpCircle, href: '#' },
+      { name: 'About us', icon: FiInfo, href: '#' },
+      { name: 'Contact', icon: FiMail, href: '#' },
+    ],
+    []
+  )
 
   return (
     <Routes>
@@ -69,9 +82,9 @@ const PrivateRoutes = () => {
 }
 
 const OverlayLoading = () => (
-  <Box position="relative" h="100vh" bgColor='black' opacity={0.5}>
+  <Box position="relative" h="100vh" bgColor="black" opacity={0.5}>
     <AbsoluteCenter axis="both">
-      <Spinner thickness="4px" speed="0.65s" color='primary' size="xl" />
+      <Spinner thickness="4px" speed="0.65s" color="primary" size="xl" />
     </AbsoluteCenter>
   </Box>
 )

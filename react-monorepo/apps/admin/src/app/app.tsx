@@ -1,6 +1,6 @@
 import { Suspense, lazy, useMemo } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { FiHome, FiPlus } from 'react-icons/fi'
+import { FiAlertTriangle, FiHelpCircle, FiHome, FiInfo, FiMail, FiPlusCircle } from 'react-icons/fi'
 import { shallow } from 'zustand/shallow'
 import { AbsoluteCenter, Box, ChakraProvider, Spinner } from '@chakra-ui/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -61,7 +61,11 @@ const PrivateRoutes = () => {
   const sidebarContent: ISideBarItem[] = useMemo(
     () => [
       { name: 'Home', icon: FiHome, href: 'dashboard' },
-      { name: 'Add book', icon: FiPlus, href: 'add-book' },
+      { name: 'Add book', icon: FiPlusCircle, href: 'add-book' },
+      { name: 'About us', icon: FiInfo, href: '#' },
+      { name: 'Report issues', icon: FiAlertTriangle, href: '#' },
+      { name: 'Help', icon: FiHelpCircle, href: '#' },
+      { name: 'Contact', icon: FiMail, href: '#' },
     ],
     []
   )
