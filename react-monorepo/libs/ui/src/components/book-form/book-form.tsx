@@ -20,15 +20,16 @@ import { REGEX } from '@react-monorepo/utils'
 import { IBook } from '@react-monorepo/types'
 
 export interface BookFormProps {
+  isSubmitting?: boolean
   bookValues?: IBook
   onSubmit: (values: IBook) => void
 }
 
-const BookForm = memo(({ onSubmit, bookValues }: BookFormProps) => {
+const BookForm = memo(({ onSubmit, bookValues, isSubmitting = false }: BookFormProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<IBook>({ defaultValues: bookValues })
   return (
     <Box bgColor="white" border="2px solid" borderColor="dust.50" p={10} maxW={960} shadow="form">

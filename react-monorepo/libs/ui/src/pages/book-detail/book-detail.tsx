@@ -57,7 +57,12 @@ const BookDetail = () => {
     isError && renderError(error)
   }, [isError, renderError, error])
 
-  const { mutate: mutateDeleteBook, isLoading: isDeleting, isSuccess: isDeleteBookSuccess, error: deleteError } = useMutateDeleteBook()
+  const {
+    mutate: mutateDeleteBook,
+    isLoading: isDeleting,
+    isSuccess: isDeleteBookSuccess,
+    error: deleteError,
+  } = useMutateDeleteBook()
 
   const handleDeleteBook = useCallback(() => {
     if (!bookId) return
@@ -154,14 +159,13 @@ const BookDetail = () => {
     })
   }, [mutateHireBook, bookData, currentUser, toast])
 
-  if (isLoading) return <Loading />
-
   return (
     <Grid
       templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: '2fr 7fr 3fr' }}
       gap={10}
       px={{ base: 5, md: 10 }}
       pt={5}
+      pos="relative"
     >
       <GridItem>
         <AspectRatio ratio={2 / 3}>
@@ -246,11 +250,12 @@ const BookDetail = () => {
           isOpen={isOpen}
           onClose={onClose}
           onConfirm={handleDeleteBook}
-          confirmTitle='delete'
+          confirmTitle="delete"
           header={`Delete ${bookData?.name} book`}
           body={`Are you sure? You can't undo this action afterwards.`}
         />
       }
+      {isLoading && <Loading />}
     </Grid>
   )
 }

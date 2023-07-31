@@ -7,12 +7,13 @@ import { IUser, TUserForm } from '@react-monorepo/types'
 import { REGEX } from '@react-monorepo/utils'
 
 export interface RegisterFormProps {
+  isLoading?: boolean
   userInfo?: IUser
   confirmTitle?: string
   onSubmit: (values: TUserForm) => void
 }
 
-const RegisterForm = memo(({ onSubmit, userInfo, confirmTitle = 'start now' }: RegisterFormProps) => {
+const RegisterForm = memo(({ onSubmit, userInfo, confirmTitle = 'start now', isLoading = false }: RegisterFormProps) => {
   const {
     register,
     handleSubmit,
@@ -138,7 +139,7 @@ const RegisterForm = memo(({ onSubmit, userInfo, confirmTitle = 'start now' }: R
             {errors.phone && errors.phone.message}
           </FormErrorMessage>
         </FormControl>
-        <Button mt={4} isLoading={isSubmitting} type="submit" fontSize="24px" variant="primary">
+        <Button mt={4} isLoading={isSubmitting || isLoading} type="submit" fontSize="24px" variant="primary">
           {confirmTitle}
         </Button>
       </form>

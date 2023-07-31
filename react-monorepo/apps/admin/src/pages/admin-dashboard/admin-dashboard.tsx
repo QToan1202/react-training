@@ -12,7 +12,7 @@ const AdminDashboard = () => {
       </TabList>
       <TabIndicator h="2px" bgColor="primary" />
 
-      <TabPanels>
+      <TabPanels pos="relative">
         <TabPanel>
           <BookList />
         </TabPanel>

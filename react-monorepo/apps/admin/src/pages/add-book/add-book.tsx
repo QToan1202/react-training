@@ -16,7 +16,7 @@ const AddBook = () => {
   const toast = useToast()
   const navigate = useNavigate()
   const { addBook } = useBookStore((state) => ({ addBook: state.add }), shallow)
-  const { mutate, isSuccess, error, data } = useMutateAddBook()
+  const { mutate, isSuccess, error, data, isLoading: isAdding } = useMutateAddBook()
 
   useEffect(() => {
     if (isSuccess) {
@@ -49,7 +49,7 @@ const AddBook = () => {
 
   return (
     <Center mt={10} px={5}>
-      <BookForm onSubmit={handleOnSubmit} />
+      <BookForm onSubmit={handleOnSubmit} isSubmitting={isAdding} />
     </Center>
   )
 }

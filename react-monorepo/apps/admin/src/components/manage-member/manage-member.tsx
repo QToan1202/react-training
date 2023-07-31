@@ -12,6 +12,7 @@ import { useDeleteMember, useGetUsers } from '@react-monorepo/hooks'
 
 const ConfirmDialog = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ConfirmDialog })))
 const ManagementTable = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.ManagementTable })))
+const Loading = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Loading })))
 
 const USERS_ENDPOINT = import.meta.env.VITE_USERS_ENDPOINT
 
@@ -21,7 +22,7 @@ const ManageMember = memo(() => {
   const navigate = useNavigate()
   const [selectedMemberId, setSelectedMemberId] = useState<number>()
   const memberList: IUser[] = useMemo(() => users.filter((item) => item.role !== 'admin'), [users])
-  const { data } = useGetUsers()
+  const { data, isLoading } = useGetUsers()
 
   useEffect(() => {
     if (!data) return
@@ -143,16 +144,17 @@ const ManageMember = memo(() => {
   return (
     <>
       <ManagementTable data={memberList} columns={columnTemplate} />
-      {
+      {isOpen && (
         <ConfirmDialog
           isOpen={isOpen}
           onClose={onClose}
           onConfirm={handleDeleteMember}
-          confirmTitle='delete'
-          header={`Delete row`}
-          body={`Are you sure? You can't undo this action afterwards.`}
+          confirmTitle="delete"
+          header="Delete row"
+          body="Are you sure? You can't undo this action afterwards."
         />
-      }
+      )}
+      {isLoading && <Loading />}
     </>
   )
 })

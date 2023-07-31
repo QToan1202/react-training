@@ -19,7 +19,7 @@ const EditBook = () => {
   const navigate = useNavigate()
   const { editBook } = useBookStore((state) => ({ editBook: state.update }), shallow)
   const { data: bookData, isLoading } = useGetBookDetail(bookId)
-  const { mutate, isSuccess, data, error } = useMutateEditBook()
+  const { mutate, isSuccess, data, error, isLoading: isEditing } = useMutateEditBook()
 
   useEffect(() => {
     if (isSuccess) {
@@ -52,11 +52,10 @@ const EditBook = () => {
     [mutate, bookId]
   )
 
-  if (isLoading) return <Loading />
-
   return (
     <Center mt={10} px={5}>
-      <BookForm onSubmit={handleOnSubmit} bookValues={bookData} />
+      <BookForm onSubmit={handleOnSubmit} bookValues={bookData} isSubmitting={isEditing}  />
+      {isLoading && <Loading />}
     </Center>
   )
 }

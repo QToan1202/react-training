@@ -20,10 +20,11 @@ import { REGEX } from '@react-monorepo/utils'
 import { TUserForm } from '@react-monorepo/types'
 
 export interface LoginFormProps {
+  isLogin?: boolean
   onSubmit: (values: TUserForm) => void
 }
 
-const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
+const LoginForm = memo(({ onSubmit, isLogin = false }: LoginFormProps) => {
   const {
     register,
     handleSubmit,
@@ -97,7 +98,7 @@ const LoginForm = memo(({ onSubmit }: LoginFormProps) => {
         <Button
           w="100%"
           mt={4}
-          isLoading={isSubmitting}
+          isLoading={isSubmitting || isLogin}
           type="submit"
           variant="primary"
           _hover={{

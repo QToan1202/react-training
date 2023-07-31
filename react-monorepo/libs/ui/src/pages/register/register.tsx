@@ -6,8 +6,8 @@ import { shallow } from 'zustand/shallow'
 import { useAuthStore } from '@react-monorepo/stores'
 import { TUserForm } from '@react-monorepo/types'
 import { useRegisterUser } from '@react-monorepo/hooks'
-import { Loading, RegisterForm } from '../../components'
 import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
+import { RegisterForm } from '../../components'
 
 const USERS_ENDPOINT = import.meta.env.VITE_USERS_ENDPOINT
 
@@ -45,8 +45,6 @@ const Register = () => {
     [mutate]
   )
 
-  if (isLoading) return <Loading />
-
   return (
     <>
       <Heading textAlign="center" fontWeight="black" fontSize="70px">
@@ -56,7 +54,7 @@ const Register = () => {
         Check out our library, we have everything from everywhere.
       </Text>
       <Box mt={20}>
-        <RegisterForm onSubmit={handleSubmit} />
+        <RegisterForm onSubmit={handleSubmit} isLoading={isLoading} />
       </Box>
     </>
   )

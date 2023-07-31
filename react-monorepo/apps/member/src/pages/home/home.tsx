@@ -6,6 +6,7 @@ import { useBookStore } from '@react-monorepo/stores'
 import { MESSAGES_ERRORS } from '@react-monorepo/utils'
 import { useGetBooks } from '@react-monorepo/hooks'
 
+const Loading = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Loading })))
 const Card = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.Card })))
 
 const Home = () => {
@@ -13,7 +14,7 @@ const Home = () => {
   const toast = useToast()
   const toastID = useId()
 
-  const { data, isError, error } = useGetBooks()
+  const { data, isLoading, isError, error } = useGetBooks()
 
   const renderData: React.ReactNode = useMemo(() => {
     if (!books.length) return <Text textAlign="center">Oops! There's no books.</Text>
@@ -58,6 +59,7 @@ const Home = () => {
       }}
     >
       {renderData}
+      {isLoading && <Loading />}
     </Grid>
   )
 }

@@ -7,7 +7,7 @@ import { useAuthStore } from '@react-monorepo/stores'
 import { TUserForm } from '@react-monorepo/types'
 import { useLoginUser } from '@react-monorepo/hooks'
 import { MESSAGES_ERRORS, MESSAGES_SUCCESS } from '@react-monorepo/utils'
-import { Loading, LoginForm } from '../../components'
+import { LoginForm } from '../../components'
 
 const USERS_ENDPOINT = import.meta.env.VITE_USERS_ENDPOINT
 
@@ -46,11 +46,10 @@ const Login = () => {
     [mutate]
   )
 
-  if (isLoading) return <Loading />
 
   return (
     <Box mt={50}>
-      <LoginForm onSubmit={handleSubmit} />
+      <LoginForm onSubmit={handleSubmit} isLogin={isLoading} />
     </Box>
   )
 }
