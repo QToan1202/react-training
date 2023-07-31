@@ -14,6 +14,7 @@ import {
   Text,
   Link,
   Heading,
+  chakra,
 } from '@chakra-ui/react'
 
 import { REGEX } from '@react-monorepo/utils'
@@ -47,7 +48,7 @@ const LoginForm = memo(({ onSubmit, isLogin = false }: LoginFormProps) => {
           manager login
         </Heading>
       </Box>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <chakra.form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={!!errors.email} mb={7} pos="relative">
           <FormLabel htmlFor="email" m={0}>
             Email
@@ -107,7 +108,7 @@ const LoginForm = memo(({ onSubmit, isLogin = false }: LoginFormProps) => {
         >
           sign in
         </Button>
-      </form>
+      </chakra.form>
       <Center my={6}>
         <Divider orientation="horizontal" />
       </Center>
