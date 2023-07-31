@@ -1,7 +1,6 @@
 import { memo, useState } from 'react'
 import {
   AspectRatio,
-  Box,
   ChakraProps,
   Flex,
   Heading,
@@ -69,14 +68,14 @@ const ManagementTable = memo(<T extends object>({ data, caption, columns }: Mana
 
   if (!data.length)
     return (
-      <Box>
+      <>
         <AspectRatio ratio={1} maxW="300px" m="0 auto">
           <Image src={noDataImg} objectFit="contain" alt="no data found image" />
         </AspectRatio>
         <Heading fontSize={24} textAlign="center" fontWeight={'medium'} color="dust.200">
           There's no data!!!
         </Heading>
-      </Box>
+      </>
     )
 
   return (
