@@ -101,9 +101,8 @@ const ManagementHireRequests = memo(() => {
   const {
     confirmMutation: {
       mutate: mutateConfirm,
-      isSuccess: isHireSuccess,
-      isError: isHireError,
-      error: hireError,
+      isError: isConfirmError,
+      error: confirmError,
       data: returnData,
     },
   } = useMutateHireRequest(selectedItem?.book, selectedItem?.user, 'confirm')
@@ -118,21 +117,21 @@ const ManagementHireRequests = memo(() => {
   }, [mutateConfirm, onClose, selectedItem])
 
   useEffect(() => {
-    if (!isHireSuccess) return
-    if (isHireError) {
-      renderError(hireError)
-      return
-    }
     if (!returnData) return
-    if (toast.isActive(toastID)) return
     deleteHireRequest(returnData)
+
+    if (toast.isActive(toastID)) return
     toast({
       id: toastID,
       title: MESSAGES_SUCCESS.RETURN.TITLE,
       description: MESSAGES_SUCCESS.RETURN.DESC,
       status: 'success',
     })
-  }, [deleteHireRequest, hireError, isHireError, isHireSuccess, renderError, returnData, toast, toastID])
+  }, [deleteHireRequest, returnData, toast, toastID])
+
+  useEffect(() => {
+    isConfirmError && renderError(confirmError)
+  }, [confirmError, isConfirmError, renderError])
 
   return (
     <>

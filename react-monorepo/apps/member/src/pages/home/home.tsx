@@ -45,8 +45,11 @@ const Home = () => {
   useEffect(() => {
     if (!data) return
     useBookStore.setState({ books: data })
+  }, [data])
+
+  useEffect(() => {
     isError && renderError()
-  }, [data, isError, renderError])
+  }, [isError, renderError])
 
   return (
     <Grid

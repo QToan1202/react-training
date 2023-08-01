@@ -60,7 +60,8 @@ const BookDetail = () => {
   const {
     mutate: mutateDeleteBook,
     isLoading: isDeleting,
-    isSuccess: isDeleteBookSuccess,
+    isSuccess: isDeleteSuccess,
+    isError: isDeleteError,
     error: deleteError,
   } = useMutateDeleteBook()
 
@@ -74,17 +75,19 @@ const BookDetail = () => {
   }, [bookId, mutateDeleteBook, onClose])
 
   useEffect(() => {
-    if (!isDeleteBookSuccess) {
-      renderError(deleteError)
-      return
-    }
+    if (!isDeleteSuccess) return
+
     toast({
       title: MESSAGES_SUCCESS.DELETE.TITLE,
       description: MESSAGES_SUCCESS.DELETE.DESC,
       status: 'success',
     })
     navigate('/admin/dashboard')
-  }, [isDeleteBookSuccess, deleteError, renderError, toast, navigate])
+  }, [isDeleteSuccess, navigate, toast])
+
+  useEffect(() => {
+    isDeleteError && renderError(deleteError)
+  }, [deleteError, isDeleteError, renderError])
 
   const {
     addMutation: {
@@ -98,34 +101,23 @@ const BookDetail = () => {
   } = useMutateHireRequest(bookData, currentUser, 'add')
 
   useEffect(() => {
-    onClose()
     if (!bookData) return
     if (!isHireSuccess) return
-    if (isHireError) {
-      renderError(hireError)
-      return
-    }
     if (!returnData) return
-    if (toast.isActive(toastId)) return
+
     addHireRequest(returnData)
+    if (toast.isActive(toastId)) return
     toast({
       id: toastId,
       title: MESSAGES_SUCCESS.HIRE.TITLE,
-      description: `Book ${bookData?.name} have been hired successfully.`,
+      description: `Book ${bookData.name} have been hired successfully.`,
       status: 'success',
     })
-  }, [
-    addHireRequest,
-    bookData,
-    hireError,
-    isHireError,
-    isHireSuccess,
-    onClose,
-    renderError,
-    returnData,
-    toast,
-    toastId,
-  ])
+  }, [addHireRequest, bookData, isHireSuccess, returnData, toast, toastId])
+
+  useEffect(() => {
+    isHireError && renderError(hireError)
+  }, [hireError, isHireError, renderError])
 
   const handleEditBook = useCallback(() => navigate(`/admin/edit-book/${bookId}`), [navigate, bookId])
 
