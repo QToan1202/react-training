@@ -19,23 +19,25 @@ const AddBook = () => {
   const { mutate, isSuccess, error, data, isLoading: isAdding } = useMutateAddBook()
 
   useEffect(() => {
-    if (isSuccess) {
-      addBook(data)
-      toast({
-        title: MESSAGES_SUCCESS.ADD.TITLE,
-        description: `Book ${data.name} have been add successfully.`,
-        status: 'success',
-      })
-      navigate('/')
-    }
+    if (!isSuccess) return
 
+    addBook(data)
+    toast({
+      title: MESSAGES_SUCCESS.ADD.TITLE,
+      description: `Book ${data.name} have been add successfully.`,
+      status: 'success',
+    })
+    navigate('/')
+  }, [addBook, data, isSuccess, navigate, toast])
+
+  useEffect(() => {
     if (error instanceof Error)
       toast({
         title: error.message,
         description: MESSAGES_ERRORS.ACTION_FAIL,
         status: 'error',
       })
-  }, [addBook, data, error, isSuccess, navigate, toast])
+  }, [error, toast])
 
   const handleOnSubmit = useCallback(
     (values: IBook) => {

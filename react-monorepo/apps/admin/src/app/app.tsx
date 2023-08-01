@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { useAuthStore } from '@react-monorepo/stores'
 import { ISideBarItem } from '@react-monorepo/types'
-import { default as theme } from '@react-monorepo/themes'
+import theme from '@react-monorepo/themes'
 
 const NavbarLayout = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.NavbarLayout })))
 const BookDetail = lazy(() => import('@react-monorepo/ui').then((module) => ({ default: module.BookDetail })))

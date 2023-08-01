@@ -22,23 +22,25 @@ const EditMember = () => {
   const { mutate, isSuccess, data, error } = useMutateEditUser()
 
   useEffect(() => {
-    if (isSuccess) {
-      editUser(data)
-      toast({
-        title: MESSAGES_SUCCESS.EDIT.TITLE,
-        description: `User ${data.firstName} ${data.lastName} have been modify successfully.`,
-        status: 'success',
-      })
-      navigate('/')
-    }
+    if (!isSuccess) return
 
+    editUser(data)
+    toast({
+      title: MESSAGES_SUCCESS.EDIT.TITLE,
+      description: `User ${data.firstName} ${data.lastName} have been modify successfully.`,
+      status: 'success',
+    })
+    navigate('/')
+  }, [data, editUser, isSuccess, navigate, toast])
+
+  useEffect(() => {
     if (error instanceof Error)
       toast({
         title: error.message,
         description: MESSAGES_ERRORS.ACTION_FAIL,
         status: 'error',
       })
-  }, [data, editUser, error, isSuccess, navigate, toast])
+  }, [error, toast])
 
   const handleOnSubmit = useCallback(
     (values: TUserForm) => {

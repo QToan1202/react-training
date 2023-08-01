@@ -22,23 +22,25 @@ const EditBook = () => {
   const { mutate, isSuccess, data, error, isLoading: isEditing } = useMutateEditBook()
 
   useEffect(() => {
-    if (isSuccess) {
-      editBook(data)
-      toast({
-        title: MESSAGES_SUCCESS.EDIT.TITLE,
-        description: `Book ${data.name} have been modify successfully.`,
-        status: 'success',
-      })
-      navigate('/')
-    }
+    if (!isSuccess) return
 
+    editBook(data)
+    toast({
+      title: MESSAGES_SUCCESS.EDIT.TITLE,
+      description: `Book ${data.name} have been modify successfully.`,
+      status: 'success',
+    })
+    navigate('/')
+  }, [data, editBook, isSuccess, navigate, toast])
+
+  useEffect(() => {
     if (error instanceof Error)
       toast({
         title: error.message,
         description: MESSAGES_ERRORS.ACTION_FAIL,
         status: 'error',
       })
-  }, [data, editBook, error, isSuccess, navigate, toast])
+  }, [error, toast])
 
   const handleOnSubmit = useCallback(
     (values: IBook) => {
@@ -54,7 +56,7 @@ const EditBook = () => {
 
   return (
     <Center mt={10} px={5}>
-      <BookForm onSubmit={handleOnSubmit} bookValues={bookData} isSubmitting={isEditing}  />
+      <BookForm onSubmit={handleOnSubmit} bookValues={bookData} isSubmitting={isEditing} />
       {isLoading && <Loading />}
     </Center>
   )
