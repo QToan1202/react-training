@@ -26,7 +26,7 @@ export interface BookFormProps {
   onSubmit: (values: IBook) => void
 }
 
-const BookForm = memo(({ onSubmit, bookValues, isSubmitting = false }: BookFormProps) => {
+const BookForm = memo(({ bookValues, isSubmitting = false, onSubmit }: BookFormProps) => {
   const {
     register,
     handleSubmit,

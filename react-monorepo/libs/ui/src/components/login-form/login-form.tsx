@@ -25,7 +25,7 @@ export interface LoginFormProps {
   onSubmit: (values: TUserForm) => void
 }
 
-const LoginForm = memo(({ onSubmit, isLogin = false }: LoginFormProps) => {
+const LoginForm = memo(({ isLogin = false, onSubmit }: LoginFormProps) => {
   const {
     register,
     handleSubmit,

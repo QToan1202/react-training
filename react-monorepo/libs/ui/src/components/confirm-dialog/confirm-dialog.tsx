@@ -19,7 +19,7 @@ export interface ConfirmDialogProps {
   onConfirm: () => void
 }
 
-const ConfirmDialog = memo(({ isOpen, onClose, onConfirm, header, body, cancelTitle = 'cancel', confirmTitle = 'confirm' }: ConfirmDialogProps) => {
+const ConfirmDialog = memo(({ isOpen, header, body, cancelTitle = 'cancel', confirmTitle = 'confirm', onClose, onConfirm }: ConfirmDialogProps) => {
   const cancelRef = useRef(null)
 
   return (

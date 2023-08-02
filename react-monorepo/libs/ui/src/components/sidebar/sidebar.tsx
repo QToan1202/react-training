@@ -15,7 +15,7 @@ export interface SidebarProps extends BoxProps {
   items: ISideBarItem[]
 }
 
-const Sidebar = memo(({ onClose, items, ...rest }: SidebarProps) => {
+const Sidebar = memo(({ items, onClose, ...rest }: SidebarProps) => {
   const toast = useToast()
   const { logOut } = useAuthStore((state) => ({ logOut: state.logout }), shallow)
   const handleLogOut = useCallback(() => {
