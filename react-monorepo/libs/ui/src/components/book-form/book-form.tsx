@@ -42,7 +42,7 @@ const BookForm = memo(({ onSubmit, bookValues, isSubmitting = false }: BookFormP
       <chakra.form onSubmit={handleSubmit(onSubmit)}>
         <Flex direction="column" rowGap={6}>
           <FormControl isInvalid={!!errors.name} pos="relative">
-            <FormLabel htmlFor="firstName" m={0}>
+            <FormLabel htmlFor="name" m={0}>
               Name
             </FormLabel>
             <Input
@@ -54,6 +54,7 @@ const BookForm = memo(({ onSubmit, bookValues, isSubmitting = false }: BookFormP
                   value: REGEX.NOT_CONTAIN_NUMBER,
                   message: 'Book should not contain number',
                 },
+                validate: (value) => !!value.trim() || 'This field is empty',
               })}
             />
             <FormErrorMessage pos="absolute" mt={0}>

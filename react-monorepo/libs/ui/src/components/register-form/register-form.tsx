@@ -43,6 +43,7 @@ const RegisterForm = memo(
                     value: REGEX.NOT_CONTAIN_NUMBER,
                     message: 'First name should not contain number',
                   },
+                  validate: (value) => !!value.trim() || 'This field is empty',
                   maxLength: { value: 30, message: 'Maximum length should be 30' },
                 })}
               />
@@ -64,6 +65,7 @@ const RegisterForm = memo(
                     value: REGEX.NOT_CONTAIN_NUMBER,
                     message: 'Last name should not contain number',
                   },
+                  validate: (value) => !!value.trim() || 'This field is empty',
                   maxLength: { value: 30, message: 'Maximum length should be 30' },
                 })}
               />
