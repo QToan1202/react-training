@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { AspectRatio, Box, Image, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-import placeholderImage from '../../../../assets/images/placeholder.webp'
+import placeholderImage from '../../../assets/images/placeholder.webp'
 
 export interface CardProps {
   href: string
